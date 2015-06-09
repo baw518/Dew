@@ -7,8 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-인덱스
-시작시작
-연습해볼게요
+인덱스라능
 </body>
 </html>
