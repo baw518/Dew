@@ -56,7 +56,7 @@
                                 <li><a href="product-detail.html">메뉴2</a></li>
                                 <li><a href="contact.html">메뉴3</a></li>
                                 <li><a href="projectList.jsp">프로젝트</a></li>
-                                 <li><a href="contact.html">메뉴5</a></li>
+                                 <li><a href="QnA_listview.do">QnA</a></li>
                                  <li><a href="contact.html">메뉴6</a></li>
                                   <li><a href="contact.html">메뉴7</a></li>
                             </ul>
