@@ -8,7 +8,8 @@ public class HomeController {
 	
 	@RequestMapping("home.do")
 	public String homeView(){
-		return "redirect:/main.jsp";
+		System.out.println("HomeController Start()..");
+		return "home";
 	}
 	
 }
