@@ -5,7 +5,7 @@
        "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
 <tiles-definitions>	
 	<definition name="discussion_*" extends="home">
-		<put-attribute name="main"  value="/WEB-INF/views/discussion/{1}.jsp"  />
+		<put-attribute name="main"  value="/WEB-INF/views/discuss/{1}.jsp"  />
 	</definition>		
 </tiles-definitions>
 
