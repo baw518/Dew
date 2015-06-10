@@ -6,7 +6,9 @@ import javax.annotation.Resource;
 
 import org.kosta.dew.model.vo.VideoVO;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.stereotype.Component;
 
+@Component
 public class VideoDAOImpl implements VideoDAO {
 	@Resource(name="sqlSessionTemplate")
 	private SqlSessionTemplate sqlSessionTemplate;

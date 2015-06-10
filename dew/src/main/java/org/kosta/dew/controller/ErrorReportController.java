@@ -14,16 +14,17 @@ import org.springframework.web.servlet.ModelAndView;
 public class ErrorReportController {
 	@Resource
 	private ErrorReportService errorReportService;
-	
-	
+
 	@RequestMapping("reportView.do")
-	public String reportView(){
-		return "errorReport_view";
-	}
-	/*@RequestMapping("reportView.do")
 	public ModelAndView reportView(){
-			List<ErrorReportVO> list = errorReportService.getReportView();
-		return new ModelAndView("errorReport_view","errorReport",list);
-	}*/
+		List<ErrorReportVO> list = null;
+		ModelAndView mav = new ModelAndView("errorReport_view");
+		mav.addObject("errorcode", errorReportService.getReportErrorCode());
+		System.out.println(errorReportService.getReportErrorCode());
+		list = errorReportService.getReportExceptionMessage();
+		mav.addObject("exception", list);
+//		System.out.println(list);
+		return mav;
+	}
 	
 }

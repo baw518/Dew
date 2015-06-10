@@ -5,9 +5,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  <mapper namespace="errorReport"> 
  
 <select id="getReportErrorCode" resultType="evo">
+ select er.error_no as errorNo, e.error_code as errorCode ,er.discussion_status as discussionstatus  from ERROR_REPORT er, ERROR e where e.error_no = er.error_no and e.error_code is not null 
 </select>
 
 <select id="getReportExceptionMessage" resultType="evo">
+select er.error_no as errorNo,e.exception_message as exceptionMessage, er.discussion_status as discussionstatus  from ERROR_REPORT er, ERROR e where e.error_no = er.error_no and e.exception_message is not null
 </select>
 
 <select id="getReportView" resultType="evo">

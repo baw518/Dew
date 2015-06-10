@@ -21,7 +21,7 @@ public class ErrorReportDAOImpl implements ErrorReportDAO {
 
 	@Override
 	public List<ErrorReportVO> getReportExceptionMessage() {
-		return sqlSessionTemplate.selectList("errorReport.getExceptionMessage");
+		return sqlSessionTemplate.selectList("errorReport.getReportExceptionMessage");
 	}
 
 	@Override

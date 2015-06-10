@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class VideoServiceImpl implements VideoService {
-	@Resource(name="VideoDAOImpl")
+	@Resource(name="videoDAOImpl")
 	private VideoDAO videoDAO;	
 	/* (non-Javadoc)
 	 * @see org.kosta.dew.model.service.VideoService#write(org.kosta.dew.model.vo.VideoVO)

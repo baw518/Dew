@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class ErrorReportVO {
 	private String exceptionMessage;
-	private String errorNo;
+	private int errorNo;
 	private String id;
 	private String errorReportNo;
 	private String errorCode;
@@ -22,7 +22,7 @@ public class ErrorReportVO {
 
 
 
-	public ErrorReportVO(String exceptionMessage, String errorNo, String id,
+	public ErrorReportVO(String exceptionMessage, int errorNo, String id,
 			String errorReportNo, String errorCode, int hit, String content,
 			String writer, Date date, int discussionStatus) {
 		super();
@@ -52,13 +52,13 @@ public class ErrorReportVO {
 
 
 
-	public String getErrorNo() {
+	public int getErrorNo() {
 		return errorNo;
 	}
 
 
 
-	public void setErrorNo(String errorNo) {
+	public void setErrorNo(int errorNo) {
 		this.errorNo = errorNo;
 	}
 
