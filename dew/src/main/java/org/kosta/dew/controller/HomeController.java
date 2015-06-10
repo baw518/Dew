@@ -8,7 +8,6 @@ public class HomeController {
 	
 	@RequestMapping("home.do")
 	public String homeView(){
-		System.out.println("HomeController Start()..");
 		return "home";
 	}
 	
