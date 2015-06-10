@@ -2,9 +2,57 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
- <mapper namespace="vedio"> 
-
- </mapper> 		
+<mapper namespace="vedio">
+	<insert id="write" parameterType="vvo">
+		<selectKey keyProperty="no" resultType="int" order="BEFORE">
+			select video_no.nextval from dual
+		</selectKey>
+		insert into video_tutorial(video_no,id,title,content,video_date,video_path) 
+		values(#{videoNo},#{id},#{title},#{content},sysdate,#{videoPath})
+	</insert>
+	<resultMap type="vvo" id="videoListRM">
+		<result property="viewCount" column="view_count" />
+		<result property="writeDate" column="write_date" />
+	</resultMap>
+	<select id="getVideoList" resultMap="videoListRM">
+		SELECT video_no,title,hit,id,video_date
+		FROM(
+		SELECT video_no,title,hit,id,video_date,CEIL(rownum/5) AS page
+		FROM (
+		SELECT video_no,title,hit,id,to_char(write_date,'YYYY.MM.DD') as
+		video_date
+		FROM video_tutorial order by no desc
+		)
+		) WHERE PAGE=#{value}
+	</select>
+	<!-- 위에서 정의했던 videoListRM 을 확장하여(속성추가) 사용 -->
+	<resultMap type="vvo" id="videoRM" extends="videoListRM">
+		<result property="content" column="content" />
+	</resultMap>
+	<select id="showContent" resultMap="videoRM">
+		select video_no,title,hit,id,video_date,content
+		from video_tutorial
+		where video_no=#{value}
+	</select>
+	<update id="updateCount" parameterType="int">
+		update video_tutorial set view_count=view_count+1 where no=#{no}
+	</update>
+	<select id="checkAdmin" resultType="int" parameterType="hashmap">
+		<!-- select count(*) from video_tutorial
+		where video_no=#{video_no} -->
+	</select>
+	<delete id="deleteBoard">
+		delete from video_tutorial where no=#{value}
+	</delete>
+	<update id="updateBoard" parameterType="vvo">
+		update video_tutorial set title=#{title},content=#{content},id=#{id}
+		where video_no=#{video_no}
+	</update>
+	<select id="totalContent" resultType="int">
+		select count(*) from
+		video_tutorial
+	</select>
+</mapper> 		
  
  
  

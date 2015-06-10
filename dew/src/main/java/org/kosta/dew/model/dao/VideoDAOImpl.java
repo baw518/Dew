@@ -6,7 +6,9 @@ import javax.annotation.Resource;
 
 import org.kosta.dew.model.vo.VideoVO;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.stereotype.Component;
 
+@Component
 public class VideoDAOImpl implements VideoDAO {
 	@Resource(name="sqlSessionTemplate")
 	private SqlSessionTemplate sqlSessionTemplate;
@@ -23,7 +25,7 @@ public class VideoDAOImpl implements VideoDAO {
 	 * @see org.kosta.dew.model.dao.VideoDAO#checkAdmin(java.util.Map)
 	 */
 	@Override
-	public Integer checkAdmin() {		
+	public Integer checkAdmin(/*회원이 완성해야됨*/) {		
 		return sqlSessionTemplate.selectOne("video.checkAdmin");
 	}
 	

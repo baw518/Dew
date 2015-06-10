@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class VideoServiceImpl implements VideoService {
-	@Resource(name="VideoDAOImpl")
+	@Resource(name="videoDAOImpl")
 	private VideoDAO videoDAO;	
 	/* (non-Javadoc)
 	 * @see org.kosta.dew.model.service.VideoService#write(org.kosta.dew.model.vo.VideoVO)
@@ -25,7 +25,7 @@ public class VideoServiceImpl implements VideoService {
 	 * @see org.kosta.dew.model.service.VideoService#getBoardList(java.lang.String)
 	 */
 	@Override
-	public VideoListVO getBoardList(String pageNo){
+	public VideoListVO getVideoList(String pageNo){
 		if(pageNo==null||pageNo=="") 
 			pageNo="1";
 		List<VideoVO> list=videoDAO.getVideoList(pageNo);
@@ -74,4 +74,5 @@ public class VideoServiceImpl implements VideoService {
 	public void updateVideo(VideoVO vvo){
 		videoDAO.updateVideo(vvo);
 	}
+	
 }

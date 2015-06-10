@@ -7,7 +7,7 @@ public interface VideoService {
 
 	public abstract void write(VideoVO vvo);
 
-	public abstract VideoListVO getBoardList(String pageNo);
+	public abstract VideoListVO getVideoList(String pageNo);
 
 	public abstract VideoVO showContent(int no);
 
@@ -18,5 +18,7 @@ public interface VideoService {
 	public abstract void deleteVideo(String no);
 
 	public abstract void updateVideo(VideoVO vvo);
+
+	
 
 }
