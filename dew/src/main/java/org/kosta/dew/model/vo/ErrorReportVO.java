@@ -1,77 +1,183 @@
 package org.kosta.dew.model.vo;
 
+import java.sql.Date;
+
 public class ErrorReportVO {
 	private String exceptionMessage;
-	private String errorCode;
+	private String errorNo;
 	private String id;
 	private String errorReportNo;
-	private int hits;
+	private String errorCode;
+	private int hit;
 	private String content;
 	private String writer;
-	public String getExceptionMessage() {
-		return exceptionMessage;
-	}
-	public void setExceptionMessage(String exceptionMessage) {
-		this.exceptionMessage = exceptionMessage;
-	}
-	public String getErrorCode() {
-		return errorCode;
-	}
-	public void setErrorCode(String errorCode) {
-		this.errorCode = errorCode;
-	}
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
-	public String getErrorReportNo() {
-		return errorReportNo;
-	}
-	public void setErrorReportNo(String errorReportNo) {
-		this.errorReportNo = errorReportNo;
-	}
-	public int getHits() {
-		return hits;
-	}
-	public void setHits(int hits) {
-		this.hits = hits;
-	}
-	public String getContent() {
-		return content;
-	}
-	public void setContent(String content) {
-		this.content = content;
-	}
-	public String getWriter() {
-		return writer;
-	}
-	public void setWriter(String writer) {
-		this.writer = writer;
-	}
-	public ErrorReportVO(String exceptionMessage, String errorCode, String id,
-			String errorReportNo, int hits, String content, String writer) {
-		super();
-		this.exceptionMessage = exceptionMessage;
-		this.errorCode = errorCode;
-		this.id = id;
-		this.errorReportNo = errorReportNo;
-		this.hits = hits;
-		this.content = content;
-		this.writer = writer;
-	}
+	private Date date;
+	private int discussionStatus;
+	
+	
+	
 	public ErrorReportVO() {
 		super();
 	}
-	
+
+
+
+	public ErrorReportVO(String exceptionMessage, String errorNo, String id,
+			String errorReportNo, String errorCode, int hit, String content,
+			String writer, Date date, int discussionStatus) {
+		super();
+		this.exceptionMessage = exceptionMessage;
+		this.errorNo = errorNo;
+		this.id = id;
+		this.errorReportNo = errorReportNo;
+		this.errorCode = errorCode;
+		this.hit = hit;
+		this.content = content;
+		this.writer = writer;
+		this.date = date;
+		this.discussionStatus = discussionStatus;
+	}
+
+
+
+	public String getExceptionMessage() {
+		return exceptionMessage;
+	}
+
+
+
+	public void setExceptionMessage(String exceptionMessage) {
+		this.exceptionMessage = exceptionMessage;
+	}
+
+
+
+	public String getErrorNo() {
+		return errorNo;
+	}
+
+
+
+	public void setErrorNo(String errorNo) {
+		this.errorNo = errorNo;
+	}
+
+
+
+	public String getId() {
+		return id;
+	}
+
+
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+
+
+	public String getErrorReportNo() {
+		return errorReportNo;
+	}
+
+
+
+	public void setErrorReportNo(String errorReportNo) {
+		this.errorReportNo = errorReportNo;
+	}
+
+
+
+	public String getErrorCode() {
+		return errorCode;
+	}
+
+
+
+	public void setErrorCode(String errorCode) {
+		this.errorCode = errorCode;
+	}
+
+
+
+	public int getHit() {
+		return hit;
+	}
+
+
+
+	public void setHit(int hit) {
+		this.hit = hit;
+	}
+
+
+
+	public String getContent() {
+		return content;
+	}
+
+
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+
+
+	public String getWriter() {
+		return writer;
+	}
+
+
+
+	public void setWriter(String writer) {
+		this.writer = writer;
+	}
+
+
+
+	public Date getDate() {
+		return date;
+	}
+
+
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+
+
+	public int getDiscussionStatus() {
+		return discussionStatus;
+	}
+
+
+
+	public void setDiscussionStatus(int discussionStatus) {
+		this.discussionStatus = discussionStatus;
+	}
+
+
+
 	@Override
 	public String toString() {
-		return "ErrorReport [exceptionMessage=" + exceptionMessage
-				+ ", errorCode=" + errorCode + ", id=" + id
-				+ ", errorReportNo=" + errorReportNo + ", hits=" + hits
-				+ ", content=" + content + ", writer=" + writer + "]";
+		return "ErrorReportVO [exceptionMessage=" + exceptionMessage
+				+ ", errorNo=" + errorNo + ", id=" + id + ", errorReportNo="
+				+ errorReportNo + ", errorCode=" + errorCode + ", hit=" + hit
+				+ ", content=" + content + ", writer=" + writer + ", date="
+				+ date + ", discussionStatus=" + discussionStatus + "]";
 	}
+
+	
+
+
+
+
+	
+	
+	
+	
 	
 	
 }

@@ -21,8 +21,8 @@
                     <div class="col-md-12 col-sm-6">
                         <div class="social-icons">
                             <ul>
-                                <li><a href="${initParam.root }main.jsp">홈으로</a></li>
-                                <li><a href="${initParam.root }login.jsp">로그인</a></li>
+                                <li><a href="home.do">홈으로</a></li>
+                                <li><a href="${initParam.root }WEB-INF/views/member/login.jsp">로그인</a></li>
                             </ul>
                             <div class="clearfix"></div>
                         </div> <!-- /.social-icons -->
@@ -35,7 +35,7 @@
                 <div class="row">
                     <div class="col-md-3 col-sm-6 col-xs-8">
                         <div class="logo">
-                            <h1><a href="${initParam.root }main.jsp">DEW</a></h1>
+                            <h1><a href="home.do">DEW</a></h1>
                         </div> <!-- /.logo -->
                     </div> <!-- /.col-md-4 -->
                     <div class="col-md-15 col-sm-6 col-xs-8">
@@ -52,7 +52,7 @@
                     <div class="col-md-10">
                         <div class="list-menu">
                             <ul>
-                                <li><a href="index.html">메뉴1</a></li>
+                                <li><a href="reportView.do">에러 리포트</a></li>
                                 <li><a href="product-detail.html">메뉴2</a></li>
                                 <li><a href="contact.html">메뉴3</a></li>
                                 <li><a href="projectList.jsp">프로젝트</a></li>
