@@ -18,38 +18,16 @@ import org.springframework.web.servlet.view.AbstractView;
  *
  */
 public class DownloadView extends AbstractView{
-	
-	@Override
-	public String getContentType() {
-		// 8bit 단위의 일련의 데이터
-		return "application/octet-stream";
-	}
 
 	@Override
-	protected void renderMergedOutputModel(Map<String, Object> map,
-			HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String path=(String)map.get("path");
-		String filename=request.getParameter("filename");
-		System.out.println("DownloadView 실행 "+path+filename);
-		// 업로드 파일 객체 
-		File file=new File(path+filename);
-		// 파일 다운로드 
-	    response.setContentType(this.getContentType());
-	    response.setContentLength((int)file.length());//파일 크기 설정 
-	    // 다운로드 파일에 대한 설정 
-	    response.setHeader("Content-Disposition", 
-	      "attachment; fileName="
-	    +new String(file.getName().getBytes("UTF-8"),"8859_1"));
-	    //데이터 인코딩이 바이너리 파일임을 명시
-	    response.setHeader("Content-Transfer-encoding", "binary");
+	protected void renderMergedOutputModel(Map<String, Object> model,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		// TODO Auto-generated method stub
 		
-	    //response에 연결된 OutputStream
-	    OutputStream os=response.getOutputStream();
-	    //업로드된 파일을 입력받기 위한 입력스트림 
-	    FileInputStream fis=new FileInputStream(file);
-	    FileCopyUtils.copy(fis, os);
-	    System.out.println("다운로드 ok:"+file.getName());
 	}
+	
+	
 }
 
 
