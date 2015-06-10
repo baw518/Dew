@@ -57,7 +57,7 @@
                                 <li><a href="contact.html">메뉴3</a></li>
                                 <li><a href="projectList.jsp">프로젝트</a></li>
                                  <li><a href="QnA_listview.do">QnA</a></li>
-                                 <li><a href="contact.html">메뉴6</a></li>
+                                 <li><a href="contact.html">토론방</a></li>
                                   <li><a href="contact.html">메뉴7</a></li>
                             </ul>
                         </div> <!-- /.list-menu -->
