@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class VideoDAOImpl implements VideoDAO {
-	@Resource(name="sqlSessionTemplate")
+	@Resource
 	private SqlSessionTemplate sqlSessionTemplate;
 	
 	/* (non-Javadoc)

@@ -23,8 +23,8 @@
 	<tbody>			
 	<c:forEach var="list" items="${requestScope.vo.list}">				
 		<tr>
-		    <td>${list.qnaNo }</td>				
-			<td ><a href="QnA_showcontent.do?qnaNo=${list.qnaNo}">
+		    <td>${list.videoNo }</td>				
+			<td ><a href="video_showcontent.do?videoNo=${list.videoNo}">
 			${list.title }</a></td>
 			<td>${list.id }</td>
 			<td>${list.date }</td>

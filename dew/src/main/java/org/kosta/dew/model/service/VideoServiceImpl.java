@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class VideoServiceImpl implements VideoService {
-	@Resource(name="videoDAOImpl")
+	@Resource
 	private VideoDAO videoDAO;	
 	/* (non-Javadoc)
 	 * @see org.kosta.dew.model.service.VideoService#write(org.kosta.dew.model.vo.VideoVO)
@@ -29,10 +29,11 @@ public class VideoServiceImpl implements VideoService {
 		if(pageNo==null||pageNo=="") 
 			pageNo="1";
 		List<VideoVO> list=videoDAO.getVideoList(pageNo);
+		System.out.println(list);
 		int total=videoDAO.totalContent();
-		PagingBean paging=new PagingBean(total,Integer.parseInt(pageNo));
-		VideoListVO lvo=new VideoListVO(list,paging);
-		return lvo;
+		PagingBean PagingBean=new PagingBean(total,Integer.parseInt(pageNo));
+		VideoListVO vo=new VideoListVO(list,PagingBean);
+		return vo;
 	}
 	/* (non-Javadoc)
 	 * @see org.kosta.dew.model.service.VideoService#showContent(int)
