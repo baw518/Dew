@@ -15,14 +15,21 @@ public class ErrorReportController {
 	@Resource
 	private ErrorReportService errorReportService;
 
-	@RequestMapping("reportView.do")
+	@RequestMapping("report_listView.do")
 	public ModelAndView reportView(){
 		List<ErrorReportVO> list = null;
-		ModelAndView mav = new ModelAndView("errorReport_view");
+		ModelAndView mav = new ModelAndView("errorReport_listView");
 		mav.addObject("errorcode", errorReportService.getReportErrorCode());
 		mav.addObject("exception",errorReportService.getReportExceptionMessage());
 		System.out.println("getErrorCode : " + errorReportService.getReportErrorCode() + " \n getExceptionMessage :" +errorReportService.getReportExceptionMessage());
 		return mav;
 	}
 	
+	@RequestMapping("report_showContent.do")
+	public ModelAndView ReportShowContent(String errorNo,String type){
+		ModelAndView mav = new ModelAndView("errorReport_showContent");
+		System.out.println("errorNo : " + errorNo + " type : " + type);
+		
+		return mav;
+	}
 }
