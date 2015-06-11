@@ -34,6 +34,7 @@ $(document).ready(function(){
 		<th class="no" >NO</th>
 		<th class="title" >제목</th>
 		<th class="id">아이디</th>
+		<th class="point">걸린포인트</th>
 		<th class="date">작성일</th>
 		<th class="hit">HIT</th>
 		</tr>
@@ -45,13 +46,25 @@ $(document).ready(function(){
 			<td ><a href="QnA_showContent.do?qnaNo=${list.qnaNo}">
 			${list.title }</a></td>
 			<td>${list.id }</td>
+			<td>
+				<c:choose>
+					<c:when test="${list.restep== 0}">
+						${list.point }
+					</c:when>
+					<c:otherwise>
+						-
+					</c:otherwise>
+				</c:choose>
+			</td>
 			<td>${list.date }</td>
 			<td>${list.hit }</td>
 		</tr>	
 	</c:forEach>
 	<tr>
-		<td colspan="5" align="right">
-			<a href="QnA_write.do"><img  src="${initParam.root}images/qna_write.jpg" border="0"></a>
+		<td colspan="6" align="right">
+			<c:if test="${sessionScope.mvo != null}">
+				<a href="QnA_WriteForm.do"><img  src="${initParam.root}images/qna_write.jpg" border="0"></a>
+			</c:if>
 		</td>
 	</tr>
 	</tbody>
