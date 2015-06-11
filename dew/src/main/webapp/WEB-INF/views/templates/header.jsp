@@ -52,13 +52,11 @@
                     <div class="col-md-10">
                         <div class="list-menu">
                             <ul>
-                                <li><a href="reportView.do">에러 리포트</a></li>
-                                <li><a href="product-detail.html">메뉴2</a></li>
-                                <li><a href="contact.html">메뉴3</a></li>
-                                <li><a href="projectList.jsp">프로젝트</a></li>
+                                <li><a href="report_listview.do">에러 리포트</a></li>
+                                <li><a href="project_listview.do">프로젝트</a></li>
                                  <li><a href="QnA_listview.do">QnA</a></li>
-                                 <li><a href="show_Discussion_list.do">토론방</a></li>
-                                  <li><a href="contact.html">메뉴7</a></li>
+                                 <li><a href="discussion_listview.do">토론방</a></li>
+                                  <li><a href="video_listview.do">동영상 강좌</a></li>
                             </ul>
                         </div> <!-- /.list-menu -->
                     </div> <!-- /.col-md-6 -->
