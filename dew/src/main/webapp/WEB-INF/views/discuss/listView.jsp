@@ -11,14 +11,14 @@
 <body> --%>
 <%-- <c:import url="/template/header.jsp"></c:import>	 --%>
 	<table class="table" >
-		<caption>목록</caption>
+		<caption><h2>목록</h2></caption>
 		<thead>
 		<tr>
 			<th class="discussionNo">NO</th>
-			<th class="title">TITLE</th>
-			<th class="id">ID</th>
-			<th class="discussionSubject">SUBJECT</th>
-			<th class="discussionDate">DATE</th>
+			<th class="title">제목</th>
+			<th class="id">아이디</th>
+			<th class="discussionSubject">분류</th>
+			<th class="discussionDate">작성일</th>
 			<th class="hit">HIT</th>
 			</tr>		
 		</thead>	
@@ -34,6 +34,16 @@
 			</c:forEach>
 	</table><br></br>	
 <br></br>	
-<%-- <c:import url="/template/footer.jsp"></c:import>	 --%>
-<!-- </body>
-</html> -->
+<%-- <center>
+	<a href="QnA_listView.do?pageNo=${requestScope.vo.pagingBean.startPageOfPageGroup-1}">
+	<c:if test="${requestScope.vo.pagingBean.previousPageGroup== true && requestScope.vo.pagingBean.nowPageGroup!=1}">◀</c:if>
+	</a>
+	
+	<c:forEach var="i" begin="${requestScope.vo.pagingBean.startPageOfPageGroup}" end="${requestScope.vo.pagingBean.endPageOfPageGroup}" step="1">
+		<a href="discussion_listView?pageNo=${i}">${i}</a>
+	</c:forEach>
+	
+	<a href="discussion_listView.do?&pageNo=${requestScope.vo.pagingBean.endPageOfPageGroup+1}">
+		<c:if test="${requestScope.vo.pagingBean.nextPageGroup== true}">▶</c:if>
+	</a>
+</center> --%>
