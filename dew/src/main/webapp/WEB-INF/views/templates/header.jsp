@@ -30,7 +30,6 @@
                                 <li><a href="logout.do">로그아웃</a></li>                                   
                                    </c:otherwise>
                                 </c:choose>
-                                <li><a href="loginForm.do">로그인</a></li>
                             </ul>
                             <div class="clearfix"></div>
                         </div> <!-- /.social-icons -->
