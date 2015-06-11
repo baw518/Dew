@@ -25,7 +25,7 @@
 			<c:forEach var="dsvo" items="${requestScope.dslvo.list}">		
 			<tr>
 			    <td>${dsvo.discussionNo }</td>					
-			    <td>${dsvo.title }</td>					
+			    <td><a href="findDiscussContent.do?no=${dsvo.discussionNo }">${dsvo.title }</a></td>					
 			    <td>${dsvo.id }</td>					
 			    <td>${dsvo.discussionSubject }</td>					
 			    <td>${dsvo.discussionDate }</td>					

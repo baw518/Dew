@@ -12,7 +12,7 @@ public interface DiscussService {
 
 	public abstract int registerDiscussion(DiscussVO divo);
 
-	public abstract DiscussVO findDiscussContent();
+	public abstract List<DiscussVO> findDiscussContent(String no);
 
 	public abstract List<DiscussVO> searchDisscuss(String title);
 

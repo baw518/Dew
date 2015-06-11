@@ -31,8 +31,8 @@ public class DiscussDAOImpl implements DiscussDAO {
 	 * @see org.kosta.dew.model.dao.DiscussDAO#findDiscussContent()
 	 */
 	@Override
-	public DiscussVO findDiscussContent(){
-		return sqlSessionTemplate.selectOne("discuss.findDiscussContent");
+	public List<DiscussVO> findDiscussContent(String no){
+		return sqlSessionTemplate.selectList("discuss.findDiscussContent",no);
 	}
 	/* (non-Javadoc)
 	 * @see org.kosta.dew.model.dao.DiscussDAO#findDiscussContent(java.lang.String)
