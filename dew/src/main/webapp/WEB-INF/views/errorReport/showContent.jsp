@@ -1,9 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<table border="1">
-<tr>
-<td>
-</td>
-</tr>
+<table border="1" >
+<c:forEach items="${requestScope.exception }" var = "evo">
+<tr><td>${evo.exceptionMessage }</td></tr>
+</c:forEach>
+
+<c:forEach items="${requestScope.errorcode }" var="cvo">
+<tr><td>${cvo.errorCode }</td></tr>
+</c:forEach>
+<tr><td>하하하</td></tr>
 </table>
