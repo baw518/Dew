@@ -118,7 +118,7 @@ public class QnAController {
 	@RequestMapping("QnA_SelectedListView.do")
 	public String selectedListView(String group){
 		if(group.equals("all")){
-			
+			///////
 		}
 		return "QnA_SelectedListView";
 	}
