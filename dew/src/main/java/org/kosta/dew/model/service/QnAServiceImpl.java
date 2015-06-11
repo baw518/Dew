@@ -1,10 +1,12 @@
 package org.kosta.dew.model.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
 
 import org.kosta.dew.model.dao.QnADAO;
+import org.kosta.dew.model.vo.QnAGroupVO;
 import org.kosta.dew.model.vo.QnAVO;
 import org.springframework.stereotype.Service;
 @Service
@@ -34,4 +36,12 @@ public class QnAServiceImpl implements QnAService{
 		
 		return qnADAO.showContent(qnaNo);
 	}
+
+	@Override
+	public List<QnAGroupVO> getGroupList() {
+		
+		return qnADAO.getGroupList();
+	}
+
+	
 }

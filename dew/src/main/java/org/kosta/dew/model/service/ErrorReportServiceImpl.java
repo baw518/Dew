@@ -29,4 +29,9 @@ public class ErrorReportServiceImpl implements ErrorReportService {
 		return errorReportDAO.getReportView();
 	}
 
+	@Override
+	public ErrorReportVO getContent(String errorNo, String type) {
+		return errorReportDAO.getContent(errorNo,type);
+	}
+
 }

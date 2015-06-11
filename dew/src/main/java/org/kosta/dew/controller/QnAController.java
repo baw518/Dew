@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.kosta.dew.model.service.QnAService;
 import org.kosta.dew.model.vo.PagingBean;
+import org.kosta.dew.model.vo.QnAGroupVO;
 import org.kosta.dew.model.vo.QnAListVO;
 import org.kosta.dew.model.vo.QnAVO;
 import org.springframework.stereotype.Controller;
@@ -26,7 +27,7 @@ public class QnAController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping("QnA_listview.do")
+	@RequestMapping("QnA_listView.do")
 	public String listview(HttpServletRequest request,Model model){
 		
 		//페이지번호
@@ -47,7 +48,11 @@ public class QnAController {
 		QnAListVO vo = new QnAListVO(list,pagingBean);
 		model.addAttribute("vo", vo);
 		
-		return "QnA_listview";
+		//분류받아와서 보내기
+		List<QnAGroupVO> groupList = qnAService.getGroupList();
+		model.addAttribute("groupList", groupList);
+		
+		return "QnA_listView";
 	}
 	
 	/**
@@ -58,7 +63,7 @@ public class QnAController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping("QnA_showcontent.do")
+	@RequestMapping("QnA_showContent.do")
 	public String showContent(String qnaNo,HttpServletRequest request,HttpServletResponse response,Model model){
 		
 		QnAVO qvo = null;
@@ -106,6 +111,6 @@ public class QnAController {
 		}
 		
 		model.addAttribute("qvo", qvo);
-		return "QnA_showcontent";
+		return "QnA_showContent";
 	}
 }
