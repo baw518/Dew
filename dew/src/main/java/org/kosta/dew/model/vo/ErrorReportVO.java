@@ -11,7 +11,7 @@ public class ErrorReportVO {
 	private int hit;
 	private String content;
 	private String writer;
-	private Date date;
+	private Date reportDate;
 	private int discussionStatus;
 	
 	
@@ -24,7 +24,7 @@ public class ErrorReportVO {
 
 	public ErrorReportVO(String exceptionMessage, int errorNo, String id,
 			String errorReportNo, String errorCode, int hit, String content,
-			String writer, Date date, int discussionStatus) {
+			String writer, Date reportDate, int discussionStatus) {
 		super();
 		this.exceptionMessage = exceptionMessage;
 		this.errorNo = errorNo;
@@ -34,7 +34,7 @@ public class ErrorReportVO {
 		this.hit = hit;
 		this.content = content;
 		this.writer = writer;
-		this.date = date;
+		this.reportDate = reportDate;
 		this.discussionStatus = discussionStatus;
 	}
 
@@ -137,13 +137,13 @@ public class ErrorReportVO {
 
 
 	public Date getDate() {
-		return date;
+		return reportDate;
 	}
 
 
 
-	public void setDate(Date date) {
-		this.date = date;
+	public void setDate(Date reportDate) {
+		this.reportDate = reportDate;
 	}
 
 
@@ -165,8 +165,8 @@ public class ErrorReportVO {
 		return "ErrorReportVO [exceptionMessage=" + exceptionMessage
 				+ ", errorNo=" + errorNo + ", id=" + id + ", errorReportNo="
 				+ errorReportNo + ", errorCode=" + errorCode + ", hit=" + hit
-				+ ", content=" + content + ", writer=" + writer + ", date="
-				+ date + ", discussionStatus=" + discussionStatus + "]";
+				+ ", content=" + content + ", writer=" + writer + ", reportDate="
+				+ reportDate + ", discussionStatus=" + discussionStatus + "]";
 	}
 
 	

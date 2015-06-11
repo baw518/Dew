@@ -9,5 +9,6 @@ public interface ErrorReportService {
 	List<ErrorReportVO> getReportErrorCode();
 	List<ErrorReportVO> getReportExceptionMessage();
 	List<ErrorReportVO> getReportView();
+	ErrorReportVO getContent(String errorNo, String type);
 
 }

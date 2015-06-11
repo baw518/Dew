@@ -22,6 +22,14 @@
                         <div class="social-icons">
                             <ul>
                                 <li><a href="home.do">홈으로</a></li>
+                                <c:choose>
+                                   <c:when test="${sessionScope.mvo==null }">
+                                <li><a href="login_form.do">로그인</a></li>
+                                   </c:when>
+                                   <c:otherwise>
+                                <li><a href="logout.do">로그아웃</a></li>                                   
+                                   </c:otherwise>
+                                </c:choose>
                                 <li><a href="loginForm.do">로그인</a></li>
                             </ul>
                             <div class="clearfix"></div>

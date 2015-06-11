@@ -29,6 +29,19 @@ public class ErrorReportDAOImpl implements ErrorReportDAO {
 		return sqlSessionTemplate.selectList("errorReport.getReportView");
 	}
 
+	@Override
+	public ErrorReportVO getContent(String errorNo, String type) {
+		ErrorReportVO vo = null;
+		if(type.equals("exception")){
+			System.out.println("exception start");
+			vo = sqlSessionTemplate.selectOne("errorReport.getContentException", errorNo);
+		}else{
+			System.out.println("error start");
+			vo = sqlSessionTemplate.selectOne("errorReport.getContentErrorCode", errorNo);
+		}
+		return vo;
+	}
+
 
 	
 	

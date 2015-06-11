@@ -21,15 +21,14 @@ public class ErrorReportController {
 		ModelAndView mav = new ModelAndView("errorReport_listView");
 		mav.addObject("errorcode", errorReportService.getReportErrorCode());
 		mav.addObject("exception",errorReportService.getReportExceptionMessage());
-		System.out.println("getErrorCode : " + errorReportService.getReportErrorCode() + " \n getExceptionMessage :" +errorReportService.getReportExceptionMessage());
 		return mav;
 	}
 	
 	@RequestMapping("report_showContent.do")
 	public ModelAndView ReportShowContent(String errorNo,String type){
 		ModelAndView mav = new ModelAndView("errorReport_showContent");
-		System.out.println("errorNo : " + errorNo + " type : " + type);
-		
+		ErrorReportVO vo = errorReportService.getContent(errorNo,type);
+		System.out.println(vo);
 		return mav;
 	}
 }
