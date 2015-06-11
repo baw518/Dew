@@ -2,8 +2,18 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
- <mapper namespace="member"> 
-
+ <mapper namespace="member" > 
+ <resultMap type="mvo" id="memberListRM">
+ 		<result property="memberName" column="member_name" />			
+		<result property="memberPassword" column="member_password" /> 
+		<result property="birthDate" column="birth_date" /> 
+		<result property="memberLevel" column="member_level" /> 
+		<result property="passwordQuestion" column="password_question" /> 
+		<result property="passwordAnswer" column="password_answer" />  
+</resultMap>
+ <select id="login" resultMap="memberListRM">
+	select id,member_name,member_password,birth_date,member_level,contribution,point,password_question,password_answer from member where id=#{id} and member_password=#{memberPassword}
+ </select>
  </mapper> 		
  
  

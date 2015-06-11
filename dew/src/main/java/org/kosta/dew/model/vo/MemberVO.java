@@ -2,30 +2,68 @@ package org.kosta.dew.model.vo;
 
 public class MemberVO {
 	private String id;
-	private String password;
-	private String birthday;
+	private String memberName;
+	private String memberPassword;
+	private String birthDate;
+	private String memberLevel;
 	private int userType;
 	private int score;
 	private int point;
-	private String question;
-	private String answer;
+	private String passwordQuestion;
+	private String passwordAnswer;
+	public MemberVO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public MemberVO(String id, String memberName, String memberPassword,
+			String birthDate, String memberLevel, int userType, int score,
+			int point, String passwordQuestion, String passwordAnswer) {
+		super();
+		this.id = id;
+		this.memberName = memberName;
+		this.memberPassword = memberPassword;
+		this.birthDate = birthDate;
+		this.memberLevel = memberLevel;
+		this.userType = userType;
+		this.score = score;
+		this.point = point;
+		this.passwordQuestion = passwordQuestion;
+		this.passwordAnswer = passwordAnswer;
+	}
+	public MemberVO(String id, String memberPassword) {
+		super();
+		this.id = id;
+		this.memberPassword = memberPassword;
+	}
 	public String getId() {
 		return id;
 	}
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getPassword() {
-		return password;
+	public String getMemberName() {
+		return memberName;
 	}
-	public void setPassword(String password) {
-		this.password = password;
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
 	}
-	public String getBirthday() {
-		return birthday;
+	public String getMemberPassword() {
+		return memberPassword;
 	}
-	public void setBirthday(String birthday) {
-		this.birthday = birthday;
+	public void setMemberPassword(String memberPassword) {
+		this.memberPassword = memberPassword;
+	}
+	public String getBirthDate() {
+		return birthDate;
+	}
+	public void setBirthDate(String birthDate) {
+		this.birthDate = birthDate;
+	}
+	public String getMemberLevel() {
+		return memberLevel;
+	}
+	public void setMemberLevel(String memberLevel) {
+		this.memberLevel = memberLevel;
 	}
 	public int getUserType() {
 		return userType;
@@ -45,39 +83,26 @@ public class MemberVO {
 	public void setPoint(int point) {
 		this.point = point;
 	}
-	public String getQuestion() {
-		return question;
+	public String getPasswordQuestion() {
+		return passwordQuestion;
 	}
-	public void setQuestion(String question) {
-		this.question = question;
+	public void setPasswordQuestion(String passwordQuestion) {
+		this.passwordQuestion = passwordQuestion;
 	}
-	public String getAnswer() {
-		return answer;
+	public String getPasswordAnswer() {
+		return passwordAnswer;
 	}
-	public void setAnswer(String answer) {
-		this.answer = answer;
-	}
-	public MemberVO(String id, String password, String birthday, int userType,
-			int score, int point, String question, String answer) {
-		super();
-		this.id = id;
-		this.password = password;
-		this.birthday = birthday;
-		this.userType = userType;
-		this.score = score;
-		this.point = point;
-		this.question = question;
-		this.answer = answer;
-	}
-	public MemberVO() {
-		super();
+	public void setPasswordAnswer(String passwordAnswer) {
+		this.passwordAnswer = passwordAnswer;
 	}
 	@Override
 	public String toString() {
-		return "MemberVO [id=" + id + ", password=" + password + ", birthday="
-				+ birthday + ", userType=" + userType + ", score=" + score
-				+ ", point=" + point + ", question=" + question + ", answer="
-				+ answer + "]";
+		return "MemberVO [id=" + id + ", memberName=" + memberName
+				+ ", memberPassword=" + memberPassword + ", birthDate="
+				+ birthDate + ", memberLevel=" + memberLevel + ", userType="
+				+ userType + ", score=" + score + ", point=" + point
+				+ ", passwordQuestion=" + passwordQuestion
+				+ ", passwordAnswer=" + passwordAnswer + "]";
 	}
 	
 	
