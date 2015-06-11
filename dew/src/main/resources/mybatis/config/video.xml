@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="vedio">
+<mapper namespace="video">
 	<insert id="write" parameterType="vvo">
 		<selectKey keyProperty="no" resultType="int" order="BEFORE">
 			select video_no.nextval from dual
@@ -11,18 +11,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		values(#{videoNo},#{id},#{title},#{content},sysdate,#{videoPath})
 	</insert>
 	<resultMap type="vvo" id="videoListRM">
-		<result property="viewCount" column="view_count" />
-		<result property="writeDate" column="write_date" />
+		  <result property="videoNo" column="video_no" />
+		 <result property="videoDate" column="video_date" />
+		<result property="videoPath" column="video_path" />   
 	</resultMap>
 	<select id="getVideoList" resultMap="videoListRM">
-		SELECT video_no,title,hit,id,video_date
-		FROM(
-		SELECT video_no,title,hit,id,video_date,CEIL(rownum/5) AS page
-		FROM (
-		SELECT video_no,title,hit,id,to_char(write_date,'YYYY.MM.DD') as
-		video_date
-		FROM video_tutorial order by no desc
-		)
+		SELECT video_no,title,hit,id,video_date FROM(
+			SELECT video_no,title,hit,id,video_date,CEIL(rownum/5) AS page FROM (
+				SELECT video_no,title,hit,id,to_char(video_date,'YYYY.MM.DD') 
+			as video_date FROM video_tutorial order by video_no desc
+			)
 		) WHERE PAGE=#{value}
 	</select>
 	<!-- 위에서 정의했던 videoListRM 을 확장하여(속성추가) 사용 -->
@@ -35,14 +33,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where video_no=#{value}
 	</select>
 	<update id="updateCount" parameterType="int">
-		update video_tutorial set view_count=view_count+1 where no=#{no}
+		update video_tutorial set hit=hit+1 where video_no=#{value}
 	</update>
 	<select id="checkAdmin" resultType="int" parameterType="hashmap">
 		<!-- select count(*) from video_tutorial
 		where video_no=#{video_no} -->
 	</select>
 	<delete id="deleteBoard">
-		delete from video_tutorial where no=#{value}
+		delete from video_tutorial where video_no=#{value}
 	</delete>
 	<update id="updateBoard" parameterType="vvo">
 		update video_tutorial set title=#{title},content=#{content},id=#{id}

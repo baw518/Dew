@@ -28,7 +28,13 @@ public class ErrorReportController {
 	public ModelAndView ReportShowContent(String errorNo,String type){
 		ModelAndView mav = new ModelAndView("errorReport_showContent");
 		ErrorReportVO vo = errorReportService.getContent(errorNo,type);
-		System.out.println(vo);
+		if(type.equals("exception")){
+			mav.addObject("exception", vo);	
+			System.out.println("vo :"+vo);
+		}else{
+			mav.addObject("errorcode",vo);
+			System.out.println("vo : " +vo);
+		}
 		return mav;
 	}
 }

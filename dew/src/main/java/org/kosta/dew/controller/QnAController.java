@@ -36,10 +36,10 @@ public class QnAController {
 		if(pageNo==null){
 			pageNo="1";
 		}
-		int pageNum = Integer.parseInt(pageNo);
+		int pageNum = Integer.parseInt(pageNo);	
 		
 		//해당 페이지번호에 해당하는 게시물들을 리스트에 저장
-		List<QnAVO> list = qnAService.getAllList(pageNum);
+		List<QnAVO> list =  qnAService.getAllList(pageNum);
 		
 		//페이징
 		PagingBean pagingBean = new PagingBean(qnAService.getAllCount(),pageNum);
@@ -47,6 +47,7 @@ public class QnAController {
 		//리스트와 페이징을 저장하여 보낸다
 		QnAListVO vo = new QnAListVO(list,pagingBean);
 		model.addAttribute("vo", vo);
+		
 		
 		//분류받아와서 보내기
 		List<QnAGroupVO> groupList = qnAService.getGroupList();
@@ -111,6 +112,15 @@ public class QnAController {
 		}
 		
 		model.addAttribute("qvo", qvo);
-		return "QnA_showContent";
+		return "QnA_showcontent";
 	}
+	
+	@RequestMapping("QnA_SelectedListView.do")
+	public String selectedListView(String group){
+		if(group.equals("all")){
+			
+		}
+		return "QnA_SelectedListView";
+	}
+
 }

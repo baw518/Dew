@@ -7,14 +7,14 @@ public class VideoVO {
 	private String id;
 	private String title;
 	private String content;
-	private Date videoDate;
+	private String videoDate;
 	private String hit;
 	private String videoPath;
 	public VideoVO() {
 		super();
 	}
 	public VideoVO(int videoNo, String id, String title, String content,
-			Date videoDate, String hit, String videoPath) {
+			String videoDate, String hit, String videoPath) {
 		super();
 		this.videoNo = videoNo;
 		this.id = id;
@@ -48,10 +48,10 @@ public class VideoVO {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public Date getVideoDate() {
+	public String getVideoDate() {
 		return videoDate;
 	}
-	public void setVideoDate(Date videoDate) {
+	public void setVideoDate(String videoDate) {
 		this.videoDate = videoDate;
 	}
 	public String getHit() {
