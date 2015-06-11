@@ -52,7 +52,7 @@ public class QnAController {
 		List<QnAGroupVO> groupList = qnAService.getGroupList();
 		model.addAttribute("groupList", groupList);
 		
-		return "QnA_listview";
+		return "QnA_listView";
 	}
 	
 	/**
@@ -111,6 +111,6 @@ public class QnAController {
 		}
 		
 		model.addAttribute("qvo", qvo);
-		return "QnA_showcontent";
+		return "QnA_showContent";
 	}
 }

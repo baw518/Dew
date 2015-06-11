@@ -57,15 +57,15 @@ $(document).ready(function(){
 </table>
 
 <center>
-	<a href="QnA_listview.do?pageNo=${requestScope.vo.pagingBean.startPageOfPageGroup-1}">
+	<a href="QnA_listView.do?pageNo=${requestScope.vo.pagingBean.startPageOfPageGroup-1}">
 	<c:if test="${requestScope.vo.pagingBean.previousPageGroup== true && requestScope.vo.pagingBean.nowPageGroup!=1}">◀</c:if>
 	</a>
 	
 	<c:forEach var="i" begin="${requestScope.vo.pagingBean.startPageOfPageGroup}" end="${requestScope.vo.pagingBean.endPageOfPageGroup}" step="1">
-		<a href="QnA_listview.do?pageNo=${i}">${i}</a>
+		<a href="QnA_listView.do?pageNo=${i}">${i}</a>
 	</c:forEach>
 	
-	<a href="QnA_listview.do?&pageNo=${requestScope.vo.pagingBean.endPageOfPageGroup+1}">
+	<a href="QnA_listView.do?&pageNo=${requestScope.vo.pagingBean.endPageOfPageGroup+1}">
 		<c:if test="${requestScope.vo.pagingBean.nextPageGroup== true}">▶</c:if>
 	</a>
 </center>
