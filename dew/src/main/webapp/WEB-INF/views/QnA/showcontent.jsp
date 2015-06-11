@@ -24,6 +24,7 @@
 			<input type="button" value="목록">
 		 <%-- <img class="action" src="${initParam.root}img/list_btn.jpg" onclick="sendList()" >
 		 <img class="action"  onclick="winOpen('delete')" 	src="${initParam.root}img/delete_btn.jpg" > 
-		 <img class="action"  onclick="winOpen('update')"  src="${initParam.root}img/modify_btn.jpg" ></td> --%>
+		 <img class="action"  onclick="winOpen('update')"  src="${initParam.root}img/modify_btn.jpg" > --%>
+		 </td>
 	</tr>
 </table>

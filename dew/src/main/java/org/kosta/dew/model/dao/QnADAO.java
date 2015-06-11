@@ -2,6 +2,7 @@ package org.kosta.dew.model.dao;
 
 import java.util.List;
 
+import org.kosta.dew.model.vo.QnAGroupVO;
 import org.kosta.dew.model.vo.QnAVO;
 
 public interface QnADAO {
@@ -13,5 +14,9 @@ public interface QnADAO {
 	public QnAVO showContent(String qnaNo);
 
 	public void hitUpContent(String qnaNo);
+
+	public List<QnAGroupVO> getGroupList();
+
+
 
 }

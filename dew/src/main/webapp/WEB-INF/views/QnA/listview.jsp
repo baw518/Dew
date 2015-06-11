@@ -2,14 +2,31 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <title>QnA 게시판 입니다.</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	
+	$("#group").change(function(){
+		
+	});
+});
+</script>
 </head>
-<body>
-<br>
+
 <center><h2>QnA게시판</h2></center>
+
+분류 : 
+<select id="group">
+	<option value="">전체보기</option>
+	<c:forEach items="${requestScope.groupList}" var="i">
+		<option value="i">${i.qnAGroupName }</option>
+	</c:forEach>
+</select> 
+
+
+
 <table class="table">
 	<thead>
 	<tr>
@@ -24,7 +41,7 @@
 	<c:forEach var="list" items="${requestScope.vo.list}">				
 		<tr>
 		    <td>${list.qnaNo }</td>				
-			<td ><a href="QnA_showcontent.do?qnaNo=${list.qnaNo}">
+			<td ><a href="QnA_showContent.do?qnaNo=${list.qnaNo}">
 			${list.title }</a></td>
 			<td>${list.id }</td>
 			<td>${list.date }</td>
@@ -53,11 +70,6 @@
 	</a>
 </center>
 
-
-
-
 <br>
 <br>
 <br>
-</body>
-</html>

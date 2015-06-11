@@ -19,6 +19,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		<result property="restep" column="restep"/>
  		<result property="relevel" column="relevel"/>
  	</resultMap>
+ 	
+ 	<resultMap type="qGroupvo" id="qGroupMap">
+ 		<result property="qnAGroupNo" column="group_no"/>
+ 		<result property="qnAGroupName" column="group_name"/>
+ 	</resultMap>
  	 
  <!-- 	 <select id="getAllList" resultMap="qMap">
  	 	select qna_no,id,group_no,title,content,to_char(qna_date,'YYYY.MM.DD') as qna_date,hit,point,answer_status,ref,restep,relevel from qna
@@ -48,6 +53,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	 <update id="hitUpContent" parameterType="string">
  	 	update qna set hit=hit+1 where qna_no=#{value}
  	 </update>
+ 	 
+ 	 <select id="getGroupList" resultMap="qGroupMap">
+ 	 	select group_name from qna_group
+ 	 </select>
  </mapper> 		
 
  
