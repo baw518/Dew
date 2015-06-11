@@ -1,9 +1,11 @@
 package org.kosta.dew.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.kosta.dew.model.vo.QnAGroupVO;
 import org.kosta.dew.model.vo.QnAVO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
@@ -35,4 +37,12 @@ public class QnADAOImpl implements QnADAO{
 	
 		sqlSessionTemplate.update("QnA.hitUpContent", qnaNo);
 	}
+
+	@Override
+	public List<QnAGroupVO> getGroupList() {
+		
+		return sqlSessionTemplate.selectList("QnA.getGroupList");
+	}
+
+
 }

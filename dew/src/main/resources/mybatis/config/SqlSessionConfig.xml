@@ -13,6 +13,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="org.kosta.dew.model.vo.MemberVO" alias="mvo"/>
 		<typeAlias type="org.kosta.dew.model.vo.ProjectVO" alias="pvo"/>
 		<typeAlias type="org.kosta.dew.model.vo.QnAVO" alias="qvo"/>
+		<typeAlias type="org.kosta.dew.model.vo.QnAGroupVO" alias="qGroupvo"/>
 		<typeAlias type="org.kosta.dew.model.vo.VideoVO" alias="vvo"/>
 	</typeAliases>	
     <!-- mybatis sql 정의 xml을 mapping  -->
