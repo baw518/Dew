@@ -30,8 +30,8 @@ public class DiscussController {
 	public ModelAndView findDiscussContent(HttpServletRequest request){
 		String no = request.getParameter("no");
 		System.out.println(no);
-		List list = discussService.findDiscussContent(no);
-		System.out.println(list);
-		return new ModelAndView("discussion_show_discussion","list",list);
+		DiscussVO dsvo  = discussService.findDiscussContent(no);
+		System.out.println(dsvo);
+		return new ModelAndView("discussion_show_discussion","dsvo",dsvo);
 	}
 }

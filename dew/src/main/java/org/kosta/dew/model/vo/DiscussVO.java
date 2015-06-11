@@ -10,14 +10,14 @@ private String content;
 private String discussionDate;
 private String hit;
 private String discussionSubject;
-private List<CommentVO> commentVO;
+private CommentVO commentVO;
 public DiscussVO() {
 	super();
 	// TODO Auto-generated constructor stub
 }
 public DiscussVO(int discussionNo, String id, String title, String content,
 		String discussionDate, String hit, String discussionSubject,
-		List<CommentVO> commentVO) {
+		CommentVO commentVO) {
 	super();
 	this.discussionNo = discussionNo;
 	this.id = id;
@@ -70,10 +70,10 @@ public String getDiscussionSubject() {
 public void setDiscussionSubject(String discussionSubject) {
 	this.discussionSubject = discussionSubject;
 }
-public List<CommentVO> getCommentVO() {
+public CommentVO getCommentVO() {
 	return commentVO;
 }
-public void setCommentVO(List<CommentVO> commentVO) {
+public void setCommentVO(CommentVO commentVO) {
 	this.commentVO = commentVO;
 }
 @Override

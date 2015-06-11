@@ -34,16 +34,16 @@
 			</c:forEach>
 	</table><br></br>	
 <br></br>	
-<%-- <center>
-	<a href="QnA_listView.do?pageNo=${requestScope.vo.pagingBean.startPageOfPageGroup-1}">
-	<c:if test="${requestScope.vo.pagingBean.previousPageGroup== true && requestScope.vo.pagingBean.nowPageGroup!=1}">◀</c:if>
+<center>
+	<a href="discussion_listView.do?pageNo=${requestScope.dslvo.pagingBean.startPageOfPageGroup-1}">
+	<c:if test="${requestScope.dslvo.pagingBean.previousPageGroup== true && requestScope.dslvo.pagingBean.nowPageGroup!=1}">◀</c:if>
 	</a>
 	
-	<c:forEach var="i" begin="${requestScope.vo.pagingBean.startPageOfPageGroup}" end="${requestScope.vo.pagingBean.endPageOfPageGroup}" step="1">
-		<a href="discussion_listView?pageNo=${i}">${i}</a>
+	<c:forEach var="i" begin="${requestScope.dslvo.pagingBean.startPageOfPageGroup}" end="${requestScope.dslvo.pagingBean.endPageOfPageGroup}" step="1">
+		<a href="discussion_listView.do?pageNo=${i}">${i}</a>
 	</c:forEach>
 	
-	<a href="discussion_listView.do?&pageNo=${requestScope.vo.pagingBean.endPageOfPageGroup+1}">
-		<c:if test="${requestScope.vo.pagingBean.nextPageGroup== true}">▶</c:if>
+	<a href="discussion_listView.do.do?&pageNo=${requestScope.dslvo.pagingBean.endPageOfPageGroup+1}">
+		<c:if test="${requestScope.dslvo.pagingBean.nextPageGroup== true}">▶</c:if>
 	</a>
-</center> --%>
+</center>

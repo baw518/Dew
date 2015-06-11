@@ -11,7 +11,7 @@ public interface DiscussDAO {
 
 	public abstract int registerDiscussion(DiscussVO dsvo);
 
-	public abstract List<DiscussVO> findDiscussContent(String no);
+	public abstract DiscussVO findDiscussContent(String no);
 
 	public abstract List<DiscussVO> searchDisscuss(String title);
 

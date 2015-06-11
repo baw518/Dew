@@ -40,7 +40,7 @@ public class DiscussServiceImpl implements DiscussService {
 	 * @see org.kosta.dew.model.service.DiscussService#findDiscussContent()
 	 */
 	@Override
-	public List<DiscussVO> findDiscussContent(String no){
+	public DiscussVO findDiscussContent(String no){
 		return discussDAO.findDiscussContent(no);
 	}
 	/* (non-Javadoc)
