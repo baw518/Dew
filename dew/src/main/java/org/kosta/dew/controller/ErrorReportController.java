@@ -20,10 +20,8 @@ public class ErrorReportController {
 		List<ErrorReportVO> list = null;
 		ModelAndView mav = new ModelAndView("errorReport_view");
 		mav.addObject("errorcode", errorReportService.getReportErrorCode());
-		System.out.println(errorReportService.getReportErrorCode());
-		list = errorReportService.getReportExceptionMessage();
-		mav.addObject("exception", list);
-//		System.out.println(list);
+		mav.addObject("exception",errorReportService.getReportExceptionMessage());
+		System.out.println("getErrorCode : " + errorReportService.getReportErrorCode() + " \n getExceptionMessage :" +errorReportService.getReportExceptionMessage());
 		return mav;
 	}
 	

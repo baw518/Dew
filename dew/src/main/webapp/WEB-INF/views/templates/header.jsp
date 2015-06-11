@@ -22,7 +22,7 @@
                         <div class="social-icons">
                             <ul>
                                 <li><a href="home.do">홈으로</a></li>
-                                <li><a href="${initParam.root }WEB-INF/views/member/login.jsp">로그인</a></li>
+                                <li><a href="loginForm.do">로그인</a></li>
                             </ul>
                             <div class="clearfix"></div>
                         </div> <!-- /.social-icons -->
