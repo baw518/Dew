@@ -33,13 +33,9 @@ public class ErrorReportDAOImpl implements ErrorReportDAO {
 	public ErrorReportVO getContent(String errorNo, String type) {
 		ErrorReportVO vo = null;
 		if(type.equals("exception")){
-			System.out.println("exception start");
 			vo = sqlSessionTemplate.selectOne("errorReport.getContentException", errorNo);
-			System.out.println(vo);
 		}else{
-			System.out.println("error start");
 			vo = sqlSessionTemplate.selectOne("errorReport.getContentErrorCode", errorNo);
-			System.out.println(vo);
 		}
 		return vo;
 	}

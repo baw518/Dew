@@ -24,6 +24,7 @@
                                 <li><a href="home.do">홈으로</a></li>
                                 <c:choose>
                                    <c:when test="${sessionScope.mvo==null }">
+                                   <li><a href="report_write.do">에러 리포트 등록</a></li>
                                 <li><a href="login_form.do">로그인</a></li>
                                    </c:when>
                                    <c:otherwise>

@@ -9,10 +9,12 @@
 
 </tr>
 </c:forEach>
+
 <tr><td width="1200"><u>E r r o r C o d e</u></td></tr>
 <c:forEach items="${requestScope.errorcode }" var="cvo">
 <tr>
 <td width="400" height="30" align="left"><a href="report_showContent.do?errorNo=${cvo.errorNo }&type=error">${cvo.errorCode }</a></td>
 </tr>
 </c:forEach>
+
 </table>
