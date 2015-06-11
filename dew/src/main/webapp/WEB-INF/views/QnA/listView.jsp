@@ -9,7 +9,8 @@
 $(document).ready(function(){
 	
 	$("#group").change(function(){
-		
+		var c = $("#group").val();
+		location.href="QnA_SelectedListView.do?group="+c+"&pageNo=1";
 	});
 });
 </script>
@@ -19,9 +20,9 @@ $(document).ready(function(){
 
 분류 : 
 <select id="group">
-	<option value="">전체보기</option>
+	<option value="all">전체보기</option>
 	<c:forEach items="${requestScope.groupList}" var="i">
-		<option value="i">${i.qnAGroupName }</option>
+		<option value="${i.qnAGroupName}">${i.qnAGroupName }</option>
 	</c:forEach>
 </select> 
 
