@@ -51,5 +51,10 @@ public class ProjectServiceImpl implements ProjectService{
 		 PagingBean pagingBean=new PagingBean(total,pn);
 		 return new ProjectListVO(plist,pagingBean);
 	}
+	
+	@Override
+	public void updateProject(ProjectVO pvo, DepartVO dvo) {
+		projectDAO.updateProject(pvo,dvo);
+	}
 
 }

@@ -36,7 +36,7 @@
 	<option value="">-------------------</option>
 	<option value="웹프로그래밍">웹프로그래밍</option>
 	<option value="웹디자인">웹디자인</option>
-	<option value="other">기타</option>
+	<option value="기타">기타</option>
 </select><br>
 인원
 <input type="text" name="mans" style="width: 40px">

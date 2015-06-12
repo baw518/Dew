@@ -4,7 +4,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="project"> 
 <select id="findProjectByNo" resultType="pvo">
- 		select project_no as projectNo,title as projectName,writer,content,point,progressing,achieve,hit,to_char(project_date,'YYYY.MM.DD HH24:MI') as project_date,progressing_end_date as deadline from project_ex where project_no=#{value}
+ 		select project_no as projectNo,title as projectName,writer,content,point,progressing,achieve,hit,
+ 		to_char(project_date,'YYYY.MM.DD HH24:MI') as project_date,progressing_end_date as deadline 
+ 		from project_ex where project_no=#{value}
  	</select>
  	
  	<select id="findDepartByNo" resultType="dvo">
@@ -29,7 +31,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where page=#{value}
 	</select>
 	
-	<select id="getTotalPostingCount" resultType="int">
+	<select id="getTotalPostingCountProject" resultType="int">
 		select count(*) from project_ex
 	</select>
 	
@@ -39,6 +41,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deleteDepart">
 		delete from depart_ex where project_no=#{value}
 	</delete>
+	
+	<update id="updateProject" parameterType="pvo">
+		update project_ex set title=#{projectName},point=#{point},progressing_end_date=#{deadline},content=#{content} where project_no=#{projectNo}
+	</update>
+	<update id="updateDepart" parameterType="dvo">
+		update depart_ex set subject=#{subject},subject_man=#{mans} where project_no=#{projectNo} and subject=#{subject}
+	</update>
  </mapper> 		
  
  

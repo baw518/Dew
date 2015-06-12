@@ -40,7 +40,7 @@ public class ProjectDAOImpl implements ProjectDAO{
 	}
 	@Override
 	public int getTotalPostingCount(){
-		return sqlSessionTemplate.selectOne("project.getTotalPostingCount");
+		return sqlSessionTemplate.selectOne("project.getTotalPostingCountProject");
 	}
 	@Override
 	public void deleteProject(String projectNo) {
@@ -49,6 +49,17 @@ public class ProjectDAOImpl implements ProjectDAO{
 	@Override
 	public void deleteDepart(String projectNo) {
 		sqlSessionTemplate.delete("project.deleteDepart",projectNo);
+	}
+	@Override
+	public void updateProject(ProjectVO pvo, DepartVO dvo) {
+		String[] subject=dvo.getSubject().split(",");
+		String[] mans=dvo.getMans().split(",");
+		sqlSessionTemplate.update("project.updateProject",pvo);
+		for(int i=0;i<subject.length;i++){
+			System.out.println(pvo);System.out.println(dvo);
+			DepartVO dvoSpl=new DepartVO(subject[i], mans[i],pvo.getProjectNo());
+			sqlSessionTemplate.update("project.updateDepart",dvoSpl);
+		}
 	}
 
 }

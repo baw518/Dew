@@ -1,5 +1,7 @@
 package org.kosta.dew.controller;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.kosta.dew.model.service.ProjectService;
@@ -19,14 +21,14 @@ public class ProjectController {
 	   public String projectMain(){
 		   return "projectView_projectMain";
 	   }
-	   @RequestMapping("project_Register.do")
+	   @RequestMapping("project_registerForm.do")
 	   public String projectRegisterShow(){
 		   return "projectView_projectRegister";
 	   }
 		@RequestMapping(value="project_register.do",method=RequestMethod.POST)
-		public String registerProject(ProjectVO pvo, DepartVO dvo){
+		public ModelAndView registerProject(ProjectVO pvo, DepartVO dvo){
 			projectService.registerProject(pvo, dvo);
-			return "redirect:project_View?projectNo="+pvo.getProjectNo();
+			return new ModelAndView("redirect:project_View.do?projectNo="+pvo.getProjectNo());
 	}
 	@RequestMapping("project_View.do")
 	public ModelAndView projectView(String projectNo){
@@ -39,15 +41,23 @@ public class ProjectController {
 		return new ModelAndView("projectView_projectList","plvo",plvo);
 	}
 	
-	@RequestMapping("project_update.do")
-	public String updateProject(String projectNo){
-		return "redirect:project_listview.do";
+	@RequestMapping("project_updateForm.do")
+	public ModelAndView updateProjectForm(String projectNo){
+		ProjectVO pvo=projectService.getProjectContent(projectNo);
+		return new ModelAndView("projectView_projectUpdate","pvo",pvo);
 	}
+	@RequestMapping("project_update.do")
+	public ModelAndView updateProject(ProjectVO pvo, DepartVO dvo, String beforeSubject){
+		projectService.updateProject(pvo,dvo);
+		System.out.println(beforeSubject);
+		return new ModelAndView("redirect:project_View.do?projectNo="+pvo.getProjectNo());
+	}
+	
 	@RequestMapping("project_delete.do")
-	public String deleteProject(String projectNo){
+	public ModelAndView deleteProject(String projectNo){
 		projectService.deleteDepart(projectNo);
 		projectService.deleteProject(projectNo);
-		return "redirect:project_listview.do";
+		return new ModelAndView("redirect:project_listView.do");
 	}
 	@RequestMapping("registerProjectComment.do")
 	public ModelAndView registerProjectComment(ProjectVO pvo){
