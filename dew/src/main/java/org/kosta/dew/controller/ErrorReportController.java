@@ -15,6 +15,10 @@ public class ErrorReportController {
 	@Resource
 	private ErrorReportService errorReportService;
 
+	@RequestMapping("report_writeForm.do")
+	public String reportWriteView(){
+		return "errorReport_writeForm";
+	}
 	@RequestMapping("report_listView.do")
 	public ModelAndView reportView(){
 		List<ErrorReportVO> list = null;
@@ -30,11 +34,11 @@ public class ErrorReportController {
 		ErrorReportVO vo = errorReportService.getContent(errorNo,type);
 		if(type.equals("exception")){
 			mav.addObject("exception", vo);	
-			System.out.println("vo :"+vo);
 		}else{
 			mav.addObject("errorcode",vo);
-			System.out.println("vo : " +vo);
 		}
 		return mav;
 	}
+	
+	
 }
