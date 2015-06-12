@@ -7,6 +7,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	<!-- 사용할 클래스에 대한 별칭을 명시한다.  -->
 	<typeAliases>
 		<typeAlias type="org.kosta.dew.model.vo.CommentVO" alias="cmvo"/>
+		<typeAlias type="org.kosta.dew.model.vo.UserTypeVO" alias="uvo"/>
 		<typeAlias type="org.kosta.dew.model.vo.DepartVO" alias="dvo"/>
 		<typeAlias type="org.kosta.dew.model.vo.DiscussVO" alias="dsvo"/>
 		<typeAlias type="org.kosta.dew.model.vo.ErrorReportVO" alias="evo"/>
