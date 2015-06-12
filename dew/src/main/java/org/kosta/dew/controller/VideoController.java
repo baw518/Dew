@@ -61,7 +61,15 @@ public class VideoController {
 			vvo = videoService.showContentNoHit(no);
 		}
 		model.addAttribute("vvo", vvo);
-		return "content_view";
+		return "video_showContent";
+	}
+	@RequestMapping("video_delete.do")
+	public String delete(HttpServletRequest request, Model model) {
+		String no = request.getParameter("no");
+		videoService.deleteVideo(no);
+		VideoListVO vo = videoService.getVideoList("1");
+		model.addAttribute("vo", vo);
+		return "video_listView";
 	}
 	/*
 	 * @RequestMapping("showContentNoHit.do") public ModelAndView

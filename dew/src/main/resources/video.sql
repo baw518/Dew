@@ -5,6 +5,7 @@ SELECT video_no,title,hit,id,video_date FROM(
 	)
 ) WHERE PAGE=1
 
+select * from member
 select video_no,title,hit,id,video_date,content
 		from video_tutorial
 		where video_no=#{value}
