@@ -1,23 +1,60 @@
 package org.kosta.dew.model.vo;
 
-import java.util.ArrayList;
+import java.util.List;
 
 
 public class ProjectVO {
+	private int projectNo;
 	private String projectName;
+	private String writer;
+	private String content;
 	private int point;
-	private ArrayList<DepartVO> departVO;
+	private int progressing;
+	private String achieve;
+	private int hit;
+	private String project_date;
+	private List<DepartVO> departVO;
 	private String deadline;
 	public ProjectVO() {
 		super();
 	}
-	public ProjectVO(String projectName, int point,
-			ArrayList<DepartVO> departVO, String deadline) {
+	public ProjectVO(int projectNo, String projectName, String writer, String content,
+			int point, int progressing, String achieve, int hit,
+			String project_date, List<DepartVO> departVO, String deadline) {
 		super();
+		this.projectNo = projectNo;
 		this.projectName = projectName;
+		this.writer = writer;
+		this.content = content;
 		this.point = point;
+		this.progressing = progressing;
+		this.achieve = achieve;
+		this.hit = hit;
+		this.project_date = project_date;
 		this.departVO = departVO;
 		this.deadline = deadline;
+	}
+	
+	public ProjectVO(int projectNo, String projectName, String writer, String content,
+			int point, int progressing, String achieve, int hit,
+			String project_date, String deadline) {
+		super();
+		this.projectNo = projectNo;
+		this.writer = writer;
+		this.projectName = projectName;
+		this.content = content;
+		this.point = point;
+		this.progressing = progressing;
+		this.achieve = achieve;
+		this.hit = hit;
+		this.project_date = project_date;
+		this.deadline = deadline;
+	}
+	public int getProjectNo() {
+		return projectNo;
+	}
+	public void setProjectNo(int projectNo) {
+		this.projectNo = projectNo;
 	}
 	public String getProjectName() {
 		return projectName;
@@ -25,16 +62,52 @@ public class ProjectVO {
 	public void setProjectName(String projectName) {
 		this.projectName = projectName;
 	}
+	public String getWriter() {
+		return writer;
+	}
+	public void setWriter(String writer) {
+		this.writer = writer;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
 	public int getPoint() {
 		return point;
 	}
 	public void setPoint(int point) {
 		this.point = point;
 	}
-	public ArrayList<DepartVO> getDepartVO() {
+	public int getProgressing() {
+		return progressing;
+	}
+	public void setProgressing(int progressing) {
+		this.progressing = progressing;
+	}
+	public String getAchieve() {
+		return achieve;
+	}
+	public void setAchieve(String achieve) {
+		this.achieve = achieve;
+	}
+	public int getHit() {
+		return hit;
+	}
+	public void setHit(int hit) {
+		this.hit = hit;
+	}
+	public String getProject_date() {
+		return project_date;
+	}
+	public void setProject_date(String project_date) {
+		this.project_date = project_date;
+	}
+	public List<DepartVO> getDepartVO() {
 		return departVO;
 	}
-	public void setDepartVO(ArrayList<DepartVO> departVO) {
+	public void setDepartVO(List<DepartVO> departVO) {
 		this.departVO = departVO;
 	}
 	public String getDeadline() {
@@ -45,8 +118,12 @@ public class ProjectVO {
 	}
 	@Override
 	public String toString() {
-		return "ProjectVO [projectName=" + projectName + ", point=" + point
+		return "ProjectVO [projectNo=" + projectNo + ", projectName="
+				+ projectName + ",writer=" + writer + ", content=" + content + ", point=" + point
+				+ ", progressing=" + progressing + ", achieve=" + achieve
+				+ ", hit=" + hit + ", project_date=" + project_date
 				+ ", departVO=" + departVO + ", deadline=" + deadline + "]";
 	}
+	
 	
 }

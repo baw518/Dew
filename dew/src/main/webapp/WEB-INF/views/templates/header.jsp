@@ -61,7 +61,7 @@
                         <div class="list-menu">
                             <ul>
                                 <li><a href="report_listView.do">에러 리포트</a></li>
-                                <li><a href="project_listView.do">프로젝트</a></li>
+                                <li><a href="project_main.do">프로젝트</a></li>
                                  <li><a href="QnA_listView.do">QnA</a></li>
                                  <li><a href="discussion_listView.do">토론방</a></li>
                                   <li><a href="video_listView.do">동영상 강좌</a></li>
