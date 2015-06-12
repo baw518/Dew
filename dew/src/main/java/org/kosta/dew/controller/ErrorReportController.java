@@ -30,10 +30,8 @@ public class ErrorReportController {
 		ErrorReportVO vo = errorReportService.getContent(errorNo,type);
 		if(type.equals("exception")){
 			mav.addObject("exception", vo);	
-			System.out.println("vo :"+vo);
 		}else{
 			mav.addObject("errorcode",vo);
-			System.out.println("vo : " +vo);
 		}
 		return mav;
 	}
