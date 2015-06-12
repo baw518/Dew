@@ -6,34 +6,26 @@ public class MemberVO {
 	private String memberPassword;
 	private String birthDate;
 	private String memberLevel;
-	private int userType;
 	private int score;
 	private int point;
 	private String passwordQuestion;
 	private String passwordAnswer;
 	public MemberVO() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	public MemberVO(String id, String memberName, String memberPassword,
-			String birthDate, String memberLevel, int userType, int score,
-			int point, String passwordQuestion, String passwordAnswer) {
+			String birthDate, String memberLevel, int score, int point,
+			String passwordQuestion, String passwordAnswer) {
 		super();
 		this.id = id;
 		this.memberName = memberName;
 		this.memberPassword = memberPassword;
 		this.birthDate = birthDate;
 		this.memberLevel = memberLevel;
-		this.userType = userType;
 		this.score = score;
 		this.point = point;
 		this.passwordQuestion = passwordQuestion;
 		this.passwordAnswer = passwordAnswer;
-	}
-	public MemberVO(String id, String memberPassword) {
-		super();
-		this.id = id;
-		this.memberPassword = memberPassword;
 	}
 	public String getId() {
 		return id;
@@ -65,12 +57,6 @@ public class MemberVO {
 	public void setMemberLevel(String memberLevel) {
 		this.memberLevel = memberLevel;
 	}
-	public int getUserType() {
-		return userType;
-	}
-	public void setUserType(int userType) {
-		this.userType = userType;
-	}
 	public int getScore() {
 		return score;
 	}
@@ -99,11 +85,9 @@ public class MemberVO {
 	public String toString() {
 		return "MemberVO [id=" + id + ", memberName=" + memberName
 				+ ", memberPassword=" + memberPassword + ", birthDate="
-				+ birthDate + ", memberLevel=" + memberLevel + ", userType="
-				+ userType + ", score=" + score + ", point=" + point
-				+ ", passwordQuestion=" + passwordQuestion
-				+ ", passwordAnswer=" + passwordAnswer + "]";
+				+ birthDate + ", memberLevel=" + memberLevel + ", score="
+				+ score + ", point=" + point + ", passwordQuestion="
+				+ passwordQuestion + ", passwordAnswer=" + passwordAnswer + "]";
 	}
-	
 	
 }

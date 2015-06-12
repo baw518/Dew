@@ -14,6 +14,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  <select id="login" resultMap="memberListRM">
 	select id,member_name,member_password,birth_date,member_level,contribution,point,password_question,password_answer from member where id=#{id} and member_password=#{memberPassword}
  </select>
+<insert id="register" parameterType="mvo" >
+		insert into member(id,member_name,member_password,birth_date,password_question,password_answer) 
+values(#{id},#{memberName},#{memberPassword},to_date(#{birthDate},'yyyymmdd'),#{passwordQuestion},#{passwordAnswer})
+		
+	</insert>
+	
+	 <resultMap type="uvo" id="userTypeListRM">
+ 		<result property="jobNo" column="job_no" />			
+		<result property="jobName" column="job_name" /> 
+</resultMap>
+	<select id="usertype" resultMap="userTypeListRM">
+		select job_no,job_name from job
+	</select>
  </mapper> 		
  
  

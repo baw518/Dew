@@ -1,11 +1,15 @@
 package org.kosta.dew.controller;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.kosta.dew.model.service.MemberService;
 import org.kosta.dew.model.vo.MemberVO;
+import org.kosta.dew.model.vo.UserTypeVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -35,11 +39,11 @@ public class MemberController {
 			HttpSession session = request.getSession();
 			System.out.println(session);
 			session.setAttribute("mvo", vo);
-			System.out.println("로그인ㅅ ㅓㅇ공 :)");
+			
 			//return new ModelAndView("redirect:home.do");
 			url = "redirect:home.do";
 		}else if(vo==null){
-			System.out.println("로그인실패 :(");
+	
 			//return new ModelAndView("error.jsp");
 			url = "error";
 		}
@@ -51,4 +55,30 @@ public class MemberController {
 		session.invalidate();
 		return "redirect:home.do";
 	}
+	
+	
+	
+	@RequestMapping("register.do")
+	public String register(HttpServletRequest request,
+			HttpServletResponse response,MemberVO vo/*,UserTypeVO uvo*/) {		
+		System.out.println("등록하는 곳 들어오나 확인");
+		memberSerivce.register(vo);
+		/*memberSerivce.usertype(uvo);*/
+		return "member_register_result";
+	}
+	@RequestMapping("registerView.do")
+	public ModelAndView registerForm(HttpServletRequest request,UserTypeVO uvo,String radio){
+		System.out.println("회원가입폼 컨트롤러");
+		System.out.println("radio : " + radio);
+		
+		List<UserTypeVO> list=memberSerivce.usertype(uvo);
+		
+		return new ModelAndView("member_registerView","list",list);
+	}
+	@RequestMapping("findidView.do")
+	public String findbyid(){
+		System.out.println("findbyid 도착");
+		return "member_registerViewfindidView";
+	}
+
 }
