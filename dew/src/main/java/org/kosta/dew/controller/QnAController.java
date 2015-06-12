@@ -123,4 +123,17 @@ public class QnAController {
 		return "QnA_SelectedListView";
 	}
 
+	@RequestMapping("QnA_WriteForm.do")
+	public String writeForm(Model model){
+		//분류받아와서 보내기
+		List<QnAGroupVO> groupList = qnAService.getGroupList();
+		model.addAttribute("groupList", groupList);
+		return "QnA_WriteForm";
+	}
+	
+	@RequestMapping("QnA_Write.do")
+	public String write(String title){
+		System.out.println(title);
+		return "";
+	}
 }

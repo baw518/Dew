@@ -3,7 +3,42 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="project"> 
-
+<select id="findProjectByNo" resultType="pvo">
+ 		select project_no as projectNo,title as projectName,writer,content,point,progressing,achieve,hit,to_char(project_date,'YYYY.MM.DD HH24:MI') as project_date,progressing_end_date as deadline from project_ex where project_no=#{value}
+ 	</select>
+ 	
+ 	<select id="findDepartByNo" resultType="dvo">
+ 		select subject,subject_man as mans from depart_ex where project_no=#{value}
+ 	</select>
+ 	
+ 	<insert id="insertProject" parameterType="pvo">
+ 	<selectKey keyProperty="projectNo" resultType="int" order="BEFORE">
+		select project_ex_seq.nextval from dual
+	</selectKey>  
+ 		insert into project_ex(project_no,title,writer,content,achieve,point,project_date,progressing_end_date) 
+ 		values(#{projectNo},#{projectName},#{writer},#{content},#{achieve},#{point},sysdate,#{deadline})
+ 	</insert>
+ 	
+ 	<insert id="insertDepart" parameterType="dvo">
+ 		insert into depart_ex(subject,subject_man,project_no) values(#{subject},#{mans},#{projectNo})
+ 	</insert>
+ 	
+	<select id="getProjectList" resultType="pvo">
+		select project_no as projectNo,writer,title as projectName,achieve,project_date,hit,progressing_end_date as deadline,point from(select project_no,writer,title,achieve,project_date,hit,progressing_end_date,ceil(rownum/10) as page,point 
+		from(select project_no,writer,title,achieve,to_char(project_date,'YYYY.MM.DD') as project_date,hit,progressing_end_date,point from project_ex order by project_no desc))
+		where page=#{value}
+	</select>
+	
+	<select id="getTotalPostingCount" resultType="int">
+		select count(*) from project_ex
+	</select>
+	
+	<delete id="deleteProject">
+		delete from project_ex where project_no=#{value}
+	</delete>
+	<delete id="deleteDepart">
+		delete from depart_ex where project_no=#{value}
+	</delete>
  </mapper> 		
  
  

@@ -45,7 +45,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	 </select>
  	 
  	 <select id="showContent" parameterType="string" resultMap="qMap">
- 	 	select qna_no,id,group_no,title,content,to_char(qna_date,'YYYY.MM.DD') as qna_date,hit,point,answer_status,ref,restep,relevel
+ 	 	select qna_no,id,group_no,title,content,to_char(qna_date,'YYYY.MM.DD HH24:MI') as qna_date,hit,point,answer_status,ref,restep,relevel
  	 	from qna
  	 	where qna_no=#{value}
  	 </select>
@@ -55,7 +55,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	 </update>
  	 
  	 <select id="getGroupList" resultMap="qGroupMap">
- 	 	select group_name from qna_group
+ 	 	select group_no,group_name from qna_group
  	 </select>
  </mapper> 		
 

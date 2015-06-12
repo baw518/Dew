@@ -94,39 +94,6 @@ textarea {
 }
 
 /* ==========================================================================
-    Forms
-   ========================================================================== */
-form input[type="text"],
-form input[type="email"],
-form input[type="number"],
-form input[type="password"] {
-  background: #fff;
-  border: 1px solid #fff;
-  padding: 7px 10px;
-  width: 60%;
-}
-form input[type="text"]:focus,
-form input[type="email"]:focus,
-form input[type="number"]:focus,
-form input[type="password"]:focus {
-  outline: none !important;
-}
-form .button {
-  background: #fff;
-  border: 1px solid #fff;
-  padding: 7px 20px;
-  text-transform: uppercase;
-}
-form .button:focus, form .button:active {
-  outline: none !important;
-}
-form .button.yellow {
-  background: #e7af2a;
-  color: #fff;
-  border: 1px solid #c89316;
-}
-
-/* ==========================================================================
    Print styles
    ========================================================================== */
 @media print {
@@ -493,7 +460,7 @@ h6 {
 }
 
 ul.product-buttons li {
-  margin-bottom: 15px;
+  margin-bottom: 5px;
 }
 
 
@@ -524,29 +491,6 @@ ul.product-buttons li {
   margin-bottom: 40px;
 }
 
-.our-partner {
-  background-color: #2a80b9;
-  padding: 15px;
-  position: relative;
-}
-.our-partner .item {
-  margin: 0 15px;
-  overflow: hidden;
-}
-.our-partner .item img {
-  width: 100%;
-}
-.our-partner .customNavigation .prev, .our-partner .customNavigation .next {
-  position: absolute;
-  top: 20%;
-  font-size: 24px;
-}
-.our-partner .customNavigation .prev {
-  left: -10px;
-}
-.our-partner .customNavigation .next {
-  right: -10px;
-}
 
 .main-footer {
   background-color: #2d3e50;
@@ -585,35 +529,6 @@ ul.follow-us li a i {
   margin-right: 25px;
 }
 
-.newsletter {
-  padding: 20px;
-  background-color: #2a80b9;
-}
-.newsletter p {
-  margin: 0 0 20px 0;
-  font-size: 14px;
-  text-align: left;
-}
-.newsletter input {
-  -webkit-backface-visibility: hidden;
-  /* Chrome, Safari, Opera */
-  backface-visibility: hidden;
-  outline: 0;
-  border: 0;
-  height: 38px;
-  padding: 0 10px;
-  width: 64%;
-}
-.newsletter input[type=submit] {
-  width: auto;
-  background-color: #2d3e50;
-  color: white;
-  padding: 0 25px;
-  font-size: 14px;
-  text-transform: uppercase;
-  font-weight: 700;
-  margin: 0;
-}
 
 .bottom-footer {
   background-color: #2d3e50;
@@ -733,6 +648,3 @@ ul.follow-us li a i {
   .product-item-2 .product-content p {
     display: none;
   }
-  
-
-}

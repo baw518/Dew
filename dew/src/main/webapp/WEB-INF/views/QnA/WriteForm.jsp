@@ -1,0 +1,71 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#writeBtn").click(function(){
+		var title = $("#title").val();
+		var content = $("#content").val();
+		var point = $("#point").val();
+		if(title==""){
+			alert("제목을 입력하세요");
+			return false;
+		}
+		if(point==""){
+			alert("포인트를 입력하세요");
+			return false;
+		}
+		if(isNaN(point)){
+			alert("포인트는 숫자만 입력하세요");
+			return false;
+		}
+		if(content==""){
+			alert("내용을 입력하세요");
+			return false;
+		}
+		$("#writeForm").submit();
+	});
+});
+</script>
+
+<form action="QnA_Write.do" method="post" id="writeForm">
+	<h2>질문글쓰기</h2>
+	 <table class="table" >
+		  <tbody>
+			  <tr>
+			  	<td>분류 :</td>
+			  	<td>
+					<select id="qnagroup"> 
+						<c:forEach items="${requestScope.groupList}" var="i">
+							<option value="${i.qnAGroupNo}">${i.qnAGroupName }</option>
+						</c:forEach>
+					</select>
+				</td>
+			  	<td>제목</td>
+			  	<td colspan="3">
+			  		<input type="text" id="title">
+			  	</td>
+			  	<td>아이디</td>
+			  	<td><input type="text" id="id" value="${sessionScope.mvo.id}"></td>
+			  	<td>포인트</td>
+			  	<td ><input type="text" id="point" value="0" ></td>
+			  </tr>
+			  <tr>
+			  	<td></td>
+			  	<td colspan="7" align="left">
+			   	&nbsp;&nbsp;
+			  	<textarea cols="190" rows="30" id="content"></textarea>
+			  	</td>
+			  	<td></td>
+			  </tr> 
+			  <tr>
+			  	<td colspan="9" align="center" >
+				    <img class="action" src="${initParam.root}images/qna_write_complete.jpg" id="writeBtn">
+				    <input type="button" id="cancel" value="작성취소">
+			  	</td>  
+			  </tr>
+		  </tbody>
+	 </table>
+</form>

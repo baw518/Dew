@@ -1,0 +1,115 @@
+#registerProjectForm{
+	 width: 600px;
+ 	margin: 0 auto;
+}
+#projectRegisterLogo{
+	 font-size: 50px;
+ color: #404040;
+ margin: 0 auto;
+ text-align: center;
+ text-transform: capitalize;
+ font-family: "맑은 고딕";
+ font-style: italic;
+ margin: 60px;
+}
+input[id="regProBtn"] {
+ margin-left : 150px;
+ border-radius: 5px;
+}
+
+
+.regform{
+	color:black;
+	margin:80px;
+	padding:40px;
+	 border: 5px double #999;
+	 border-radius: 25px;
+	 font-size: 19px;
+	font-family: "HY나무B";
+}
+
+
+#view{
+	 width: 600px;
+ 	margin: 0 auto;
+	padding:40px;
+	 border: 5px double #999;
+	 border-radius: 25px;
+}
+#viewForm{
+	color:black;
+	 font-size: 19px;
+	font-family: "HY나무B";
+}
+#space{
+	height:200px;
+}
+input[id="joinProBtn"] {
+ margin-left : 130px;
+ border-radius: 5px;
+}
+
+
+
+
+#listView{
+	 width: 800px;
+ 	margin: 0 auto;
+	padding:10px;
+	 border: 5px double #999;
+	 border-radius: 25px;
+}
+#listViewForm{
+	color:black;
+	 font-size: 22px;
+	font-family: "HY나무B";
+}
+#listSpace{
+	height:160px;
+}
+
+table.listTable{
+	text-align: center;
+}
+.listTable th,td {padding:5px 10px} /* 상하 여백 5 좌우 여백 10 */
+.listTable tbody tr:hover {background:#E6E6FA} /* 각 행에 마우스 커서를 올렸을 때 배경 색  */
+.listTable .project_date{
+	width: 10%;
+}
+.listTable .projectName{
+	width: 40%;
+	text-align: center;
+}
+.listTable .writer{
+	width: 15%;
+}
+.listTable .point{
+	width: 16%;
+	text-align: center;
+}
+.listTable .deadline{
+	width: 10%;
+	font-size: 19px;
+}
+.listTable .project_date{
+	width: 10%;
+}
+
+
+#main_view{
+	padding: 70px; 
+	padding-left: 200px;
+	height: 500px;
+}
+#create{
+	padding: 30px; 
+	cursor: pointer;
+}
+#Join{
+	padding: 30px; 
+	cursor: pointer;
+}
+#want{
+	padding: 30px; 
+	cursor: pointer;
+}

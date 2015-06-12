@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-에러당 :)
+에러당 :).
 </body>
 </html>
