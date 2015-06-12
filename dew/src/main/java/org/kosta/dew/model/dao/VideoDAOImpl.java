@@ -58,7 +58,7 @@ public class VideoDAOImpl implements VideoDAO {
 	 */
 	@Override
 	public void deleteVideo(String no){
-		sqlSessionTemplate.delete("video.deleteBoard", no);
+		sqlSessionTemplate.delete("video.deleteVideo", no);
 	}
 	
 	/* (non-Javadoc)

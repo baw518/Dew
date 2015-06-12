@@ -4,11 +4,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="video">
 	<insert id="write" parameterType="vvo">
-		<selectKey keyProperty="no" resultType="int" order="BEFORE">
+		<!-- <selectKey keyProperty='video_no' resultType="int" order="BEFORE">
 			select video_no.nextval from dual
-		</selectKey>
+		</selectKey> -->
 		insert into video_tutorial(video_no,id,title,content,video_date,video_path) 
-		values(#{videoNo},#{id},#{title},#{content},sysdate,#{videoPath})
+		values(video_no.nextval,#{id},#{title},#{content},sysdate,#{videoPath})
 	</insert>
 	<resultMap type="vvo" id="videoListRM">
 		  <result property="videoNo" column="video_no" />
@@ -18,7 +18,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getVideoList" resultMap="videoListRM">
 		SELECT video_no,title,hit,id,video_date FROM(
 			SELECT video_no,title,hit,id,video_date,CEIL(rownum/5) AS page FROM (
-				SELECT video_no,title,hit,id,to_char(video_date,'YYYY.MM.DD') 
+				SELECT video_no,title,hit,id,to_char(video_date,'YYYY-MM-DD') 
 			as video_date FROM video_tutorial order by video_no desc
 			)
 		) WHERE PAGE=#{value}
@@ -28,7 +28,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="content" column="content" />
 	</resultMap>
 	<select id="showContent" resultMap="videoRM">
-		select video_no,title,hit,id,video_date,content
+		select video_no,title,hit,id,to_char(video_date,'YYYY-MM-DD HH24:MI') as video_date,content
 		from video_tutorial
 		where video_no=#{value}
 	</select>
@@ -39,12 +39,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<!-- select count(*) from video_tutorial
 		where video_no=#{video_no} -->
 	</select>
-	<delete id="deleteBoard">
+	<delete id="deleteVideo">
 		delete from video_tutorial where video_no=#{value}
 	</delete>
-	<update id="updateBoard" parameterType="vvo">
-		update video_tutorial set title=#{title},content=#{content},id=#{id}
-		where video_no=#{video_no}
+	<update id="updateVideo" parameterType="vvo">
+		update video_tutorial set title=#{title},content=#{content}
+		where video_no=#{videoNo}
 	</update>
 	<select id="totalContent" resultType="int">
 		select count(*) from

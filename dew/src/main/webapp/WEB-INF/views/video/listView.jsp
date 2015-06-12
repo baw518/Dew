@@ -1,6 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#write").click(function(){
+		location.href="video_writeView.do";
+	});
+});
+</script>
 <title>Video 게시판 입니다.</title>
 <br>
 <center><h2>Video게시판</h2></center>
@@ -27,7 +35,9 @@
 	</c:forEach> 
 	<tr>
 		<td colspan="5" align="right">
-			<%-- <a href="QnA_write.do"><img  src="${initParam.root}images/qna_write.jpg" border="0"></a> --%>
+			 <c:if test="${sessionScope.mvo.memberLevel == 0}">
+				<input type="button" value="글쓰기" id="write">
+			</c:if>
 		</td>
 	</tr>
 	</tbody>
