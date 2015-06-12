@@ -38,7 +38,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deleteDiscussComment" parameterType="cmvo">
 		delete from discussion_comment where discussion_comment_no=#{value}
 	</delete>
-	<insert id="registerDiscussComment" parameterMap="discussCommentRM">
+	<insert id="registerDiscussComment" parameterType="cmvo">
 		
 	</insert>
  </mapper> 		
