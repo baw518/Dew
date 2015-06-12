@@ -66,11 +66,16 @@ public class DiscussDAOImpl implements DiscussDAO {
 	 * @see org.kosta.dew.model.dao.DiscussDAO#deleteDiscussComment(org.kosta.dew.model.vo.CommentVO)
 	 */
 	@Override
-	public int deleteDiscussComment(CommentVO cvo){
-		return sqlSessionTemplate.delete("discuss.updateDiscussComment",cvo);
+	public int deleteDiscussComment(String no){
+		return sqlSessionTemplate.delete("discuss.deleteDiscussComment",no);
 	}
 	@Override
 	public int totalContent() {
 		return sqlSessionTemplate.selectOne("discuss.totalContent");
+	}
+	@Override
+	public List<CommentVO> findDiscussComment(String discussionNo) {
+		// TODO Auto-generated method stub
+		return sqlSessionTemplate.selectList("discuss.findDiscussComment",discussionNo);
 	}
 }

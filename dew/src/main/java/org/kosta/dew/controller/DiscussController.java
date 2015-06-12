@@ -6,9 +6,11 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.kosta.dew.model.service.DiscussService;
+import org.kosta.dew.model.vo.CommentVO;
 import org.kosta.dew.model.vo.DiscussVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -33,5 +35,25 @@ public class DiscussController {
 		DiscussVO dsvo  = discussService.findDiscussContent(no);
 		System.out.println(dsvo);
 		return new ModelAndView("discussion_show_discussion","dsvo",dsvo);
+	}
+	@RequestMapping("show_discussion_comment.do")
+	@ResponseBody
+	public List<CommentVO> show_discussion_comment(HttpServletRequest request){
+		System.out.println("댓글");
+/*		CommentVO cvo = new CommentVO();*/
+		String discussionNo = request.getParameter("discussionNo");
+		System.out.println(discussionNo);
+		List<CommentVO> cmlist = discussService.findDiscussComment(discussionNo);
+		return cmlist;
+	}
+	@RequestMapping("deleteDiscussComment.do")
+	@ResponseBody
+	public ModelAndView deleteDiscussComment(HttpServletRequest request){
+		System.out.println("딜리트 댓글");
+		String no = request.getParameter("no");
+		String index = request.getParameter("index");
+		System.out.println(no+index);
+		discussService.deleteDiscussComment(no);
+		return new ModelAndView("redirect:findDiscussContent.do?no="+index);
 	}
 }

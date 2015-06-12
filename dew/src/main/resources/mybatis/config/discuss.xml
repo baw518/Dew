@@ -26,7 +26,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="findDiscussContent" resultMap="discussListRM">
 		<!-- select d.discussion_no,d.id,d.title,d.content,d.discussion_date,d.hit,d.discussion_subject,dc.discussion_comment_no,dc.id,dc.discussion_no,dc.content,dc.discussion_comment_date,dc.ref,dc.restep,dc.relevel from DISCUSSION d, DISCUSSION_COMMENT dc where d.id=dc.id  and d.discussion_no=#{value} -->
 		select discussion_no,id,title,content,discussion_date,hit,discussion_subject from discussion where discussion_no=#{value}
+	</select> 
+      <resultMap type="cmvo" id="discussCommentRM">
+		<result property="no" column="discussion_comment_no" />			
+		<result property="index" column="discussion_no" /> 
+		<result property="date" column="discussion_comment_date" /> 
+	</resultMap>
+	<select id="findDiscussComment" resultMap="discussCommentRM">
+		select discussion_comment_no,id,discussion_no,content,discussion_comment_date,ref,restep,relevel from discussion_comment where discussion_no=#{value}
 	</select>
+	<delete id="deleteDiscussComment" parameterType="cmvo">
+		delete from discussion_comment where discussion_comment_no=#{value}
+	</delete>
  </mapper> 		
  
  
