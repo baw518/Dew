@@ -52,9 +52,7 @@ public class ErrorReportController {
 	@RequestMapping("report_write_result.do")
 	public ModelAndView reportWriteResult(int errorNo){
 		ModelAndView mav = new ModelAndView("errorReport_writeResult");
-		System.out.println("errorNO : " + errorNo);
 		mav.addObject("result",errorReportService.writeResult(errorNo));
-		//errorReportService.getContent(errorNo);
 		return mav;
 	}
 }
