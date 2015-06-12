@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.kosta.dew.model.service.DiscussService;
 import org.kosta.dew.model.vo.CommentVO;
@@ -31,9 +32,9 @@ public class DiscussController {
 	@RequestMapping("findDiscussContent.do")
 	public ModelAndView findDiscussContent(HttpServletRequest request){
 		String no = request.getParameter("no");
-		System.out.println(no);
+		System.out.println("파인드토론방 : " + no);
 		DiscussVO dsvo  = discussService.findDiscussContent(no);
-		System.out.println(dsvo);
+		System.out.println("파인드토론방 : "+dsvo);
 		return new ModelAndView("discussion_show_discussion","dsvo",dsvo);
 	}
 	@RequestMapping("show_discussion_comment.do")
@@ -52,8 +53,18 @@ public class DiscussController {
 		System.out.println("딜리트 댓글");
 		String no = request.getParameter("no");
 		String index = request.getParameter("index");
-		System.out.println(no+index);
+		System.out.println("no:"+no+"   index:"+index);
 		discussService.deleteDiscussComment(no);
 		return new ModelAndView("redirect:findDiscussContent.do?no="+index);
+	}
+	@RequestMapping("registerDiscussComment.do")
+	public ModelAndView registerDiscussComment(HttpServletRequest request){
+		System.out.println("댓글등록컨트롤러");
+		int discussionNo = Integer.parseInt(request.getParameter("no"));
+		String content = request.getParameter("content");
+		String id = request.getParameter("id");
+		System.out.println("게시글넘버 "+discussionNo+"댓글 ="+content+"세션 아이디 ="+id);
+		/*discussService.registerDiscussComment(new CommentVO(discussionNo, id, content));*/
+		return new ModelAndView("redirect:findDiscussContent.do?no="+discussionNo);
 	}
 }

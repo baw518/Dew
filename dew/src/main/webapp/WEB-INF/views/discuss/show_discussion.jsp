@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--  ${requestScope.dsvo}  --%>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script>
 $(document).ready(function(){
 	$.ajax({
@@ -12,8 +13,7 @@ $(document).ready(function(){
         success:function(data){
         	 	var showCommentComp = ""; 
 				$.each(data,function(i,data){
-				   /* alert(i+"."+data);  */
-					/* showCommentComp+="<tr><td>"+data.id+"님 =>"+data.content; */
+				   /*  alert(i+"."+data);   */
 					showCommentComp+="<tr>";
 					showCommentComp+="<td>";					
 					showCommentComp+=data.id;
@@ -22,7 +22,7 @@ $(document).ready(function(){
 					showCommentComp+=data.date;
 				/* 	showCommentComp+="<input type='button' id='updateBtn' value='수정'><input type='button' id='deleteBtn' value='삭제'>"; */
 					showCommentComp+="<a href='updateDiscussComment.do'>수정</a>";
-					showCommentComp+="<a href='deleteDiscussComment.do?no="+data.no+"&index='"+data.index+">삭제</a>";
+					showCommentComp+="<a href='deleteDiscussComment.do?no="+data.no+"&index="+data.index+"'>삭제</a>";
 					showCommentComp+="</td></tr>";
 					showCommentComp+="<tr><td>";					
 					showCommentComp+=data.content;
@@ -41,15 +41,17 @@ $(document).ready(function(){
 		});
 	// 댓글 확인 버튼 누를 시
 	$("#submit").click(function(){
-		alert("뀨");
+		/* alert($("#auto_textarea").val()); */
+		location.href="registerDiscussComment.do?no="+$("#discussionNo").val()+"&content="+$("#auto_textarea").val()+"&id="+$("#sessionId").val();
 	});
 	
 });
 </script>
  <input type="hidden" id="discussionNo" name="discussionNo" value="${requestScope.dsvo.discussionNo}">
+ <input type="hidden" id="sessionId" name="sessionId" value="${sessionScope.mvo.id}">
  <table id="discussView">
  	<tr>
- 		<td class="discussionNo"> ${requestScope.dsvo.discussionNo} </td>
+ 		<td id="discussionNo" class="discussionNo"> ${requestScope.dsvo.discussionNo} </td>
  		<td class="title"> ${requestScope.dsvo.title} </td>
  		<td class="discussionSubject">${requestScope.dsvo.discussionSubject} </td>
  		<td class="discussionDate"> ${requestScope.dsvo.discussionDate} </td>
