@@ -51,12 +51,10 @@ public class DiscussController {
 	}
 	@RequestMapping("registerDiscussComment.do")
 	public ModelAndView registerDiscussComment(HttpServletRequest request){
-		System.out.println("댓글등록컨트롤러");
 		int discussionNo = Integer.parseInt(request.getParameter("no"));
 		String content = request.getParameter("content");
 		String id = request.getParameter("id");
-		System.out.println("게시글넘버 "+discussionNo+"댓글 ="+content+"세션 아이디 ="+id);
-		/*discussService.registerDiscussComment(new CommentVO(discussionNo, id, content));*/
+		discussService.registerDiscussComment(new CommentVO(discussionNo, id, content));
 		return new ModelAndView("redirect:findDiscussContent.do?no="+discussionNo);
 	}
 }

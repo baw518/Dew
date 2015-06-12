@@ -42,6 +42,10 @@ $(document).ready(function(){
 	// 댓글 확인 버튼 누를 시
 	$("#submit").click(function(){
 		/* alert($("#auto_textarea").val()); */
+		if($("#sessionId").val()==""){
+			alert("로그인이나하시져");
+			return false;
+		}
 		location.href="registerDiscussComment.do?no="+$("#discussionNo").val()+"&content="+$("#auto_textarea").val()+"&id="+$("#sessionId").val();
 	});
 	

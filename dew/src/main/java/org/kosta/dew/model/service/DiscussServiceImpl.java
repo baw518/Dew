@@ -20,7 +20,6 @@ public class DiscussServiceImpl implements DiscussService {
 	 */
 	@Override
 	public DiscussListVO getAllDiscussList(String pageNo){
-		System.out.println("토론방 리스트 서비스 pn: "+pageNo);
 		if(pageNo==null||pageNo=="") 
 			pageNo="1";
 		List<DiscussVO> list=discussDAO.getAllDiscussList(pageNo);

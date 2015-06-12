@@ -17,7 +17,6 @@ public class DiscussDAOImpl implements DiscussDAO {
 	 */
 	@Override
 	public List<DiscussVO> getAllDiscussList(String pageNo){
-		System.out.println("토론방 리스트 DAO pn: "+pageNo);
 		return sqlSessionTemplate.selectList("discuss.getAllDiscussList",pageNo);
 	}
 	/* (non-Javadoc)

@@ -39,7 +39,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from discussion_comment where discussion_comment_no=#{value}
 	</delete>
 	<insert id="registerDiscussComment" parameterType="cmvo">
-		
+	 <selectKey keyProperty="no" resultType="int" order="BEFORE">
+		select discussion_comment_no.nextval from dual
+	</selectKey> 
+		insert into discussion_comment(discussion_comment_no,id,discussion_no,content,discussion_comment_date,ref,restep,relevel) values(#{no},#{id},#{index},#{content},sysdate,#{no},0,0)
 	</insert>
  </mapper> 		
  
