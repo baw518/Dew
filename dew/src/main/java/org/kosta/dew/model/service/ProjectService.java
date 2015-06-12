@@ -22,5 +22,7 @@ public interface ProjectService {
 
 	ProjectListVO makeProjectListVO(String pageNo);
 
+	void updateProject(ProjectVO pvo, DepartVO dvo);
+
 	
 }

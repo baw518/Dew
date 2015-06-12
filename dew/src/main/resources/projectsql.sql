@@ -33,7 +33,7 @@ insert into depart_ex(subject,subject_man,project_no) values('웹개발',3,1);
 insert into depart_ex(subject,subject_man,project_no) values('기타',2,1);
 
 delete from depart_ex where subject='웹디자인';
-select * from depart_ex where project_no=1;
+select * from depart_ex where project_no=81;
 
 select project_no as projectNo,title as projectName,content,point,progressing,achieve,hit,project_date,progressing_end_date as deadline from project_ex where project_no=
 select project_no as projectNo,title as projectName,content,point,progressing,achieve,hit,project_date,progressing_end_date as deadline from project_ex where project_no=1
@@ -50,7 +50,6 @@ select count(*) from project_ex
 select project_no as projectNo,writer,title as projectName,achieve,project_date,hit,progressing_end_date as deadline from(select project_no,writer,title,achieve,project_date,hit,progressing_end_date,ceil(rownum/5) as page 
 		from(select project_no,writer,title,achieve,to_char(project_date,'YYYY.MM.DD') as project_date,hit,progressing_end_date from project_ex order by project_no desc))
 		where page=1
-
 
 
 

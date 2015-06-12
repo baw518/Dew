@@ -21,7 +21,7 @@
   			$(this).attr({src:"${initParam.root}images/want.jpg"});
   	});
   		$("#create").click(function(){
-  			location.href="project_Register.do";
+  			location.href="project_registerForm.do";
   		});
   		$("#Join").click(function(){
   			location.href="project_listView.do";

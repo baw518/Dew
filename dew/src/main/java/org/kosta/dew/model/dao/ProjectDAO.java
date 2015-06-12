@@ -19,4 +19,6 @@ public interface ProjectDAO {
 
 	void deleteDepart(String projectNo);
 
+	void updateProject(ProjectVO pvo, DepartVO dvo);
+
 }

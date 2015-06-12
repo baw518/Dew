@@ -308,7 +308,7 @@ h6 {
   font-size: 16px;
 }
 .main-header .main-menu ul.menu li a:hover {
-  color: #bfddf0;
+  color: #FFB900;
 }
 
 .main-nav {
@@ -332,7 +332,7 @@ h6 {
   font-weight: 700;
 }
 .main-nav .list-menu ul li a:hover {
-  color: #dcecf7;
+  color: #FFB900;
 }
 .main-nav .notification {
   text-align: right;

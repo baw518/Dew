@@ -25,12 +25,10 @@
 			location.href="project_listView.do";
 		});
 		$("#deleteProBtn").click(function(){
-			alert("삭제완료");
 			location.href="project_delete.do?projectNo=${requestScope.pvo.projectNo}";
 		});
 		$("#updateProBtn").click(function(){
-			alert("수정완료");
-			location.href="project_update.do?projectNo=${requestScope.pvo.projectNo}";
+			location.href="project_updateForm.do?projectNo=${requestScope.pvo.projectNo}";
 		});
 });  
 </script>
