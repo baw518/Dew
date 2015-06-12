@@ -47,5 +47,24 @@ public class QnAServiceImpl implements QnAService{
 		qnADAO.write(vo);
 	}
 
+	@Override
+	public void update(QnAVO vo) {
+		qnADAO.update(vo);
+		
+	}
+
+	@Override
+	public void pointMinus(QnAVO vo) {
+		qnADAO.pointMinus(vo);
+	}
+
+
+
+	@Override
+	public void deleteContent(QnAVO vo) {
+		qnADAO.deleteContent(vo);
+		
+	}
+
 	
 }

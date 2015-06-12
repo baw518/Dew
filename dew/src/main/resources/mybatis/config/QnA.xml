@@ -24,11 +24,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		<result property="qnAGroupNo" column="group_no"/>
  		<result property="qnAGroupName" column="group_name"/>
  	</resultMap>
- 	 
- <!-- 	 <select id="getAllList" resultMap="qMap">
- 	 	select qna_no,id,group_no,title,content,to_char(qna_date,'YYYY.MM.DD') as qna_date,hit,point,answer_status,ref,restep,relevel from qna
- 	 </select> -->
- 	 
+
+
  	 <select id="getAllCount" resultType="int">
  	 	select count(*) from qna
  	 </select>
@@ -38,7 +35,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	from(	select qna_no,id,group_no,title,content,qna_date,hit,point,answer_status,ref,restep,relevel,ceil(rownum/5) as page 
  			from(select qna_no,id,group_no,title,content,to_char(qna_date,'YYYY.MM.DD') as qna_date,hit,point,answer_status,ref,restep,relevel 
  				   from qna 
- 				   order by qna_no desc
+ 				   order by ref desc,restep asc
 				   )
 		  )
 	where page=#{value}
@@ -66,6 +63,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	 	values(qna_no.currval,#{id},#{groupNo},#{title},#{content},sysdate,#{point},qna_no.currval,0,0)
  	 </insert>
  	 
+ 	 <update id="pointMinus" parameterType="qvo">
+ 	 	update member set point=point-#{point} where id=#{id}
+ 	 </update>
+ 	 
+ 	 <update id="update" parameterType="qvo">
+ 	 	update qna set group_no=#{groupNo},title=#{title},content=#{content},point=#{point} where qna_no=#{qnaNo}
+ 	 </update>
+
+ 	 <delete id="deleteContent" parameterType="qvo">
+ 	 	delete from qna where qna_no=#{qnaNo}
+ 	 </delete>
  </mapper> 		
 
  
