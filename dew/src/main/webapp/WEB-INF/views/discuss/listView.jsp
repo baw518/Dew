@@ -37,7 +37,7 @@
 				<tr>
 		<td colspan="6" align="right">
 			<c:if test="${sessionScope.mvo != null}">
-				<a href="updateDiscussCommentForm.do"><img  src="${initParam.root}images/qna_write.jpg" border="0"></a>
+				<a href="registerDiscussionForm.do"><img  src="${initParam.root}images/qna_write.jpg" border="0"></a>
 			</c:if>
 		</td>
 	</tr>

@@ -1,19 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- 토론방 생성 FORM  -->
-${sessionScope.mvo.id }
+<c:choose>
+<c:when test="${sessionScope.mvo !=null}">
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script>
 	$(document).ready(function(){
 		// 확인 버튼 누르면 세션id/제목/주제/내용을 가지고 updateDiscussComment 로 감
 		$("#submit").click(function(){
-			alert($("#id").val());
-			/* location.href="updateDiscussComment.do?id="+$("#id").val()+"&title="+$("#title").val()+"&subject="+$("#subject").val()+"&content="+$("#content").val(); */
+			location.href="registerDiscussion.do?id="+$("#sessionId").val()+"&title="+$("#title").val()+"&subject="+$("#subject").val()+"&content="+$("#content").val(); 
 		});
 	});
 </script>
+<input type="hidden" id="sessionId" name="sessionId" value="${sessionScope.mvo.id}">
 <form>
-<input type="hidden" name="id" value="${sessionScope.mvo.id }">
+<%-- <input type="hidden" name="id" value="${sessionScope.mvo.id }"> --%>
 <table class="table">
 	<tr>
 		<td>제목 <input type="text" name="title" id="title"></td>
@@ -36,3 +38,8 @@ ${sessionScope.mvo.id }
 	</tr>
 </table>
 </form>
+</c:when>
+<c:otherwise>
+	로그인해..
+</c:otherwise>
+</c:choose>

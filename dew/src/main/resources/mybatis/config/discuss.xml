@@ -6,7 +6,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       <resultMap type="dsvo" id="discussListRM">
 		<result property="discussionNo" column="discussion_no" />			
 		<result property="discussionDate" column="discussion_date" /> 
-		<result property="discussionDate" column="discussion_date" /> 
 		<result property="discussionSubject" column="discussion_subject" /> 
 	</resultMap>
 	<select id="getAllDiscussList" resultMap="discussListRM">
@@ -21,7 +20,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	where page=#{value}
 	</select>
 	<select id="totalContent" resultType="int">
-		select count(*)  from DISCUSSION d, DISCUSSION_COMMENT dc where d.id=dc.id
+		select count(*)  from DISCUSSION
 	</select>
 	<select id="findDiscussContent" resultMap="discussListRM">
 		<!-- select d.discussion_no,d.id,d.title,d.content,d.discussion_date,d.hit,d.discussion_subject,dc.discussion_comment_no,dc.id,dc.discussion_no,dc.content,dc.discussion_comment_date,dc.ref,dc.restep,dc.relevel from DISCUSSION d, DISCUSSION_COMMENT dc where d.id=dc.id  and d.discussion_no=#{value} -->
@@ -43,6 +42,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select discussion_comment_no.nextval from dual
 	</selectKey> 
 		insert into discussion_comment(discussion_comment_no,id,discussion_no,content,discussion_comment_date,ref,restep,relevel) values(#{no},#{id},#{index},#{content},sysdate,#{no},0,0)
+	</insert>
+	<insert id="registerDiscussion" parameterType="dsvo">
+	 <selectKey keyProperty="discussionNo" resultType="int" order="BEFORE">
+		select discussion_no.nextval from dual
+	</selectKey> 
+		insert into discussion(discussion_no,id,title,content,discussion_date,hit,discussion_subject) values(#{discussionNo},#{id},#{title},#{content},sysdate,0,#{discussionSubject})
 	</insert>
  </mapper> 		
  

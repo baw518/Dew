@@ -15,6 +15,16 @@ public DiscussVO() {
 	super();
 	// TODO Auto-generated constructor stub
 }
+
+public DiscussVO(String id, String title, String content,
+		String discussionSubject) {
+	super();
+	this.id = id;
+	this.title = title;
+	this.content = content;
+	this.discussionSubject = discussionSubject;
+}
+
 public DiscussVO(int discussionNo, String id, String title, String content,
 		String discussionDate, String hit, String discussionSubject,
 		CommentVO commentVO) {
