@@ -18,7 +18,7 @@
 	<c:forEach var="list" items="${requestScope.vo.list}">				
 		<tr>
 		    <td>${list.videoNo }</td>				
-			<td ><a href="video_showContent.do?videoNo=${list.videoNo}">
+			<td ><a href="video_showContent.do?no=${list.videoNo}">
 			${list.title }</a></td>
 			<td>${list.id }</td>
 			<td>${list.videoDate }</td>
