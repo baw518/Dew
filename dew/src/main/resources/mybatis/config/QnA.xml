@@ -57,28 +57,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	 <select id="getGroupList" resultMap="qGroupMap">
  	 	select group_no,group_name from qna_group
  	 </select>
+ 	 
+ 	 <insert id="write" parameterType="qvo">
+ 	 	<selectKey keyProperty="qnaNo" resultType="int" order="BEFORE">
+			select qna_no.nextval from dual
+		</selectKey>
+ 	 	insert into qna(qna_no,id,group_no,title,content,qna_date,point,ref,restep,relevel)
+ 	 	values(qna_no.currval,#{id},#{groupNo},#{title},#{content},sysdate,#{point},qna_no.currval,0,0)
+ 	 </insert>
+ 	 
  </mapper> 		
 
  
- 
- 
- 
- 
- 
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

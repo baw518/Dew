@@ -1,6 +1,5 @@
 package org.kosta.dew.model.service;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.kosta.dew.model.vo.QnAGroupVO;
@@ -17,6 +16,8 @@ public interface QnAService {
 	public QnAVO showContentNoHit(String qnaNo);
 
 	public List<QnAGroupVO> getGroupList();
+
+	public void write(QnAVO vo);
 
 
 

@@ -1,6 +1,5 @@
 package org.kosta.dew.model.dao;
 
-import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -43,6 +42,13 @@ public class QnADAOImpl implements QnADAO{
 		
 		return sqlSessionTemplate.selectList("QnA.getGroupList");
 	}
+
+	@Override
+	public void write(QnAVO vo) {
+		sqlSessionTemplate.insert("QnA.write", vo);
+	}
+
+
 
 
 }
