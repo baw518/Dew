@@ -7,8 +7,8 @@ import javax.servlet.http.HttpSession;
 
 import org.kosta.dew.model.service.ErrorReportService;
 import org.kosta.dew.model.vo.ErrorReportVO;
-import org.kosta.dew.model.vo.MemberVO;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -44,20 +44,17 @@ public class ErrorReportController {
 	
 	@RequestMapping("report_write.do")
 	public ModelAndView reportWrite(HttpSession session,ErrorReportVO vo, String type,String title){
-		System.out.println(vo + " Type : " + type );
 		int errorNo = errorReportService.reportWrite(vo,type,title);
-		
 		ModelAndView mav = new ModelAndView("redirect:/report_write_result.do?errorNo="+ errorNo);
-		
-		
-
 		return mav;
 	}
 	
 	@RequestMapping("report_write_result.do")
-	public String reportWriteResult(int errorNo){
-		System.out.println(errorNo);
+	public ModelAndView reportWriteResult(int errorNo){
+		ModelAndView mav = new ModelAndView("errorReport_writeResult");
+		System.out.println("errorNO : " + errorNo);
+		mav.addObject("result",errorReportService.writeResult(errorNo));
 		//errorReportService.getContent(errorNo);
-		return "";
+		return mav;
 	}
 }

@@ -44,4 +44,9 @@ public class ErrorReportServiceImpl implements ErrorReportService {
 		return errorReportDAO.reportWrite(vo,type,title);
 	}
 
+	@Override
+	public ErrorReportVO writeResult(int errorNo) {
+		return errorReportDAO.writeResult(errorNo);
+	}
+
 }

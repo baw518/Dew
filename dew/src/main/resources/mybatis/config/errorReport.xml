@@ -15,12 +15,11 @@ select distinct e.exception_message as exceptionMessage, er.error_no as errorNo,
 <select id="getContentException" parameterType="String" resultType="evo">
 select e.exception_message as exceptionMessage, to_char(error_report_date,'YYYY/MM/DD HH24:MI') as reportDate , er.content as content, er.discussion_status as discussionstatus from ERROR_REPORT er, ERROR e where e.error_no = er.error_no and e.error_no =#{value}
 </select>
-<select id="getContentErrorCode" parameterType="String" resultType="evo">
+<select id="getContentErrorCode" parameterType="int" resultType="evo">
 select e.error_code as errorCode, to_char(error_report_date,'YYYY/MM/DD HH24:MI') as reportDate , er.content as content, er.discussion_status as discussionstatus from ERROR_REPORT er, ERROR e where e.error_no = er.error_no and e.error_no =#{value}
 </select>
-<select id="getContentRegisterResult" parameterType="int" resultType="evo">
-select e.error_code as errorCode ,  e.exception_message as exceptionMessage,to_char(error_report_date,'yyyy/mm/dd HH24:MI:SS') as reportdate, er.id, er.discussion_status as discussionstatus from ERROR_REPORT er, ERROR e where e.error_no = er.error_no and e.error_no = #{value}
-
+<select id="writeResult" parameterType="String" resultType="evo">
+select er.error_no as errorNo,e.error_code as errorCode ,  e.exception_message as exceptionMessage,to_char(error_report_date,'yyyy/mm/dd HH24:MI:SS') as reportdate, er.id, er.discussion_status as discussionstatus from ERROR_REPORT er, ERROR e where e.error_no = er.error_no and e.error_no = #{value}
 </select>
 <select id="currentValue" resultType="int">
 select error_no.currval from dual
@@ -39,6 +38,7 @@ insert into error(error_no,exception_message) values(error_no.nextval,#{value})
 insert into error_report(error_report_no,error_no,id,error_report_date,content)
 values(error_report_no.nextval,error_no.currval,#{id},sysdate,#{content})
 </insert>
+
  </mapper> 		
  
  

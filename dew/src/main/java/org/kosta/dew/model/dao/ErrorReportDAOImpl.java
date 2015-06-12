@@ -58,6 +58,13 @@ public class ErrorReportDAOImpl implements ErrorReportDAO {
 		return sqlSessionTemplate.selectOne("errorReport.currentValue");
 	}
 
+	@Override
+	public ErrorReportVO writeResult(int errorNo) {
+		System.out.println("DAO errorNO : " + errorNo);
+		System.out.println(sqlSessionTemplate.selectOne("errorReport.writeResult", errorNo));
+		return sqlSessionTemplate.selectOne("errorReport.writeResult", errorNo);
+	}
+
 
 	
 	
