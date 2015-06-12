@@ -34,4 +34,19 @@ public class ErrorReportServiceImpl implements ErrorReportService {
 		return errorReportDAO.getContent(errorNo,type);
 	}
 
+	@Override
+	public ErrorReportVO getContent(int errorNo) {
+		return errorReportDAO.getContent(errorNo);
+	}
+
+	@Override
+	public int reportWrite(ErrorReportVO vo, String type,String title) {
+		return errorReportDAO.reportWrite(vo,type,title);
+	}
+
+	@Override
+	public ErrorReportVO writeResult(int errorNo) {
+		return errorReportDAO.writeResult(errorNo);
+	}
+
 }

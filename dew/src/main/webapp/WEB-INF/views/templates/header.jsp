@@ -24,10 +24,10 @@
                                 <li><a href="home.do">홈으로</a></li>
                                 <c:choose>
                                    <c:when test="${sessionScope.mvo==null }">
-                                   <li><a href="report_writeForm.do">에러 리포트 등록</a></li>
                                 <li><a href="login_form.do">로그인</a></li>
                                    </c:when>
                                    <c:otherwise>
+                                <li><a href="report_writeForm.do">에러 리포트 등록</a></li>
                                 <li><a href="logout.do">로그아웃</a></li>                                   
                                    </c:otherwise>
                                 </c:choose>
