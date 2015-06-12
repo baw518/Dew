@@ -4,7 +4,7 @@
        "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
        "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
 <tiles-definitions>	
-	<definition name="project_*" extends="home">
+	<definition name="projectView_*" extends="home">
 		<put-attribute name="main"  value="/WEB-INF/views/project/{1}.jsp"  />
 	</definition>		
 </tiles-definitions>
