@@ -40,6 +40,24 @@ public class ErrorReportDAOImpl implements ErrorReportDAO {
 		return vo;
 	}
 
+	@Override
+	public ErrorReportVO getContent(int errorNo) {
+		return sqlSessionTemplate.selectOne("errorReport.getContentRegisterResult", errorNo);
+	}
+
+	@Override
+	public int reportWrite(ErrorReportVO vo, String type,String title) {
+		if(type.equals("exception")){
+			sqlSessionTemplate.insert("errorReport.writeReportExceptionTitle", title);
+			sqlSessionTemplate.insert("errorReport.writeReportException", vo);
+		}else{
+			sqlSessionTemplate.insert("errorReport.writeReportErrorcodeTitle", title);
+			sqlSessionTemplate.insert("errorReport.writeReportErrorcode", vo);
+		}
+		
+		return sqlSessionTemplate.selectOne("errorReport.currentValue");
+	}
+
 
 	
 	

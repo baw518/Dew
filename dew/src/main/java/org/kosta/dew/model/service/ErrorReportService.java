@@ -10,5 +10,7 @@ public interface ErrorReportService {
 	List<ErrorReportVO> getReportExceptionMessage();
 	List<ErrorReportVO> getReportView();
 	ErrorReportVO getContent(String errorNo, String type);
+	ErrorReportVO getContent(int errorNo);
+	int reportWrite(ErrorReportVO vo, String type, String title);
 
 }
