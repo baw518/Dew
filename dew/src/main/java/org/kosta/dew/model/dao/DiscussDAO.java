@@ -21,8 +21,10 @@ public interface DiscussDAO {
 
 	public abstract int updateDiscussComment(CommentVO cvo);
 
-	public abstract int deleteDiscussComment(CommentVO cvo);
+	public abstract int deleteDiscussComment(String no);
 
 	public abstract int totalContent();
+
+	public abstract List<CommentVO> findDiscussComment(String discussionNo);
 
 }

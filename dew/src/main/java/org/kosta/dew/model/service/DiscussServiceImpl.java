@@ -75,7 +75,12 @@ public class DiscussServiceImpl implements DiscussService {
 	 * @see org.kosta.dew.model.service.DiscussService#deleteDiscussComment(org.kosta.dew.model.vo.CommentVO)
 	 */
 	@Override
-	public int deleteDiscussComment(CommentVO cvo){
-		return discussDAO.deleteDiscussComment(cvo);
+	public int deleteDiscussComment(String no){
+		return discussDAO.deleteDiscussComment(no);
+	}
+	@Override
+	public List<CommentVO> findDiscussComment(String discussionNo) {
+		// TODO Auto-generated method stub
+		return discussDAO.findDiscussComment(discussionNo);
 	}
 }

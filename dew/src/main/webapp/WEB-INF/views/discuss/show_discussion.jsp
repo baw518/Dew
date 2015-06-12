@@ -2,14 +2,52 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--  ${requestScope.dsvo}  --%>
-<%--  ${requestScope.list[0].discussionNo} 
- ${requestScope.list[0].id} 
- ${requestScope.list[0].title} 
- ${requestScope.list[0].content} 
- ${requestScope.list[0].discussionDate} 
- ${requestScope.list[0].hit} 
- ${requestScope.list[0].discussionSubject}  --%>
- <table class="table">
+<script>
+$(document).ready(function(){
+	$.ajax({
+		type:'post',
+        url:'show_discussion_comment.do?discussionNo='+$("#discussionNo").val(),
+        dataType:'json',
+        // data = List<CommentVO>
+        success:function(data){
+        	 	var showCommentComp = ""; 
+				$.each(data,function(i,data){
+				   /* alert(i+"."+data);  */
+					/* showCommentComp+="<tr><td>"+data.id+"님 =>"+data.content; */
+					showCommentComp+="<tr>";
+					showCommentComp+="<td>";					
+					showCommentComp+=data.id;
+					showCommentComp+="</td>";
+					showCommentComp+="<td>";					
+					showCommentComp+=data.date;
+				/* 	showCommentComp+="<input type='button' id='updateBtn' value='수정'><input type='button' id='deleteBtn' value='삭제'>"; */
+					showCommentComp+="<a href='updateDiscussComment.do'>수정</a>";
+					showCommentComp+="<a href='deleteDiscussComment.do?no="+data.no+"&index='"+data.index+">삭제</a>";
+					showCommentComp+="</td></tr>";
+					showCommentComp+="<tr><td>";					
+					showCommentComp+=data.content;
+					showCommentComp+="</td>";
+					showCommentComp+="</tr>";
+					showCommentComp+= "<input type='hidden' id='no' name='no' value='data.no'>";
+				});
+				$("#showComment").html(showCommentComp);
+        }
+        
+     });
+	// textarea 자동 크기 조절
+	$("#auto_textarea").on("keydown",function(){
+		$(this).height(1);
+		 $(this).height(20 + $(this).prop("scrollHeight"));
+		});
+	// 댓글 확인 버튼 누를 시
+	$("#submit").click(function(){
+		alert("뀨");
+	});
+	
+});
+</script>
+ <input type="hidden" id="discussionNo" name="discussionNo" value="${requestScope.dsvo.discussionNo}">
+ <table id="discussView">
  	<tr>
  		<td class="discussionNo"> ${requestScope.dsvo.discussionNo} </td>
  		<td class="title"> ${requestScope.dsvo.title} </td>
@@ -18,10 +56,22 @@
  		<td class="hit"> ${requestScope.dsvo.hit} </td>
  	</tr>
  	<tr>
- 		<td class="id" colspan="5">${requestScope.dsvo.id} </td>
+ 		<td class="id" colspan="5" align="left">${requestScope.dsvo.id} </td>
  	</tr>
  	<tr>
- 		<td class="content" colspan="5">${requestScope.dsvo.content} </td>
+ 		<td class="content" colspan="5" align="center">${requestScope.dsvo.content} </td>
  	</tr>
- </table>
-
+ 	</table>
+ 	<table id="discussCommentView">
+ 	<div id="showComment"></div>
+ 	<tr>
+	<td colspan="5" align="center">
+	<!-- 크기가 크롬에선 자동으로 바뀌게할 수 있으니 css에서 resize:none; 해주기 -->
+	<textarea id="auto_textarea" cols="50" rows="2" class="textarea m-tcol-c" maxlength="1000" style="overflow:hidden"></textarea>
+ 	<input type="image" name="" src="http://cafeimgs.naver.net/cafe4/btn_cmt_cfm_v1.gif" alt="확인" id="submit">
+	</td> 
+ 	</tr> 
+ 	</table>
+<form>
+	
+</form>

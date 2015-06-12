@@ -22,6 +22,8 @@ public interface DiscussService {
 
 	public abstract int updateDiscussComment(CommentVO cvo);
 
-	public abstract int deleteDiscussComment(CommentVO cvo);
+	public abstract int deleteDiscussComment(String no);
+
+	public abstract List<CommentVO> findDiscussComment(String discussionNo);
 
 }

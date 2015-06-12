@@ -10,6 +10,7 @@
 </head>
 <body> --%>
 <%-- <c:import url="/template/header.jsp"></c:import>	 --%>
+
 	<table class="table" >
 		<caption><h2>목록</h2></caption>
 		<thead>
