@@ -46,7 +46,7 @@ public class DiscussController {
 	public ModelAndView deleteDiscussComment(HttpServletRequest request){
 		String no = request.getParameter("no");
 		String index = request.getParameter("index");
-		discussService.deleteDiscussComment(no);
+		discussService.deleteDiscussComment(no);	
 		return new ModelAndView("redirect:findDiscussContent.do?no="+index);
 	}
 	@RequestMapping("registerDiscussComment.do")
@@ -56,5 +56,18 @@ public class DiscussController {
 		String id = request.getParameter("id");
 		discussService.registerDiscussComment(new CommentVO(discussionNo, id, content));
 		return new ModelAndView("redirect:findDiscussContent.do?no="+discussionNo);
+	}
+	@RequestMapping("updateDiscussCommentForm.do")
+	public String updateDiscussCommentForm(){
+		return "discussion_updateDiscussCommentForm";
+	}
+	@RequestMapping("updateDiscussComment.do")
+	public ModelAndView updateDiscussComment(HttpServletRequest request){
+		String id = request.getParameter("id");
+		String title = request.getParameter("title");
+		String subject = request.getParameter("subject");
+		String content = request.getParameter("content");
+		System.out.println(id+"/"+title+"/"+subject+"/"+content);
+		return null;
 	}
 }

@@ -10,15 +10,15 @@
 </head>
 <body> --%>
 <%-- <c:import url="/template/header.jsp"></c:import>	 --%>
-
 	<table class="table" >
-		<caption><h2>목록</h2></caption>
+		<caption><h2>discussion게시판</h2></caption>
 		<thead>
 		<tr>
 			<th class="discussionNo">NO</th>
 			<th class="title">제목</th>
 			<th class="id">아이디</th>
-			<th class="discussionSubject">분류</th>
+			<!-- 주제 필요없어서 주석 처리 -->
+			<th class="discussionSubject">주제</th> 
 			<th class="discussionDate">작성일</th>
 			<th class="hit">HIT</th>
 			</tr>		
@@ -27,14 +27,21 @@
 			<tr>
 			    <td>${dsvo.discussionNo }</td>					
 			    <td><a href="findDiscussContent.do?no=${dsvo.discussionNo }">${dsvo.title }</a></td>					
-			    <td>${dsvo.id }</td>					
-			    <td>${dsvo.discussionSubject }</td>					
+			    <td>${dsvo.id }</td>	
+			    <!-- 주제 필요없어서 주석 처리 -->				
+			    <td>${dsvo.discussionSubject }</td>		
 			    <td>${dsvo.discussionDate }</td>					
 			    <td>${dsvo.hit }</td>					 
 			</tr>		
 			</c:forEach>
+				<tr>
+		<td colspan="6" align="right">
+			<c:if test="${sessionScope.mvo != null}">
+				<a href="updateDiscussCommentForm.do"><img  src="${initParam.root}images/qna_write.jpg" border="0"></a>
+			</c:if>
+		</td>
+	</tr>
 	</table><br></br>	
-<br></br>	
 <center>
 	<a href="discussion_listView.do?pageNo=${requestScope.dslvo.pagingBean.startPageOfPageGroup-1}">
 	<c:if test="${requestScope.dslvo.pagingBean.previousPageGroup== true && requestScope.dslvo.pagingBean.nowPageGroup!=1}">◀</c:if>
@@ -48,3 +55,4 @@
 		<c:if test="${requestScope.dslvo.pagingBean.nextPageGroup== true}">▶</c:if>
 	</a>
 </center>
+<br><br>

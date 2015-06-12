@@ -21,16 +21,23 @@ $(document).ready(function(){
 					showCommentComp+="<td>";					
 					showCommentComp+=data.date;
 				/* 	showCommentComp+="<input type='button' id='updateBtn' value='수정'><input type='button' id='deleteBtn' value='삭제'>"; */
-					showCommentComp+="<a href='updateDiscussComment.do'>수정</a>";
+		/* 			showCommentComp+="<a href='updateDiscussComment.do'>수정</a>"; */
+					showCommentComp+="<input type='button' name='updateBtn' value='수정'>";
 					showCommentComp+="<a href='deleteDiscussComment.do?no="+data.no+"&index="+data.index+"'>삭제</a>";
 					showCommentComp+="</td></tr>";
-					showCommentComp+="<tr><td>";					
+					showCommentComp+="<tr><td colspan='2'><pre>";					
 					showCommentComp+=data.content;
-					showCommentComp+="</td>";
+					showCommentComp+="</pre></td>";
 					showCommentComp+="</tr>";
 					showCommentComp+= "<input type='hidden' id='no' name='no' value='data.no'>";
+					showCommentComp+="</tr>";
 				});
 				$("#showComment").html(showCommentComp);
+				// 수정버튼클릭시
+				$("input[name=updateBtn]").click(function(){
+					alert("하기싫다");
+					
+				});
         }
         
      });
@@ -53,7 +60,7 @@ $(document).ready(function(){
 </script>
  <input type="hidden" id="discussionNo" name="discussionNo" value="${requestScope.dsvo.discussionNo}">
  <input type="hidden" id="sessionId" name="sessionId" value="${sessionScope.mvo.id}">
- <table id="discussView">
+ <table id="discussView" class="table" align="center">
  	<tr>
  		<td id="discussionNo" class="discussionNo"> ${requestScope.dsvo.discussionNo} </td>
  		<td class="title"> ${requestScope.dsvo.title} </td>
@@ -65,11 +72,11 @@ $(document).ready(function(){
  		<td class="id" colspan="5" align="left">${requestScope.dsvo.id} </td>
  	</tr>
  	<tr>
- 		<td class="content" colspan="5" align="center">${requestScope.dsvo.content} </td>
+ 		<td class="content" colspan="5" align="center"><pre>${requestScope.dsvo.content} </pre></td>
  	</tr>
  	</table>
- 	<table id="discussCommentView">
- 	<div id="showComment"></div>
+ 	<table id="discussCommentView" class="table" align="center">
+ 	<div id="showComment" align="center"></div>
  	<tr>
 	<td colspan="5" align="center">
 	<!-- 크기가 크롬에선 자동으로 바뀌게할 수 있으니 css에서 resize:none; 해주기 -->
