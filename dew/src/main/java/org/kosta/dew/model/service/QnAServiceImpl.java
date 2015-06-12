@@ -1,6 +1,5 @@
 package org.kosta.dew.model.service;
 
-import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -41,6 +40,11 @@ public class QnAServiceImpl implements QnAService{
 	public List<QnAGroupVO> getGroupList() {
 		
 		return qnADAO.getGroupList();
+	}
+
+	@Override
+	public void write(QnAVO vo) {
+		qnADAO.write(vo);
 	}
 
 	

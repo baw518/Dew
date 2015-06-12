@@ -14,6 +14,7 @@ import org.kosta.dew.model.vo.QnAListVO;
 import org.kosta.dew.model.vo.QnAVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -122,7 +123,12 @@ public class QnAController {
 		}
 		return "QnA_SelectedListView";
 	}
-
+	
+	/**
+	 * 분류그룹 받아와서 콤보박스로 보내기
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("QnA_WriteForm.do")
 	public String writeForm(Model model){
 		//분류받아와서 보내기
@@ -131,9 +137,18 @@ public class QnAController {
 		return "QnA_WriteForm";
 	}
 	
+	/**
+	 * 게시판에 질문글 등록
+	 * @param vo
+	 * @param title
+	 * @return
+	 */
 	@RequestMapping("QnA_Write.do")
-	public String write(String title){
-		System.out.println(title);
-		return "";
+	public String write(QnAVO vo,String title){
+		//글작성
+		qnAService.write(vo);
+		//상세글보기로 리다이렉트
+		return "redirect:QnA_showContent.do?qnaNo="+vo.getQnaNo();
 	}
+	
 }

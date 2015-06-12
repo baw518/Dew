@@ -17,6 +17,7 @@ public interface QnADAO {
 
 	public List<QnAGroupVO> getGroupList();
 
+	public void write(QnAVO vo);
 
 
 }
