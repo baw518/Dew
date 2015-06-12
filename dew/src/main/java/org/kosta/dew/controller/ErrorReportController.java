@@ -15,6 +15,10 @@ public class ErrorReportController {
 	@Resource
 	private ErrorReportService errorReportService;
 
+	@RequestMapping("report_writeForm.do")
+	public String reportWriteView(){
+		return "errorReport_writeForm";
+	}
 	@RequestMapping("report_listView.do")
 	public ModelAndView reportView(){
 		List<ErrorReportVO> list = null;
@@ -35,4 +39,6 @@ public class ErrorReportController {
 		}
 		return mav;
 	}
+	
+	
 }

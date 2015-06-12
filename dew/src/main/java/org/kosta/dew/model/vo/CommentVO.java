@@ -11,6 +11,14 @@ public class CommentVO {
 	private int ref;
 	private int reStep;
 	private int relevel;
+	
+	
+	public CommentVO(int index, String id, String content) {
+		super();
+		this.index = index;
+		this.id = id;
+		this.content = content;
+	}
 	public CommentVO(int no, int index, String id, String content, Date date,
 			int ref, int reStep, int relevel) {
 		super();
