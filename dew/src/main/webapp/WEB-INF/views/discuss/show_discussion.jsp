@@ -42,7 +42,14 @@ $(document).ready(function(){
 				});
 				// 수정버튼클릭시
 				$("input[name=updateBtn]").click(function(){
-					alert("하기싫다");
+					$.ajax({
+						type:'post',
+				        url:'updateDiscussCommentForm.do?no='+$("#no").val(),
+				        dataType:'json',
+				        success:function(data){
+					
+				        }
+				     });
 					
 				});
         }
