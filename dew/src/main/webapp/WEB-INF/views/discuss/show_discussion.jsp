@@ -20,8 +20,11 @@ $(document).ready(function(){
 					showCommentComp+="</td>";
 					showCommentComp+="<td>";					
 					showCommentComp+=data.commentDate;
+					showCommentComp+=$("#sessionId").val();
+					if($("#sessionId").val()==data.id){
 					showCommentComp+="<input type='button' name='updateBtn' value='수정'>";
 					showCommentComp+="<input type='button' name='deleteBtn' value='삭제'>";
+					}
 					showCommentComp+="</td></tr>";
 					showCommentComp+="<tr><td colspan='2'><pre>";					
 					showCommentComp+=data.content;
@@ -102,7 +105,8 @@ $(document).ready(function(){
  	</tr>
  	</table>
  	<table id="discussCommentView" class="table" align="center">
- 	<div id="showComment" align="center"></div>
+  	<div id="showComment" align="center"></div>
+	<c:if test="${sessionScope.mvo.id != null}">
  	<tr>
 	<td colspan="5" align="center">
 	<!-- 크기가 크롬에선 자동으로 바뀌게할 수 있으니 css에서 resize:none; 해주기 -->
@@ -110,7 +114,7 @@ $(document).ready(function(){
  	<input type="image" src="http://cafeimgs.naver.net/cafe4/btn_cmt_cfm_v1.gif" alt="확인" id="submit">
 	</td> 
  	</tr> 
+	</c:if>
+
  	</table>
-<form>
-	
-</form>
+
