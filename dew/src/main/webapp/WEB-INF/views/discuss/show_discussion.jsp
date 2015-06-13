@@ -36,11 +36,17 @@ $(document).ready(function(){
 				$("#showComment").html(showCommentComp);
 				// 삭제버튼클릭시
 				$("input[name=deleteBtn]").click(function(){
+					var q = confirm("삭제하시겠습니까?");
+					if(q){	
 					location.href="deleteDiscussComment.do?no="+$("#no").val()+"&index="+$("#index").val();
-					
+					}else{
+						return false;
+					}					
 				});//function
 				// 수정버튼클릭시
 				$("input[name=updateBtn]").click(function(){
+					var q = confirm("수정하시겠습니까?");
+					if(q){	
 					$.ajax({
 						type:'post',
 				        url:'updateDiscussCommentForm.do?no='+$("#no").val(),
@@ -67,6 +73,9 @@ $(document).ready(function(){
 							});
 				        }//success
 				     });//ajax
+					}else{
+						return false;
+					}			
 				});//function
         }
         
@@ -80,7 +89,6 @@ $(document).ready(function(){
 	$("#submit").click(function(){
 		/* alert($("#auto_textarea").val()); */
 		if($("#sessionId").val()==""){
-			alert("로그인이나하시져");
 			return false;
 		}//if
 		location.href="registerDiscussComment.do?no="+$("#discussionNo").val()+"&content="+$("#auto_textarea").val()+"&id="+$("#sessionId").val();
