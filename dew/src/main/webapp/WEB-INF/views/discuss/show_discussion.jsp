@@ -13,17 +13,18 @@ $(document).ready(function(){
         success:function(data){
         	 	var showCommentComp = ""; 
 				$.each(data,function(i,data){
-				   /*  alert(i+"."+data);   */
+				     /* alert(i+"."+data);   */
 					showCommentComp+="<tr>";
 					showCommentComp+="<td>";					
 					showCommentComp+=data.id;
 					showCommentComp+="</td>";
 					showCommentComp+="<td>";					
-					showCommentComp+=data.date;
+					showCommentComp+=data.commentDate;
 				/* 	showCommentComp+="<input type='button' id='updateBtn' value='수정'><input type='button' id='deleteBtn' value='삭제'>"; */
 		/* 			showCommentComp+="<a href='updateDiscussComment.do'>수정</a>"; */
 					showCommentComp+="<input type='button' name='updateBtn' value='수정'>";
-					showCommentComp+="<a href='deleteDiscussComment.do?no="+data.no+"&index="+data.index+"'>삭제</a>";
+					/* showCommentComp+="<a href='deleteDiscussComment.do?no="+data.commentNo+"&index="+data.boardNo+"'>삭제</a>"; */
+					showCommentComp+="<input type='button' name='deleteBtn' value='삭제'>";
 					showCommentComp+="</td></tr>";
 					showCommentComp+="<tr><td colspan='2'><pre>";					
 					showCommentComp+=data.content;
@@ -34,6 +35,11 @@ $(document).ready(function(){
 				});
 				$("#showComment").html(showCommentComp);
 				// 수정버튼클릭시
+				$("input[name=deleteBtn]").click(function(){
+					location.href="deleteDiscussComment.do?no="+data.commentNo+"&index="+data.boardNo;
+					
+				});
+				// 삭제버튼클릭시
 				$("input[name=updateBtn]").click(function(){
 					alert("하기싫다");
 					
@@ -55,7 +61,6 @@ $(document).ready(function(){
 		}
 		location.href="registerDiscussComment.do?no="+$("#discussionNo").val()+"&content="+$("#auto_textarea").val()+"&id="+$("#sessionId").val();
 	});
-	
 });
 </script>
  <input type="hidden" id="discussionNo" name="discussionNo" value="${requestScope.dsvo.discussionNo}">
