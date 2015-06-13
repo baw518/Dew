@@ -3,48 +3,48 @@ package org.kosta.dew.model.vo;
 import java.sql.Date;
 
 public class CommentVO {
-	private int no;
-	private int index;
+	private int commentNo;
+	private int boardNo;
 	private String id;
 	private String content;
-	private Date date;
+	private String commentDate;
 	private int ref;
 	private int reStep;
 	private int relevel;
-	
-	
-	public CommentVO(int index, String id, String content) {
+	public CommentVO() {
 		super();
-		this.index = index;
-		this.id = id;
-		this.content = content;
+		// TODO Auto-generated constructor stub
 	}
-	public CommentVO(int no, int index, String id, String content, Date date,
-			int ref, int reStep, int relevel) {
+	public CommentVO(int commentNo, int boardNo, String id, String content,
+			String commentDate, int ref, int reStep, int relevel) {
 		super();
-		this.no = no;
-		this.index = index;
+		this.commentNo = commentNo;
+		this.boardNo = boardNo;
 		this.id = id;
 		this.content = content;
-		this.date = date;
+		this.commentDate = commentDate;
 		this.ref = ref;
 		this.reStep = reStep;
 		this.relevel = relevel;
 	}
-	public CommentVO() {
+	
+	public CommentVO(int boardNo, String id, String content) {
 		super();
+		this.boardNo = boardNo;
+		this.id = id;
+		this.content = content;
 	}
-	public int getNo() {
-		return no;
+	public int getCommentNo() {
+		return commentNo;
 	}
-	public void setNo(int no) {
-		this.no = no;
+	public void setCommentNo(int commentNo) {
+		this.commentNo = commentNo;
 	}
-	public int getIndex() {
-		return index;
+	public int getBoardNo() {
+		return boardNo;
 	}
-	public void setIndex(int index) {
-		this.index = index;
+	public void setBoardNo(int boardNo) {
+		this.boardNo = boardNo;
 	}
 	public String getId() {
 		return id;
@@ -58,11 +58,11 @@ public class CommentVO {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public Date getDate() {
-		return date;
+	public String getCommentDate() {
+		return commentDate;
 	}
-	public void setDate(Date date) {
-		this.date = date;
+	public void setCommentDate(String commentDate) {
+		this.commentDate = commentDate;
 	}
 	public int getRef() {
 		return ref;
@@ -81,6 +81,13 @@ public class CommentVO {
 	}
 	public void setRelevel(int relevel) {
 		this.relevel = relevel;
+	}
+	@Override
+	public String toString() {
+		return "CommentVO [commentNo=" + commentNo + ", boardNo=" + boardNo
+				+ ", id=" + id + ", content=" + content + ", commentDate="
+				+ commentDate + ", ref=" + ref + ", reStep=" + reStep
+				+ ", relevel=" + relevel + "]";
 	}
 	
 }
