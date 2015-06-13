@@ -27,7 +27,7 @@ public class VideoListVO {
 	}
 	@Override
 	public String toString() {
-		return "VieioListVo [list=" + list + ", pagingBean=" + pagingBean + "]";
+		return "VideoListVo [list=" + list + ", pagingBean=" + pagingBean + "]";
 	}
 	
 }

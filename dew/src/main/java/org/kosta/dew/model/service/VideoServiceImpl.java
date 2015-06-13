@@ -29,7 +29,7 @@ public class VideoServiceImpl implements VideoService {
 		if(pageNo==null||pageNo=="") 
 			pageNo="1";
 		List<VideoVO> list=videoDAO.getVideoList(pageNo);
-		System.out.println(list);
+		//System.out.println(list);
 		int total=videoDAO.totalContent();
 		PagingBean PagingBean=new PagingBean(total,Integer.parseInt(pageNo));
 		VideoListVO vo=new VideoListVO(list,PagingBean);

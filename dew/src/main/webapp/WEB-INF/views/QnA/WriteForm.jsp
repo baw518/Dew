@@ -25,6 +25,9 @@ $(document).ready(function(){
 			alert("내용을 입력하세요");
 			return false;
 		}
+		if(!confirm("작성하시겠습니까??")){
+			return false;
+		}
 		$("#writeForm").submit();
 	});
 	

@@ -6,15 +6,16 @@ import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.kosta.dew.model.service.QnAService;
+import org.kosta.dew.model.vo.MemberVO;
 import org.kosta.dew.model.vo.PagingBean;
 import org.kosta.dew.model.vo.QnAGroupVO;
 import org.kosta.dew.model.vo.QnAListVO;
 import org.kosta.dew.model.vo.QnAVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -144,11 +145,82 @@ public class QnAController {
 	 * @return
 	 */
 	@RequestMapping("QnA_Write.do")
-	public String write(QnAVO vo,String title){
+	public String write(QnAVO vo,HttpServletRequest request){
+		//포인트 차감
+		qnAService.pointMinus(vo);
+		
 		//글작성
 		qnAService.write(vo);
+		
+		//세션에 포인트수정하여 재설정
+		HttpSession session = request.getSession();
+		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
+		int beforePoint = mvo.getPoint();
+		int minusPoint = vo.getPoint();
+		mvo.setPoint(beforePoint-minusPoint);
+		session.setAttribute("mvo", mvo);
+		
 		//상세글보기로 리다이렉트
 		return "redirect:QnA_showContent.do?qnaNo="+vo.getQnaNo();
+	}
+	
+	/**
+	 * 게시판 질문내용 수정폼 보이기
+	 * @param qnaNo
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("QnA_UpdateForm.do")
+	public String updateForm(String qnaNo,Model model){
+		//분류받아와서 보내기
+		List<QnAGroupVO> groupList = qnAService.getGroupList();
+		model.addAttribute("groupList", groupList);
+		
+		//글번호로 작성글내용받아오기
+		QnAVO qvo = qnAService.showContentNoHit(qnaNo);
+		model.addAttribute("qvo", qvo);
+		
+		return "QnA_UpdateForm";
+	}
+	
+	/**
+	 * 게시판 질문내용 수정하기
+	 * @param vo
+	 * @return
+	 */
+	@RequestMapping("QnA_Update.do")
+	public String update(QnAVO vo){
+		//글 수정
+		qnAService.update(vo);
+		
+		//상세글보기로 리다이렉트
+		return "redirect:QnA_showContent.do?qnaNo="+vo.getQnaNo();
+	}
+	
+	/**
+	 * QnA게시판 게시글 삭제.
+	 * @param vo
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("QnA_delete.do")
+	public String delete(QnAVO vo,Model model){
+		qnAService.deleteContent(vo);
+
+		return "redirect:QnA_listView.do";
+	}
+	
+	@RequestMapping("QnA_replyForm.do")
+	public String replyForm(String qnaNo,Model model){
+		//분류받아와서 보내기
+		List<QnAGroupVO> groupList = qnAService.getGroupList();
+		model.addAttribute("groupList", groupList);
+		
+		//글번호로 작성글 받아오기
+		QnAVO qvo = qnAService.showContentNoHit(qnaNo);
+		model.addAttribute("qvo", qvo);
+		
+		return "QnA_replyForm";
 	}
 	
 }

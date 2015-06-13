@@ -19,5 +19,11 @@ public interface QnADAO {
 
 	public void write(QnAVO vo);
 
+	public void update(QnAVO vo);
+
+	public void pointMinus(QnAVO vo);
+
+	public void deleteContent(QnAVO vo);
+
 
 }

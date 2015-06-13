@@ -48,7 +48,26 @@ public class QnADAOImpl implements QnADAO{
 		sqlSessionTemplate.insert("QnA.write", vo);
 	}
 
+	@Override
+	public void update(QnAVO vo) {
+		sqlSessionTemplate.update("QnA.update", vo);
+		
+	}
 
+	@Override
+	public void pointMinus(QnAVO vo) {
+		sqlSessionTemplate.update("QnA.pointMinus",vo);
+		
+	}
+
+
+	@Override
+	public void deleteContent(QnAVO vo) {
+		
+		sqlSessionTemplate.delete("QnA.deleteContent", vo);
+	}
+
+	
 
 
 }
