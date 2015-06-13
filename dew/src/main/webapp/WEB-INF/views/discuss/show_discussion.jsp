@@ -30,16 +30,17 @@ $(document).ready(function(){
 					showCommentComp+=data.content;
 					showCommentComp+="</pre></td>";
 					showCommentComp+="</tr>";
-					showCommentComp+= "<input type='hidden' id='no' name='no' value='data.no'>";
+					showCommentComp+= "<input type='hidden' id='no' name='no' value='"+data.commentNo+"'>";
+					showCommentComp+= "<input type='hidden' id='index' name='index' value='"+data.boardNo+"'>";
 					showCommentComp+="</tr>";
 				});
 				$("#showComment").html(showCommentComp);
-				// 수정버튼클릭시
+				// 삭제버튼클릭시
 				$("input[name=deleteBtn]").click(function(){
-					location.href="deleteDiscussComment.do?no="+data.commentNo+"&index="+data.boardNo;
+					location.href="deleteDiscussComment.do?no="+$("#no").val()+"&index="+$("#index").val();
 					
 				});
-				// 삭제버튼클릭시
+				// 수정버튼클릭시
 				$("input[name=updateBtn]").click(function(){
 					alert("하기싫다");
 					

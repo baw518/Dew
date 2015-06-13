@@ -46,6 +46,7 @@ public class DiscussController {
 	public ModelAndView deleteDiscussComment(HttpServletRequest request){
 		String no = request.getParameter("no");
 		String index = request.getParameter("index");
+		System.out.println("delete "+no+" "+index);
 		discussService.deleteDiscussComment(no);	
 		return new ModelAndView("redirect:findDiscussContent.do?no="+index);
 	}
