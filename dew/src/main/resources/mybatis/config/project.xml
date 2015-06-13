@@ -4,51 +4,71 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="project"> 
 <select id="findProjectByNo" resultType="pvo">
- 		select project_no as projectNo,title as projectName,writer,content,point,progressing,achieve,hit,
+ 		select project_no as projectNo,title as projectName,id,content,point,progressing,achieve,hit,
  		to_char(project_date,'YYYY.MM.DD HH24:MI') as project_date,progressing_end_date as deadline 
- 		from project_ex where project_no=#{value}
+ 		from project_write where project_no=#{value}
  	</select>
  	
  	<select id="findDepartByNo" resultType="dvo">
- 		select subject,subject_man as mans from depart_ex where project_no=#{value}
+ 		select subject,subject_man as mans from project_depart where project_no=#{value}
  	</select>
  	
  	<insert id="insertProject" parameterType="pvo">
  	<selectKey keyProperty="projectNo" resultType="int" order="BEFORE">
-		select project_ex_seq.nextval from dual
+		select project_seq.nextval from dual
 	</selectKey>  
- 		insert into project_ex(project_no,title,writer,content,achieve,point,project_date,progressing_end_date) 
- 		values(#{projectNo},#{projectName},#{writer},#{content},#{achieve},#{point},sysdate,#{deadline})
+ 		insert into project_write(project_no,title,id,content,achieve,point,project_date,progressing_end_date) 
+ 		values(#{projectNo},#{projectName},#{id},#{content},#{achieve},#{point},sysdate,#{deadline})
  	</insert>
  	
  	<insert id="insertDepart" parameterType="dvo">
- 		insert into depart_ex(subject,subject_man,project_no) values(#{subject},#{mans},#{projectNo})
+ 		insert into project_depart(subject,subject_man,project_no) values(#{subject},#{mans},#{projectNo})
  	</insert>
  	
 	<select id="getProjectList" resultType="pvo">
-		select project_no as projectNo,writer,title as projectName,achieve,project_date,hit,progressing_end_date as deadline,point from(select project_no,writer,title,achieve,project_date,hit,progressing_end_date,ceil(rownum/10) as page,point 
-		from(select project_no,writer,title,achieve,to_char(project_date,'YYYY.MM.DD') as project_date,hit,progressing_end_date,point from project_ex order by project_no desc))
+		select project_no as projectNo,id,title as projectName,achieve,project_date,hit,progressing_end_date as deadline,point from(select project_no,id,title,achieve,project_date,hit,progressing_end_date,ceil(rownum/10) as page,point 
+		from(select project_no,id,title,achieve,to_char(project_date,'YYYY.MM.DD') as project_date,hit,progressing_end_date,point from project_write order by project_no desc))
 		where page=#{value}
 	</select>
 	
 	<select id="getTotalPostingCountProject" resultType="int">
-		select count(*) from project_ex
+		select count(*) from project_write
 	</select>
 	
 	<delete id="deleteProject">
-		delete from project_ex where project_no=#{value}
+		delete from project_write where project_no=#{value}
 	</delete>
 	<delete id="deleteDepart">
-		delete from depart_ex where project_no=#{value}
+		delete from project_depart where project_no=#{value}
 	</delete>
 	
 	<update id="updateProject" parameterType="pvo">
-		update project_ex set title=#{projectName},point=#{point},progressing_end_date=#{deadline},content=#{content} where project_no=#{projectNo}
+		update project_write set title=#{projectName},point=#{point},progressing_end_date=#{deadline},content=#{content} where project_no=#{projectNo}
 	</update>
 	<update id="updateDepart" parameterType="dvo">
-		update depart_ex set subject=#{subject},subject_man=#{mans} where project_no=#{projectNo} and subject=#{subject}
+		update project_depart set subject=#{subject},subject_man=#{mans} where project_no=#{projectNo} and subject=#{subject}
 	</update>
+
+
+
+
+ <insert id="registerProComment" parameterType="cmvo">
+ <selectKey keyProperty="commentNo" resultType="int" order="BEFORE">
+		select project_comment_seq.nextval from dual
+	</selectKey>  
+  	insert into project_comment(
+	  project_comment_no,project_no,id,content,project_comment_date) 
+	  values(#{commentNo},#{boardNo},'글쓴이',#{content},sysdate)
+  </insert>
+  <select id="getProComment" resultType="cmvo">
+  select project_comment_no as commentNo,id,content,project_comment_date as commentDate from project_comment where project_no=#{value} order by project_no desc
+  </select>
+  <select id="findProCommentByNo" resultType="cmvo">
+  select project_comment_no as commentNo,content,project_comment_date as commentDate from project_comment where project_comment_no=#{value}
+  </select>
+  
  </mapper> 		
+
  
  
  

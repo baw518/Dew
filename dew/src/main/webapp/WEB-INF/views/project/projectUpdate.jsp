@@ -33,6 +33,7 @@
 분야
 <select name="subject">
 	<option value="${dvo.subject }">${dvo.subject }</option>
+		<option value="">-------------------</option>
 	<option value="웹개발">웹개발</option>
 	<option value="웹디자인">웹디자인</option>
 	<option value="웹서버">웹서버</option>
@@ -63,7 +64,6 @@
 한마디<textarea rows="2" cols="28" name="content">${requestScope.pvo.content }</textarea><hr>
 <input type="submit" value="수정" id="regProBtn">
 <input type="hidden" name="projectNo" value="${requestScope.pvo.projectNo }">
-<input type="hidden" name="beforeSubject" value="${requestScope.pvo.departVO }">
 </form>
 </div>
 </body>

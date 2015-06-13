@@ -19,16 +19,34 @@
 			$("#switchBtn").html("<input type='button' value='신청완료' id='joinProBtn' >");
 		});
 		$("#joinProBtn").click(function(){
-			/*Ajax사용  */
+			/* $.ajax({
+				type:"POST",
+				url:"joinProjectAjax.do",
+				data: "content="+$("#commentTextContent").val()+"&projectNo=${requestScope.pvo.projectNo}",
+				success:function(commentVO){
+					$("#commentView").append("<table border='1' ><tr><td width='79px'>"+"글쓴이"+"</td><td width='301px'>"+commentVO.content+"</td><td width='119px'>"+commentVO.commentDate+"</td></tr></table>");
+				}
+			}); */
 		});
 		$("#backBtn").click(function(){
 			location.href="project_listView.do";
 		});
 		$("#deleteProBtn").click(function(){
+			if(confirm("삭제하시겠습니까?"))
 			location.href="project_delete.do?projectNo=${requestScope.pvo.projectNo}";
 		});
 		$("#updateProBtn").click(function(){
 			location.href="project_updateForm.do?projectNo=${requestScope.pvo.projectNo}";
+		});
+		$("#writeComment").click(function(){
+			$.ajax({
+				type:"POST",
+				url:"registerProjectCommentAjax.do",
+				data: "content="+$("#commentTextContent").val()+"&projectNo=${requestScope.pvo.projectNo}",
+				success:function(commentVO){
+					$("#commentView").append("<table border='1' ><tr><td width='79px'>"+"글쓴이"+"</td><td width='301px'>"+commentVO.content+"</td><td width='119px'>"+commentVO.commentDate+"</td></tr></table>");
+				}
+			});
 		});
 });  
 </script>
@@ -39,7 +57,7 @@
 <div id="view">
 <table border="1" width="500px" align="center">
 <tr><th>프로젝트명</th><td>${requestScope.pvo.projectName}</td></tr>
-<tr><th>작성자</th><td>${requestScope.pvo.writer}</td></tr>
+<tr><th>작성자</th><td>${requestScope.pvo.id}</td></tr>
 <tr><th>작성일</th><td>${requestScope.pvo.project_date}</td></tr>
 <c:forEach items="${requestScope.pvo.departVO}" var="dvo" varStatus="i">
 <tr><th>분야</th><td>${dvo.subject}</td></tr>
@@ -55,9 +73,18 @@
 <input type="button" value="목록" id="backBtn">
 <span id="switchBtn"><input type="button" value="참가신청" id="joinProBtn" ></span>
 <input type="button" value="수정" id="updateProBtn" style="margin-left: 100px">
-<input type="button" value="삭제" id="deleteProBtn" >
+<input type="button" value="삭제" id="deleteProBtn" ><br>
+<div id="commentForm">
+	<table border="1" id="commentTable">
+	<c:forEach var="cvo" items="${requestScope.pvo.commentVO}">
+		<tr><td id="writer">${cvo.id }</td><td>${cvo.content }</td><td id="date">${cvo.commentDate }</td></tr>
+	</c:forEach>
+	</table>
+	<div id="commentView"></div>
+	<input type="text" id='commentTextContent'>
+	<input type="button" value="댓글작성" id="writeComment">
+</div>
 </div>
   </div>
-   <span id="comment"></span>
   <div id="space"></div>
 </body>

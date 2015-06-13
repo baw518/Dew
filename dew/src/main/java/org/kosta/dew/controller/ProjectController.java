@@ -1,16 +1,16 @@
 package org.kosta.dew.controller;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 
 import org.kosta.dew.model.service.ProjectService;
+import org.kosta.dew.model.vo.CommentVO;
 import org.kosta.dew.model.vo.DepartVO;
 import org.kosta.dew.model.vo.ProjectListVO;
 import org.kosta.dew.model.vo.ProjectVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -47,9 +47,8 @@ public class ProjectController {
 		return new ModelAndView("projectView_projectUpdate","pvo",pvo);
 	}
 	@RequestMapping("project_update.do")
-	public ModelAndView updateProject(ProjectVO pvo, DepartVO dvo, String beforeSubject){
+	public ModelAndView updateProject(ProjectVO pvo, DepartVO dvo){
 		projectService.updateProject(pvo,dvo);
-		System.out.println(beforeSubject);
 		return new ModelAndView("redirect:project_View.do?projectNo="+pvo.getProjectNo());
 	}
 	
@@ -59,9 +58,11 @@ public class ProjectController {
 		projectService.deleteProject(projectNo);
 		return new ModelAndView("redirect:project_listView.do");
 	}
-	@RequestMapping("registerProjectComment.do")
-	public ModelAndView registerProjectComment(ProjectVO pvo){
-		return new ModelAndView("");
+	@RequestMapping("registerProjectCommentAjax.do")
+	@ResponseBody
+	public CommentVO findAndRegisterProjectComment(String projectNo,String content){
+		CommentVO cvo=projectService.findRegisterComment(new CommentVO(Integer.parseInt(projectNo),null,content));
+		return cvo;
 	}
 	@RequestMapping("updateProjectComment.do")
 	public ModelAndView updateProjectComment(ProjectVO pvo){

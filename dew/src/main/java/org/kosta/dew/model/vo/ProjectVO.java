@@ -6,7 +6,7 @@ import java.util.List;
 public class ProjectVO {
 	private int projectNo;
 	private String projectName;
-	private String writer;
+	private String id;
 	private String content;
 	private int point;
 	private int progressing;
@@ -14,17 +14,20 @@ public class ProjectVO {
 	private int hit;
 	private String project_date;
 	private List<DepartVO> departVO;
+	private List<CommentVO> commentVO;
 	private String deadline;
 	public ProjectVO() {
 		super();
 	}
-	public ProjectVO(int projectNo, String projectName, String writer, String content,
-			int point, int progressing, String achieve, int hit,
-			String project_date, List<DepartVO> departVO, String deadline) {
+	
+	public ProjectVO(int projectNo, String projectName, String id,
+			String content, int point, int progressing, String achieve,
+			int hit, String project_date, List<DepartVO> departVO,
+			List<CommentVO> commentVO, String deadline) {
 		super();
 		this.projectNo = projectNo;
 		this.projectName = projectName;
-		this.writer = writer;
+		this.id = id;
 		this.content = content;
 		this.point = point;
 		this.progressing = progressing;
@@ -32,24 +35,10 @@ public class ProjectVO {
 		this.hit = hit;
 		this.project_date = project_date;
 		this.departVO = departVO;
+		this.commentVO = commentVO;
 		this.deadline = deadline;
 	}
-	
-	public ProjectVO(int projectNo, String projectName, String writer, String content,
-			int point, int progressing, String achieve, int hit,
-			String project_date, String deadline) {
-		super();
-		this.projectNo = projectNo;
-		this.writer = writer;
-		this.projectName = projectName;
-		this.content = content;
-		this.point = point;
-		this.progressing = progressing;
-		this.achieve = achieve;
-		this.hit = hit;
-		this.project_date = project_date;
-		this.deadline = deadline;
-	}
+
 	public int getProjectNo() {
 		return projectNo;
 	}
@@ -62,11 +51,11 @@ public class ProjectVO {
 	public void setProjectName(String projectName) {
 		this.projectName = projectName;
 	}
-	public String getWriter() {
-		return writer;
+	public String getId() {
+		return id;
 	}
-	public void setWriter(String writer) {
-		this.writer = writer;
+	public void setId(String id) {
+		this.id = id;
 	}
 	public String getContent() {
 		return content;
@@ -116,14 +105,25 @@ public class ProjectVO {
 	public void setDeadline(String deadline) {
 		this.deadline = deadline;
 	}
+	
+	public List<CommentVO> getCommentVO() {
+		return commentVO;
+	}
+
+	public void setCommentVO(List<CommentVO> commentVO) {
+		this.commentVO = commentVO;
+	}
+
 	@Override
 	public String toString() {
 		return "ProjectVO [projectNo=" + projectNo + ", projectName="
-				+ projectName + ",writer=" + writer + ", content=" + content + ", point=" + point
-				+ ", progressing=" + progressing + ", achieve=" + achieve
-				+ ", hit=" + hit + ", project_date=" + project_date
-				+ ", departVO=" + departVO + ", deadline=" + deadline + "]";
+				+ projectName + ", id=" + id + ", content=" + content
+				+ ", point=" + point + ", progressing=" + progressing
+				+ ", achieve=" + achieve + ", hit=" + hit + ", project_date="
+				+ project_date + ", departVO=" + departVO + ", commentVO="
+				+ commentVO + ", deadline=" + deadline + "]";
 	}
-	
+
+
 	
 }

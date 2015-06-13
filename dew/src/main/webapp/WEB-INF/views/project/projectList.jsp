@@ -6,10 +6,11 @@
 <h3 id="projectRegisterLogo">프로젝트 참여</h3>
 <div id="listViewForm">
 <div id="listView">
-<table border="1" width="700px" align="center" class="listTable">
+<table border="1" width="800px" align="center" class="listTable">
 <thead>
 <tr>
 <th class="projectNo">NO</th>
+<th class="projectAchieve">상태</th>
 <th class="projectName">프로젝트명</th>
 <th class="writer">작성자</th>
 <th class="point">포인트</th>
@@ -21,8 +22,9 @@
 <c:forEach var="plist" items="${requestScope.plvo.list}">
 <tr>
 <td>${plist.projectNo}</td>
+<td>${plist.achieve}</td>
 <td><a href="project_View.do?projectNo=${plist.projectNo}">${plist.projectName}</a></td>
-<td>${plist.writer}</td>
+<td>${plist.id}</td>
 <td>${plist.point}<b>p</b></td>
 <td class="deadlinelist">${plist.deadline}</td>
 <td>${plist.project_date}</td>

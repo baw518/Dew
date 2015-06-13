@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.kosta.dew.model.dao.ProjectDAO;
+import org.kosta.dew.model.vo.CommentVO;
 import org.kosta.dew.model.vo.DepartVO;
 import org.kosta.dew.model.vo.PagingBean;
 import org.kosta.dew.model.vo.ProjectListVO;
@@ -56,5 +57,10 @@ public class ProjectServiceImpl implements ProjectService{
 	public void updateProject(ProjectVO pvo, DepartVO dvo) {
 		projectDAO.updateProject(pvo,dvo);
 	}
+	@Override
+	public CommentVO findRegisterComment(CommentVO cvo) {
+		return projectDAO.findRegisterComment(cvo);
+	}
+
 
 }

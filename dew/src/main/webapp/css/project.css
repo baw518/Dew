@@ -53,7 +53,7 @@ input[id="joinProBtn"] {
 
 
 #listView{
-	 width: 800px;
+	 width: 1000px;
  	margin: 0 auto;
 	padding:10px;
 	 border: 5px double #999;
@@ -61,7 +61,7 @@ input[id="joinProBtn"] {
 }
 #listViewForm{
 	color:black;
-	 font-size: 22px;
+	 font-size: 20px;
 	font-family: "HY나무B";
 }
 #listSpace{
@@ -81,6 +81,11 @@ table.listTable{
 	text-align: center;
 }
 .listTable .writer{
+	text-align: center;
+	width: 15%;
+}
+.listTable .projectAchieve{
+	text-align: center;
 	width: 15%;
 }
 .listTable .point{
@@ -112,4 +117,32 @@ table.listTable{
 #want{
 	padding: 30px; 
 	cursor: pointer;
+}
+
+
+
+#commentForm{
+	padding-top:50px;
+}
+#commentTable{
+	width: 500px;
+}
+#writer{
+	width: 16%;
+}
+#date{
+	width: 24%;
+}
+#writeCommentForm{
+	font-size : 19px;
+	padding : 20px;
+	text-align: right;
+}
+#commentTextContent{
+	width: 380px;
+	font-size: 18px;
+	font-family: "HY나무B";
+}
+#writeComment{
+	margin: 10px;
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.kosta.dew.model.vo.CommentVO;
 import org.kosta.dew.model.vo.DepartVO;
 import org.kosta.dew.model.vo.ProjectVO;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -19,7 +20,7 @@ public class ProjectDAOImpl implements ProjectDAO{
 		String[] subject=dvo.getSubject().split(",");
 		String[] mans=dvo.getMans().split(",");
 		pvo.setAchieve("모집중");
-		pvo.setWriter("관리자");
+		pvo.setId("관리자");
 		sqlSessionTemplate.insert("project.insertProject",pvo);
 		for(int i=0;i<subject.length;i++){
 			DepartVO dvoSpl=new DepartVO(subject[i], mans[i],pvo.getProjectNo());
@@ -30,7 +31,9 @@ public class ProjectDAOImpl implements ProjectDAO{
 	public ProjectVO getProjectContent(String no){
 		ProjectVO pvo=sqlSessionTemplate.selectOne("project.findProjectByNo",no);
 		List<DepartVO> dvo=sqlSessionTemplate.selectList("project.findDepartByNo",no);
+		List<CommentVO> cvo=sqlSessionTemplate.selectList("project.getProComment",no);
 		pvo.setDepartVO(dvo);
+		pvo.setCommentVO(cvo);
 		return pvo;
 	}
 	@Override
@@ -56,10 +59,15 @@ public class ProjectDAOImpl implements ProjectDAO{
 		String[] mans=dvo.getMans().split(",");
 		sqlSessionTemplate.update("project.updateProject",pvo);
 		for(int i=0;i<subject.length;i++){
-			System.out.println(pvo);System.out.println(dvo);
 			DepartVO dvoSpl=new DepartVO(subject[i], mans[i],pvo.getProjectNo());
 			sqlSessionTemplate.update("project.updateDepart",dvoSpl);
 		}
+	}
+	@Override
+	public CommentVO findRegisterComment(CommentVO cvo) {
+		sqlSessionTemplate.insert("project.registerProComment",cvo);
+		cvo=sqlSessionTemplate.selectOne("project.findProCommentByNo",cvo.getCommentNo());
+		return cvo;
 	}
 
 }
