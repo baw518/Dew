@@ -18,7 +18,7 @@ public class ErrorReportServiceImpl implements ErrorReportService {
 	public List<ErrorReportVO> getReportErrorCode() {
 		return errorReportDAO.getReportErrorCode();
 	}
-
+	
 	@Override
 	public List<ErrorReportVO> getReportExceptionMessage() {
 		return errorReportDAO.getReportExceptionMessage();

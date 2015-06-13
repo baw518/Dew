@@ -7,6 +7,15 @@ $(document).ready(function(){
 	$("#getList").click(function(){
 		location.href="report_listView.do";
 	});
+	$("#update").click(function(){
+		var type ="${requestScope.type}" ;
+		if( type =="ExceptionMessage"){
+			location.href="report_updateView.do?errorNo=${requestScope.exception.errorNo}&type="+type;
+		}else if(type == "ErrorCode"){
+			location.href="report_updateView.do?errorNo=${requestScope.errorcode.errorNo}&type="+type;
+		}
+		
+	});
 });
 </script>
 <table class="table" >
@@ -60,7 +69,7 @@ ${errorcode.content }
 </c:if>
 <tr>
 <td align="right" colspan="4">
-<input type="button" value="편집">
+<input type="button" value="편집" id="update">
 <input type="button" value="목록" id="getList">
 </td>
 </tr>

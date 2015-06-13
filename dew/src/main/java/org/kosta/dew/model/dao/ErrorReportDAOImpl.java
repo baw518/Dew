@@ -32,7 +32,7 @@ public class ErrorReportDAOImpl implements ErrorReportDAO {
 	@Override
 	public ErrorReportVO getContent(String errorNo, String type) {
 		ErrorReportVO vo = null;
-		if(type.equals("exception")){
+		if(type.equals("exception") || type.equals("ExceptionMessage")){
 			vo = sqlSessionTemplate.selectOne("errorReport.getContentException", errorNo);
 		}else{
 			vo = sqlSessionTemplate.selectOne("errorReport.getContentErrorCode", errorNo);
@@ -47,10 +47,13 @@ public class ErrorReportDAOImpl implements ErrorReportDAO {
 
 	@Override
 	public int reportWrite(ErrorReportVO vo, String type,String title) {
-		if(type.equals("exception")){
+		
+		if(type.equals("exception") || type.equals("ExceptionMessage")){
+			System.out.println("write : "  +type);
 			sqlSessionTemplate.insert("errorReport.writeReportExceptionTitle", title);
 			sqlSessionTemplate.insert("errorReport.writeReportException", vo);
 		}else{
+			System.out.println("write : "  +type);
 			sqlSessionTemplate.insert("errorReport.writeReportErrorcodeTitle", title);
 			sqlSessionTemplate.insert("errorReport.writeReportErrorcode", vo);
 		}
@@ -60,8 +63,6 @@ public class ErrorReportDAOImpl implements ErrorReportDAO {
 
 	@Override
 	public ErrorReportVO writeResult(int errorNo) {
-		System.out.println("DAO errorNO : " + errorNo);
-		System.out.println(sqlSessionTemplate.selectOne("errorReport.writeResult", errorNo));
 		return sqlSessionTemplate.selectOne("errorReport.writeResult", errorNo);
 	}
 
