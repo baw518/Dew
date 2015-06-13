@@ -25,7 +25,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		<result property="qnAGroupName" column="group_name"/>
  	</resultMap>
 
-
+	<resultMap type="cmvo" id="cMap">
+ 		<result property="commentNo" column="qna_comment_no"/>
+ 		<result property="boardNo" column="qna_no"/>
+ 		<result property="id" column="id"/>
+ 		<result property="content" column="content"/>
+ 		<result property="commentDate" column="qna_comment_date"/>
+ 		<result property="ref" column="ref"/>
+ 		<result property="reStep" column="restep"/>
+ 		<result property="relevel" column="relevel"/>
+ 	</resultMap>
+	
+	
  	 <select id="getAllCount" resultType="int">
  	 	select count(*) from qna
  	 </select>
@@ -73,6 +84,32 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
  	 <delete id="deleteContent" parameterType="qvo">
  	 	delete from qna where qna_no=#{qnaNo}
+ 	 </delete>
+ 	 
+ 	 <update id="replyRestepPlus">
+ 	 	update qna set restep = restep+1 where ref = #{ref} and restep > #{restep}
+ 	 </update>
+ 	 
+ 	 <insert id="writeReply" parameterType="qvo">
+ 	 	<selectKey keyProperty="qnaNo" resultType="int" order="BEFORE">
+			select qna_no.nextval from dual
+		</selectKey>
+			insert into qna(qna_no,id,group_no,title,content,qna_date,point,ref,restep,relevel)
+			values(qna_no.currval,#{id},#{groupNo},#{title},#{content},sysdate,#{point},#{ref},#{restep},#{relevel})
+ 	 </insert>
+ 	 
+ 	 <select id="showCommentList" parameterType="cmvo" resultMap="cMap">
+ 	 	select qna_comment_no,qna_no,id,content,to_char(qna_comment_date,'YYYY-MM-DD HH24:MI') as qna_comment_date ,ref,restep,relevel
+ 	 	from qna_comment where qna_no=#{values} order by ref asc,restep asc
+ 	 </select>
+ 	 
+ 	 <insert id="ajaxWriteComment" parameterType="cmvo">
+ 	 	insert into qna_comment(qna_comment_no,qna_no,id,content,qna_comment_date,ref,restep,relevel)
+ 	 	values(qna_comment_no.nextval,#{boardNo},#{id},#{content},sysdate,qna_comment_no.currval,'0','0')
+ 	 </insert>
+ 	 
+ 	 <delete id="ajaxDeleteComment" parameterType="cmvo">
+ 	 	delete from qna_comment where qna_comment_no=#{commentNo}
  	 </delete>
  </mapper> 		
 

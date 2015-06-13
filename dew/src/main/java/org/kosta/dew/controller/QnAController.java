@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.kosta.dew.model.service.QnAService;
+import org.kosta.dew.model.vo.CommentVO;
 import org.kosta.dew.model.vo.MemberVO;
 import org.kosta.dew.model.vo.PagingBean;
 import org.kosta.dew.model.vo.QnAGroupVO;
@@ -17,6 +18,7 @@ import org.kosta.dew.model.vo.QnAVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class QnAController {
@@ -112,8 +114,12 @@ public class QnAController {
 				}
 			}
 		}
-		
 		model.addAttribute("qvo", qvo);
+		
+		//해당글의 커맨트리스트 받아오기
+		List<CommentVO> cmvo = qnAService.showCommentList(qvo.getQnaNo());
+		model.addAttribute("cmvo", cmvo);
+		
 		return "QnA_showcontent";
 	}
 	
@@ -210,6 +216,12 @@ public class QnAController {
 		return "redirect:QnA_listView.do";
 	}
 	
+	/**
+	 * QnA게시판 답글폼 보여주기
+	 * @param qnaNo
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("QnA_replyForm.do")
 	public String replyForm(String qnaNo,Model model){
 		//분류받아와서 보내기
@@ -219,8 +231,58 @@ public class QnAController {
 		//글번호로 작성글 받아오기
 		QnAVO qvo = qnAService.showContentNoHit(qnaNo);
 		model.addAttribute("qvo", qvo);
-		
+
 		return "QnA_replyForm";
 	}
 	
+	/**
+	 * 답변글 달기
+	 * @param vo
+	 * @return
+	 */
+	@RequestMapping("QnA_WriteReply.do")
+	public String writeReply(QnAVO vo){
+		//답변글과 같은 ref들중에서, restep이 답변글보다 더 큰 글들의 restep을 1씩 증가시킨다.
+		qnAService.replyRestepPlus(vo);
+		
+		//답변글의 restep과 relevel을 증가시켜 insert한다.
+		vo.setRestep(vo.getRestep()+1);
+		vo.setRelevel(vo.getRelevel()+1);
+		qnAService.writeReply(vo);
+		
+		return "redirect:QnA_showContent.do?qnaNo="+vo.getQnaNo();
+	}
+	
+	/**
+	 * ajax 커맨트등록
+	 * @param vo
+	 * @return
+	 */
+	@RequestMapping("ajaxWriteComment.do")
+	@ResponseBody
+	public List<CommentVO> ajaxWriteComment(CommentVO vo){
+		//커맨트 쓰기
+		qnAService.ajaxWriteComment(vo);
+		
+		//해당글의 커맨트리스트 받아오기
+		List<CommentVO> cmvo = qnAService.showCommentList(vo.getBoardNo());
+		
+		return cmvo;
+	}
+	
+	/**
+	 * ajax 커맨트 삭제
+	 * @param vo
+	 * @return
+	 */
+	@RequestMapping("ajaxDeleteComment.do")
+	@ResponseBody
+	public List<CommentVO> ajaxDeleteComment(CommentVO vo){
+		//커맨트 삭제
+		qnAService.ajaxDeleteComment(vo);
+		
+		//해당글의 커맨트리스트 받아오기
+		List<CommentVO> cmvo = qnAService.showCommentList(vo.getBoardNo());
+		return cmvo;
+	}
 }

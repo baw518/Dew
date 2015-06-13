@@ -2,6 +2,7 @@ package org.kosta.dew.model.dao;
 
 import java.util.List;
 
+import org.kosta.dew.model.vo.CommentVO;
 import org.kosta.dew.model.vo.QnAGroupVO;
 import org.kosta.dew.model.vo.QnAVO;
 
@@ -24,6 +25,16 @@ public interface QnADAO {
 	public void pointMinus(QnAVO vo);
 
 	public void deleteContent(QnAVO vo);
+
+	public void replyRestepPlus(QnAVO vo);
+
+	public void writeReply(QnAVO vo);
+
+	public List<CommentVO> showCommentList(int qnaNo);
+
+	public void ajaxWriteComment(CommentVO vo);
+
+	public void ajaxDeleteComment(CommentVO vo);
 
 
 }

@@ -6,8 +6,6 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	
-	$("#content").html("${requestScope.qvo.content}");
-	
 	$("#cancel").click(function(){
 		location.href="QnA_showContent.do?qnaNo=${requestScope.qvo.qnaNo}";
 	});
@@ -32,9 +30,12 @@ $(document).ready(function(){
 });
 </script>
 
-<form action="QnA_reply.do" method="post" id="replyForm">
+<form action="QnA_WriteReply.do" method="post" id="replyForm">
 <input type="hidden" name="qnaNo" id="qnaNo" value="${requestScope.qvo.qnaNo}">
 <input type="hidden" name="groupNo" id="groupNo" value="${requestScope.qvo.groupNo}">
+<input type="hidden" name="ref" value="${requestScope.qvo.ref }">
+<input type="hidden" name="restep" value="${requestScope.qvo.restep }">
+<input type="hidden" name="relevel" value="${requestScope.qvo.relevel }">
 	<h2>질문글쓰기</h2>
 	 <table class="table" >
 		  <tbody>
@@ -50,7 +51,7 @@ $(document).ready(function(){
 				</td>
 			  	<td>제목</td>
 			  	<td colspan="3">
-			  		<input type="text" id="title" name="title" value="  RE:${requestScope.qvo.title}" >
+			  		<input type="text" id="title" name="title" value="RE:${requestScope.qvo.title}" >
 			  	</td>
 			  	<td>아이디</td>
 			  	<td><input type="text" id="id" name="id" value="${sessionScope.mvo.id}" readonly></td>

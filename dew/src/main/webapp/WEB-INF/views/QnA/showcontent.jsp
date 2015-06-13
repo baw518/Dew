@@ -5,6 +5,7 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
+	
 	$("#list").click(function(){
 		location.href="QnA_listView.do";
 	});
@@ -29,8 +30,83 @@ $(document).ready(function(){
 	$("#reply").click(function(){
 		location.href="QnA_replyForm.do?qnaNo=${requestScope.qvo.qnaNo}";
 	});
+	
+	$("#commentWriteBtn").click(function(){
+		var content = $("#content").val();
+		var id = $("#id").val();
+		var boardNo =  $("#boardNo").val();
+		if(content==""){
+			alert("댓글 내용을 입력하세요");
+			return false;
+		}
+		$.ajax({
+		      type:"post",
+		      url:"ajaxWriteComment.do",
+		      data:"content="+content+"&id="+id+"&boardNo="+boardNo,
+		      dataType:"json",
+		      success:function(result){
+		    	    $("#commentView").html("");
+		    		var c = "";
+		    		$.each(result,function(index,data){
+						 c+="<tr><td>"+data.id+"</td>";
+						 c+="<td>"+data.commentDate+"</td>";
+						 c+="<td>"+data.content+"</td>";
+						 if(id==data.id){
+							 c+="<td><input type='hidden' id='commentNo' name='commentNo' value='"+data.commentNo+"'>"
+							 +"<input type='button' id='commentUpdate' name='commentUpdate' value='수정'>"
+							 +"<input type='button' id='commentDelete' name='commentDelete' value='삭제'></td>";
+						 }
+						 c+="</tr>";
+					});
+					$("#commentView").html(c);
+					$("#content").val("");
+		      } 
+		});
+		
+	});
+	
+	$(document).on("click", "#commentDelete",function(e){
+		var commentNo = $(this).parent().children().val();
+		var id = $("#id").val();
+		var boardNo = $("#boardNo").val();
+		
+		if($(this).val()=="삭제"){
+			$.ajax({
+			      type:"post",
+			      url:"ajaxDeleteComment.do",
+			      data:"commentNo="+commentNo+"&boardNo="+boardNo,
+			      dataType:"json",
+			      success:function(result){
+			    	  $("#commentView").html("");
+			    		var c = "";
+			    		$.each(result,function(index,data){
+							 c+="<tr><td>"+data.id+"</td>";
+							 c+="<td>"+data.commentDate+"</td>";
+							 c+="<td>"+data.content+"</td>";
+							 if(id==data.id){
+								 c+="<td><input type='hidden' id='commentNo' name='commentNo' value='"+data.commentNo+"'>"
+								 +"<input type='button' id='commentUpdate' name='commentUpdate' value='수정'>"
+								 +"<input type='button' id='commentDelete' name='commentDelete' value='삭제'></td>";
+							 }
+							 c+="</tr>";
+						});
+						$("#commentView").html(c);   
+			      }
+			});
+		}
+	});
+	$(document).on("click", "#commentUpdate",function(e){
+		var commentNo = $(this).parent().children().val();
+		var commentContent =  $(this).parent().parent().children("td:eq(2)").text();
+		var id = $("#id").val();
+		var boardNo = $("#boardNo").val();
+		alert("수정준비중");
+	});
+	
 });
 </script>
+
+
 
 <table class="table" align="center" >
 	<tr>
@@ -49,6 +125,41 @@ $(document).ready(function(){
 		</td>
 	</tr>
 	<tr>
+		<td colspan="4">
+				<table class="table" align="center" id="commentView">
+					<c:forEach items="${requestScope.cmvo}" var="i" varStatus="index">
+						<tr>
+							<td>${i.id}&nbsp;&nbsp;&nbsp;</td>
+							<td>${i.commentDate}&nbsp;&nbsp;&nbsp;</td>
+							<td colspan="3">${i.content}</td>
+							<td>
+								<c:if test="${sessionScope.mvo.id == i.id}">
+									<input type="hidden" id="commentNo" name="commentNo" value="${i.commentNo}">
+									<input type="button" id="commentUpdate" name="commentUpdate" value="수정">
+									<input type="button" id="commentDelete"name="commentDelete" value="삭제">
+								</c:if>
+							</td>
+						</tr>
+					</c:forEach>
+				</table>
+			<table class="table">
+				<tr>
+					<td colspan="3"></td>
+				<tr>
+				<c:if test="${sessionScope.mvo ne null}">
+					<tr>
+						<td colspan="2"><input type="text" name="content" id="content" size="150"></td>
+						<td align="left">
+							<input type="button" name="commentWriteBtn" id="commentWriteBtn" value="댓글등록">
+							<input type="hidden" name="id" id="id" value="${sessionScope.mvo.id }">
+							<input type="hidden" name="boardNo" id="boardNo" value="${requestScope.qvo.qnaNo}">
+						</td> 
+					</tr>
+				</c:if>
+			</table>
+		</td>
+	</tr>
+	<tr>
 		<td>
 			<c:if test="${sessionScope.mvo.id == requestScope.qvo.id}">
 				<input type="button" id="reply" name="reply" value="답글달기">
@@ -57,8 +168,8 @@ $(document).ready(function(){
 		<td valign="middle" align="center" colspan="2">
 			<input type="button" id="list" name="list" value="목록" id="list">
 			<c:if test="${sessionScope.mvo.id == requestScope.qvo.id}">
-				<input type="button" value="수정" name="change" id="change">
-				<input type="button" value="삭제" name="delete" id="delete">
+				<input type="button" value="글수정" name="change" id="change">
+				<input type="button" value="글삭제" name="delete" id="delete">
 			</c:if>
 		 </td>
 		 <td></td>
