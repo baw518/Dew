@@ -20,7 +20,6 @@ $(document).ready(function(){
 					showCommentComp+="</td>";
 					showCommentComp+="<td>";					
 					showCommentComp+=data.commentDate;
-					showCommentComp+=$("#sessionId").val();
 					if($("#sessionId").val()==data.id){
 					showCommentComp+="<input type='button' name='updateBtn' value='수정'>";
 					showCommentComp+="<input type='button' name='deleteBtn' value='삭제'>";
