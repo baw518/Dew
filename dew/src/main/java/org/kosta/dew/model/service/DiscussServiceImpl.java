@@ -82,4 +82,9 @@ public class DiscussServiceImpl implements DiscussService {
 		// TODO Auto-generated method stub
 		return discussDAO.findDiscussComment(discussionNo);
 	}
+	@Override
+	public CommentVO findDiscussCommentByNo(String no) {
+		// TODO Auto-generated method stub
+		return discussDAO.findDiscussCommentByNo(no);
+	}
 }

@@ -27,4 +27,6 @@ public interface DiscussDAO {
 
 	public abstract List<CommentVO> findDiscussComment(String discussionNo);
 
+	public abstract CommentVO findDiscussCommentByNo(String no);
+
 }

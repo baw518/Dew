@@ -1,6 +1,5 @@
 package org.kosta.dew.model.vo;
 
-import java.sql.Date;
 
 public class CommentVO {
 	private int commentNo;
@@ -32,6 +31,12 @@ public class CommentVO {
 		super();
 		this.boardNo = boardNo;
 		this.id = id;
+		this.content = content;
+	}
+
+	public CommentVO(int commentNo, String content) {
+		super();
+		this.commentNo = commentNo;
 		this.content = content;
 	}
 	public int getCommentNo() {

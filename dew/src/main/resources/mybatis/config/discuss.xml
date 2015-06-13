@@ -49,35 +49,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</selectKey> 
 		insert into discussion(discussion_no,id,title,content,discussion_date,hit,discussion_subject) values(#{discussionNo},#{id},#{title},#{content},sysdate,0,#{discussionSubject})
 	</insert>
+	<select id="findDiscussCommentByNo" resultMap="discussCommentRM">
+		select discussion_comment_no,id,discussion_no,content,to_char(discussion_comment_date,'YYYY-MM-DD HH:MI') as discussion_comment_date,ref,restep,relevel from discussion_comment where discussion_comment_no=#{value}
+	</select>
+	<update id="updateDiscussComment" parameterType="cmvo">
+		update discussion_comment set content=#{content} where discussion_comment_no =#{commentNo}
+	</update>
  </mapper> 		
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

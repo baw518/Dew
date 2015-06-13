@@ -26,4 +26,6 @@ public interface DiscussService {
 
 	public abstract List<CommentVO> findDiscussComment(String discussionNo);
 
+	public abstract CommentVO findDiscussCommentByNo(String no);
+
 }
