@@ -102,7 +102,7 @@ $(document).ready(function(){
 		var commentNo = $(this).parent().children().val();
 		
 		$(this).parent().parent().children("td:eq(2)").html("<input type='hidden' id='commentNo' name='commentNo' value='"+commentNo+"'>"+
-									"<input type='text' id='content' name='content'>"+
+									"<input type='text' id='commentUpdatecontent' name='commentUpdatecontent'>"+
 									"<input type='button' name='commentUpdateBtn' id='commentUpdateBtn' value='확인'>"+
 									"<input type='button' name='commentUpdateCancel' id='commentUpdateCancel' value='취소'>");
 		
