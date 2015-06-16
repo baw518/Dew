@@ -53,8 +53,8 @@ $(document).ready(function(){
 						 c+="<td>"+data.content+"</td>";
 						 if(id==data.id){
 							 c+="<td><input type='hidden' id='commentNo' name='commentNo' value='"+data.commentNo+"'>"
-							 +"<input type='button' id='commentUpdate' name='commentUpdate' value='수정'>"
-							 +"<input type='button' id='commentDelete' name='commentDelete' value='삭제'></td>";
+							 +"<input type='button' id='commentUpdateText' name='commentUpdateText' value='수정'>"
+							 +"<input type='button' id='commentDeleteBtn' name='commentDeleteBtn' value='삭제'></td>";
 						 }
 						 c+="</tr>";
 					});
@@ -65,42 +65,108 @@ $(document).ready(function(){
 		
 	});
 	
-	$(document).on("click", "#commentDelete",function(e){
+	$(document).on("click", "#commentDeleteBtn",function(e){
 		var commentNo = $(this).parent().children().val();
 		var id = $("#id").val();
 		var boardNo = $("#boardNo").val();
 		
-		if($(this).val()=="삭제"){
-			$.ajax({
-			      type:"post",
-			      url:"ajaxDeleteComment.do",
-			      data:"commentNo="+commentNo+"&boardNo="+boardNo,
-			      dataType:"json",
-			      success:function(result){
-			    	  $("#commentView").html("");
-			    		var c = "";
-			    		$.each(result,function(index,data){
-							 c+="<tr><td>"+data.id+"</td>";
-							 c+="<td>"+data.commentDate+"</td>";
-							 c+="<td>"+data.content+"</td>";
-							 if(id==data.id){
-								 c+="<td><input type='hidden' id='commentNo' name='commentNo' value='"+data.commentNo+"'>"
-								 +"<input type='button' id='commentUpdate' name='commentUpdate' value='수정'>"
-								 +"<input type='button' id='commentDelete' name='commentDelete' value='삭제'></td>";
-							 }
-							 c+="</tr>";
-						});
-						$("#commentView").html(c);   
-			      }
-			});
+		if(!confirm("삭제하시겠습니까??")){
+			return false;
 		}
+		$.ajax({
+		      type:"post",
+		      url:"ajaxDeleteComment.do",
+		      data:"commentNo="+commentNo+"&boardNo="+boardNo,
+		      dataType:"json",
+		      success:function(result){
+		    	  $("#commentView").html("");
+		    		var c = "";
+		    		$.each(result,function(index,data){
+						 c+="<tr><td>"+data.id+"</td>";
+						 c+="<td>"+data.commentDate+"</td>";
+						 c+="<td>"+data.content+"</td>";
+						 if(id==data.id){
+							 c+="<td><input type='hidden' id='commentNo' name='commentNo' value='"+data.commentNo+"'>"
+							 +"<input type='button' id='commentUpdateText' name='commentUpdateText' value='수정'>"
+							 +"<input type='button' id='commentDeleteBtn' name='commentDeleteBtn' value='삭제'></td>";
+						 }
+						 c+="</tr>";
+					});
+					$("#commentView").html(c);   
+		      }
+		});
+		
 	});
-	$(document).on("click", "#commentUpdate",function(e){
+	
+	$(document).on("click", "#commentUpdateText",function(e){
 		var commentNo = $(this).parent().children().val();
-		var commentContent =  $(this).parent().parent().children("td:eq(2)").text();
+		
+		$(this).parent().parent().children("td:eq(2)").html("<input type='hidden' id='commentNo' name='commentNo' value='"+commentNo+"'>"+
+									"<input type='text' id='content' name='content'>"+
+									"<input type='button' name='commentUpdateBtn' id='commentUpdateBtn' value='확인'>"+
+									"<input type='button' name='commentUpdateCancel' id='commentUpdateCancel' value='취소'>");
+		
+	});
+	
+	$(document).on("click", "#commentUpdateCancel" , function(e){
+		if(!confirm("입력한 내용을 취소하시겠습니까??")){
+			return false;
+		}
+		
+		location.href="QnA_showContent.do?qnaNo=${requestScope.qvo.qnaNo }";
+		
+	});
+	
+	
+	$(document).on("click", "#commentUpdateBtn", function(e){
+		var commentNo_update = $(this).parent().parent().children().children().val();
+		var commentContent_update = $(this).prev().val();
 		var id = $("#id").val();
 		var boardNo = $("#boardNo").val();
-		alert("수정준비중");
+ 		
+		if(commentContent_update==""){
+			alert("내용을 입력하세요");
+			return false;
+		} 
+
+		$.ajax({
+		      type:"post",
+		      url:"ajaxUpdateComment.do",
+		      data:"commentNo="+commentNo_update+"&content="+commentContent_update+"&boardNo="+boardNo,
+		      dataType:"json",
+		      success:function(result){
+		    	  $("#commentView").html("");
+		    		var c = "";
+		    		$.each(result,function(index,data){
+						 c+="<tr><td>"+data.id+"</td>";
+						 c+="<td>"+data.commentDate+"</td>";
+						 c+="<td>"+data.content+"</td>";
+						 if(id==data.id){
+							 c+="<td><input type='hidden' id='commentNo' name='commentNo' value='"+data.commentNo+"'>"
+							 +"<input type='button' id='commentUpdateText' name='commentUpdateText' value='수정'>"
+							 +"<input type='button' id='commentDeleteBtn' name='commentDeleteBtn' value='삭제'></td>";
+						 }
+						 c+="</tr>";
+					});
+					$("#commentView").html(c);   
+		      }
+		});
+		
+
+	});
+	
+	$("#replyChoose").click(function(){
+		if(!confirm("답변을 채택하시겠습니까???")){
+			return false;	
+		}
+		location.href="QnA_replyChoose.do?questionNO=${requestScope.qvo.ref}&answerNO=${requestScope.qvo.qnaNo}"+
+				"&point=${requestScope.qvo.point}&id=${requestScope.qvo.id }";
+		
+	});
+	
+	$("#commentReplyWriteView").click(function(){
+		$("#commentReplyWrite").html("<tr><td colspan='3'><input type='text' name='commentReplyContent' id='commentReplyContent'></td>"+
+											"<td><input type='button' name='commentReplyWriteBtn' id='commentReplyWriteBtn' value='등록'></td></tr>"); 
 	});
 	
 });
@@ -111,7 +177,18 @@ $(document).ready(function(){
 <table class="table" align="center" >
 	<tr>
 		<td>NO : ${requestScope.qvo.qnaNo } </td>
-		<td colspan="3">${requestScope.qvo.title} </td>
+		<td colspan="2">${requestScope.qvo.title} </td>
+		<td>
+			<c:if test="${requestScope.qvo.answerStatus !=0 }">
+				답변완료된 글입니다.
+			</c:if>
+			<c:if test="${requestScope.qvo.restep !=0 && requestScope.qvo.answerStatus == 0 }">
+				<c:if test="${sessionScope.mvo.id != requestScope.qvo.id && sessionScope.mvo.id == requestScope.questionID ||  
+								sessionScope.mvo.memberLevel == 0  }">
+					<input type="button" name="replyChoose" id="replyChoose" value="답변채택">
+				</c:if>
+			</c:if>
+		</td>
 	</tr>
 	<tr>
 		<td>작성자 :  ${requestScope.qvo.id }</td>
@@ -133,10 +210,11 @@ $(document).ready(function(){
 							<td>${i.commentDate}&nbsp;&nbsp;&nbsp;</td>
 							<td colspan="3">${i.content}</td>
 							<td>
-								<c:if test="${sessionScope.mvo.id == i.id}">
+								<c:if test="${sessionScope.mvo.id == i.id || sessionScope.mvo.memberLevel == 0 }">
 									<input type="hidden" id="commentNo" name="commentNo" value="${i.commentNo}">
-									<input type="button" id="commentUpdate" name="commentUpdate" value="수정">
-									<input type="button" id="commentDelete"name="commentDelete" value="삭제">
+									<input type="button" id="commentUpdateText" name="commentUpdateText" value="수정">
+									<input type="button" id="commentDeleteBtn"name="commentDeleteBtn" value="삭제">
+									<input type="button" id="commentReplyWriteView" name="commentReplyWriteView" value="댓글달기">
 								</c:if>
 							</td>
 						</tr>
@@ -161,13 +239,13 @@ $(document).ready(function(){
 	</tr>
 	<tr>
 		<td>
-			<c:if test="${sessionScope.mvo.id == requestScope.qvo.id}">
+			<c:if test="${sessionScope.mvo ne null}">
 				<input type="button" id="reply" name="reply" value="답글달기">
 			</c:if>
 		</td>
 		<td valign="middle" align="center" colspan="2">
 			<input type="button" id="list" name="list" value="목록" id="list">
-			<c:if test="${sessionScope.mvo.id == requestScope.qvo.id}">
+			<c:if test="${sessionScope.mvo.id == requestScope.qvo.id  || sessionScope.mvo.memberLevel == 0  }">
 				<input type="button" value="글수정" name="change" id="change">
 				<input type="button" value="글삭제" name="delete" id="delete">
 			</c:if>

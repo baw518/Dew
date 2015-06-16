@@ -111,6 +111,45 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	 <delete id="ajaxDeleteComment" parameterType="cmvo">
  	 	delete from qna_comment where qna_comment_no=#{commentNo}
  	 </delete>
+ 	 
+ 	 <update id="ajaxUpdateComment" parameterType="cmvo">
+ 	 	update qna_comment set content=#{content} where qna_comment_no=#{commentNo}
+ 	 </update>
+ 	 
+ 	 <select id="getQuestionId" parameterType="int" resultType="string">
+ 	 	select id from qna where qna_no=#{value}
+ 	 </select>
+ 	 
+ 	 <update id="AllAnswerStatusThree" parameterType="string">
+ 	 	update qna set answer_status=3 where ref=#{value}
+ 	 </update>
+ 	 <update id="questionAnswerStatusOne" parameterType="string">
+ 	 	update qna set answer_status=1 where qna_no=#{value}
+ 	 </update>
+ 	 <update id="replyAnswerStatusTwo" parameterType="string">
+ 	 	update qna set answer_status=2 where qna_no=#{values}
+ 	 </update>
+ 	 
+ 	 <update id="pointPlus" parameterType="qvo">
+ 	 	update member set point=point+#{point} where id=#{id}
+ 	 </update>
+ 	 
+ 	 <select id="getSelectedList" parameterType="java.util.Map" resultMap="qMap">
+ 	 	select qna_no,id,group_no,title,content,qna_date,hit,point,answer_status,ref,restep,relevel 
+	 	from(	select qna_no,id,group_no,title,content,qna_date,hit,point,answer_status,ref,restep,relevel,ceil(rownum/5) as page 
+	 			from(select qna_no,id,group_no,title,content,to_char(qna_date,'YYYY.MM.DD') as qna_date,hit,point,answer_status,ref,restep,relevel 
+	 				   from qna
+	 				   where group_no= #{qnAGroupNo}
+	 				   order by ref desc,restep asc
+					   )
+			  )
+		where page=#{pageNo}
+ 	 </select>
+ 	 
+ 	 <select id="getSelectedCount" parameterType="string" resultType="int">
+ 	 	select count(*) from qna where group_no=#{value}
+ 	 </select>
+ 	 
  </mapper> 		
 
  

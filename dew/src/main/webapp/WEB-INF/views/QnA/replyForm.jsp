@@ -36,6 +36,7 @@ $(document).ready(function(){
 <input type="hidden" name="ref" value="${requestScope.qvo.ref }">
 <input type="hidden" name="restep" value="${requestScope.qvo.restep }">
 <input type="hidden" name="relevel" value="${requestScope.qvo.relevel }">
+<input type="hidden" name="questionID" value="${requestScope.questionID}">
 	<h2>질문글쓰기</h2>
 	 <table class="table" >
 		  <tbody>

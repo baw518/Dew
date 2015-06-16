@@ -1,6 +1,8 @@
 package org.kosta.dew.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
@@ -116,19 +118,58 @@ public class QnAController {
 		}
 		model.addAttribute("qvo", qvo);
 		
+
+		//글에대한 질문자 아이디를 받아오기
+		String questionID = qnAService.getQuestionId(qvo.getRef());
+		model.addAttribute("questionID", questionID);
+		
 		//해당글의 커맨트리스트 받아오기
 		List<CommentVO> cmvo = qnAService.showCommentList(qvo.getQnaNo());
 		model.addAttribute("cmvo", cmvo);
-		
+
 		return "QnA_showcontent";
 	}
 	
+	
+	/**
+	 * 그룹선택시 선택된 그룹들만 보여주기.
+	 * 그룹,페이징 적용 QnA 게시판 
+	 * @param qnAGroupNo
+	 * @param request
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("QnA_SelectedListView.do")
-	public String selectedListView(String group){
-		if(group.equals("all")){
-			///////
+	public String selectedListView(String qnAGroupNo,HttpServletRequest request,Model model){
+		//페이지번호
+		String pageNo = request.getParameter("pageNo");
+		//페이지가 없을경우 1페이지를 보여줌
+		if(pageNo==null){
+			pageNo="1";
 		}
-		return "QnA_SelectedListView";
+		int pageNum = Integer.parseInt(pageNo);	
+		
+		//해당 페이지번호와 그룹에 맞는 게시물들을 리스트에 저장
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("pageNo", pageNo);
+		map.put("qnAGroupNo", qnAGroupNo);
+		List<QnAVO> list =  qnAService.getSelectedList(map);
+		
+		//그룹 적용된 페이징
+		PagingBean pagingBean = new PagingBean(qnAService.getSelectedCount(qnAGroupNo),pageNum);
+		
+		//리스트와 페이징을 저장하여 보낸다
+		QnAListVO vo = new QnAListVO(list,pagingBean);
+		model.addAttribute("vo", vo);
+		
+		
+		//분류받아와서 보내기
+		List<QnAGroupVO> groupList = qnAService.getGroupList();
+		model.addAttribute("groupList", groupList);
+		//선택된 분류보내기
+		model.addAttribute("selectGroupNo", qnAGroupNo);
+		
+		return "QnA_listView";
 	}
 	
 	/**
@@ -231,6 +272,7 @@ public class QnAController {
 		//글번호로 작성글 받아오기
 		QnAVO qvo = qnAService.showContentNoHit(qnaNo);
 		model.addAttribute("qvo", qvo);
+		
 
 		return "QnA_replyForm";
 	}
@@ -284,5 +326,27 @@ public class QnAController {
 		//해당글의 커맨트리스트 받아오기
 		List<CommentVO> cmvo = qnAService.showCommentList(vo.getBoardNo());
 		return cmvo;
+	}
+	
+	/**
+	 * ajax 커맨트 수정
+	 * @param vo
+	 * @return
+	 */
+	@RequestMapping("ajaxUpdateComment.do")
+	@ResponseBody
+	public List<CommentVO> ajaxUpdateComment(CommentVO vo){
+		//커맨트 수정
+		qnAService.ajaxUpdateComment(vo);
+		
+		//해당글의 커맨트리스트 받아오기
+		List<CommentVO> cmvo = qnAService.showCommentList(vo.getBoardNo());
+		return cmvo;
+	}
+	
+	@RequestMapping("QnA_replyChoose.do")
+	public String replyChoose(String questionNO,String answerNO,QnAVO qvo){
+		qnAService.replyChoose(questionNO,answerNO,qvo);
+		return "redirect:QnA_showContent.do?qnaNo="+answerNO;
 	}
 }
