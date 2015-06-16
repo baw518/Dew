@@ -58,8 +58,40 @@ public class ProjectServiceImpl implements ProjectService{
 		projectDAO.updateProject(pvo,dvo);
 	}
 	@Override
-	public CommentVO findRegisterComment(CommentVO cvo) {
-		return projectDAO.findRegisterComment(cvo);
+	public void findRegisterComment(CommentVO cvo) {
+		projectDAO.findRegisterComment(cvo);
+	}
+	@Override
+	public void joinProject(CommentVO cvo) {
+		projectDAO.joinProject(cvo);
+	}
+	@Override
+	public void deleteProjectComment(int commentNo) {
+		projectDAO.deleteProjectComment(commentNo);
+	}
+	@Override
+	public void updateProjectComment(CommentVO cvo) {
+		projectDAO.updateProjectComment(cvo);
+	}
+	@Override
+	public List<ProjectVO> findProjectById(String id) {
+		return projectDAO.findProjectById(id);
+	}
+	@Override
+	public List<ProjectVO> findJoinProjectById(String id) {
+		return projectDAO.findJoinProjectById(id);
+	}
+	@Override
+	public List<ProjectVO> findProcessProjectById(String id) {
+		return projectDAO.findProcessProjectById(id);
+	}
+	@Override
+	public boolean joinCheck(CommentVO cvo) {
+		boolean flag=false;
+		System.out.println(projectDAO.joinCheck(cvo));
+		if(projectDAO.joinCheck(cvo)!=null)
+			flag=true;
+		return  flag;
 	}
 
 

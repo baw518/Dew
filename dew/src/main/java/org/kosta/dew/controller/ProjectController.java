@@ -1,11 +1,15 @@
 package org.kosta.dew.controller;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.kosta.dew.model.service.ProjectService;
 import org.kosta.dew.model.vo.CommentVO;
 import org.kosta.dew.model.vo.DepartVO;
+import org.kosta.dew.model.vo.MemberVO;
 import org.kosta.dew.model.vo.ProjectListVO;
+import org.kosta.dew.model.vo.ProjectManageVO;
 import org.kosta.dew.model.vo.ProjectVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,8 +29,27 @@ public class ProjectController {
 	   public String projectRegisterShow(){
 		   return "projectView_projectRegister";
 	   }
+	   @RequestMapping("project_projectRequestForm.do")
+		public ModelAndView projectRequestView(){
+			return new ModelAndView("projectView_projectRequest");
+		}
+	   @RequestMapping("project_projectManageForm.do")
+		public ModelAndView projectManageView(HttpServletRequest request){
+		   HttpSession session=request.getSession(false);
+			MemberVO mvo=(MemberVO) session.getAttribute("mvo");
+			String id=mvo.getId();
+		   ProjectManageVO pmvo=new ProjectManageVO();
+		   pmvo.setCreatingProject(projectService.findProjectById(id));
+		   pmvo.setJoinProject(projectService.findJoinProjectById(id));
+		   pmvo.setProcessingProject(projectService.findProcessProjectById(id));
+		   System.out.println(pmvo.getJoinProject());
+			return new ModelAndView("projectView_projectManage","pmvo",pmvo);
+		}
 		@RequestMapping(value="project_register.do",method=RequestMethod.POST)
-		public ModelAndView registerProject(ProjectVO pvo, DepartVO dvo){
+		public ModelAndView registerProject(ProjectVO pvo, DepartVO dvo,HttpServletRequest request){
+			HttpSession session=request.getSession(false);
+			MemberVO mvo=(MemberVO) session.getAttribute("mvo");
+			pvo.setId(mvo.getId());
 			projectService.registerProject(pvo, dvo);
 			return new ModelAndView("redirect:project_View.do?projectNo="+pvo.getProjectNo());
 	}
@@ -58,19 +81,39 @@ public class ProjectController {
 		projectService.deleteProject(projectNo);
 		return new ModelAndView("redirect:project_listView.do");
 	}
-	@RequestMapping("registerProjectCommentAjax.do")
+	@RequestMapping("registerProjectComment.do")
+	public ModelAndView findAndRegisterProjectComment(String projectNo,String content,HttpServletRequest request){
+		HttpSession session=request.getSession(false);
+		MemberVO mvo=(MemberVO) session.getAttribute("mvo");
+		projectService.findRegisterComment(new CommentVO(Integer.parseInt(projectNo),mvo.getId(),content));
+		return new ModelAndView("redirect:project_View.do?projectNo="+projectNo);
+	}
+	@RequestMapping("joinProjectAjax.do")
 	@ResponseBody
-	public CommentVO findAndRegisterProjectComment(String projectNo,String content){
-		CommentVO cvo=projectService.findRegisterComment(new CommentVO(Integer.parseInt(projectNo),null,content));
-		return cvo;
+	public boolean joinProjectAjax(String projectNo,String joinContent,HttpServletRequest request){
+		HttpSession session=request.getSession(false);
+		MemberVO mvo=(MemberVO) session.getAttribute("mvo");
+		String id=mvo.getId();
+		CommentVO cvo=new CommentVO();
+		cvo.setBoardNo(Integer.parseInt(projectNo));
+		cvo.setId(id);
+		boolean flag=projectService.joinCheck(cvo);
+		System.out.println(flag);
+		System.out.println(cvo);
+		if(flag==false)
+			projectService.joinProject(new CommentVO(Integer.parseInt(projectNo),id,joinContent));
+		return flag;
 	}
 	@RequestMapping("updateProjectComment.do")
-	public ModelAndView updateProjectComment(ProjectVO pvo){
-		return new ModelAndView("");
+	public ModelAndView updateProjectComment(CommentVO cvo){
+		projectService.updateProjectComment(cvo);
+		return new ModelAndView("redirect:project_View.do?projectNo="+cvo.getBoardNo());
 	}
 	@RequestMapping("deleteProjectComment.do")
-	public ModelAndView deleteProjectComment(ProjectVO pvo){
-		return new ModelAndView("");
+	public ModelAndView deleteProjectComment(int commentNo,String projectNo){
+		projectService.deleteProjectComment(commentNo);
+		return new ModelAndView("redirect:project_View.do?projectNo="+projectNo);
 	}
+	
 	
 }

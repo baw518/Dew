@@ -22,7 +22,21 @@ public interface ProjectDAO {
 
 	void updateProject(ProjectVO pvo, DepartVO dvo);
 
-	CommentVO findRegisterComment(CommentVO cvo);
+	void findRegisterComment(CommentVO cvo);
+
+	void joinProject(CommentVO cvo);
+
+	void deleteProjectComment(int commentNo);
+
+	void updateProjectComment(CommentVO cvo);
+
+	List<ProjectVO> findProjectById(String id);
+
+	List<ProjectVO> findJoinProjectById(String id);
+
+	List<ProjectVO> findProcessProjectById(String id);
+
+	CommentVO joinCheck(CommentVO pvo);
 
 
 }

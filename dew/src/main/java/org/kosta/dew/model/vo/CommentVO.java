@@ -1,6 +1,5 @@
 package org.kosta.dew.model.vo;
 
-import java.sql.Date;
 
 public class CommentVO {
 	private int commentNo;

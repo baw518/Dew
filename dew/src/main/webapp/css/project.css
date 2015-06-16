@@ -45,6 +45,11 @@ input[id="regProBtn"] {
 	height:200px;
 }
 input[id="joinProBtn"] {
+ margin-left : 140px;
+ border-radius: 5px;
+}
+
+input[id="joinProBtn2"] {
  margin-left : 130px;
  border-radius: 5px;
 }
@@ -103,19 +108,23 @@ table.listTable{
 
 #main_view{
 	padding: 70px; 
-	padding-left: 200px;
+	padding-left: 140px;
 	height: 500px;
 }
 #create{
-	padding: 30px; 
+	padding: 10px; 
 	cursor: pointer;
 }
 #Join{
-	padding: 30px; 
+	padding: 10px; 
 	cursor: pointer;
 }
 #want{
-	padding: 30px; 
+	padding: 10px; 
+	cursor: pointer;
+}
+#manage{
+	padding: 10px; 
 	cursor: pointer;
 }
 
@@ -145,4 +154,34 @@ table.listTable{
 }
 #writeComment{
 	margin: 10px;
+}
+#commentTextContentNoLogin{
+	width: 380px;
+	font-size: 18px;
+	font-family: "HY나무B";
+	margin-top: 20px;
+	padding-left : 10px;
+}
+#writeCommentLogin{
+	margin: 10px;
+}
+
+
+
+#manageForm{
+	color:black;
+	 font-size: 19px;
+	font-family: "HY나무B";
+	text-align: left;
+}
+#manageFormView{
+	 width: 500px;
+ 	margin: 0 auto;
+	padding:10px;
+	 border: 5px double #999;
+	 border-radius: 25px;
+	 text-align: center;
+}
+#manageSpace{
+	height: 160px;
 }

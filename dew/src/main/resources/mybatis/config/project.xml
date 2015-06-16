@@ -3,10 +3,22 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="project"> 
-<select id="findProjectByNo" resultType="pvo">
- 		select project_no as projectNo,title as projectName,id,content,point,progressing,achieve,hit,
- 		to_char(project_date,'YYYY.MM.DD HH24:MI') as project_date,progressing_end_date as deadline 
- 		from project_write where project_no=#{value}
+ 
+  <resultMap type="pvo" id="projectRM">
+		<result property="projectNo" column="project_no" />
+		<result property="projectName" column="title" />
+		<result property="deadline" column="progressing_end_date" />
+	</resultMap>
+  <sql id="findProject">
+  	select project_no,title,id,content,point,progressing,achieve,hit,
+ 		to_char(project_date,'YYYY.MM.DD HH24:MI') as project_date,progressing_end_date 
+ 		from project_write
+  </sql>
+  
+  
+<select id="findProjectByNo" resultMap="projectRM">
+ 		<include refid="findProject"/> 
+ 		where project_no=#{value}
  	</select>
  	
  	<select id="findDepartByNo" resultType="dvo">
@@ -25,8 +37,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		insert into project_depart(subject,subject_man,project_no) values(#{subject},#{mans},#{projectNo})
  	</insert>
  	
-	<select id="getProjectList" resultType="pvo">
-		select project_no as projectNo,id,title as projectName,achieve,project_date,hit,progressing_end_date as deadline,point from(select project_no,id,title,achieve,project_date,hit,progressing_end_date,ceil(rownum/10) as page,point 
+	<select id="getProjectList" resultMap="projectRM">
+		select project_no,id,title,achieve,project_date,hit,point from(select project_no,id,title,achieve,project_date,hit,progressing_end_date,ceil(rownum/10) as page,point 
 		from(select project_no,id,title,achieve,to_char(project_date,'YYYY.MM.DD') as project_date,hit,progressing_end_date,point from project_write order by project_no desc))
 		where page=#{value}
 	</select>
@@ -57,21 +69,56 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select project_comment_seq.nextval from dual
 	</selectKey>  
   	insert into project_comment(
-	  project_comment_no,project_no,id,content,project_comment_date) 
-	  values(#{commentNo},#{boardNo},'글쓴이',#{content},sysdate)
+	  project_comment_no,project_no,id,content,type,project_comment_date) 
+	  values(#{commentNo},#{boardNo},#{id},#{content},2,sysdate)
   </insert>
   <select id="getProComment" resultType="cmvo">
-  select project_comment_no as commentNo,id,content,project_comment_date as commentDate from project_comment where project_no=#{value} order by project_no desc
+  select project_comment_no as commentNo,id,content,to_char(project_comment_date,'YYYY-MM-DD HH:MI') as commentDate from project_comment where project_no=#{value} and type=2 order by project_no desc
   </select>
   <select id="findProCommentByNo" resultType="cmvo">
-  select project_comment_no as commentNo,content,project_comment_date as commentDate from project_comment where project_comment_no=#{value}
+  select project_comment_no as commentNo,id,content,to_char(project_comment_date,'YYYY-MM-DD HH:MI') as commentDate from project_comment where project_comment_no=#{value} and type=2
   </select>
+   
+    <insert id="joinProject" parameterType="cmvo">
+ <selectKey keyProperty="commentNo" resultType="int" order="BEFORE">
+		select project_comment_seq.nextval from dual
+	</selectKey>  
+  	insert into project_comment(
+	  project_comment_no,project_no,id,content,type,project_comment_date) 
+	  values(#{commentNo},#{boardNo},#{id},#{content},1,sysdate)
+  </insert>
   
- </mapper> 		
+  <delete id="deleteProjectComment" parameterType="int">
+  	  delete from project_comment where project_comment_no=#{value}
+  </delete>
+  <delete id="deleteProjectCommentByProNo" parameterType="int">
+  	  delete from project_comment where project_no=#{value}
+  </delete>
+   <update id="updateProjectComment" parameterType="cmvo">
+  	 update project_comment set content=#{content} where project_comment_no=#{commentNo} 
+  </update>
+  
+  
+ 
+ <select id="findProjectById" resultMap="projectRM">
+  	<include refid="findProject" />
+  	 where id=#{value}
+   </select>
+   
+   
+   <select id="findJoinProjectById" resultMap="projectRM">
+  	select p.title,p.progressing,p.point,p.project_no,to_char(c.project_comment_date,'YYYY-MM-DD') as deadline from project_comment c,project_write p where c.type=1 and c.id=#{value} and c.project_no=p.project_no
+  </select>
+  <select id="findProcessProjectById" resultMap="projectRM">
+  	select p.achieve,p.title,p.progressing,p.point,p.project_no,c.project_comment_date as deadline from project_comment c,project_write p where c.type!=2 and p.achieve='진행중' and c.id=#{value} and c.project_no=p.project_no
+  </select>
+		
 
+  <select id="joinCheck" resultType="cmvo">
+ 	select project_comment_no as commentNo, project_no as boardNo,id,content,project_comment_date as commentDate from project_comment where project_no=#{boardNo} and id=#{id} and type=1
+ </select>
  
- 
- 
+  </mapper> 
  
  
  

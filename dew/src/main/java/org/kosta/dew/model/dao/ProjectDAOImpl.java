@@ -20,7 +20,6 @@ public class ProjectDAOImpl implements ProjectDAO{
 		String[] subject=dvo.getSubject().split(",");
 		String[] mans=dvo.getMans().split(",");
 		pvo.setAchieve("모집중");
-		pvo.setId("관리자");
 		sqlSessionTemplate.insert("project.insertProject",pvo);
 		for(int i=0;i<subject.length;i++){
 			DepartVO dvoSpl=new DepartVO(subject[i], mans[i],pvo.getProjectNo());
@@ -47,6 +46,7 @@ public class ProjectDAOImpl implements ProjectDAO{
 	}
 	@Override
 	public void deleteProject(String projectNo) {
+		sqlSessionTemplate.delete("project.deleteProjectCommentByProNo",projectNo);
 		sqlSessionTemplate.delete("project.deleteProject",projectNo);
 	}
 	@Override
@@ -64,10 +64,37 @@ public class ProjectDAOImpl implements ProjectDAO{
 		}
 	}
 	@Override
-	public CommentVO findRegisterComment(CommentVO cvo) {
+	public void findRegisterComment(CommentVO cvo) {
 		sqlSessionTemplate.insert("project.registerProComment",cvo);
 		cvo=sqlSessionTemplate.selectOne("project.findProCommentByNo",cvo.getCommentNo());
-		return cvo;
+	}
+	@Override
+	public void joinProject(CommentVO cvo) {
+		sqlSessionTemplate.insert("project.joinProject",cvo);
+	}
+	@Override
+	public void deleteProjectComment(int commentNo) {
+		sqlSessionTemplate.delete("project.deleteProjectComment",commentNo);
+	}
+	@Override
+	public void updateProjectComment(CommentVO cvo) {
+		sqlSessionTemplate.update("project.updateProjectComment",cvo);
+	}
+	@Override
+	public List<ProjectVO> findProjectById(String id) {
+		return sqlSessionTemplate.selectList("project.findProjectById",id);
+	}
+	@Override
+	public List<ProjectVO> findJoinProjectById(String id) {
+		return sqlSessionTemplate.selectList("project.findJoinProjectById",id);
+	}
+	@Override
+	public List<ProjectVO> findProcessProjectById(String id) {
+		return sqlSessionTemplate.selectList("project.findProcessProjectById",id);
+	}
+	@Override
+	public CommentVO joinCheck(CommentVO cvo) {
+		return sqlSessionTemplate.selectOne("project.joinCheck",cvo);
 	}
 
 }
