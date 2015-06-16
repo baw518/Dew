@@ -5,7 +5,7 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-	
+
 	$("#list").click(function(){
 		location.href="QnA_listView.do";
 	});
@@ -54,7 +54,11 @@ $(document).ready(function(){
 						 if(id==data.id){
 							 c+="<td><input type='hidden' id='commentNo' name='commentNo' value='"+data.commentNo+"'>"
 							 +"<input type='button' id='commentUpdateText' name='commentUpdateText' value='수정'>"
-							 +"<input type='button' id='commentDeleteBtn' name='commentDeleteBtn' value='삭제'></td>";
+							 +"<input type='button' id='commentDeleteBtn' name='commentDeleteBtn' value='삭제'>"+
+							 "<input type='button' id='commentReplyWriteView' name='commentReplyWriteView' value='댓글달기'>"+
+							 "<input type='hidden' id='ref' name='ref' value='"+data.ref+"'>"+
+							 "<input type='hidden id='reStep' name='reStep' value='"+data.reStep+"'>"+
+							 "<input type='hidden' id='relevel' name='relevel' value='"+data.relevel+"'></td>";
 						 }
 						 c+="</tr>";
 					});
@@ -88,7 +92,11 @@ $(document).ready(function(){
 						 if(id==data.id){
 							 c+="<td><input type='hidden' id='commentNo' name='commentNo' value='"+data.commentNo+"'>"
 							 +"<input type='button' id='commentUpdateText' name='commentUpdateText' value='수정'>"
-							 +"<input type='button' id='commentDeleteBtn' name='commentDeleteBtn' value='삭제'></td>";
+							 +"<input type='button' id='commentDeleteBtn' name='commentDeleteBtn' value='삭제'>"+
+							 "<input type='button' id='commentReplyWriteView' name='commentReplyWriteView' value='댓글달기'>"+
+							 "<input type='hidden' id='ref' name='ref' value='"+data.ref+"'>"+
+							 "<input type='hidden id='reStep' name='reStep' value='"+data.reStep+"'>"+
+							 "<input type='hidden' id='relevel' name='relevel' value='"+data.relevel+"'></td>";
 						 }
 						 c+="</tr>";
 					});
@@ -144,7 +152,11 @@ $(document).ready(function(){
 						 if(id==data.id){
 							 c+="<td><input type='hidden' id='commentNo' name='commentNo' value='"+data.commentNo+"'>"
 							 +"<input type='button' id='commentUpdateText' name='commentUpdateText' value='수정'>"
-							 +"<input type='button' id='commentDeleteBtn' name='commentDeleteBtn' value='삭제'></td>";
+							 +"<input type='button' id='commentDeleteBtn' name='commentDeleteBtn' value='삭제'>"+
+							 "<input type='button' id='commentReplyWriteView' name='commentReplyWriteView' value='댓글달기'>"+
+							 "<input type='hidden' id='ref' name='ref' value='"+data.ref+"'>"+
+							 "<input type='hidden id='reStep' name='reStep' value='"+data.reStep+"'>"+
+							 "<input type='hidden' id='relevel' name='relevel' value='"+data.relevel+"'></td>";
 						 }
 						 c+="</tr>";
 					});
@@ -164,9 +176,60 @@ $(document).ready(function(){
 		
 	});
 	
-	$("#commentReplyWriteView").click(function(){
-		$("#commentReplyWrite").html("<tr><td colspan='3'><input type='text' name='commentReplyContent' id='commentReplyContent'></td>"+
-											"<td><input type='button' name='commentReplyWriteBtn' id='commentReplyWriteBtn' value='등록'></td></tr>"); 
+	$(document).on("click", "#commentReplyWriteView" , function(){
+		var p = "<td colspan='6'><input type='text' name='commentReplyText' id='commentReplyText' value='re:'>"+
+					"<input type='button' id='commentReplyWriteBtn' name='commentReplyWriteBtn' value='등록'>"+
+					"<input type='button' id='commentReplyCancel' name='commentReplyCancel' value='취소'>"+
+					"<input type='hidden' id='boardNo' name='boardNo' value='${requestScope.qvo.qnaNo}'"+
+					"</td>";
+		$(this).parent().parent().next().html(p);
+		
+	});
+	
+	$(document).on("click", "#commentReplyCancel", function(){
+		if(!confirm("입력한 내용을 취소하시겠습니까???")){
+			return false;
+		}
+		$(this).parent().parent().html("");
+	})
+	
+	$(document).on("click", "#commentReplyWriteBtn", function(){
+		var ref = $(this).parent().parent().prev().children().next().children().next().next().next().next().val();
+		var reStep = $(this).parent().parent().prev().children().next().children().next().next().next().next().next().val();
+		var relevel = $(this).parent().parent().prev().children().next().children().next().next().next().next().next().next().val();
+		var content = $(this).prev().val();
+		if(content==""){
+			alert("커맨트 답글 내용을 입력하세요");
+			return false;
+		}
+		
+		$.ajax({
+		      type:"post",
+		      url:"ajaxWriteCommentReply.do",
+		      data:"content="+content+"&id=${sessionScope.mvo.id}&boardNo=${requestScope.qvo.qnaNo}&ref="+ref+"&reStep="+reStep+"&relevel="+relevel,
+		      dataType:"json",
+		      success:function(result){
+		    	    $("#commentView").html("");
+		    		var c = "";
+		    		$.each(result,function(index,data){
+						 c+="<tr><td>"+data.id+"</td>";
+						 c+="<td>"+data.commentDate+"</td>";
+						 c+="<td>"+data.content+"</td>";
+						 if(id==data.id){
+							 c+="<td><input type='hidden' id='commentNo' name='commentNo' value='"+data.commentNo+"'>"
+							 +"<input type='button' id='commentUpdateText' name='commentUpdateText' value='수정'>"
+							 +"<input type='button' id='commentDeleteBtn' name='commentDeleteBtn' value='삭제'>"+
+							 "<input type='button' id='commentReplyWriteView' name='commentReplyWriteView' value='댓글달기'>"+
+							 "<input type='hidden' id='ref' name='ref' value='"+data.ref+"'>"+
+							 "<input type='hidden id='reStep' name='reStep' value='"+data.reStep+"'>"+
+							 "<input type='hidden' id='relevel' name='relevel' value='"+data.relevel+"'></td>";
+						 }
+						 c+="</tr>";
+					});
+					$("#commentView").html(c);
+					$("#content").val("");
+		      } 
+		});
 	});
 	
 });
@@ -215,8 +278,13 @@ $(document).ready(function(){
 									<input type="button" id="commentUpdateText" name="commentUpdateText" value="수정">
 									<input type="button" id="commentDeleteBtn"name="commentDeleteBtn" value="삭제">
 									<input type="button" id="commentReplyWriteView" name="commentReplyWriteView" value="댓글달기">
+									<input type="hidden" id="ref" name="ref" value="${i.ref}">
+									<input type="hidden" id="reStep" name="reStep" value="${i.reStep}">
+									<input type="hidden" id="relevel" name="relevel" value="${i.relevel}">
 								</c:if>
 							</td>
+						</tr>
+						<tr>
 						</tr>
 					</c:forEach>
 				</table>

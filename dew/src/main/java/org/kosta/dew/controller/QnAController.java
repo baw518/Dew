@@ -344,9 +344,31 @@ public class QnAController {
 		return cmvo;
 	}
 	
+	/**
+	 * 질문자가 답변을 채택하는곳
+	 * @param questionNO
+	 * @param answerNO
+	 * @param qvo
+	 * @return
+	 */
 	@RequestMapping("QnA_replyChoose.do")
 	public String replyChoose(String questionNO,String answerNO,QnAVO qvo){
+		//답변채택
+		
+		
 		qnAService.replyChoose(questionNO,answerNO,qvo);
 		return "redirect:QnA_showContent.do?qnaNo="+answerNO;
+	}
+	
+	/**
+	 * 커맨트에대한 답글커맨트 ajax로 다는곳.
+	 * @param vo
+	 * @return
+	 */
+	@RequestMapping("ajaxWriteCommentReply.do")
+	@ResponseBody
+	public String ajaxWriteCommentReply(CommentVO vo){
+		System.out.println(vo);
+		return "";
 	}
 }
