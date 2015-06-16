@@ -10,8 +10,16 @@ $(document).ready(function(){
 	
 	$("#group").change(function(){
 		var c = $("#group").val();
-		location.href="QnA_SelectedListView.do?group="+c+"&pageNo=1";
+		if(c=="all"){
+			location.href="QnA_listView.do";
+		}
+		else{
+			location.href="QnA_SelectedListView.do?qnAGroupNo="+c+"&pageNo=1";
+		}
+		
 	});
+	
+	$("#group").val("${requestScope.selectGroupNo}");
 });
 </script>
 </head>
@@ -22,7 +30,7 @@ $(document).ready(function(){
 <select id="group">
 	<option value="all">전체보기</option>
 	<c:forEach items="${requestScope.groupList}" var="i">
-		<option value="${i.qnAGroupName}">${i.qnAGroupName }</option>
+		<option value="${i.qnAGroupNo}">${i.qnAGroupName }</option>
 	</c:forEach>
 </select> 
 
@@ -32,6 +40,7 @@ $(document).ready(function(){
 	<thead>
 	<tr>
 		<th class="no" >NO</th>
+		<th class="choose">글상태</th>
 		<th class="title" >제목</th>
 		<th class="id">아이디</th>
 		<th class="point">걸린포인트</th>
@@ -42,9 +51,16 @@ $(document).ready(function(){
 	<tbody>			
 	<c:forEach var="list" items="${requestScope.vo.list}">				
 		<tr>
-		    <td>${list.qnaNo }</td>				
-			<td ><a href="QnA_showContent.do?qnaNo=${list.qnaNo}">
-			${list.title }</a></td>
+		    <td>${list.qnaNo }</td>
+		    <td>
+		    	<c:if test="${list.answerStatus==0}"></c:if>
+		    	<c:if test="${list.answerStatus==1}">답변완료</c:if>
+		    	<c:if test="${list.answerStatus==2}">채택된답변</c:if>
+		    	<c:if test="${list.answerStatus==3}"></c:if>
+		    </td>			
+			<td >
+				<a href="QnA_showContent.do?qnaNo=${list.qnaNo}">${list.title }</a>
+			</td>
 			<td>${list.id }</td>
 			<td>
 				<c:choose>
@@ -52,7 +68,7 @@ $(document).ready(function(){
 						${list.point }
 					</c:when>
 					<c:otherwise>
-						-
+					-
 					</c:otherwise>
 				</c:choose>
 			</td>
@@ -61,7 +77,7 @@ $(document).ready(function(){
 		</tr>	
 	</c:forEach>
 	<tr>
-		<td colspan="6" align="right">
+		<td colspan="7" align="right">
 			<c:if test="${sessionScope.mvo != null}">
 				<a href="QnA_WriteForm.do"><img  src="${initParam.root}images/qna_write.jpg" border="0"></a>
 			</c:if>
@@ -71,19 +87,51 @@ $(document).ready(function(){
 </table>
 
 <center>
-	<a href="QnA_listView.do?pageNo=${requestScope.vo.pagingBean.startPageOfPageGroup-1}">
-	<c:if test="${requestScope.vo.pagingBean.previousPageGroup== true && requestScope.vo.pagingBean.nowPageGroup!=1}">◀</c:if>
-	</a>
-	
-	<c:forEach var="i" begin="${requestScope.vo.pagingBean.startPageOfPageGroup}" end="${requestScope.vo.pagingBean.endPageOfPageGroup}" step="1">
-		<a href="QnA_listView.do?pageNo=${i}">${i}</a>
-	</c:forEach>
-	
-	<a href="QnA_listView.do?&pageNo=${requestScope.vo.pagingBean.endPageOfPageGroup+1}">
-		<c:if test="${requestScope.vo.pagingBean.nextPageGroup== true}">▶</c:if>
-	</a>
+	<c:choose>
+		<c:when test="${requestScope.selectGroupNo == all}">
+			<a href="QnA_listView.do?pageNo=${requestScope.vo.pagingBean.startPageOfPageGroup-1}">
+				<c:if test="${requestScope.vo.pagingBean.previousPageGroup== true && requestScope.vo.pagingBean.nowPageGroup!=1}">◀</c:if>
+			</a>
+			
+			<c:forEach var="i" begin="${requestScope.vo.pagingBean.startPageOfPageGroup}" end="${requestScope.vo.pagingBean.endPageOfPageGroup}" step="1">
+				<c:choose>
+					<c:when test="${requestScope.vo.pagingBean.nowPage == i}">
+						${i}
+					</c:when>
+					<c:otherwise>
+						<a href="QnA_listView.do?pageNo=${i}">${i}</a>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+			
+			<a href="QnA_listView.do?&pageNo=${requestScope.vo.pagingBean.endPageOfPageGroup+1}">
+				<c:if test="${requestScope.vo.pagingBean.nextPageGroup== true}">▶</c:if>
+			</a>
+		</c:when>
+		<c:otherwise>
+			<a href="QnA_SelectedListView.do?pageNo=${requestScope.vo.pagingBean.startPageOfPageGroup-1}&qnAGroupNo=${requestScope.selectGroupNo}">
+				<c:if test="${requestScope.vo.pagingBean.previousPageGroup== true && requestScope.vo.pagingBean.nowPageGroup!=1}">◀</c:if>
+			</a>
+			
+			<c:forEach var="i" begin="${requestScope.vo.pagingBean.startPageOfPageGroup}" end="${requestScope.vo.pagingBean.endPageOfPageGroup}" step="1">
+				<c:choose>
+					<c:when test="${requestScope.vo.pagingBean.nowPage == i}">
+						${i}
+					</c:when>
+					<c:otherwise>
+						<a href="QnA_SelectedListView.do?pageNo=${i}&qnAGroupNo=${requestScope.selectGroupNo}">${i}</a>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+			
+			<a href="QnA_SelectedListView.do?&pageNo=${requestScope.vo.pagingBean.endPageOfPageGroup+1}&qnAGroupNo=${requestScope.selectGroupNo}">
+				<c:if test="${requestScope.vo.pagingBean.nextPageGroup== true}">▶</c:if>
+			</a>
+		</c:otherwise>
+	</c:choose>
 </center>
 
 <br>
 <br>
 <br>
+

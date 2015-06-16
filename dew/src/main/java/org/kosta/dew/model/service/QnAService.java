@@ -1,7 +1,10 @@
 package org.kosta.dew.model.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.kosta.dew.model.vo.CommentVO;
 import org.kosta.dew.model.vo.QnAGroupVO;
 import org.kosta.dew.model.vo.QnAVO;
 
@@ -24,6 +27,26 @@ public interface QnAService {
 	public void pointMinus(QnAVO vo);
 
 	public void deleteContent(QnAVO vo);
+
+	public void replyRestepPlus(QnAVO vo);
+
+	public void writeReply(QnAVO vo);
+
+	public List<CommentVO> showCommentList(int qnaNo);
+
+	public void ajaxWriteComment(CommentVO vo);
+
+	public void ajaxDeleteComment(CommentVO vo);
+
+	public void ajaxUpdateComment(CommentVO vo);
+
+	public String getQuestionId(int ref);
+
+	public void replyChoose(String questionNO, String answerNO,QnAVO qvo);
+
+	public List<QnAVO> getSelectedList(Map<String, String> map);
+
+	public int getSelectedCount(String qnAGroupNo);
 
 
 

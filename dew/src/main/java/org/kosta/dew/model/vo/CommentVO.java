@@ -33,6 +33,12 @@ public class CommentVO {
 		this.id = id;
 		this.content = content;
 	}
+
+	public CommentVO(int commentNo, String content) {
+		super();
+		this.commentNo = commentNo;
+		this.content = content;
+	}
 	public int getCommentNo() {
 		return commentNo;
 	}

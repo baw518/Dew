@@ -21,6 +21,15 @@ public class ErrorReportController {
 	public String reportWriteView(){
 		return "errorReport_writeForm";
 	}
+	
+	@RequestMapping("report_updateView.do")
+	public ModelAndView reportUpdateView(String errorNo,String type){
+		ModelAndView mav = new ModelAndView("errorReport_updateForm");
+		mav.addObject("evo", errorReportService.getContent(errorNo,type));
+		mav.addObject("type",type);
+		return mav;
+	}
+	
 	@RequestMapping("report_listView.do")
 	public ModelAndView reportView(){
 		List<ErrorReportVO> list = null;
@@ -34,10 +43,13 @@ public class ErrorReportController {
 	public ModelAndView reportShowContent(String errorNo,String type){
 		ModelAndView mav = new ModelAndView("errorReport_showContent");
 		ErrorReportVO vo = errorReportService.getContent(errorNo,type);
+		vo.setErrorNo(Integer.parseInt(errorNo));
 		if(type.equals("exception")){
 			mav.addObject("exception", vo);	
+			mav.addObject("type","ExceptionMessage");
 		}else{
 			mav.addObject("errorcode",vo);
+			mav.addObject("type","ErrorCode");
 		}
 		return mav;
 	}
@@ -45,6 +57,7 @@ public class ErrorReportController {
 	@RequestMapping("report_write.do")
 	public ModelAndView reportWrite(HttpSession session,ErrorReportVO vo, String type,String title){
 		int errorNo = errorReportService.reportWrite(vo,type,title);
+		System.out.println("vo : " + vo  + " type : " + type + " title : " + title);
 		ModelAndView mav = new ModelAndView("redirect:/report_write_result.do?errorNo="+ errorNo);
 		return mav;
 	}
@@ -54,5 +67,11 @@ public class ErrorReportController {
 		ModelAndView mav = new ModelAndView("errorReport_writeResult");
 		mav.addObject("result",errorReportService.writeResult(errorNo));
 		return mav;
+	}
+	
+	@RequestMapping("report_update.do")
+	public String reportUpdate(ErrorReportVO vo, String type,String title){
+		int errorNo = errorReportService.reportWrite(vo,type,title);
+		return "redirect:/report_write_result.do?errorNo="+errorNo;
 	}
 }

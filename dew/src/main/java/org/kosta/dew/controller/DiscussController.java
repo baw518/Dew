@@ -46,7 +46,6 @@ public class DiscussController {
 	public ModelAndView deleteDiscussComment(HttpServletRequest request){
 		String no = request.getParameter("no");
 		String index = request.getParameter("index");
-		System.out.println("delete "+no+" "+index);
 		discussService.deleteDiscussComment(no);	
 		return new ModelAndView("redirect:findDiscussContent.do?no="+index);
 	}
@@ -70,5 +69,21 @@ public class DiscussController {
 		String content = request.getParameter("content");
 		discussService.registerDiscussion(new DiscussVO(id, title, content, subject));
 		return "redirect:discussion_listView.do";
+	}
+	@RequestMapping("updateDiscussCommentForm.do")
+	@ResponseBody
+	public CommentVO updateDiscussCommentForm(HttpServletRequest request){
+		String no = request.getParameter("no");
+		CommentVO cmvo = discussService.findDiscussCommentByNo(no);
+		return cmvo;
+	}
+	@RequestMapping("updateDiscussComment.do")
+	public String updateDiscussComment(HttpServletRequest request){
+		int no = Integer.parseInt(request.getParameter("no"));
+		String index = request.getParameter("index");
+		String content=request.getParameter("content");
+		CommentVO cmvo = new CommentVO(no, content);
+		discussService.updateDiscussComment(cmvo);
+		return "redirect:findDiscussContent.do?no="+index;
 	}
 }

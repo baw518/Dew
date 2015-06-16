@@ -20,11 +20,10 @@ $(document).ready(function(){
 					showCommentComp+="</td>";
 					showCommentComp+="<td>";					
 					showCommentComp+=data.commentDate;
-				/* 	showCommentComp+="<input type='button' id='updateBtn' value='수정'><input type='button' id='deleteBtn' value='삭제'>"; */
-		/* 			showCommentComp+="<a href='updateDiscussComment.do'>수정</a>"; */
+					if($("#sessionId").val()==data.id){
 					showCommentComp+="<input type='button' name='updateBtn' value='수정'>";
-					/* showCommentComp+="<a href='deleteDiscussComment.do?no="+data.commentNo+"&index="+data.boardNo+"'>삭제</a>"; */
 					showCommentComp+="<input type='button' name='deleteBtn' value='삭제'>";
+					}
 					showCommentComp+="</td></tr>";
 					showCommentComp+="<tr><td colspan='2'><pre>";					
 					showCommentComp+=data.content;
@@ -32,44 +31,68 @@ $(document).ready(function(){
 					showCommentComp+="</tr>";
 					showCommentComp+= "<input type='hidden' id='no' name='no' value='"+data.commentNo+"'>";
 					showCommentComp+= "<input type='hidden' id='index' name='index' value='"+data.boardNo+"'>";
-					showCommentComp+="</tr>";
-				});
+				});//each
 				$("#showComment").html(showCommentComp);
 				// 삭제버튼클릭시
 				$("input[name=deleteBtn]").click(function(){
+					var q = confirm("삭제하시겠습니까?");
+					if(q){	
 					location.href="deleteDiscussComment.do?no="+$("#no").val()+"&index="+$("#index").val();
-					
-				});
+					}else{
+						return false;
+					}					
+				});//function
 				// 수정버튼클릭시
 				$("input[name=updateBtn]").click(function(){
+					var q = confirm("수정하시겠습니까?");
+					if(q){	
 					$.ajax({
 						type:'post',
 				        url:'updateDiscussCommentForm.do?no='+$("#no").val(),
 				        dataType:'json',
 				        success:function(data){
-					
-				        }
-				     });
-					
-				});
+							var showCommentComp = ""; 
+								showCommentComp+="<tr>";
+								showCommentComp+="<td>";					
+								showCommentComp+=data.id;
+								showCommentComp+="</td>";
+								showCommentComp+="<td>";					
+								showCommentComp+=data.commentDate;
+								showCommentComp+="</td></tr>";
+								showCommentComp+="<tr><td colspan='2'>";		
+								showCommentComp+="<textarea id='auto_textarea' cols='50' rows='2' maxlength='1000'>"+data.content+"</textarea>";
+								showCommentComp+="<input type='image' src='http://cafeimgs.naver.net/cafe4/btn_cmt_cfm_v1.gif' alt='확인' id='updateSubmit'>";
+								showCommentComp+="</td>";
+								showCommentComp+="</tr>";
+								showCommentComp+= "<input type='hidden' id='updateNo' name='no' value='"+data.commentNo+"'>";
+								showCommentComp+= "<input type='hidden' id='updateIndex' name='index' value='"+data.boardNo+"'>";
+							$("#showComment").html(showCommentComp);
+							$("#updateSubmit").click(function(){
+								location.href="updateDiscussComment.do?no="+$("#updateNo").val()+"&index="+$("#updateIndex").val()+"&content="+$("#auto_textarea").val();
+							});
+				        }//success
+				     });//ajax
+					}else{
+						return false;
+					}			
+				});//function
         }
         
-     });
+     });//ajax
 	// textarea 자동 크기 조절
 	$("#auto_textarea").on("keydown",function(){
 		$(this).height(1);
 		 $(this).height(20 + $(this).prop("scrollHeight"));
-		});
+		});//function
 	// 댓글 확인 버튼 누를 시
 	$("#submit").click(function(){
 		/* alert($("#auto_textarea").val()); */
 		if($("#sessionId").val()==""){
-			alert("로그인이나하시져");
 			return false;
-		}
+		}//if
 		location.href="registerDiscussComment.do?no="+$("#discussionNo").val()+"&content="+$("#auto_textarea").val()+"&id="+$("#sessionId").val();
-	});
-});
+	});//댓글확인버튼
+});//ready
 </script>
  <input type="hidden" id="discussionNo" name="discussionNo" value="${requestScope.dsvo.discussionNo}">
  <input type="hidden" id="sessionId" name="sessionId" value="${sessionScope.mvo.id}">
@@ -89,15 +112,16 @@ $(document).ready(function(){
  	</tr>
  	</table>
  	<table id="discussCommentView" class="table" align="center">
- 	<div id="showComment" align="center"></div>
+  	<div id="showComment" align="center"></div>
+	<c:if test="${sessionScope.mvo.id != null}">
  	<tr>
 	<td colspan="5" align="center">
 	<!-- 크기가 크롬에선 자동으로 바뀌게할 수 있으니 css에서 resize:none; 해주기 -->
 	<textarea id="auto_textarea" cols="50" rows="2" class="textarea m-tcol-c" maxlength="1000" style="overflow:hidden"></textarea>
- 	<input type="image" name="" src="http://cafeimgs.naver.net/cafe4/btn_cmt_cfm_v1.gif" alt="확인" id="submit">
+ 	<input type="image" src="http://cafeimgs.naver.net/cafe4/btn_cmt_cfm_v1.gif" alt="확인" id="submit">
 	</td> 
  	</tr> 
+	</c:if>
+
  	</table>
-<form>
-	
-</form>
+

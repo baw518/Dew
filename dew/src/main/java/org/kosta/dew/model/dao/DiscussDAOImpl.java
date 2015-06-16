@@ -77,4 +77,9 @@ public class DiscussDAOImpl implements DiscussDAO {
 		// TODO Auto-generated method stub
 		return sqlSessionTemplate.selectList("discuss.findDiscussComment",discussionNo);
 	}
+	@Override
+	public CommentVO findDiscussCommentByNo(String no) {
+		// TODO Auto-generated method stub
+		return sqlSessionTemplate.selectOne("discuss.findDiscussCommentByNo",no);
+	}
 }

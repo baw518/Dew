@@ -52,7 +52,7 @@ $(document).ready(function(){
 			  		<input type="text" id="title" name="title" value="${requestScope.qvo.title}" >
 			  	</td>
 			  	<td>아이디</td>
-			  	<td><input type="text" id="id" name="id" value="${sessionScope.mvo.id}" readonly></td>
+			  	<td><input type="text" id="id" name="id" value="${requestScope.qvo.id}" readonly></td>
 			  	<td>포인트</td>
 			  	<td ><input type="text" id="point" name="point" value="${requestScope.qvo.point }" readonly></td>
 			  </tr>
