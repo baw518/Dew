@@ -112,5 +112,13 @@ public class ProjectDAOImpl implements ProjectDAO{
 	public void updateHit(String no) {
 		sqlSessionTemplate.update("project.updateHit",no);
 	}
+	@Override
+	public List<CommentVO> countComment(int projectNo) {
+		return sqlSessionTemplate.selectList("project.getProComment",projectNo);
+	}
+	@Override
+	public void deleteJoinerById(String commentId) {
+		sqlSessionTemplate.delete("project.deleteJoinerById",commentId);
+	}
 
 }

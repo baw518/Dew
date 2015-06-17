@@ -70,22 +70,15 @@ public class ProjectController {
 					break;
 				}
 			}
-			// 쿠키는 있지만 hitcookie가 없어서 hitcookie를 만듬
 						if(cookie==null){
 							response.addCookie(new Cookie("hitcookie","|"+projectNo+"|"));
 							pvo = projectService.getProjectContent(projectNo);
 						}
-						
-						// hitcookie가 있는경우
 						else{
 							String value=cookie.getValue();
-							
-							//해당 글번호에대한 쿠키가 있으므로 조회수 증가시키지 않는다.
 							if(value.indexOf("|"+projectNo+"|")!=-1){
 								pvo = projectService.getProjectContentNohit(projectNo);
 							}
-							
-							//해당글번호의 쿠키가 없으므로 조회수를 증가시키고 쿠키를 만듬.
 							else{
 								pvo = projectService.getProjectContent(projectNo);
 								value+="|"+projectNo+"|";
@@ -98,6 +91,8 @@ public class ProjectController {
 	@RequestMapping("project_listView.do")
 	public ModelAndView ProjectList(String pageNo){
 		ProjectListVO plvo=projectService.makeProjectListVO(pageNo);
+		for(int i=0;i<plvo.getList().size();i++)
+			plvo.getList().get(i).setCommentVO(projectService.countComment(plvo.getList().get(i).getProjectNo()));
 		return new ModelAndView("projectView_projectList","plvo",plvo);
 	}
 	
@@ -162,5 +157,10 @@ public class ProjectController {
 		projectService.startProject(projectNo);
 		return new ModelAndView("redirect:project_projectManageForm.do");
 	}
-	
+	@RequestMapping("project_deleteJoiner.do")
+	public ModelAndView deleteJoinerById(String commentId){
+		System.out.println(commentId);
+		projectService.deleteJoinerById(commentId);
+		return new ModelAndView("redirect:project_projectManageForm.do");
+	}
 }

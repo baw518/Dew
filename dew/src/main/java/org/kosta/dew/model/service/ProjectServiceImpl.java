@@ -112,5 +112,13 @@ public class ProjectServiceImpl implements ProjectService{
 	public ProjectVO getProjectContentNohit(String projectNo) {
 		return projectDAO.getProjectContent(projectNo);
 	}
+	@Override
+	public List<CommentVO> countComment(int projectNo) {
+		return projectDAO.countComment(projectNo);
+	}
+	@Override
+	public void deleteJoinerById(String commentId) {
+		projectDAO.deleteJoinerById(commentId);
+	}
 
 }

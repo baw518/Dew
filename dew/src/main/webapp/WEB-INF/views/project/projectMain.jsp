@@ -53,12 +53,9 @@
   </script>
 <body>
 <div id="main_viewForm">
-<div id="main_view1">
 	<img src="${initParam.root}images/Create.jpg"  id="create">
-	<img src="${initParam.root}images/Join.jpg"  id="Join">
-</div><div id="main_view2">
+	<img src="${initParam.root}images/Join.jpg"  id="Join"><br>
 	<img src="${initParam.root}images/want.jpg"  id="want">
 	<img src="${initParam.root}images/manage.jpg"  id="manage">
-</div>
 </div>
 </body>
