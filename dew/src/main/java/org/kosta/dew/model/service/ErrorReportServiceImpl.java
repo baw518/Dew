@@ -30,8 +30,8 @@ public class ErrorReportServiceImpl implements ErrorReportService {
 	}
 
 	@Override
-	public ErrorReportVO getContent(String errorNo, String type) {
-		return errorReportDAO.getContent(errorNo,type);
+	public ErrorReportVO getContent(String error, String type) {
+		return errorReportDAO.getContent(error,type);
 	}
 
 	@Override
@@ -44,9 +44,5 @@ public class ErrorReportServiceImpl implements ErrorReportService {
 		return errorReportDAO.reportWrite(vo,type,title);
 	}
 
-	@Override
-	public ErrorReportVO writeResult(int errorNo) {
-		return errorReportDAO.writeResult(errorNo);
-	}
 
 }

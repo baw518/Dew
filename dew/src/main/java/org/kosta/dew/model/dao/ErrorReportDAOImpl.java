@@ -42,7 +42,7 @@ public class ErrorReportDAOImpl implements ErrorReportDAO {
 
 	@Override
 	public ErrorReportVO getContent(int errorNo) {
-		return sqlSessionTemplate.selectOne("errorReport.getContentRegisterResult", errorNo);
+		return sqlSessionTemplate.selectOne("errorReport.showErrorReportVO", errorNo);
 	}
 
 	@Override
@@ -61,10 +61,9 @@ public class ErrorReportDAOImpl implements ErrorReportDAO {
 		return sqlSessionTemplate.selectOne("errorReport.currentValue");
 	}
 
-	@Override
-	public ErrorReportVO writeResult(int errorNo) {
-		return sqlSessionTemplate.selectOne("errorReport.writeResult", errorNo);
-	}
+
+
+
 
 
 	

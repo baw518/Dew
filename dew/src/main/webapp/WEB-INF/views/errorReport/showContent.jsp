@@ -69,7 +69,9 @@ ${errorcode.content }
 </c:if>
 <tr>
 <td align="right" colspan="4">
+<c:if test="${sessionScope.mvo !=null }">
 <input type="button" value="편집" id="update">
+</c:if>
 <input type="button" value="목록" id="getList">
 </td>
 </tr>

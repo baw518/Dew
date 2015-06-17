@@ -1,5 +1,6 @@
 package org.kosta.dew.model.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -18,8 +19,8 @@ public class VideoServiceImpl implements VideoService {
 	 * @see org.kosta.dew.model.service.VideoService#write(org.kosta.dew.model.vo.VideoVO)
 	 */
 	@Override
-	public void write(VideoVO vvo){
-		videoDAO.write(vvo);
+	public int write(VideoVO vvo){
+		return videoDAO.write(vvo);
 	}
 	/* (non-Javadoc)
 	 * @see org.kosta.dew.model.service.VideoService#getBoardList(java.lang.String)
@@ -74,6 +75,24 @@ public class VideoServiceImpl implements VideoService {
 	@Override
 	public void updateVideo(VideoVO vvo){
 		videoDAO.updateVideo(vvo);
+	}
+	@Override
+	public int file(VideoVO vo, String file) {
+		return videoDAO.file(vo,file);
+	}
+	@Override
+	public List<HashMap<String, String>> getVideoName(String no) {
+		// TODO Auto-generated method stub
+		return videoDAO.getVideoName(no);
+	}
+	@Override
+	public void deleteVideoFile(String no) {
+		// TODO Auto-generated method stub
+		 videoDAO.deleteVideoFile(no);
+	}
+	@Override
+	public void deleteVideoFileName(String no, String dbFileName) {
+		videoDAO.deleteVideoFileName(no,dbFileName);
 	}
 	
 }

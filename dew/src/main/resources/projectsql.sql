@@ -11,7 +11,7 @@ create table project_write(
 	project_date date not null,
 	progressing_end_date varchar2(50) not null
 )
-
+select * from qna_comment
  drop sequence project_seq;
  create sequence project_seq; 
  

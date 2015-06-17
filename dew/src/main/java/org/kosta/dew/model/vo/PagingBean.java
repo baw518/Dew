@@ -21,7 +21,7 @@ public class PagingBean {
 	   /**
 	    * 페이지 그룹 당 페이지 수
 	    */
-	   int PAGE_NUMBER_PER_PAGEGROUP=4;
+	   int PAGE_NUMBER_PER_PAGEGROUP=10;
 	/**
 	 * 현재 페이지
 	 */

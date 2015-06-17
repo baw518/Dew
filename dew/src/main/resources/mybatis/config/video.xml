@@ -3,12 +3,16 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="video">
+	<insert id = "file" parameterType="HashMap">
+	insert into video_file(video_file_no,video_no,video_file_name)
+	values(video_file_no.nextval,#{no},#{file})
+	</insert>
 	<insert id="write" parameterType="vvo">
-		<!-- <selectKey keyProperty='video_no' resultType="int" order="BEFORE">
+		<selectKey keyProperty='videoNo' resultType="int" order="BEFORE">
 			select video_no.nextval from dual
-		</selectKey> -->
-		insert into video_tutorial(video_no,id,title,content,video_date,video_path) 
-		values(video_no.nextval,#{id},#{title},#{content},sysdate,#{videoPath})
+		</selectKey>
+		insert into video_tutorial(video_no,id,title,content,video_date) 
+		values(video_no.currval,#{id},#{title},#{content},sysdate)
 	</insert>
 	<resultMap type="vvo" id="videoListRM">
 		  <result property="videoNo" column="video_no" />
@@ -17,7 +21,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	<select id="getVideoList" resultMap="videoListRM">
 		SELECT video_no,title,hit,id,video_date FROM(
-			SELECT video_no,title,hit,id,video_date,CEIL(rownum/5) AS page FROM (
+			SELECT video_no,title,hit,id,video_date,CEIL(rownum/10) AS page FROM (
 				SELECT video_no,title,hit,id,to_char(video_date,'YYYY-MM-DD') 
 			as video_date FROM video_tutorial order by video_no desc
 			)
@@ -50,6 +54,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(*) from
 		video_tutorial
 	</select>
+	<select id = "videoname" resultType="map" parameterType="int">
+		select video_file_name from video_file where video_no =#{value}
+	</select>
+	<delete id="deleteVideofile">
+		delete from video_file where video_no=#{value}
+	</delete>
+	<delete id = "deleteVideofileName" parameterType="Hashmap">
+		delete from video_file where video_no=#{no} and video_file_name=#{dbFileName}
+	</delete>
 </mapper> 		
  
  
