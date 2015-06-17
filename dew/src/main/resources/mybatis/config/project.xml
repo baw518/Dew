@@ -11,7 +11,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
   <sql id="findProject">
   	select project_no,title,id,content,point,progressing,achieve,hit,
- 		to_char(project_date,'YYYY.MM.DD HH24:MI') as project_date,progressing_end_date 
+ 		to_char(project_date,'YY.MM.DD HH24:MI') as project_date,progressing_end_date 
  		from project_write
   </sql>
   
@@ -38,7 +38,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	</insert>
  	
 	<select id="getProjectList" resultMap="projectRM">
-		select project_no,id,title,achieve,project_date,hit,point from(select project_no,id,title,achieve,project_date,hit,progressing_end_date,ceil(rownum/10) as page,point 
+		select project_no,id,title,achieve,project_date,hit,point,progressing_end_date from(select project_no,id,title,achieve,project_date,hit,progressing_end_date,ceil(rownum/10) as page,point 
 		from(select project_no,id,title,achieve,to_char(project_date,'YYYY.MM.DD') as project_date,hit,progressing_end_date,point from project_write order by project_no desc))
 		where page=#{value}
 	</select>
@@ -60,7 +60,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="updateDepart" parameterType="dvo">
 		update project_depart set subject=#{subject},subject_man=#{mans} where project_no=#{projectNo} and subject=#{subject}
 	</update>
-
+	<update id="updateHit">
+		update Project_write set hit=hit+1 where project_no=#{value}
+	</update>
 
 
 
@@ -102,15 +104,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  
  <select id="findProjectById" resultMap="projectRM">
   	<include refid="findProject" />
-  	 where id=#{value}
+  	 where id=#{value} and achieve='모집중'
    </select>
    
    
    <select id="findJoinProjectById" resultMap="projectRM">
-  	select p.title,p.progressing,p.point,p.project_no,to_char(c.project_comment_date,'YYYY-MM-DD') as deadline from project_comment c,project_write p where c.type=1 and c.id=#{value} and c.project_no=p.project_no
+  	select p.title,p.progressing,p.point,p.project_no,to_char(c.project_comment_date,'YY-MM-DD') as deadline,c.project_comment_no as hit from project_comment c,project_write p where c.type=1 and c.id=#{value} and c.project_no=p.project_no
   </select>
   <select id="findProcessProjectById" resultMap="projectRM">
-  	select p.achieve,p.title,p.progressing,p.point,p.project_no,c.project_comment_date as deadline from project_comment c,project_write p where c.type!=2 and p.achieve='진행중' and c.id=#{value} and c.project_no=p.project_no
+ 	  	 select distinct p.title,p.achieve,p.progressing,p.point,p.project_no,to_char(p.project_date,'YY.MM.DD') as project_date from project_comment c,project_write p where c.type!=2 and p.achieve='진행중' and (p.id=#{value} or c.id=#{value})
   </select>
 		
 
@@ -118,6 +120,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	select project_comment_no as commentNo, project_no as boardNo,id,content,project_comment_date as commentDate from project_comment where project_no=#{boardNo} and id=#{id} and type=1
  </select>
  
+ 
+ <delete id="deleteJoinComment" parameterType="int">
+ 	delete from project_comment where project_comment_no=#{value}
+ </delete>
+ <update id="startProject">
+ 	update project_write set achieve='진행중' where project_no=#{value}
+ </update>
+ <select id="findJoinList" resultType="cmvo">
+ 	select c.id,c.content,to_char(p.project_date,'YY.MM.DD HH24:MI') as commentDate from project_write p,project_comment c where p.project_no=c.project_no and p.achieve='모집중' and c.type=1 and p.project_no=#{value}
+  </select>
   </mapper> 
  
  

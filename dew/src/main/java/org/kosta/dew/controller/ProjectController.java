@@ -1,7 +1,9 @@
 package org.kosta.dew.controller;
 
 import javax.annotation.Resource;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.kosta.dew.model.service.ProjectService;
@@ -42,7 +44,6 @@ public class ProjectController {
 		   pmvo.setCreatingProject(projectService.findProjectById(id));
 		   pmvo.setJoinProject(projectService.findJoinProjectById(id));
 		   pmvo.setProcessingProject(projectService.findProcessProjectById(id));
-		   System.out.println(pmvo.getJoinProject());
 			return new ModelAndView("projectView_projectManage","pmvo",pmvo);
 		}
 		@RequestMapping(value="project_register.do",method=RequestMethod.POST)
@@ -54,8 +55,44 @@ public class ProjectController {
 			return new ModelAndView("redirect:project_View.do?projectNo="+pvo.getProjectNo());
 	}
 	@RequestMapping("project_View.do")
-	public ModelAndView projectView(String projectNo){
-		ProjectVO pvo=projectService.getProjectContent(projectNo);
+	public ModelAndView projectView(String projectNo,HttpServletRequest request,HttpServletResponse response){
+		ProjectVO pvo=null;
+		Cookie [] cookies=request.getCookies();
+		if(cookies==null||cookies.length==0){
+			response.addCookie(new Cookie("hitcookie","|"+projectNo+"|"));
+			pvo = projectService.getProjectContent(projectNo);
+		}
+		else{
+			Cookie cookie=null;
+			for(int i=0;i<cookies.length;i++){
+				if(cookies[i].getName().equals("hitcookie")){
+					cookie=cookies[i];
+					break;
+				}
+			}
+			// 쿠키는 있지만 hitcookie가 없어서 hitcookie를 만듬
+						if(cookie==null){
+							response.addCookie(new Cookie("hitcookie","|"+projectNo+"|"));
+							pvo = projectService.getProjectContent(projectNo);
+						}
+						
+						// hitcookie가 있는경우
+						else{
+							String value=cookie.getValue();
+							
+							//해당 글번호에대한 쿠키가 있으므로 조회수 증가시키지 않는다.
+							if(value.indexOf("|"+projectNo+"|")!=-1){
+								pvo = projectService.getProjectContentNohit(projectNo);
+							}
+							
+							//해당글번호의 쿠키가 없으므로 조회수를 증가시키고 쿠키를 만듬.
+							else{
+								pvo = projectService.getProjectContent(projectNo);
+								value+="|"+projectNo+"|";
+								response.addCookie(new Cookie("hitcookie",value));
+							}
+						}
+		}
 		return new ModelAndView("projectView_projectView","pvo",pvo);
 	}
 	@RequestMapping("project_listView.do")
@@ -76,10 +113,13 @@ public class ProjectController {
 	}
 	
 	@RequestMapping("project_delete.do")
-	public ModelAndView deleteProject(String projectNo){
+	public ModelAndView deleteProject(String projectNo,boolean manage){
+		String path="redirect:project_listView.do";
+		if(manage==true)
+			path="redirect:project_projectManageForm.do";
 		projectService.deleteDepart(projectNo);
 		projectService.deleteProject(projectNo);
-		return new ModelAndView("redirect:project_listView.do");
+		return new ModelAndView(path);
 	}
 	@RequestMapping("registerProjectComment.do")
 	public ModelAndView findAndRegisterProjectComment(String projectNo,String content,HttpServletRequest request){
@@ -98,8 +138,6 @@ public class ProjectController {
 		cvo.setBoardNo(Integer.parseInt(projectNo));
 		cvo.setId(id);
 		boolean flag=projectService.joinCheck(cvo);
-		System.out.println(flag);
-		System.out.println(cvo);
 		if(flag==false)
 			projectService.joinProject(new CommentVO(Integer.parseInt(projectNo),id,joinContent));
 		return flag;
@@ -114,6 +152,15 @@ public class ProjectController {
 		projectService.deleteProjectComment(commentNo);
 		return new ModelAndView("redirect:project_View.do?projectNo="+projectNo);
 	}
-	
+	@RequestMapping("deleteJoinComment.do")
+	public ModelAndView deleteJoinComment(String commentNo){
+		projectService.deleteJoinComment(commentNo);
+		return new ModelAndView("redirect:project_projectManageForm.do");
+	}
+	@RequestMapping("startProject.do")
+	public ModelAndView startProject(String projectNo){
+		projectService.startProject(projectNo);
+		return new ModelAndView("redirect:project_projectManageForm.do");
+	}
 	
 }

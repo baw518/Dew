@@ -22,6 +22,7 @@ public class ProjectServiceImpl implements ProjectService{
 	}
 	@Override
 	public ProjectVO getProjectContent(String no){
+		projectDAO.updateHit(no);
 		return projectDAO.getProjectContent(no);
 	}
 	@Override
@@ -75,7 +76,13 @@ public class ProjectServiceImpl implements ProjectService{
 	}
 	@Override
 	public List<ProjectVO> findProjectById(String id) {
-		return projectDAO.findProjectById(id);
+		List<ProjectVO> pvo=projectDAO.findProjectById(id);
+		if(pvo.size()!=0){
+		for(int i=0;i<pvo.size();i++){
+			pvo.get(i).setCommentVO(projectDAO.findJoinList(pvo.get(i).getProjectNo()));
+			}
+		}
+		return pvo;
 	}
 	@Override
 	public List<ProjectVO> findJoinProjectById(String id) {
@@ -93,6 +100,17 @@ public class ProjectServiceImpl implements ProjectService{
 			flag=true;
 		return  flag;
 	}
-
+	@Override
+	public void deleteJoinComment(String commentNo) {
+		projectDAO.deleteJoinComment(commentNo);
+	}
+	@Override
+	public void startProject(String projectNo) {
+		projectDAO.startProject(projectNo);
+	}
+	@Override
+	public ProjectVO getProjectContentNohit(String projectNo) {
+		return projectDAO.getProjectContent(projectNo);
+	}
 
 }

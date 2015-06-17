@@ -38,5 +38,13 @@ public interface ProjectDAO {
 
 	CommentVO joinCheck(CommentVO pvo);
 
+	void deleteJoinComment(String commentNo);
+
+	void startProject(String projectNo);
+
+	List<CommentVO> findJoinList(int projectNo);
+
+	void updateHit(String no);
+
 
 }

@@ -16,6 +16,7 @@
 <th class="point">포인트</th>
 <th class="deadline">모집기간</th>
 <th class="project_date">작성일</th>
+<th>hit</th>
 </tr>
 </thead>
 <tbody>
@@ -28,6 +29,7 @@
 <td>${plist.point}<b>p</b></td>
 <td class="deadlinelist">${plist.deadline}</td>
 <td>${plist.project_date}</td>
+<td>${plist.hit}</td>
 </tr>
 </c:forEach>
 </tbody>
