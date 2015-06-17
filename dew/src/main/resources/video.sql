@@ -4,7 +4,15 @@ SELECT video_no,title,hit,id,video_date FROM(
 		as video_date FROM video_tutorial order by video_no desc
 	)
 ) WHERE PAGE=1
+insert into video_path(video_no,video_path)
+	values(2,'123123')
 
+	
+insert into video_path(video_path_no,video_no,video_path)
+	values(video_path_no.nextval,2,'123123')
+	
+	
+	select * from video_file
 select * from member
 select video_no,title,hit,id,video_date,content
 		from video_tutorial

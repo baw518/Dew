@@ -1,11 +1,17 @@
 package org.kosta.dew.controller;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.kosta.dew.model.service.VideoService;
+import org.kosta.dew.model.vo.MultiFileVO;
 import org.kosta.dew.model.vo.VideoListVO;
 import org.kosta.dew.model.vo.VideoVO;
 import org.slf4j.Logger;
@@ -14,9 +20,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class VideoController {
+	@Resource(name="uploadPath")
+	private String path;
 	@Resource
 	private VideoService videoService;
 	private Logger log = LoggerFactory.getLogger(getClass());
@@ -64,7 +73,23 @@ public class VideoController {
 	@RequestMapping("video_delete.do")
 	public String delete(HttpServletRequest request, Model model) {
 		String no = request.getParameter("no");
+		List<HashMap<String, String>> list = videoService.getVideoName(no);
+	//	System.out.println(list);
+		//System.out.println(list.get(1).get("VIDEO_FILE_NAME"));
+		for(int i = 0 ; i < list.size() ; i++) {
+			File file = new File(path+list.get(i).get("VIDEO_FILE_NAME"));
+			 if(file.exists()) {
+				 file.delete();
+			 }
+		}
+		videoService.deleteVideoFile(no);
 		videoService.deleteVideo(no);
+		 /*
+		  *   파일 진짜 삭제 
+		  * File file = new File(path+"파일명");
+		 if(file.exists()) {
+			 file.delete();
+		 }*/
 		VideoListVO vo = videoService.getVideoList("1");
 		model.addAttribute("vo", vo);
 		return "redirect:video_listView.do";
@@ -76,12 +101,71 @@ public class VideoController {
 		return "video_updateView";
 	}
 	@RequestMapping("video_update.do")
-	public String update(HttpServletRequest request,Model model,VideoVO vo) {
-		System.out.println(request.getParameter("videoNo"));
+	public String update(HttpServletRequest request,Model model,VideoVO vo,MultiFileVO mvo) {
+		String no = request.getParameter("videoNo");
+	//	System.out.println(no);
+		//System.out.println(vo);
 		
-		System.out.println("update.do");
-		System.out.println(vo);
+		/* 변수 초기화 부분 */
+		List<HashMap<String, String>> list = videoService.getVideoName(no); // 디비에 해당 글 비디오이름 가져옴
+		List<MultipartFile> list2=mvo.getFile();		// view에서 파일을 가져온다.
+	//	System.out.println(list);
+		//System.out.println(list2);
+		
+		/* 글 업데이트 */
 		videoService.updateVideo(vo);
+		
+		/* 삭제부분 */
+		boolean del = true;
+		//System.out.println("디비에 있는 개수"+list.size());
+		//System.out.println("뷰에서 올리려는 개수"+list2.size());
+		for(int i = 0 ; i < list.size() ; i++) {
+		//	System.out.println("db 1번쨰 for문 "+i);
+			String dbFileName = list.get(i).get("VIDEO_FILE_NAME");
+			for(int j = 0 ; j < list2.size() ; j++)  {
+			//	System.out.println("뷰 2번쨰 for문 "+j);
+				if(dbFileName.equals(list2.get(j).getOriginalFilename())) {
+					del = false;
+					break;
+				} 
+			}
+			if(del) { // del이 true이면 디비에 있는 filename이 view에 없음 따라서 삭제해야함
+				videoService.deleteVideoFileName(no,dbFileName); // 해당 게시글에 디비 삭제
+			// System.out.println("디비 삭제"+dbFileName);
+				File file = new File(path+dbFileName);	// 파일 삭제
+				file.delete();
+			//	System.out.println("filedelete ok"+dbFileName);
+			}
+			del = true;	// del 초기화
+		}
+		
+		/* insert 부분 */
+		
+		boolean flag = true;
+		for(int i=0;i<list2.size();i++){	// 올리고자 하는 파일 하나하나접근
+			String fileName=list2.get(i).getOriginalFilename();		// 파일이름 가져옴
+			for(int j = 0 ; j < list.size() ;j++) {
+				if(fileName.equals(list.get(j).get("VIDEO_FILE_NAME"))) {	// 디비에 있는 것들과 비교
+					flag = false;	// 있으면 false
+					break;
+				}
+			}
+			if(flag){	// 없으면 파일 새로 생성
+				try {
+					list2.get(i).transferTo(new File(path+fileName));	// 파일 올림
+					videoService.file(vo,fileName);	// 디비에 넣어줌
+					//nameList.add(fileName);	
+				//	System.out.println("fileupload ok:"+fileName);
+				} catch (Exception e) {					
+					e.printStackTrace();
+				}
+			} else {
+			//	System.out.println("이미 존재하는 file: "+fileName);
+			}
+			flag = true;
+		}
+		
+		/* 리스트 가져오는 부분 */
 		VideoVO vvo = videoService.showContentNoHit(vo.getVideoNo());
 		model.addAttribute("vvo", vvo);
 		return "video_showContent";
@@ -92,12 +176,31 @@ public class VideoController {
 	}
 	
 	@RequestMapping("video_write.do")
-	public String write(HttpServletRequest request,Model model,VideoVO vo) {
-		System.out.println("write.do");
-		System.out.println(vo);
+	public String write(HttpServletRequest request,Model model,VideoVO vo,MultiFileVO mvo) {
+	//	System.out.println("write.do");
 		videoService.write(vo);
+	//	System.out.println(vo);
+	//	System.out.println(mvo);
+		List<MultipartFile> list=mvo.getFile();
+		ArrayList<String> nameList=new ArrayList<String>();
+		for(int i=0;i<list.size();i++){
+			//System.out.println(list.get(i).getOriginalFilename().equals(""));
+			String fileName=list.get(i).getOriginalFilename();			
+			if(!fileName.equals("")){
+				try {
+					list.get(i).transferTo(new File(path+fileName));
+					videoService.file(vo,fileName);
+					nameList.add(fileName);
+				//	System.out.println("fileupload ok:"+fileName);
+				} catch (Exception e) {					
+					e.printStackTrace();
+				}
+			}
+		}
+		
 		VideoListVO vvo = videoService.getVideoList("1");
 		model.addAttribute("vo", vvo);
+		
 		return "redirect:video_listView.do";
 	}
 	/*

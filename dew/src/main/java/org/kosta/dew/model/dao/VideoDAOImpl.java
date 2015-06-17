@@ -1,5 +1,6 @@
 package org.kosta.dew.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -75,6 +76,34 @@ public class VideoDAOImpl implements VideoDAO {
 	@Override
 	public int totalContent(){
 		return sqlSessionTemplate.selectOne("video.totalContent");
+	}
+
+	@Override
+	public int file(VideoVO vo, String file) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("no",String.valueOf(vo.getVideoNo()));
+		map.put("file",file);
+		return (Integer)sqlSessionTemplate.insert("video.file",map);
+		// TODO Auto-generated method stub
+		// controller에서 반복문을 돌리며 path라는 함수 실행시켜 video_path테이블에 vo.getVideoNo, path넣어줘야 함
+	}
+
+	@Override
+	public List<HashMap<String, String>> getVideoName(String no) {
+		return sqlSessionTemplate.selectList("video.videoname",no);
+	}
+	
+	public void deleteVideoFile(String no){
+		sqlSessionTemplate.delete("video.deleteVideofile", no);
+	}
+
+	@Override
+	public void deleteVideoFileName(String no, String dbFileName) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("no", no);
+		map.put("dbFileName",dbFileName);
+		sqlSessionTemplate.delete("video.deleteVideofileName", map);
+		
 	}
 	
 }
