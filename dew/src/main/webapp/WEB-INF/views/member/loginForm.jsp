@@ -3,12 +3,22 @@
       <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <link rel="stylesheet" href="css/login.css">
-<script type="text/javascript" src="jquery-1.11.0.js"></script>
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/jquery-migrate-1.1.0.js"></script>
 <script type="text/javascript">
-	$(document).click({
-		$()
-	});//ready
-</script> 
+	$(document).ready(function(){
+		$("form").submit(function(){
+			if($(":input[name=id]").val()==""){
+				alert("아이디를 입력하세요!");
+				return false;
+			}
+			if($(":input[name=memberPassword]").val()==""){
+				alert("패스워드를 입력하세요!");
+				return false;
+			}
+		});
+	});
+</script>
 <form action="login.do" method="post">
   <div id="wrap">
    <h1 class="member">member login</h1>

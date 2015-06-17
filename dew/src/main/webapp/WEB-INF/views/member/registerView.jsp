@@ -6,68 +6,50 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript" src="jquery-1.11.0.js"></script>
-<script type="text/javascript">
- $(document).ready(function(){
-	 
- }
-</script>
+
 <title>Insert title here</title>
-<!-- <script type="text/javascript" src="jquery-1.11.0.js"></script>
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+
 <script type="text/javascript">
 	$(document).ready(function(){
-		var checkResultId="";
-		$("#regForm").submit(function(){			
+		$("form").submit(function(){
 			if($(":input[name=id]").val()==""){
-				alert("아이디를 입력하세요");				
+				alert("아이디를 입력하세요!");
 				return false;
 			}
-			if($(":input[name=password]").val()==""){
-				alert("패스워드를 입력하세요");				
+			else if($(":input[name=memberPassword]").val()==""){
+				alert("비밀번호를 입력하세요!");
 				return false;
 			}
-			if($(":input[name=name]").val()==""){
-				alert("이름을 입력하세요");				
+			
+			else if($(":input[name=birthDate]").val()==""){
+				alert("생년월일를 입력하세요!");
 				return false;
 			}
-			if($(":input[name=address]").val()==""){
-				alert("주소를 입력하세요");				
+			
+			else if($(":input[name=passwordQuestion]").val()==""){
+				alert("질문을 입력하세요!");
 				return false;
-			}	
-			if(checkResultId==""){
-				alert("아이디 중복확인을 하세요");
+			}
+			else if($(":input[name=passwordAnswer]").val()==""){
+				alert("질문에 대한 답을 입력하세요!");
 				return false;
-			}		
+			}else{
+				if($(":input[name=birthDate]").length==8){
+					alert("제대로된 생년월일 8글자 입력해주세요");
+					return false;
+				}
+			}
+			
+			
 		});
-		$("#id").keyup(function(){
-			var id=$("#id").val().trim();
-			if(id.length<4 || id.length>10){
-				$("#idCheckView").html("아이디는 4자이상 10자 이하여야 함!").css(
-						"background","pink");
-				checkResultId="";
-				return;
-			}
-			$.ajax({
-				type:"POST",
-				url:"member.do",
-				data:"command=idcheckAjax&id="+id,
-				success:function(data){					
-					if(data.flag=="fail"){
-					$("#idCheckView").html(id+" 사용불가!").css("background","red");
-						checkResultId="";
-					}else{						
-						$("#idCheckView").html(id+" 사용가능!").css(
-								"background","yellow");		
-						checkResultId=id;
-					}					
-				}//callback			
-			});//ajax
-		});//keyup
-	});//ready
-</script> -->
+	
+		});
+</script>
 </head>
 <body>
  
-<form id="regForm" action="register.do" method="post">
+<form  action="register.do" method="post">
 <!-- private String id;
 	private String memberName;
 	private String memberPassword;
@@ -85,11 +67,8 @@ id <input type="text" name="id" id="id" ><br>
 질문<input type="text"id="passwordQuestion" name="passwordQuestion"><br>
 질문에 대한 답변<input type="text"id="passwordAnswer" name="passwordAnswer"><br>
 
-<c:forEach var="item" varStatus="i" begin="1" items="${requestScope.list}">
- <input type="radio" name="radio" value="${i}"> ${item.jobName} <br>
-
- 
-
+<c:forEach var="item" varStatus="i" items="${requestScope.list}">
+ <input type="radio" id="jobNo" name="jobNo" value="${item.jobNo}"> ${item.jobName} <br>
 </c:forEach> 
 <br><input type="submit" value="회원가입">
 </form>
