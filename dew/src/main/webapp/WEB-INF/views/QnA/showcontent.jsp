@@ -113,16 +113,16 @@ $(document).ready(function(){
 	});
 	
 	$(document).on("click", "#commentUpdateText",function(e){
-		var ref = $(this).next().next().next().next().next().next().val();
+		var relevel = $(this).next().next().next().next().next().val();
 		var refCount = "";
-		for(var i=0; i<=ref; i++){
+		for(var i=1; i<=relevel; i++){
 			refCount += "re:";
 		}
 
 		var sessionId = "${sessionScope.mvo.id}";
 		var adminCheck = "${sessionScope.mvo.memberLevel}";
 		var commentWriteId = $(this).parent().prev().prev().prev().text();
-		
+		var hiddenContent = $(this).parent().prev().text();
 		if(sessionId != commentWriteId && adminCheck != 0){
 			alert("본인의 댓글만 수정가능합니다.");
 			return false;
@@ -134,7 +134,8 @@ $(document).ready(function(){
 		$(this).parent().parent().children("td:eq(2)").html("<input type='hidden' id='commentNo' name='commentNo' value='"+commentNo+"'>"+
 									"<input type='text' id='commentUpdatecontent' name='commentUpdatecontent' value='"+refCount+"'>"+
 									"<input type='button' name='commentUpdateBtn' id='commentUpdateBtn' value='확인'>"+
-									"<input type='button' name='commentUpdateCancel' id='commentUpdateCancel' value='취소'>");
+									"<input type='button' name='commentUpdateCancel' id='commentUpdateCancel' value='취소'>"+
+									"<input type='hidden' name='hiddenContent' id='hiddenContent' value='"+hiddenContent+"'>");
 		 
 	});
 	
@@ -142,8 +143,12 @@ $(document).ready(function(){
 		if(!confirm("입력한 내용을 취소하시겠습니까??")){
 			return false;
 		}
+		var hiddenContent = $(this).next().val();
+		$(this).parent().html(hiddenContent);
+
+		/* $(this).parent().html("con"); */
 		
-		location.href="QnA_showContent.do?qnaNo=${requestScope.qvo.qnaNo }";
+	//	location.href="QnA_showContent.do?qnaNo=${requestScope.qvo.qnaNo }";
 		
 	});
 	
@@ -198,9 +203,9 @@ $(document).ready(function(){
 	});
 	
 	$(document).on("click", "#commentReplyWriteView" , function(){
-		var ref = $(this).next().next().next().val();
+		var reflevel = $(this).next().next().next().val();
 		var refCount = "";
-		for(var i=0; i<=ref; i++){
+		for(var i=0; i<=reflevel; i++){
 			refCount += "re:";
 		}
 		
@@ -255,7 +260,7 @@ $(document).ready(function(){
 		    		c+="<tr></tr>";
 		    		$("#commentView").html(c);  
 		      } 
-		});
+		}); 
 	});
 	
 });

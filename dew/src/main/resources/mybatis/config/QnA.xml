@@ -43,7 +43,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	 
  	<select id="getAllList" parameterType="int" resultMap="qMap">
  	select qna_no,id,group_no,title,content,qna_date,hit,point,answer_status,ref,restep,relevel 
- 	from(	select qna_no,id,group_no,title,content,qna_date,hit,point,answer_status,ref,restep,relevel,ceil(rownum/10) as page 
+ 	from(	select qna_no,id,group_no,title,content,qna_date,hit,point,answer_status,ref,restep,relevel,ceil(rownum/5) as page 
  			from(select qna_no,id,group_no,title,content,to_char(qna_date,'YYYY.MM.DD') as qna_date,hit,point,answer_status,ref,restep,relevel 
  				   from qna 
  				   order by ref desc,restep asc
@@ -150,6 +150,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	 	select count(*) from qna where group_no=#{value}
  	 </select>
  	 
+ 	 <update id="commentReplyStepPlus" parameterType="cmvo">
+ 	 	<![CDATA[ update qna_comment set restep = restep+1 where ref = #{ref} and restep > #{reStep}]]>
+ 	 </update>
+ 	 
+ 	 <insert id="ajaxWriteCommentReply" parameterType="cmvo">
+ 	 	insert into qna_comment(qna_comment_no,qna_no,id,content,qna_comment_date,ref,restep,relevel)
+ 	 	values(qna_comment_no.nextval,#{boardNo},#{id},#{content},sysdate,#{ref},#{reStep},#{relevel})
+ 	 </insert>
  </mapper> 		
 
  

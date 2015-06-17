@@ -193,22 +193,31 @@ public class QnAController {
 	 */
 	@RequestMapping("QnA_Write.do")
 	public String write(QnAVO vo,HttpServletRequest request){
-		//포인트 차감
-		qnAService.pointMinus(vo);
-		
-		//글작성
-		qnAService.write(vo);
-		
-		//세션에 포인트수정하여 재설정
-		HttpSession session = request.getSession();
+		//로그인 세션이 풀렸는지 확인
+		HttpSession session  = request.getSession();
 		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
-		int beforePoint = mvo.getPoint();
-		int minusPoint = vo.getPoint();
-		mvo.setPoint(beforePoint-minusPoint);
-		session.setAttribute("mvo", mvo);
+		
+		//세션이 풀렸을경우 글쓰기작업중지. 로그인폼으로
+		String path ="QnA_ReleaseSession";
+		
+		if(mvo!=null){
+			//포인트 차감
+			qnAService.pointMinus(vo);
+			
+			//글작성
+			qnAService.write(vo);
+			
+			//세션에 포인트수정하여 재설정
+			int beforePoint = mvo.getPoint();
+			int minusPoint = vo.getPoint();
+			mvo.setPoint(beforePoint-minusPoint);
+			session.setAttribute("mvo", mvo);
+			
+			path = "redirect:QnA_showContent.do?qnaNo="+vo.getQnaNo();
+		}
 		
 		//상세글보기로 리다이렉트
-		return "redirect:QnA_showContent.do?qnaNo="+vo.getQnaNo();
+		return path;
 	}
 	
 	/**
@@ -236,12 +245,23 @@ public class QnAController {
 	 * @return
 	 */
 	@RequestMapping("QnA_Update.do")
-	public String update(QnAVO vo){
-		//글 수정
-		qnAService.update(vo);
+	public String update(QnAVO vo,HttpServletRequest request){
+		//로그인 세션이 풀렸는지 확인
+		HttpSession session  = request.getSession();
+		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
+		
+		//세션이 풀렸을경우 글수정 작업중지. 로그인폼으로
+		String path ="QnA_ReleaseSession";	
+		
+		if(mvo!=null){
+			//글 수정
+			qnAService.update(vo);
+			path = "redirect:QnA_showContent.do?qnaNo="+vo.getQnaNo();
+		}
+		
 		
 		//상세글보기로 리다이렉트
-		return "redirect:QnA_showContent.do?qnaNo="+vo.getQnaNo();
+		return path;
 	}
 	
 	/**
@@ -251,10 +271,20 @@ public class QnAController {
 	 * @return
 	 */
 	@RequestMapping("QnA_delete.do")
-	public String delete(QnAVO vo,Model model){
-		qnAService.deleteContent(vo);
+	public String delete(QnAVO vo,Model model,HttpServletRequest request){
+		//로그인 세션이 풀렸는지 확인
+		HttpSession session  = request.getSession();
+		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
+		
+		//세션이 풀렸을경우 글수정 작업중지. 로그인폼으로
+		String path ="QnA_ReleaseSession";	
+		
+		if(mvo!=null){
+			qnAService.deleteContent(vo);
+			path = "redirect:QnA_listView.do";
+		}
 
-		return "redirect:QnA_listView.do";
+		return path;
 	}
 	
 	/**
@@ -283,16 +313,26 @@ public class QnAController {
 	 * @return
 	 */
 	@RequestMapping("QnA_WriteReply.do")
-	public String writeReply(QnAVO vo){
-		//답변글과 같은 ref들중에서, restep이 답변글보다 더 큰 글들의 restep을 1씩 증가시킨다.
-		qnAService.replyRestepPlus(vo);
+	public String writeReply(QnAVO vo,HttpServletRequest request){
+		//로그인 세션이 풀렸는지 확인
+		HttpSession session  = request.getSession();
+		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
 		
-		//답변글의 restep과 relevel을 증가시켜 insert한다.
-		vo.setRestep(vo.getRestep()+1);
-		vo.setRelevel(vo.getRelevel()+1);
-		qnAService.writeReply(vo);
+		//세션이 풀렸을경우 글수정 작업중지. 로그인폼으로
+		String path ="QnA_ReleaseSession";	
 		
-		return "redirect:QnA_showContent.do?qnaNo="+vo.getQnaNo();
+		if(mvo!=null){
+			//답변글과 같은 ref들중에서, restep이 답변글보다 더 큰 글들의 restep을 1씩 증가시킨다.
+			qnAService.replyRestepPlus(vo);
+			
+			//답변글의 restep과 relevel을 증가시켜 insert한다.
+			vo.setRestep(vo.getRestep()+1);
+			vo.setRelevel(vo.getRelevel()+1);
+			qnAService.writeReply(vo);
+			path = "redirect:QnA_showContent.do?qnaNo="+vo.getQnaNo();
+		}
+		
+		return path;
 	}
 	
 	/**
@@ -352,12 +392,20 @@ public class QnAController {
 	 * @return
 	 */
 	@RequestMapping("QnA_replyChoose.do")
-	public String replyChoose(String questionNO,String answerNO,QnAVO qvo){
-		//답변채택
+	public String replyChoose(String questionNO,String answerNO,QnAVO qvo,HttpServletRequest request){
+		//로그인 세션이 풀렸는지 확인
+		HttpSession session  = request.getSession();
+		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
 		
+		//세션이 풀렸을경우 글수정 작업중지. 로그인폼으로
+		String path ="QnA_ReleaseSession";	
 		
-		qnAService.replyChoose(questionNO,answerNO,qvo);
-		return "redirect:QnA_showContent.do?qnaNo="+answerNO;
+		if(mvo!=null){
+			//답변채택
+			qnAService.replyChoose(questionNO,answerNO,qvo);
+			path = "redirect:QnA_showContent.do?qnaNo="+answerNO;
+		}
+		return path;
 	}
 	
 	/**
@@ -369,6 +417,7 @@ public class QnAController {
 	@ResponseBody
 	public List<CommentVO> ajaxWriteCommentReply(CommentVO vo){
 		//답변커맨트와 같은 ref들중에서, restep이 답변커맨트보다 더 큰 커맨트들의 restep을 1씩 증가시킨다.
+		System.out.println(vo);
 		qnAService.commentReplyStepPlus(vo);
 		
 		//답변글의 restep과 relevel을 증가시켜 insert한다.
