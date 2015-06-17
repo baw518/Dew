@@ -9,7 +9,6 @@ public class ProjectManageVO {
 	private List<ProjectVO> requestProject;
 	public ProjectManageVO() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	public ProjectManageVO(List<ProjectVO> creatingProject,
 			List<ProjectVO> joinProject, List<ProjectVO> processingProject,
@@ -51,5 +50,6 @@ public class ProjectManageVO {
 				+ processingProject + ", requestProject=" + requestProject
 				+ "]";
 	}
+	
 	
 }

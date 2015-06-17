@@ -106,10 +106,10 @@ table.listTable{
 }
 
 
-#main_view{
-	padding: 70px; 
-	padding-left: 140px;
-	height: 500px;
+
+#main_viewForm{
+	margin: 70px;
+	margin-left:400px;
 }
 #create{
 	padding: 10px; 

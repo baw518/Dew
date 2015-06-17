@@ -96,5 +96,21 @@ public class ProjectDAOImpl implements ProjectDAO{
 	public CommentVO joinCheck(CommentVO cvo) {
 		return sqlSessionTemplate.selectOne("project.joinCheck",cvo);
 	}
+	@Override
+	public void deleteJoinComment(String commentNo) {
+		sqlSessionTemplate.delete("project.deleteJoinComment",commentNo);
+	}
+	@Override
+	public void startProject(String projectNo) {
+		sqlSessionTemplate.update("project.startProject",projectNo);
+	}
+	@Override
+	public List<CommentVO> findJoinList(int projectNo) {
+		return sqlSessionTemplate.selectList("project.findJoinList",projectNo);
+	}
+	@Override
+	public void updateHit(String no) {
+		sqlSessionTemplate.update("project.updateHit",no);
+	}
 
 }

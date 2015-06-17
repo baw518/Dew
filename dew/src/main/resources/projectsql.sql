@@ -91,6 +91,47 @@ select * from project_write
 
  	
  	
+ 	select project_no,id,title,achieve,project_date,progressing_end_date as deadline,hit,point from(select project_no,id,title,achieve,project_date,hit,progressing_end_date,ceil(rownum/10) as page,point 
+		from(select project_no,id,title,achieve,to_char(project_date,'YYYY.MM.DD') as project_date,hit,progressing_end_date,point from project_write order by project_no desc))
+		where page=1
+ 	select * from project_comment
+ 	delete from project_comment where project_comment_no=26
  	
  	
- 	
+ 	select * from project_write
+ 	  	 select distinct p.title,p.achieve,p.progressing,p.point,p.project_no,to_char(p.project_date,'YYYY.MM.DD') as deadline from project_comment c,project_write p where c.type!=2 and p.achieve='진행중' and (p.id='java' or c.id='java')
+ 	  
+ 	  	
+ 	  	
+ 	  	select id,content,project_comment_date from PROJECT_COMMENT where project_no=21 and type='1'
+ 	  	
+ 	  	
+ 	  		select p.project_no,p.title,c.id,c.content,p.content,p.point,p.progressing,
+ 		to_char(p.project_date,'YYYY.MM.DD HH24:MI') as project_date,p.progressing_end_date 
+ 		from project_write p,project_comment c where p.project_no=c.project_no and p.achieve='모집중' and c.type=1 and p.project_no=31
+ 	 
+ 				select c.id,c.content,
+ 		to_char(p.project_date,'YYYY.MM.DD HH24:MI') as commentDate
+ 		from project_write p,project_comment c where p.project_no=c.project_no and p.achieve='모집중' and c.type=1 and p.project_no=31
+ 	 
+ 		
+ 
+ 	  	
+ 	  	select project_no,title,id,content,point,progressing,achieve,hit,
+ 		to_char(project_date,'YYYY.MM.DD HH24:MI') as project_date,progressing_end_date 
+ 		from project_write where id='java' and achieve='모집중'
+ 	  	
+ 	  	
+ 		
+ 			select p.project_no,c.id,c.content,
+ 		to_char(p.project_date,'YYYY.MM.DD') as project_date,
+ 		from project_write p,project_comment c where p.project_no=c.project_no and p.achieve='모집중' and c.type=1 and p.project_no=28
+ 	  	
+ 		
+ 			select p.project_no as boardNo,c.id,c.content,
+ 		to_char(p.project_date,'YYYY.MM.DD') as commentDate,
+ 		from project_write p,project_comment c where p.project_no=c.project_no and p.achieve='모집중' and c.type=1 and p.project_no='java'
+
+ 		
+ 		
+ 		
