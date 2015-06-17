@@ -33,7 +33,7 @@
 
 <br><br>
 <div id="menuWrap" >
-<input type="button" class="menuBtn" value="에러리포트" id="errorReportBtn">
+<input type="button" class="menuBtn" value="에러리포트" id="errorReportBtn" alt=""\>
 <input type="button" class="menuBtn" value="프로젝트" id="projectBtn">
 <input type="button" class="menuBtn" value="질의응답" id="QnABtn">
 <input type="button" class="menuBtn" value="토론방" id="discussBtn">
