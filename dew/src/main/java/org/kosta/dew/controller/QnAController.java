@@ -367,8 +367,18 @@ public class QnAController {
 	 */
 	@RequestMapping("ajaxWriteCommentReply.do")
 	@ResponseBody
-	public String ajaxWriteCommentReply(CommentVO vo){
-		System.out.println(vo);
-		return "";
+	public List<CommentVO> ajaxWriteCommentReply(CommentVO vo){
+		//답변커맨트와 같은 ref들중에서, restep이 답변커맨트보다 더 큰 커맨트들의 restep을 1씩 증가시킨다.
+		qnAService.commentReplyStepPlus(vo);
+		
+		//답변글의 restep과 relevel을 증가시켜 insert한다.
+		vo.setReStep(vo.getReStep()+1);
+		vo.setRelevel(vo.getRelevel()+1);
+		qnAService.ajaxWriteCommentReply(vo);
+		
+		//해당글의 커맨트리스트 받아오기
+		List<CommentVO> cmvo = qnAService.showCommentList(vo.getBoardNo());
+		System.out.println(cmvo);
+		return cmvo;
 	}
 }

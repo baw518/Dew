@@ -43,7 +43,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	 
  	<select id="getAllList" parameterType="int" resultMap="qMap">
  	select qna_no,id,group_no,title,content,qna_date,hit,point,answer_status,ref,restep,relevel 
- 	from(	select qna_no,id,group_no,title,content,qna_date,hit,point,answer_status,ref,restep,relevel,ceil(rownum/5) as page 
+ 	from(	select qna_no,id,group_no,title,content,qna_date,hit,point,answer_status,ref,restep,relevel,ceil(rownum/10) as page 
  			from(select qna_no,id,group_no,title,content,to_char(qna_date,'YYYY.MM.DD') as qna_date,hit,point,answer_status,ref,restep,relevel 
  				   from qna 
  				   order by ref desc,restep asc

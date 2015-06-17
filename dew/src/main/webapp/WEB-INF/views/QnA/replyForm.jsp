@@ -7,10 +7,14 @@
 $(document).ready(function(){
 	
 	$("#cancel").click(function(){
+		if(!confirm("입력한 내용을 취소하시겠습니까??")){
+			return false;
+		}
 		location.href="QnA_showContent.do?qnaNo=${requestScope.qvo.qnaNo}";
 	});
 	
 	$("#reply").click(function(){
+		
 		var title = $("#title").val();
 		var content = $("#content").val();
 		if(title==""){

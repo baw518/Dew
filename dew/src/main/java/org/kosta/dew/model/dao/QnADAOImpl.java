@@ -1,11 +1,11 @@
 package org.kosta.dew.model.dao;
 
+
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 
-import org.apache.ibatis.annotations.Param;
 import org.kosta.dew.model.vo.CommentVO;
 import org.kosta.dew.model.vo.QnAGroupVO;
 import org.kosta.dew.model.vo.QnAVO;
@@ -144,6 +144,18 @@ public class QnADAOImpl implements QnADAO{
 	public int getSelectedCount(String qnAGroupNo) {
 		
 		return sqlSessionTemplate.selectOne("QnA.getSelectedCount",qnAGroupNo);
+	}
+
+	@Override
+	public void commentReplyStepPlus(CommentVO vo) {
+		sqlSessionTemplate.update("QnA.commentReplyStepPlus", vo);
+		
+	}
+
+	@Override
+	public void ajaxWriteCommentReply(CommentVO vo) {
+		sqlSessionTemplate.insert("QnA.ajaxWriteCommentReply", vo);
+		
 	}
 
 

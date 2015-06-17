@@ -1,5 +1,6 @@
 package org.kosta.dew.model.service;
 
+
 import java.util.List;
 import java.util.Map;
 
@@ -134,6 +135,18 @@ public class QnAServiceImpl implements QnAService{
 	public int getSelectedCount(String qnAGroupNo) {
 		
 		return qnADAO.getSelectedCount(qnAGroupNo);
+	}
+
+	@Override
+	public void commentReplyStepPlus(CommentVO vo) {
+		qnADAO.commentReplyStepPlus(vo);
+		
+	}
+
+	@Override
+	public void ajaxWriteCommentReply(CommentVO vo) {
+		qnADAO.ajaxWriteCommentReply(vo);
+		
 	}
 
 	

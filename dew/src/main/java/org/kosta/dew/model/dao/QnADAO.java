@@ -1,5 +1,6 @@
 package org.kosta.dew.model.dao;
 
+
 import java.util.List;
 import java.util.Map;
 
@@ -52,6 +53,10 @@ public interface QnADAO {
 	public List<QnAVO> getSelectedList(Map<String, String> map);
 
 	public int getSelectedCount(String qnAGroupNo);
+
+	public void commentReplyStepPlus(CommentVO vo);
+
+	public void ajaxWriteCommentReply(CommentVO vo);
 
 
 }

@@ -51,17 +51,16 @@ $(document).ready(function(){
 						 c+="<tr><td>"+data.id+"</td>";
 						 c+="<td>"+data.commentDate+"</td>";
 						 c+="<td>"+data.content+"</td>";
-						 if(id==data.id){
-							 c+="<td><input type='hidden' id='commentNo' name='commentNo' value='"+data.commentNo+"'>"
-							 +"<input type='button' id='commentUpdateText' name='commentUpdateText' value='수정'>"
-							 +"<input type='button' id='commentDeleteBtn' name='commentDeleteBtn' value='삭제'>"+
-							 "<input type='button' id='commentReplyWriteView' name='commentReplyWriteView' value='댓글달기'>"+
-							 "<input type='hidden' id='ref' name='ref' value='"+data.ref+"'>"+
-							 "<input type='hidden id='reStep' name='reStep' value='"+data.reStep+"'>"+
-							 "<input type='hidden' id='relevel' name='relevel' value='"+data.relevel+"'></td>";
-						 }
+						 c+="<td><input type='hidden' id='commentNo' name='commentNo' value='"+data.commentNo+"'>"
+						 +"<input type='button' id='commentUpdateText' name='commentUpdateText' value='수정'>"
+						 +"<input type='button' id='commentDeleteBtn' name='commentDeleteBtn' value='삭제'>"+
+						 "<input type='button' id='commentReplyWriteView' name='commentReplyWriteView' value='댓글달기'>"+
+						 "<input type='hidden' id='ref' name='ref' value='"+data.ref+"'>"+
+						 "<input type='hidden' id='reStep' name='reStep' value='"+data.reStep+"'>"+
+						 "<input type='hidden' id='relevel' name='relevel' value='"+data.relevel+"'></td>";
 						 c+="</tr>";
 					});
+		    		c+="<tr></tr>";
 					$("#commentView").html(c);
 					$("#content").val("");
 		      } 
@@ -70,6 +69,14 @@ $(document).ready(function(){
 	});
 	
 	$(document).on("click", "#commentDeleteBtn",function(e){
+		var sessionId = "${sessionScope.mvo.id}";
+		var adminCheck = "${sessionScope.mvo.memberLevel}";
+		var commentWriteId = $(this).parent().prev().prev().prev().text();
+		if(sessionId != commentWriteId && adminCheck != 0){
+			alert("본인의 댓글만 삭제가능합니다.");
+			return false;
+		}
+		
 		var commentNo = $(this).parent().children().val();
 		var id = $("#id").val();
 		var boardNo = $("#boardNo").val();
@@ -89,17 +96,16 @@ $(document).ready(function(){
 						 c+="<tr><td>"+data.id+"</td>";
 						 c+="<td>"+data.commentDate+"</td>";
 						 c+="<td>"+data.content+"</td>";
-						 if(id==data.id){
-							 c+="<td><input type='hidden' id='commentNo' name='commentNo' value='"+data.commentNo+"'>"
-							 +"<input type='button' id='commentUpdateText' name='commentUpdateText' value='수정'>"
-							 +"<input type='button' id='commentDeleteBtn' name='commentDeleteBtn' value='삭제'>"+
-							 "<input type='button' id='commentReplyWriteView' name='commentReplyWriteView' value='댓글달기'>"+
-							 "<input type='hidden' id='ref' name='ref' value='"+data.ref+"'>"+
-							 "<input type='hidden id='reStep' name='reStep' value='"+data.reStep+"'>"+
-							 "<input type='hidden' id='relevel' name='relevel' value='"+data.relevel+"'></td>";
-						 }
+						 c+="<td><input type='hidden' id='commentNo' name='commentNo' value='"+data.commentNo+"'>"
+						 +"<input type='button' id='commentUpdateText' name='commentUpdateText' value='수정'>"
+						 +"<input type='button' id='commentDeleteBtn' name='commentDeleteBtn' value='삭제'>"+
+						 "<input type='button' id='commentReplyWriteView' name='commentReplyWriteView' value='댓글달기'>"+
+						 "<input type='hidden' id='ref' name='ref' value='"+data.ref+"'>"+
+						 "<input type='hidden' id='reStep' name='reStep' value='"+data.reStep+"'>"+
+						 "<input type='hidden' id='relevel' name='relevel' value='"+data.relevel+"'></td>";
 						 c+="</tr>";
 					});
+		    		c+="<tr></tr>";
 					$("#commentView").html(c);   
 		      }
 		});
@@ -107,13 +113,29 @@ $(document).ready(function(){
 	});
 	
 	$(document).on("click", "#commentUpdateText",function(e){
+		var ref = $(this).next().next().next().next().next().next().val();
+		var refCount = "";
+		for(var i=0; i<=ref; i++){
+			refCount += "re:";
+		}
+
+		var sessionId = "${sessionScope.mvo.id}";
+		var adminCheck = "${sessionScope.mvo.memberLevel}";
+		var commentWriteId = $(this).parent().prev().prev().prev().text();
+		
+		if(sessionId != commentWriteId && adminCheck != 0){
+			alert("본인의 댓글만 수정가능합니다.");
+			return false;
+		}
+		
+		
 		var commentNo = $(this).parent().children().val();
 		
 		$(this).parent().parent().children("td:eq(2)").html("<input type='hidden' id='commentNo' name='commentNo' value='"+commentNo+"'>"+
-									"<input type='text' id='commentUpdatecontent' name='commentUpdatecontent'>"+
+									"<input type='text' id='commentUpdatecontent' name='commentUpdatecontent' value='"+refCount+"'>"+
 									"<input type='button' name='commentUpdateBtn' id='commentUpdateBtn' value='확인'>"+
 									"<input type='button' name='commentUpdateCancel' id='commentUpdateCancel' value='취소'>");
-		
+		 
 	});
 	
 	$(document).on("click", "#commentUpdateCancel" , function(e){
@@ -149,17 +171,16 @@ $(document).ready(function(){
 						 c+="<tr><td>"+data.id+"</td>";
 						 c+="<td>"+data.commentDate+"</td>";
 						 c+="<td>"+data.content+"</td>";
-						 if(id==data.id){
-							 c+="<td><input type='hidden' id='commentNo' name='commentNo' value='"+data.commentNo+"'>"
-							 +"<input type='button' id='commentUpdateText' name='commentUpdateText' value='수정'>"
-							 +"<input type='button' id='commentDeleteBtn' name='commentDeleteBtn' value='삭제'>"+
-							 "<input type='button' id='commentReplyWriteView' name='commentReplyWriteView' value='댓글달기'>"+
-							 "<input type='hidden' id='ref' name='ref' value='"+data.ref+"'>"+
-							 "<input type='hidden id='reStep' name='reStep' value='"+data.reStep+"'>"+
-							 "<input type='hidden' id='relevel' name='relevel' value='"+data.relevel+"'></td>";
-						 }
+						 c+="<td><input type='hidden' id='commentNo' name='commentNo' value='"+data.commentNo+"'>"
+						 +"<input type='button' id='commentUpdateText' name='commentUpdateText' value='수정'>"
+						 +"<input type='button' id='commentDeleteBtn' name='commentDeleteBtn' value='삭제'>"+
+						 "<input type='button' id='commentReplyWriteView' name='commentReplyWriteView' value='댓글달기'>"+
+						 "<input type='hidden' id='ref' name='ref' value='"+data.ref+"'>"+
+						 "<input type='hidden' id='reStep' name='reStep' value='"+data.reStep+"'>"+
+						 "<input type='hidden' id='relevel' name='relevel' value='"+data.relevel+"'></td>";
 						 c+="</tr>";
 					});
+		    		c+="<tr></tr>";
 					$("#commentView").html(c);   
 		      }
 		});
@@ -177,7 +198,13 @@ $(document).ready(function(){
 	});
 	
 	$(document).on("click", "#commentReplyWriteView" , function(){
-		var p = "<td colspan='6'><input type='text' name='commentReplyText' id='commentReplyText' value='re:'>"+
+		var ref = $(this).next().next().next().val();
+		var refCount = "";
+		for(var i=0; i<=ref; i++){
+			refCount += "re:";
+		}
+		
+		var p = "<td colspan='6'><input type='text' name='commentReplyText' id='commentReplyText' value='"+refCount+"'>"+
 					"<input type='button' id='commentReplyWriteBtn' name='commentReplyWriteBtn' value='등록'>"+
 					"<input type='button' id='commentReplyCancel' name='commentReplyCancel' value='취소'>"+
 					"<input type='hidden' id='boardNo' name='boardNo' value='${requestScope.qvo.qnaNo}'"+
@@ -191,9 +218,10 @@ $(document).ready(function(){
 			return false;
 		}
 		$(this).parent().parent().html("");
-	})
+	});
 	
 	$(document).on("click", "#commentReplyWriteBtn", function(){
+		var id = $("#id").val();
 		var ref = $(this).parent().parent().prev().children().next().children().next().next().next().next().val();
 		var reStep = $(this).parent().parent().prev().children().next().children().next().next().next().next().next().val();
 		var relevel = $(this).parent().parent().prev().children().next().children().next().next().next().next().next().next().val();
@@ -215,19 +243,17 @@ $(document).ready(function(){
 						 c+="<tr><td>"+data.id+"</td>";
 						 c+="<td>"+data.commentDate+"</td>";
 						 c+="<td>"+data.content+"</td>";
-						 if(id==data.id){
-							 c+="<td><input type='hidden' id='commentNo' name='commentNo' value='"+data.commentNo+"'>"
-							 +"<input type='button' id='commentUpdateText' name='commentUpdateText' value='수정'>"
-							 +"<input type='button' id='commentDeleteBtn' name='commentDeleteBtn' value='삭제'>"+
-							 "<input type='button' id='commentReplyWriteView' name='commentReplyWriteView' value='댓글달기'>"+
-							 "<input type='hidden' id='ref' name='ref' value='"+data.ref+"'>"+
-							 "<input type='hidden id='reStep' name='reStep' value='"+data.reStep+"'>"+
-							 "<input type='hidden' id='relevel' name='relevel' value='"+data.relevel+"'></td>";
-						 }
+						 c+="<td><input type='hidden' id='commentNo' name='commentNo' value='"+data.commentNo+"'>"
+						 +"<input type='button' id='commentUpdateText' name='commentUpdateText' value='수정'>"
+						 +"<input type='button' id='commentDeleteBtn' name='commentDeleteBtn' value='삭제'>"+
+						 "<input type='button' id='commentReplyWriteView' name='commentReplyWriteView' value='댓글달기'>"+
+						 "<input type='hidden' id='ref' name='ref' value='"+data.ref+"'>"+
+						 "<input type='hidden' id='reStep' name='reStep' value='"+data.reStep+"'>"+
+						 "<input type='hidden' id='relevel' name='relevel' value='"+data.relevel+"'></td>";
 						 c+="</tr>";
 					});
-					$("#commentView").html(c);
-					$("#content").val("");
+		    		c+="<tr></tr>";
+		    		$("#commentView").html(c);  
 		      } 
 		});
 	});
@@ -264,24 +290,23 @@ $(document).ready(function(){
 		<pre>${requestScope.qvo.content}</pre>
 		</td>
 	</tr>
+	
 	<tr>
 		<td colspan="4">
 				<table class="table" align="center" id="commentView">
 					<c:forEach items="${requestScope.cmvo}" var="i" varStatus="index">
 						<tr>
-							<td>${i.id}&nbsp;&nbsp;&nbsp;</td>
-							<td>${i.commentDate}&nbsp;&nbsp;&nbsp;</td>
+							<td>${i.id}</td>
+							<td>${i.commentDate}</td>
 							<td colspan="3">${i.content}</td>
 							<td>
-								<c:if test="${sessionScope.mvo.id == i.id || sessionScope.mvo.memberLevel == 0 }">
-									<input type="hidden" id="commentNo" name="commentNo" value="${i.commentNo}">
-									<input type="button" id="commentUpdateText" name="commentUpdateText" value="수정">
-									<input type="button" id="commentDeleteBtn"name="commentDeleteBtn" value="삭제">
-									<input type="button" id="commentReplyWriteView" name="commentReplyWriteView" value="댓글달기">
-									<input type="hidden" id="ref" name="ref" value="${i.ref}">
-									<input type="hidden" id="reStep" name="reStep" value="${i.reStep}">
-									<input type="hidden" id="relevel" name="relevel" value="${i.relevel}">
-								</c:if>
+								<input type="hidden" id="commentNo" name="commentNo" value="${i.commentNo}">
+								<input type="button" id="commentUpdateText" name="commentUpdateText" value="수정">
+								<input type="button" id="commentDeleteBtn"name="commentDeleteBtn" value="삭제">
+								<input type="button" id="commentReplyWriteView" name="commentReplyWriteView" value="댓글달기">
+								<input type="hidden" id="ref" name="ref" value="${i.ref}">
+								<input type="hidden" id="reStep" name="reStep" value="${i.reStep}">
+								<input type="hidden" id="relevel" name="relevel" value="${i.relevel}">
 							</td>
 						</tr>
 						<tr>

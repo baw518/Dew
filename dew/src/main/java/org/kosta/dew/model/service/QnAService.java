@@ -1,5 +1,6 @@
 package org.kosta.dew.model.service;
 
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -47,6 +48,10 @@ public interface QnAService {
 	public List<QnAVO> getSelectedList(Map<String, String> map);
 
 	public int getSelectedCount(String qnAGroupNo);
+
+	public void commentReplyStepPlus(CommentVO vo);
+
+	public void ajaxWriteCommentReply(CommentVO vo);
 
 
 
