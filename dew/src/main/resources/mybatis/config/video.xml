@@ -21,7 +21,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	<select id="getVideoList" resultMap="videoListRM">
 		SELECT video_no,title,hit,id,video_date FROM(
-			SELECT video_no,title,hit,id,video_date,CEIL(rownum/5) AS page FROM (
+			SELECT video_no,title,hit,id,video_date,CEIL(rownum/10) AS page FROM (
 				SELECT video_no,title,hit,id,to_char(video_date,'YYYY-MM-DD') 
 			as video_date FROM video_tutorial order by video_no desc
 			)
