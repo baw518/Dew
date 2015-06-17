@@ -46,6 +46,8 @@ $(document).ready(function(){
                                    <c:otherwise>
                                 <a href="report_writeForm.do">에러 리포트 등록</a>
                                 <a href="member_mypageForm.do">마이 페이지</a>
+                                 <a href="dletepassword.do?id=${sessionScope.vo.id}">회원탈퇴</a>
+                                <a href="memberupdateview.do">회원수정</a>
                                 <a href="logout.do">로그아웃</a>                  
                                    </c:otherwise>
                                    </c:choose>
