@@ -24,9 +24,11 @@ public class ErrorReportController {
 	
 	@RequestMapping("report_updateView.do")
 	public ModelAndView reportUpdateView(String errorNo,String type){
+		System.out.println("report_updateView.do start \n errorNo :" + errorNo);
 		ModelAndView mav = new ModelAndView("errorReport_updateForm");
-		mav.addObject("evo", errorReportService.getContent(errorNo,type));
+		mav.addObject("evo", errorReportService.getContent(Integer.parseInt(errorNo)));
 		mav.addObject("type",type);
+		//System.out.println("report_updateView : evo >"+   );
 		return mav;
 	}
 	
@@ -40,10 +42,9 @@ public class ErrorReportController {
 	}
 	
 	@RequestMapping("report_showContent.do")
-	public ModelAndView reportShowContent(String errorNo,String type){
+	public ModelAndView reportShowContent(String error,String type){
 		ModelAndView mav = new ModelAndView("errorReport_showContent");
-		ErrorReportVO vo = errorReportService.getContent(errorNo,type);
-		vo.setErrorNo(Integer.parseInt(errorNo));
+		ErrorReportVO vo = errorReportService.getContent(error,type);
 		if(type.equals("exception")){
 			mav.addObject("exception", vo);	
 			mav.addObject("type","ExceptionMessage");
@@ -65,7 +66,7 @@ public class ErrorReportController {
 	@RequestMapping("report_write_result.do")
 	public ModelAndView reportWriteResult(int errorNo){
 		ModelAndView mav = new ModelAndView("errorReport_writeResult");
-		mav.addObject("result",errorReportService.writeResult(errorNo));
+		mav.addObject("result",errorReportService.getContent(errorNo));
 		return mav;
 	}
 	

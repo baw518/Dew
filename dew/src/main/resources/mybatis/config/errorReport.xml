@@ -4,19 +4,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="errorReport"> 
  
-<select id="getReportErrorCode" resultType="evo">
- select distinct e.error_code as errorCode , er.error_no as errorNo,  er.discussion_status as discussionstatus  from ERROR_REPORT er, ERROR e where e.error_no = er.error_no and e.error_code is not null  
+<select id="getReportErrorCode" resultType="String">
+ select distinct(e.error_code) as errorCode   from error e , error_report er where e.error_no = er.error_no and e.exception_message is null order by e.error_code asc  
 </select>
 
-<select id="getReportExceptionMessage" resultType="evo">
-select distinct e.exception_message as exceptionMessage, er.error_no as errorNo,  er.discussion_status as discussionstatus  from ERROR_REPORT er, ERROR e where e.error_no = er.error_no and e.exception_message is not null
+<select id="getReportExceptionMessage" resultType="String">
+select distinct(e.exception_message) as errorCode   from error e , error_report er where e.error_no = er.error_no and e.error_code is null order by e.exception_message asc
 </select>
 
 <select id="getContentException" parameterType="String" resultType="evo">
-select e.exception_message as exceptionMessage, to_char(error_report_date,'YYYY/MM/DD HH24:MI') as reportDate , er.content as content, er.discussion_status as discussionstatus from ERROR_REPORT er, ERROR e where e.error_no = er.error_no and e.error_no =#{value}
+select e.error_no as errorNo ,e.exception_message as exceptionMessage, to_char(error_report_date,'yyyy/mm/dd HH24:MI:SS') as reportdate , er.content as content ,er.discussion_status as discussionstatus from ERROR_REPORT er, ERROR e where e.error_no = er.error_no and e.exception_message =#{value} and er.error_report_date = (select max(er.error_report_date)    from error_report er, error e  where er.error_no =e.error_no and  e.exception_message =#{value})
 </select>
-<select id="getContentErrorCode" parameterType="int" resultType="evo">
-select e.error_code as errorCode, to_char(error_report_date,'YYYY/MM/DD HH24:MI') as reportDate , er.content as content, er.discussion_status as discussionstatus from ERROR_REPORT er, ERROR e where e.error_no = er.error_no and e.error_no =#{value}
+<select id="getContentErrorCode" parameterType="String" resultType="evo">
+select e.error_no as errorNo ,e.error_code as errorCode, to_char(error_report_date,'yyyy/mm/dd HH24:MI:SS') as reportdate , er.content as content, er.discussion_status as discussionstatus from ERROR_REPORT er, ERROR e where e.error_no = er.error_no and e.error_code =#{value} and er.error_report_date = (select max(er.error_report_date)    from error_report er, error e  where er.error_no =e.error_no and  e.error_code =#{value})
+</select>
+<select id="showErrorReportVO" parameterType="int" resultType="evo">
+select e.error_code as errorCode ,  e.exception_message as exceptionMessage,to_char(error_report_date,'yyyy/mm/dd HH24:MI') as reportdate,er.content as content, er.id, er.discussion_status as discussionstatus from ERROR_REPORT er, ERROR e where e.error_no = er.error_no and e.error_no = #{value}
 </select>
 <select id="writeResult" parameterType="String" resultType="evo">
 select er.error_no as errorNo,e.error_code as errorCode ,  e.exception_message as exceptionMessage,to_char(error_report_date,'yyyy/mm/dd HH24:MI:SS') as reportdate, er.id, er.discussion_status as discussionstatus from ERROR_REPORT er, ERROR e where e.error_no = er.error_no and e.error_no = #{value}

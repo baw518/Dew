@@ -8,11 +8,7 @@
 <title>Dew Project</title>
 
 <link rel="stylesheet" href="${initParam.root }css/test.css">
-    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800" rel="stylesheet">
-    
-    <link rel="stylesheet" href="${initParam.root }css/bootstrap.css">
-    <link rel="stylesheet" href="${initParam.root }css/normalize.min.css">
-    <link rel="stylesheet" href="${initParam.root }css/templatemo-style.css">
+
 
 <div id="headWrap" >
 <a href="home.do"  >홈으로</a>
@@ -44,5 +40,5 @@
 <input type="button" class="menuBtn" value="동영상 강좌" id="videoBtn">
 </div>
 </div> 
-<br>
+헬로헬로헬로 나는 그냥 본문<br>
 </head>
