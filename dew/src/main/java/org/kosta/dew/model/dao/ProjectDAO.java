@@ -46,5 +46,9 @@ public interface ProjectDAO {
 
 	void updateHit(String no);
 
+	List<CommentVO> countComment(int projectNo);
+
+	void deleteJoinerById(CommentVO cvo);
+
 
 }

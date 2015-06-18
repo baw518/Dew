@@ -25,7 +25,7 @@ input[id="regProBtn"] {
 	 border: 5px double #999;
 	 border-radius: 25px;
 	 font-size: 19px;
-	font-family: "HY나무B";
+	font-family: "맑은 고딕";
 }
 
 
@@ -39,7 +39,7 @@ input[id="regProBtn"] {
 #viewForm{
 	color:black;
 	 font-size: 19px;
-	font-family: "HY나무B";
+	font-family: "맑은 고딕";
 }
 #space{
 	height:200px;
@@ -58,16 +58,16 @@ input[id="joinProBtn2"] {
 
 
 #listView{
-	 width: 1000px;
+	 width: 1100px;
  	margin: 0 auto;
-	padding:10px;
+	padding-top:50px;
 	 border: 5px double #999;
 	 border-radius: 25px;
 }
 #listViewForm{
 	color:black;
 	 font-size: 20px;
-	font-family: "HY나무B";
+	font-family: "맑은 고딕";
 }
 #listSpace{
 	height:160px;
@@ -108,23 +108,9 @@ table.listTable{
 
 
 #main_viewForm{
-	margin: 70px;
+	margin: 40px;
+	margin-bottom: 80px;
 	margin-left:400px;
-}
-#create{
-	padding: 10px; 
-	cursor: pointer;
-}
-#Join{
-	padding: 10px; 
-	cursor: pointer;
-}
-#want{
-	padding: 10px; 
-	cursor: pointer;
-}
-#manage{
-	padding: 10px; 
 	cursor: pointer;
 }
 
@@ -150,7 +136,7 @@ table.listTable{
 #commentTextContent{
 	width: 380px;
 	font-size: 18px;
-	font-family: "HY나무B";
+	font-family: "맑은 고딕";
 }
 #writeComment{
 	margin: 10px;
@@ -158,7 +144,7 @@ table.listTable{
 #commentTextContentNoLogin{
 	width: 380px;
 	font-size: 18px;
-	font-family: "HY나무B";
+	font-family: "맑은 고딕";
 	margin-top: 20px;
 	padding-left : 10px;
 }
@@ -171,7 +157,7 @@ table.listTable{
 #manageForm{
 	color:black;
 	 font-size: 19px;
-	font-family: "HY나무B";
+	font-family: "맑은 고딕";
 	text-align: left;
 }
 #manageFormView{
@@ -184,4 +170,7 @@ table.listTable{
 }
 #manageSpace{
 	height: 160px;
+}
+#regProViewForm{
+	margin-left: 15px;
 }

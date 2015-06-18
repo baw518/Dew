@@ -47,6 +47,10 @@ public interface ProjectService {
 
 	ProjectVO getProjectContentNohit(String projectNo);
 
+	List<CommentVO> countComment(int projectNo);
+
+	void deleteJoinerById(String id,String projectNo);
+
 
 	
 }
