@@ -55,3 +55,8 @@ select distinct(e.exception_message) as errorCode   from error e , error_report 
 select distinct(e.error_code) as errorCode  from error e , error_report er where e.error_no = er.error_no and e.exception_message is null and e.error_code like '%e' order by e.error_code asc 
 -- exceptionMessage
 select distinct(e.exception_message) as errorCode   from error e , error_report er where e.error_no = er.error_no and e.error_code is null  and e.exception_message like '%e' order by e.exception_message asc
+
+-- reference Exception value(exceptionMessage)
+select e.error_no as errorNo ,e.exception_message as exceptionMessage, to_char(error_report_date,'yyyy/mm/dd HH24:MI:SS') as reportdate  ,er.discussion_status as discussionstatus from ERROR_REPORT er, ERROR e where e.error_no = er.error_no and e.exception_message =#{value} order by reportDate desc
+
+select e.error_no as errorNo ,e.error_code as errorCode, to_char(error_report_date,'yyyy/mm/dd HH24:MI:SS') as reportdate  ,er.discussion_status as discussionstatus from ERROR_REPORT er, ERROR e where e.error_no = er.error_no and e.error_code ='org.apache.jasper.JasperException: Exception in JSP:' order by reportDate desc

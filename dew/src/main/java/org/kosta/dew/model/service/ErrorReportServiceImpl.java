@@ -44,5 +44,10 @@ public class ErrorReportServiceImpl implements ErrorReportService {
 		return errorReportDAO.reportWrite(vo,type,title);
 	}
 
+	@Override
+	public List<ErrorReportVO> getReference(String refer,String type) {
+		return errorReportDAO.getReference(refer,type);
+	}
+
 
 }

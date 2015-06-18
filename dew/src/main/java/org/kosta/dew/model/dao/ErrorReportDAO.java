@@ -12,5 +12,6 @@ public interface ErrorReportDAO {
 	ErrorReportVO getContent(String error, String type);
 	ErrorReportVO getContent(int errorNo);
 	int reportWrite(ErrorReportVO vo, String type, String title);
+	List<ErrorReportVO> getReference(String refer, String type);
 
 }

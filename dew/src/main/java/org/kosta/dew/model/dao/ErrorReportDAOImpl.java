@@ -61,6 +61,15 @@ public class ErrorReportDAOImpl implements ErrorReportDAO {
 		return sqlSessionTemplate.selectOne("errorReport.currentValue");
 	}
 
+	@Override
+	public List<ErrorReportVO> getReference(String refer, String type) {
+		if(type.equals("ExceptionMessage")){
+			return sqlSessionTemplate.selectList("errorReport.getReferException", refer);
+		}else{
+			return sqlSessionTemplate.selectList("errorReport.getReferError", refer);
+		}
+	}
+
 
 
 

@@ -6,7 +6,6 @@
 $(document).ready(function(){
 	$("#getList").click(function(){
 		location.href="report_listView.do";
-	});
 	$("#update").click(function(){
 		var type ="${requestScope.type}" ;
 		if( type =="ExceptionMessage"){
@@ -24,10 +23,10 @@ $(document).ready(function(){
 <td width="100">Exception Message </td>
 <td witdh="200">${exception.exceptionMessage }</td>
 <td width="50">
-<c:if test="${exception.discussionStatus ==0 }">
+<c:if test="${exception.discussionStatus !=0 }">
 토론없음
 </c:if>
-<c:if test="${exception.discussionStatus !=0 }">
+<c:if test="${exception.discussionStatus ==0 }">
 토론있음
 </c:if>
 </td>
