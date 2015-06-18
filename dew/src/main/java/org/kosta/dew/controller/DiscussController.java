@@ -11,6 +11,7 @@ import org.kosta.dew.model.service.DiscussService;
 import org.kosta.dew.model.vo.CommentVO;
 import org.kosta.dew.model.vo.DiscussVO;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -35,9 +36,9 @@ public class DiscussController {
 	 * @return
 	 */
 	@RequestMapping("findDiscussContent.do")
-	public ModelAndView findDiscussContent(HttpServletRequest request,HttpServletResponse response,@CookieValue(value = "discussCookie", required = false) String cookieValue){
+	public String findDiscussContent(HttpServletRequest request,HttpServletResponse response,@CookieValue(value = "discussCookie", required = false) String cookieValue,Model model){
 		DiscussVO dsvo = null;
-		String no = request.getParameter("no");
+		int no = Integer.parseInt(request.getParameter("no"));
 		if (cookieValue == null) {
 			// discussCookie 존재하지 않으므로 cookie 생성하고 count 증가");
 			response.addCookie(new Cookie("discussCookie", "|" + no + "|"));
@@ -52,7 +53,12 @@ public class DiscussController {
 			// discussCookie 존재하고 이전에 해당 게시물 읽었으므로 count 증가x");
 			dsvo = discussService.findDiscussContent(no);
 		}
-		return new ModelAndView("discussion_show_discussion","dsvo",dsvo);
+		model.addAttribute("dsvo",dsvo);
+		
+		List<CommentVO> cmvo = discussService.findDiscussComment(no);
+		model.addAttribute("cmvo",cmvo);
+		
+		return "discussion_show_discussion";
 
 /*		String no = request.getParameter("no");
 		DiscussVO dsvo  = discussService.findDiscussContent(no);
@@ -105,6 +111,7 @@ public class DiscussController {
 	@ResponseBody
 	public CommentVO updateDiscussCommentForm(HttpServletRequest request){
 		String no = request.getParameter("no");
+		System.out.println(no);
 		CommentVO cmvo = discussService.findDiscussCommentByNo(no);
 		return cmvo;
 	}
@@ -135,7 +142,7 @@ public class DiscussController {
 		String no = request.getParameter("no");
 		String index = request.getParameter("index");
 		System.out.println("no "+no);
-		/*discussService.deleteDiscussComment(no);	*/
+		discussService.deleteDiscussComment(no);	
 		return new ModelAndView("redirect:findDiscussContent.do?no="+index);
 	}
 	/**
@@ -146,10 +153,13 @@ public class DiscussController {
 	 */
 	@RequestMapping("show_discussion_comment.do")
 	@ResponseBody
-	public List<CommentVO> show_discussion_comment(HttpServletRequest request){
-/*		CommentVO cvo = new CommentVO();*/
-		String discussionNo = request.getParameter("discussionNo");
-		List<CommentVO> cmlist = discussService.findDiscussComment(discussionNo);
+	public List<CommentVO> show_discussion_comment(HttpServletRequest request,CommentVO cmvo){
+		int no = Integer.parseInt(request.getParameter("discussionNo"));
+		String id = request.getParameter("id");
+		String content=request.getParameter("content");
+		cmvo = new CommentVO(no, id, content);
+		discussService.registerDiscussComment(cmvo);
+		List<CommentVO> cmlist = discussService.findDiscussComment(no);
 		return cmlist;
 	}
 	@RequestMapping("replyView.do")

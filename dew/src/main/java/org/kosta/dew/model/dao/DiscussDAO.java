@@ -11,7 +11,7 @@ public interface DiscussDAO {
 
 	public abstract int registerDiscussion(DiscussVO dsvo);
 
-	public abstract DiscussVO findDiscussContent(String no);
+	public abstract DiscussVO findDiscussContent(int no);
 
 	public abstract List<DiscussVO> searchDisscuss(String title);
 
@@ -25,10 +25,10 @@ public interface DiscussDAO {
 
 	public abstract int totalContent();
 
-	public abstract List<CommentVO> findDiscussComment(String discussionNo);
+	public abstract List<CommentVO> findDiscussComment(int discussionNo);
 
 	public abstract CommentVO findDiscussCommentByNo(String no);
 
-	public abstract void updateCount(String no);
+	public abstract void updateCount(int no);
 
 }

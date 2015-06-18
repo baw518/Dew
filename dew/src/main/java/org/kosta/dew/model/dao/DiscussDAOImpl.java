@@ -30,7 +30,7 @@ public class DiscussDAOImpl implements DiscussDAO {
 	 * @see org.kosta.dew.model.dao.DiscussDAO#findDiscussContent()
 	 */
 	@Override
-	public DiscussVO findDiscussContent(String no){
+	public DiscussVO findDiscussContent(int no){
 		return sqlSessionTemplate.selectOne("discuss.findDiscussContent",no);
 	}
 	/* (non-Javadoc)
@@ -73,7 +73,7 @@ public class DiscussDAOImpl implements DiscussDAO {
 		return sqlSessionTemplate.selectOne("discuss.totalContent");
 	}
 	@Override
-	public List<CommentVO> findDiscussComment(String discussionNo) {
+	public List<CommentVO> findDiscussComment(int discussionNo) {
 		// TODO Auto-generated method stub
 		return sqlSessionTemplate.selectList("discuss.findDiscussComment",discussionNo);
 	}
@@ -83,7 +83,7 @@ public class DiscussDAOImpl implements DiscussDAO {
 		return sqlSessionTemplate.selectOne("discuss.findDiscussCommentByNo",no);
 	}
 	@Override
-	public void updateCount(String no) {
+	public void updateCount(int no) {
 		sqlSessionTemplate.update("discuss.updateCount",no);
 
 	}

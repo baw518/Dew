@@ -39,11 +39,11 @@ public class DiscussServiceImpl implements DiscussService {
 	 * @see org.kosta.dew.model.service.DiscussService#findDiscussContent()
 	 */
 	@Override
-	public DiscussVO findDiscussContent(String no){
+	public DiscussVO findDiscussContent(int no){
 		return discussDAO.findDiscussContent(no);
 	}
 	@Override
-	public DiscussVO findDiscussContenHitUp(String no){
+	public DiscussVO findDiscussContenHitUp(int no){
 		discussDAO.updateCount(no);
 		return discussDAO.findDiscussContent(no);
 	}
@@ -83,7 +83,7 @@ public class DiscussServiceImpl implements DiscussService {
 		return discussDAO.deleteDiscussComment(no);
 	}
 	@Override
-	public List<CommentVO> findDiscussComment(String discussionNo) {
+	public List<CommentVO> findDiscussComment(int discussionNo) {
 		// TODO Auto-generated method stub
 		return discussDAO.findDiscussComment(discussionNo);
 	}
