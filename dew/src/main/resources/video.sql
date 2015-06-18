@@ -6,7 +6,7 @@ SELECT video_no,title,hit,id,video_date FROM(
 ) WHERE PAGE=1
 insert into video_path(video_no,video_path)
 	values(2,'123123')
-
+select * from qna
 	
 insert into video_path(video_path_no,video_no,video_path)
 	values(video_path_no.nextval,2,'123123')
