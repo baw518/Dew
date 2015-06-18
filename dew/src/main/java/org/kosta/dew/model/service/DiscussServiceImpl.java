@@ -42,6 +42,11 @@ public class DiscussServiceImpl implements DiscussService {
 	public DiscussVO findDiscussContent(String no){
 		return discussDAO.findDiscussContent(no);
 	}
+	@Override
+	public DiscussVO findDiscussContenHitUp(String no){
+		discussDAO.updateCount(no);
+		return discussDAO.findDiscussContent(no);
+	}
 	/* (non-Javadoc)
 	 * @see org.kosta.dew.model.service.DiscussService#searchDisscuss(java.lang.String)
 	 */

@@ -29,4 +29,6 @@ public interface DiscussDAO {
 
 	public abstract CommentVO findDiscussCommentByNo(String no);
 
+	public abstract void updateCount(String no);
+
 }

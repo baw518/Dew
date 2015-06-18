@@ -55,4 +55,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="updateDiscussComment" parameterType="cmvo">
 		update discussion_comment set content=#{content} where discussion_comment_no =#{commentNo}
 	</update>
+	<update id="updateCount" parameterType="dsvo">
+		update discussion set hit=hit+1 where discussion_no =#{discussionNo}
+	</update>
  </mapper> 		

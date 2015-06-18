@@ -28,4 +28,6 @@ public interface DiscussService {
 
 	public abstract CommentVO findDiscussCommentByNo(String no);
 
+	DiscussVO findDiscussContenHitUp(String no);
+
 }

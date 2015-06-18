@@ -82,4 +82,10 @@ public class DiscussDAOImpl implements DiscussDAO {
 		// TODO Auto-generated method stub
 		return sqlSessionTemplate.selectOne("discuss.findDiscussCommentByNo",no);
 	}
+	@Override
+	public void updateCount(String no) {
+		sqlSessionTemplate.update("discuss.updateCount",no);
+
+	}
+	
 }
