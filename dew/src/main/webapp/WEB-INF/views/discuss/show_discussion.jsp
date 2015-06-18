@@ -155,6 +155,13 @@ $(document).ready(function(){
 		}); 
 	});
 	
+	//삭제 요청 버튼 누를 시
+	$("#deleteManager").click(function(){
+		var no = $("#no").val();
+		location.href="deleteManager.do?discussionNo="+no;
+		alert("삭제요청되었습니다.");
+	});
+	
 });//ready
 </script>
  <div align="right">
