@@ -51,6 +51,10 @@ public interface ProjectService {
 
 	void deleteJoinerById(String id,String projectNo);
 
+	void successProject(String projectNo);
+
+	List<ProjectVO> findSuccessProjectById(String id);
+
 
 	
 }

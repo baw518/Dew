@@ -120,5 +120,13 @@ public class ProjectDAOImpl implements ProjectDAO{
 	public void deleteJoinerById(CommentVO cvo) {
 		sqlSessionTemplate.delete("project.deleteJoinerById",cvo);
 	}
+	@Override
+	public void successProject(String projectNo) {
+		sqlSessionTemplate.update("project.successProject",projectNo);
+	}
+	@Override
+	public List<ProjectVO> findSuccessProjectById(String id) {
+		return sqlSessionTemplate.selectList("project.findSuccessProject",id);
+	}
 
 }

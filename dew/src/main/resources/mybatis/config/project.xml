@@ -101,20 +101,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   </update>
   
   
- 
+ <!-- ProjectManageVO -->
  <select id="findProjectById" resultMap="projectRM">
   	<include refid="findProject" />
   	 where id=#{value} and achieve='모집중' order by project_date desc
    </select>
-   
-   
    <select id="findJoinProjectById" resultMap="projectRM">
   	select p.title,p.progressing,p.point,p.project_no,to_char(c.project_comment_date,'YY-MM-DD') as deadline,c.project_comment_no as hit from project_comment c,project_write p where c.type=1 and c.id=#{value} and c.project_no=p.project_no order by deadline desc
   </select>
   <select id="findProcessProjectById" resultMap="projectRM">
  	  	 select distinct p.id,p.title,p.achieve,p.progressing,p.point,p.project_no,to_char(p.project_date,'YY.MM.DD') as project_date from project_comment c,project_write p where c.type!=2 and p.achieve='진행중' and (p.id=#{value} or c.id=#{value}) order by project_date desc
   </select>
-		
+    <select id="findSuccessProject" resultMap="projectRM">
+ 	  	 select distinct p.id,p.title,p.achieve,p.progressing,p.point,p.project_no,to_char(p.project_date,'YY.MM.DD') as project_date from project_comment c,project_write p where c.type!=2 and p.achieve='완료' and (p.id=#{value} or c.id=#{value}) order by project_date desc
+  </select>
+  
 
   <select id="joinCheck" resultType="cmvo">
  	select project_comment_no as commentNo, project_no as boardNo,id,content,project_comment_date as commentDate from project_comment where project_no=#{boardNo} and id=#{id} and type=1
@@ -134,6 +135,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  <delete id="deleteJoinerById" parameterType="cmvo">
  	delete from project_comment where id=#{id} and project_no=#{boardNo} and type=1
  </delete>
+ 
+ <update id="successProject">
+ 	update project_write set project_date=sysdate, achieve='완료' where project_no=#{value}
+ </update>
   </mapper> 
  
  
