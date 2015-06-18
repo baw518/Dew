@@ -158,9 +158,9 @@ public class ProjectController {
 		return new ModelAndView("redirect:project_projectManageForm.do");
 	}
 	@RequestMapping("project_deleteJoiner.do")
-	public ModelAndView deleteJoinerById(String commentId){
-		System.out.println(commentId);
-		projectService.deleteJoinerById(commentId);
+	public ModelAndView deleteJoinerById(String id,String projectNo){
+		System.out.println(id+projectNo);
+		projectService.deleteJoinerById(id,projectNo);
 		return new ModelAndView("redirect:project_projectManageForm.do");
 	}
 }

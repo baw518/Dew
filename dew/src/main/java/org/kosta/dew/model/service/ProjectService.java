@@ -49,7 +49,7 @@ public interface ProjectService {
 
 	List<CommentVO> countComment(int projectNo);
 
-	void deleteJoinerById(String commentId);
+	void deleteJoinerById(String id,String projectNo);
 
 
 	

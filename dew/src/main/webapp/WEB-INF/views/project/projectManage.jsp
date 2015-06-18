@@ -20,9 +20,10 @@
   		});
  		$("#regProForm").hover(function(){
   			$("#regPro").css("background","#B4E5FF");
-  			$("#regProView").html("<c:choose><c:when test='${fn:length(requestScope.pmvo.creatingProject)!=0}'><c:forEach items='${requestScope.pmvo.creatingProject}' var='createP' varStatus='start'><table border='1'><tr><td><a href='project_View.do?projectNo=${createP.projectNo}'>${createP.projectName}</a></td></tr> "+
+  			$("#regProView").html("<c:choose><c:when test='${fn:length(requestScope.pmvo.creatingProject)!=0}'><table border='1'><tr><td><c:forEach items='${requestScope.pmvo.creatingProject}' var='createP' varStatus='start'><table border='1'><tr><td style='width: 400px'><a href='project_View.do?projectNo=${createP.projectNo}'>${createP.projectName}</a></td></tr> "+
   			"<tr><td>${createP.point}point ${createP.project_date} ${createP.deadline} <input type='button' value='시작' id='startProBtn${start.index}'><input type='hidden' value='${createP.projectNo}' id='ProBtnHid${start.index}'><input type='button' value='삭제' id='deleteBtn${start.index}'></td></tr>"+
-  			"<tr><td><c:forEach items='${createP.commentVO }' var='com' varStatus='cp'><br><table border='1' ><tr><td colspan='3'>참가신청자</td></tr><tr><td width='80px'>ID</td><td width='200px'>한마디</td><td width='150px' >접수일</td></tr><tr><td>${com.id}</td><td>${com.content}</td><td>${com.commentDate} <input type='hidden' value='${com.id}' id='deleteJoinerBtnHid${cp.index}'><input type='button' value='삭제' style='padding: 0px;' id='deleteJoiner${cp.index}'></td></tr></table></c:forEach><br></c:forEach></td></tr></table></c:when><c:otherwise></c:otherwise></c:choose>");
+  			"<tr><td><c:forEach items='${createP.commentVO }' var='com' varStatus='cp'><br><table border='1' ><tr><td colspan='3'>참가신청자</td></tr><tr><td>ID</td><td width='200px'>한마디</td><td width='150px' >접수일</td></tr><tr><td>${com.id}</td><td>${com.content}</td><td>${com.commentDate} "+
+  			"<input type='hidden' value='${com.id}' id='deleteJoinerBtnHid${cp.index}'><input type='hidden' value='${createP.projectNo}' id='deleteJoinerBtnHid2${cp.index}'><input type='button' value='삭제' style='padding: 0px;' id='deleteJoiner${cp.index}'></td></tr></table></c:forEach><br></td></tr></table></c:forEach></td></tr></table></c:when><c:otherwise></c:otherwise></c:choose>");
   		},function(){
   			$("#regPro").css("background","white");
   			$("#regProView").html("");
@@ -37,7 +38,7 @@
   		});
  		$("#processProForm").hover(function(){
   			$("#processPro").css("background","#B4E5FF");
-  			$("#processProView").html("<c:choose><c:when test='${fn:length(requestScope.pmvo.processingProject)!=0}'><table><c:forEach items='${requestScope.pmvo.processingProject}' var='processP'><tr><td width='290px'><a href='project_View.do?projectNo=${processP.projectNo}'>${processP.projectName}</a></td><td> ${processP.progressing}% </td><td>${processP.project_date}</td></tr></c:forEach></table><br></c:when><c:otherwise></c:otherwise></c:choose>");
+  			$("#processProView").html("<c:choose><c:when test='${fn:length(requestScope.pmvo.processingProject)!=0}'><table><c:forEach items='${requestScope.pmvo.processingProject}' var='processP'><tr><td width='290px'><a href='project_View.do?projectNo=${processP.projectNo}'>${processP.projectName}</a></td><td> ${processP.progressing}% </td><td>${processP.project_date}</td><c:choose><c:when test='${processP.id==sessionScope.mvo.id}'><td><input type='button' value='완료'></td></c:when></c:choose></tr></c:forEach></table><br></c:when><c:otherwise></c:otherwise></c:choose>");
   		},function(){
   			$("#processPro").css("background","white");
   			$("#processProView").html("");
@@ -67,7 +68,7 @@
 			});
 			$("#regProView").on("click","#deleteJoiner<%=i%>",function(){
 				if(confirm("삭제하시겠습니까?"))
-					location.href="project_deleteJoiner.do?commentId="+$("#deleteJoinerBtnHid<%=i%>").val();
+					location.href="project_deleteJoiner.do?id="+$("#deleteJoinerBtnHid<%=i%>").val()+"&projectNo="+$("#deleteJoinerBtnHid2<%=i%>").val();
 			});
 			<%}%>
  	 });
@@ -84,5 +85,5 @@
 		<div id="requestProForm" ><div id="requestPro" style="cursor: pointer"><hr>의뢰<b> 0</b><hr></div><div id="requestProView"></div></div>
 </div>
   </div>
-    <div id="manageSpace"></div>
+    <div id="manageSpace"></div>	
 </body>

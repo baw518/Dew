@@ -117,8 +117,11 @@ public class ProjectServiceImpl implements ProjectService{
 		return projectDAO.countComment(projectNo);
 	}
 	@Override
-	public void deleteJoinerById(String commentId) {
-		projectDAO.deleteJoinerById(commentId);
+	public void deleteJoinerById(String id,String projectNo) {
+		CommentVO cvo=new CommentVO();
+		cvo.setBoardNo(Integer.parseInt(projectNo));
+		cvo.setId(id);
+		projectDAO.deleteJoinerById(cvo);
 	}
 
 }

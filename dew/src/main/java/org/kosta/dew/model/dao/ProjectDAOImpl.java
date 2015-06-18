@@ -117,8 +117,8 @@ public class ProjectDAOImpl implements ProjectDAO{
 		return sqlSessionTemplate.selectList("project.getProComment",projectNo);
 	}
 	@Override
-	public void deleteJoinerById(String commentId) {
-		sqlSessionTemplate.delete("project.deleteJoinerById",commentId);
+	public void deleteJoinerById(CommentVO cvo) {
+		sqlSessionTemplate.delete("project.deleteJoinerById",cvo);
 	}
 
 }
