@@ -87,5 +87,15 @@ public class DiscussDAOImpl implements DiscussDAO {
 		sqlSessionTemplate.update("discuss.updateCount",no);
 
 	}
+	@Override
+	public void commentReplyStepPlus(CommentVO vo) {
+		// TODO Auto-generated method stub
+		sqlSessionTemplate.update("discuss.commentReplyStepPlus", vo);
+	}
+	@Override
+	public void ajaxWriteCommentReply(CommentVO vo) {
+		// TODO Auto-generated method stub
+		sqlSessionTemplate.insert("discuss.ajaxWriteCommentReply", vo);
+	}
 	
 }

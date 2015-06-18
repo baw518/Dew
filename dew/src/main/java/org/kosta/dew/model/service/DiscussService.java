@@ -30,4 +30,8 @@ public interface DiscussService {
 
 	DiscussVO findDiscussContenHitUp(int no);
 
+	public abstract void commentReplyStepPlus(CommentVO vo);
+
+	public abstract void ajaxWriteCommentReply(CommentVO vo);
+
 }

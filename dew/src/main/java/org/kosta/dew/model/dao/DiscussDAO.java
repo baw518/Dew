@@ -31,4 +31,8 @@ public interface DiscussDAO {
 
 	public abstract void updateCount(int no);
 
+	public abstract void commentReplyStepPlus(CommentVO vo);
+
+	public abstract void ajaxWriteCommentReply(CommentVO vo);
+
 }

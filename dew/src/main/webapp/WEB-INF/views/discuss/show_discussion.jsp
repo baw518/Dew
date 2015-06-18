@@ -47,6 +47,13 @@ $(document).ready(function(){
 		
 	// 삭제 Btn
 	$(document).on("click", "#commentDeleteBtn",function(e){
+		var sessionId = "${sessionScope.mvo.id}";
+		var adminCheck = "${sessionScope.mvo.memberLevel}";
+		var commentWriteId = $(this).parent().prev().prev().prev().text();
+		if(sessionId != commentWriteId && adminCheck != 0){
+			alert("본인의 댓글만 삭제가능합니다.");
+			return false;
+		}
 		var commentNo = $(this).parent().children().val();
 		var id = $("#id").val();
 		var no = $("#no").val();	
@@ -60,49 +67,93 @@ $(document).ready(function(){
 	
 	// 수정 Btn -> form
 	$(document).on("click", "#commentUpdateText",function(e){
+		var relevel = $(this).next().next().next().next().next().val();
+		var refCount = "";
+		for(var i=1; i<=relevel; i++){
+			refCount += "re:";
+		}
+		
+		var sessionId = "${sessionScope.mvo.id}";
+		var adminCheck = "${sessionScope.mvo.memberLevel}";
+		var commentWriteId = $(this).parent().prev().prev().prev().text();
+		var hiddenContent = $(this).parent().prev().text();
+		if(sessionId != commentWriteId && adminCheck != 0){
+			alert("본인의 댓글만 수정가능합니다.");
+			return false;
+		}
 		var commentNo = $(this).parent().children().val();
-		alert(commentNo);
-		var no = $("#no").val();	
+		var no = $("#no").val();
 		var q = confirm("수정하시겠습니까?");
 		if(q){	
-		$.ajax({
-			type:'post',
-	        url:'updateDiscussCommentForm.do?no='+commentNo,
-	        dataType:'json',
-	        success:function(data){
-	        	var c = ""; 
-					 c+="<tr><td>"+data.id+"</td>";
-					 c+="<td>"+data.commentDate+"</td>";
-					 c+="<td colspan='2'>";		
-					 c+="<textarea id='auto_textarea2' cols='50' rows='2' maxlength='1000'>"+data.content+"</textarea>";
-					 c+="<input type='image' src='http://cafeimgs.naver.net/cafe4/btn_cmt_cfm_v1.gif' alt='확인' id='commentUpdateBtn'>";
-					 c+="</td>";
-					 c+="<td><input type='hidden' id='commentNo' name='commentNo' value='"+data.commentNo+"'>"
-					 +"<input type='button' id='commentUpdateText' name='commentUpdateText' value='수정'>"
-					 +"<input type='button' id='commentDeleteBtn' name='commentDeleteBtn' value='삭제'>"+
-					 "<input type='button' id='commentReplyWriteView' name='commentReplyWriteView' value='답글'>"+
-					 "<input type='hidden' id='ref' name='ref' value='"+data.ref+"'>"+
-					 "<input type='hidden' id='reStep' name='reStep' value='"+data.reStep+"'>"+
-					 "<input type='hidden' id='relevel' name='relevel' value='"+data.relevel+"'></td>";
-					 c+="</tr>";
-	    			c+="<tr></tr>";
-					$("#commentView").html(c);
-					 $("#commentUpdateBtn").click(function(){
-						location.href="updateDiscussComment.do?no="+commentNo+"&index="+no+"&content="+$("#auto_textarea2").val();
-					}); 
-	  	     	 }
-			});
+		$(this).parent().parent().children("td:eq(2)").html("<input type='hidden' id='commentNo' name='commentNo' value='"+commentNo+"'>"+
+					"<textarea id='auto_textarea2' cols='50' rows='2' maxlength='1000'>"+hiddenContent+"</textarea>"+
+					"<input type='button' name='commentUpdateBtn' id='commentUpdateBtn' value='확인'>"+
+					"<input type='button' name='commentUpdateCancel' id='commentUpdateCancel' value='취소'>"+
+					"<input type='hidden' name='hiddenContent' id='hiddenContent' value='"+hiddenContent+"'>");
+		$("#commentUpdateBtn").click(function(){
+			location.href="updateDiscussComment.do?no="+commentNo+"&index="+no+"&content="+$("#auto_textarea2").val();
+		}); 
 		}
 	});
 	
-/* 	// 수정 form 확인
-	$(document).on("click", "#commentUpdateBtn", function(e){
-		var commentNo = $("#commentUpdateText").parent().children().val();
-		var no = $("#no").val();	
-		var content = $("#auto_textarea").val();
-		alert(no+"/"+commentNo+"/"+content);
-	 	location.href="updateDiscussComment.do?no="commentNo+"&index="no+"&content="content; 
-	}); */
+	// 댓글의 답글
+	$(document).on("click", "#commentReplyWriteView" , function(){
+		var reflevel = $(this).next().next().next().val();
+		var refCount = "";
+		for(var i=0; i<=reflevel; i++){
+			refCount += "re:";
+		}
+		
+		var p = "<td colspan='6'><input type='text' name='commentReplyText' id='commentReplyText' value='"+refCount+"'>"+
+					"<input type='button' id='commentReplyWriteBtn' name='commentReplyWriteBtn' value='등록'>"+
+					"<input type='button' id='commentReplyCancel' name='commentReplyCancel' value='취소'>"+
+					"<input type='hidden' id='boardNo' name='boardNo' value='${requestScope.qvo.qnaNo}'"+
+					"</td>";
+		$(this).parent().parent().next().html(p);
+		
+	});
+	
+	$(document).on("click", "#commentReplyCancel", function(){
+			return false;
+	});
+	
+	$(document).on("click", "#commentReplyWriteBtn", function(){
+		var id = $("#id").val();
+		var ref = $(this).parent().parent().prev().children().next().children().next().next().next().next().val();
+		var reStep = $(this).parent().parent().prev().children().next().children().next().next().next().next().next().val();
+		var relevel = $(this).parent().parent().prev().children().next().children().next().next().next().next().next().next().val();
+		var content = $(this).prev().val();
+		if(content==""){
+			alert("커맨트 답글 내용을 입력하세요");
+			return false;
+		}
+		
+		$.ajax({
+		      type:"post",
+		      url:"DSajaxWriteCommentReply.do",
+		      data:"content="+content+"&id=${sessionScope.mvo.id}&boardNo=${requestScope.dsvo.discussionNo}&ref="+ref+"&reStep="+reStep+"&relevel="+relevel,
+		      dataType:"json",
+		      success:function(result){
+		    	    $("#commentView").html("");
+		    		var c = "";
+		    		$.each(result,function(index,data){
+						 c+="<tr><td>"+data.id+"</td>";
+						 c+="<td>"+data.commentDate+"</td>";
+						 c+="<td>"+data.content+"</td>";
+						 c+="<td><input type='hidden' id='commentNo' name='commentNo' value='"+data.commentNo+"'>"
+						 +"<input type='button' id='commentUpdateText' name='commentUpdateText' value='수정'>"
+						 +"<input type='button' id='commentDeleteBtn' name='commentDeleteBtn' value='삭제'>"+
+						 "<input type='button' id='commentReplyWriteView' name='commentReplyWriteView' value='댓글달기'>"+
+						 "<input type='hidden' id='ref' name='ref' value='"+data.ref+"'>"+
+						 "<input type='hidden' id='reStep' name='reStep' value='"+data.reStep+"'>"+
+						 "<input type='hidden' id='relevel' name='relevel' value='"+data.relevel+"'></td>";
+						 c+="</tr>";
+					});
+		    		c+="<tr></tr>";
+		    		$("#commentView").html(c);  
+		      } 
+		}); 
+	});
 	
 });//ready
 </script>

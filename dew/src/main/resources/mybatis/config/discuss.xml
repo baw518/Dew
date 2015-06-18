@@ -58,4 +58,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="updateCount" parameterType="dsvo">
 		update discussion set hit=hit+1 where discussion_no =#{discussionNo}
 	</update>
+	 <update id="commentReplyStepPlus" parameterType="cmvo">
+ 	 	<![CDATA[ update discussion_comment set restep = restep+1 where ref = #{ref} and restep > #{reStep}]]>
+ 	 </update>
+ 	 
+ 	 <insert id="ajaxWriteCommentReply" parameterType="cmvo">
+ 	 	insert into discussion_comment(discussion_comment_no,discussion_no,id,content,discussion_comment_date,ref,restep,relevel)
+ 	 	values(discussion_comment_no.nextval,#{boardNo},#{id},#{content},sysdate,#{ref},#{reStep},#{relevel})
+ 	 </insert>
  </mapper> 		

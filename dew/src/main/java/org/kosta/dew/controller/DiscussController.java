@@ -128,6 +128,7 @@ public class DiscussController {
 		String index = request.getParameter("index");
 		String content=request.getParameter("content");
 		CommentVO cmvo = new CommentVO(no, content);
+		System.out.println(cmvo);
 		discussService.updateDiscussComment(cmvo);
 		return "redirect:findDiscussContent.do?no="+index;
 	}
@@ -184,5 +185,26 @@ public class DiscussController {
 		 * 관리자에게 넘기는 메소드
 		 */
 		return "redirect:findDiscussContent.do?no="+discussionNo;
+	}
+	
+	/**
+	 * 커맨트에대한 답글커맨트 ajax로 다는곳.
+	 * @param vo
+	 * @return
+	 */
+	@RequestMapping("DSajaxWriteCommentReply.do")
+	@ResponseBody
+	public List<CommentVO> ajaxWriteCommentReply(CommentVO vo){
+		//답변커맨트와 같은 ref들중에서, restep이 답변커맨트보다 더 큰 커맨트들의 restep을 1씩 증가시킨다.
+		discussService.commentReplyStepPlus(vo);
+		
+		//답변글의 restep과 relevel을 증가시켜 insert한다.
+		vo.setReStep(vo.getReStep()+1);
+		vo.setRelevel(vo.getRelevel()+1);
+		discussService.ajaxWriteCommentReply(vo);
+		
+		//해당글의 커맨트리스트 받아오기
+		List<CommentVO> cmvo = discussService.findDiscussComment(vo.getBoardNo());
+		return cmvo;
 	}
 }
