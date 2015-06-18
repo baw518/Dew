@@ -123,5 +123,13 @@ public class ProjectServiceImpl implements ProjectService{
 		cvo.setId(id);
 		projectDAO.deleteJoinerById(cvo);
 	}
+	@Override
+	public void successProject(String projectNo) {
+		projectDAO.successProject(projectNo);
+	}
+	@Override
+	public List<ProjectVO> findSuccessProjectById(String id) {
+		return projectDAO.findSuccessProjectById(id);
+	}
 
 }

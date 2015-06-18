@@ -760,7 +760,7 @@ pre code {
   margin-right: auto;
   margin-left: auto;
 }
-.row {
+. {
   margin-right: -15px;
   margin-left: -15px;
 }
@@ -2676,7 +2676,7 @@ input[type="button"].btn-block {
 .glyphicon-ban-circle:before {
   content: "\e090";
 }
-.glyphicon-arrow-left:before {
+.glyphicon-ar-left:before {
   content: "\e091";
 }
 .glyphicon-arrow-right:before {
@@ -5685,7 +5685,7 @@ button.close {
     display: table;
   }
   tr.visible-xs {
-    display: table-row !important;
+    display: table- !important;
   }
   th.visible-xs,
   td.visible-xs {
@@ -5700,7 +5700,7 @@ button.close {
     display: table;
   }
   tr.visible-sm {
-    display: table-row !important;
+    display: table- !important;
   }
   th.visible-sm,
   td.visible-sm {
@@ -5715,7 +5715,7 @@ button.close {
     display: table;
   }
   tr.visible-md {
-    display: table-row !important;
+    display: table- !important;
   }
   th.visible-md,
   td.visible-md {
@@ -5730,7 +5730,7 @@ button.close {
     display: table;
   }
   tr.visible-lg {
-    display: table-row !important;
+    display: table- !important;
   }
   th.visible-lg,
   td.visible-lg {
@@ -5768,7 +5768,7 @@ button.close {
     display: table;
   }
   tr.visible-print {
-    display: table-row !important;
+    display: table- !important;
   }
   th.visible-print,
   td.visible-print {

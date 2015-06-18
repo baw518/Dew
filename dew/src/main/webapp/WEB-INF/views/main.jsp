@@ -1,13 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <div class="content-section">
         <div class="container">
             <div class="row">
                 <div class="col-md-5">
                     <div class="product-item-1">
                         <div class="product-thumb">
-                            <img src="images/board1.jpg">
+                        	
+                        	<h4 align="center">토론방</h4><h6 align="right"><a href="discussion_listView.do">more</a></h6>
+                        		<table class="table">
+	                        		<c:forEach items="${requestScope.discussList}" var="i">
+	                        			<tr>
+	                        				<td><a href="findDiscussContent.do?no=${i.discussionNo}">${i.title}</a></td>
+	                        			</tr>
+	                        		</c:forEach>
+                        		</table>
+                        	
+                            <!-- <img src="images/board1.jpg"> -->
                         </div> <!-- /.product-thumb -->
                     </div> <!-- /.product-item -->
                 </div> <!-- /.col-md-3 -->
@@ -15,17 +25,35 @@
                     <div class="product-holder">
                         <div class="product-item-2">
                             <div class="product-thumb">
-                                <img src="images/board2.jpg" >
+                                
+                                <h4 align="center">질의응답</h4><h6 align="right"><a href="QnA_listView.do">more</a></h6>
+                        		<table class="table">
+	                        		<c:forEach items="${requestScope.qnaList}" var="i">
+	                        			<tr>
+	                        				<td><a href="QnA_showContent.do?qnaNo=${i.qnaNo}">${i.title}</a></td>
+	                        			</tr>
+	                        		</c:forEach>
+                        		</table>
+                                
                             </div> <!-- /.product-thumb -->
                         </div> <!-- /.product-item-2 -->
-                        <div class="clearfix"></div>
+                        <!-- <div class="clearfix">dfgdfsgdsfg</div> -->
                     </div> <!-- /.product-holder -->
                 </div> <!-- /.col-md-5 -->
                  <div class="col-md-2">
                  	 <div class="product-holder">
                         <div class="product-item-2">
                             <div class="product-thumb">
-                                <img src="images/rank.jpg" >
+                            
+                            	<h4 align="center">기여도랭킹</h4><h6 align="right"><a href="">more</a></h6>
+                        		<table class="table">
+	                            	<c:forEach items="${requestScope.rankingList}" varStatus="num" var="r" begin="0" step="1" end="4">
+                            			<tr>
+                            				<td>${num.index+1}위</td><td>${r.id}</td><td>${r.score}</td>
+                            			</tr>
+	                            	</c:forEach>
+                        		</table>
+                        		
                             </div> <!-- /.product-thumb -->
                         </div> <!-- /.product-item-2 -->
                     </div> <!-- /.product-holder -->
@@ -34,7 +62,16 @@
                  	 <div class="product-holder">
                         <div class="product-item-2">
                             <div class="product-thumb">
-                                <img src="images/dong.jpg" >
+                            
+                            	<h4 align="center">동영상강좌</h4><h6 align="right"><a href="video_listView.do">more</a></h6>
+                        		<table class="table">
+	                            	<c:forEach items="${requestScope.videoList}" var="i">
+                            			<tr>
+                            				<td><a href="video_showContent.do?no=${i.videoNo}">${i.title}</a></td>
+                            			</tr>
+	                            	</c:forEach>
+                        		</table>
+                        		
                             </div> <!-- /.product-thumb -->
                         </div> <!-- /.product-item-2 -->
                     </div> <!-- /.product-holder -->
@@ -44,20 +81,49 @@
                 <div class="col-md-4 col-sm-6 col-xs-12">
                     <div class="product-item-4">
                         <div class="product-thumb">
-                            <img src="images/sub.jpg" >
+                        	
+                        	<h4 align="center">Exception</h4><h6 align="right"><a href="report_listView.do">more</a></h6>
+                    		<table class="table">
+	                    		<c:forEach items="${requestScope.errorReportExceptionList}" var="i">
+	                    			<tr>
+	                    				<td><a href="report_showContent.do?error=${i.exceptionMessage}&type=exception">${i.exceptionMessage}</a></td>
+	                    			</tr>
+	                    		</c:forEach>
+                    		</table>
+                            
+                        		
                         </div> <!-- /.product-thumb -->
                     </div> <!-- /.product-item-4 -->
                 </div> <!-- /.col-md-4 -->
                 <div class="col-md-4 col-sm-6 col-xs-12">
                     <div class="product-item-4">
                         <div class="product-thumb">
-                            <img src="images/sub.jpg">
+                        
+                        	<h4 align="center">ErrorCode</h4><h6 align="right"><a href="report_listView.do">more</a></h6>
+                    		<table class="table">
+	                    		<c:forEach items="${requestScope.errorReportErrorCodeList}" var="i">
+	                    			<tr>
+	                    				<td><a href="report_showContent.do?error=${i.errorCode}&type=errorcode">${i.errorCode}</a></td>
+	                    			</tr>
+	                    		</c:forEach>
+                    		</table>
+                            
+                        		
                         </div> <!-- /.product-thumb -->
                     </div> <!-- /.product-item-4 -->
                 </div> <!-- /.col-md-4 -->
                 <div class="col-md-4 col-sm-12 col-xs-12">
                     <div class="ads-placemenet">
-                        <img src="images/sub.jpg" >
+                    
+                        <h4 align="center">프로젝트참여</h4><h6 align="right"><a href="project_listView.do">more</a></h6>
+                    		<table class="table">
+	                    		<c:forEach items="${requestScope.projectList}" var="i">
+	                    			<tr>
+	                    				<td><a href="project_View.do?projectNo=${i.projectNo}">${i.projectName}</a></td>
+	                    			</tr>
+	                    		</c:forEach>
+                    		</table>
+                       		
                     </div> <!-- /.ads-placement -->
                 </div> <!-- /.col-md-4 -->
             </div> <!-- /.row -->

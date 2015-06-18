@@ -44,6 +44,7 @@ public class ProjectController {
 		   pmvo.setCreatingProject(projectService.findProjectById(id));
 		   pmvo.setJoinProject(projectService.findJoinProjectById(id));
 		   pmvo.setProcessingProject(projectService.findProcessProjectById(id));
+		   pmvo.setSuccessProject(projectService.findSuccessProjectById(id));
 			return new ModelAndView("projectView_projectManage","pmvo",pmvo);
 		}
 		@RequestMapping(value="project_register.do",method=RequestMethod.POST)
@@ -152,15 +153,19 @@ public class ProjectController {
 		projectService.deleteJoinComment(commentNo);
 		return new ModelAndView("redirect:project_projectManageForm.do");
 	}
-	@RequestMapping("startProject.do")
+	@RequestMapping("project_start.do")
 	public ModelAndView startProject(String projectNo){
 		projectService.startProject(projectNo);
 		return new ModelAndView("redirect:project_projectManageForm.do");
 	}
 	@RequestMapping("project_deleteJoiner.do")
 	public ModelAndView deleteJoinerById(String id,String projectNo){
-		System.out.println(id+projectNo);
 		projectService.deleteJoinerById(id,projectNo);
+		return new ModelAndView("redirect:project_projectManageForm.do");
+	}
+	@RequestMapping("project_success.do")
+	public ModelAndView successProject(String projectNo){
+		projectService.successProject(projectNo);
 		return new ModelAndView("redirect:project_projectManageForm.do");
 	}
 }

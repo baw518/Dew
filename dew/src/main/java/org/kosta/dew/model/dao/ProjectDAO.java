@@ -50,5 +50,9 @@ public interface ProjectDAO {
 
 	void deleteJoinerById(CommentVO cvo);
 
+	void successProject(String projectNo);
+
+	List<ProjectVO> findSuccessProjectById(String id);
+
 
 }

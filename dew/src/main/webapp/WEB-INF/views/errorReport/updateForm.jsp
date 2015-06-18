@@ -26,11 +26,11 @@ ${type }
 </c:otherwise>
 </c:choose>
 <td width="50">
-<c:if test="${exception.discussionStatus ==0 }">
-토론없음
+<c:if test="${evo.discussionStatus == 1}">
+토론 있음
 </c:if>
-<c:if test="${exception.discussionStatus !=0 }">
-토론있음
+<c:if test="${evo.discussionStatus == 0}">
+토론 없음
 </c:if>
 </td>
 <td width="150">

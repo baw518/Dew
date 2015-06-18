@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="home"> 
+ 	 <resultMap type="mvo" id="memberMap">
+ 	 	<result property="id" column="id" />			
+ 		<result property="memberName" column="member_name" />			
+		<result property="memberLevel" column="member_level" /> 
+		<result property="score" column="contribution" /> 
+		<result property="point" column="point" />   
+	</resultMap>
+	
+	 <resultMap type="vvo" id="videoMap">
+ 	 	<result property="videoNo" column="video_no" />						
+		<result property="title" column="title" />
+	</resultMap>
+	
+	<resultMap type="dsvo" id="discussMap">
+ 	 	<result property="discussionNo" column="discussion_no" />						
+		<result property="title" column="title" />
+	</resultMap>
+	
+	<resultMap type="qvo" id="qnaMap">
+ 	 	<result property="qnaNo" column="qna_no" />						
+		<result property="title" column="title" />
+	</resultMap>
+	
+	 <resultMap type="pvo" id="projectMap">
+ 	 	<result property="projectNo" column="qna_no" />						
+		<result property="projectName" column="title" />
+	</resultMap>
+ 
+ 	<select id="mainRankingLoad" resultMap="memberMap">
+ 		select id,member_name,member_level,contribution,point from member where member_level not in ('0')  order by contribution desc
+ 	</select>
+ 	
+ 	<select id="videoListLoad" resultMap="videoMap">
+ 		<![CDATA[ select video_no,title from video_tutorial  where rownum <=5 order by video_no desc ]]>
+ 	</select>
+ 	
+ 	<select id="discussListLoad" resultMap="discussMap">
+ 		<![CDATA[ select discussion_no,title from discussion where rownum <=16 order by discussion_no desc ]]>
+ 	</select>
+ 	
+
+ 	
+ 	<select id="qnaListLoad" resultMap="qnaMap">
+ 		<![CDATA[ 
+ 		select qna_no,title 
+		from (select qna_no,title
+				from qna
+				order by ref desc,restep asc)
+		where rownum <= 16
+		]]>
+ 	</select>
+ 	
+ 	<select id="projectListLoad" resultMap="projectMap">
+ 		<![CDATA[ select project_no,title from project_write where achieve='모집중' and rownum <=5 order by project_no desc ]]>
+ 	</select>
+ 	
+ 	<select id="errorReportExceptionList" resultType="evo">
+ 		<![CDATA[  
+ 			select exceptionMessage
+			from(select distinct(e.exception_message) as exceptionMessage, er.error_report_date as reportDate   
+					from error e , error_report er 
+					where e.error_no = er.error_no and e.error_code is null 
+					order by er.error_report_date desc)
+			where rownum<=5
+		]]>
+ 	</select>
+ 	
+ 	<select id="errorReportErrorCodeList" resultType="evo">
+ 		<![CDATA[
+ 			select errorCode
+			from(
+					select distinct(e.error_code) as errorCode , er.error_report_date as reportDate 
+					from error e , error_report er 
+					where e.error_no = er.error_no and e.exception_message is null or e.error_code is not null 
+					order by er.error_report_date desc)
+			where rownum <=5
+ 		]]>
+ 	</select>
+ </mapper> 		
+
+ 

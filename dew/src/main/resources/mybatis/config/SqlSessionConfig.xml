@@ -26,6 +26,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="mybatis/config/video.xml"></mapper>		
 		<mapper resource="mybatis/config/discuss.xml"></mapper>		
 		<mapper resource="mybatis/config/comment.xml"></mapper>	
+		<mapper resource="mybatis/config/home.xml"></mapper>	
 	</mappers>
 </configuration>
 

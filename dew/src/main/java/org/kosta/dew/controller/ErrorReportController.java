@@ -41,6 +41,15 @@ public class ErrorReportController {
 		return mav;
 	}
 	
+	@RequestMapping("report_referView.do")
+	public ModelAndView reportReferenceView(String refer,String type){
+		ModelAndView mav = new ModelAndView("errorReport_referView");
+		mav.addObject("reference", errorReportService.getReference(refer,type));
+		mav.addObject("type",type);
+		System.out.println(errorReportService.getReference(refer,type) + " " + type);
+		return mav;
+	}
+	
 	@RequestMapping("report_showContent.do")
 	public ModelAndView reportShowContent(String error,String type){
 		ModelAndView mav = new ModelAndView("errorReport_showContent");
@@ -67,6 +76,7 @@ public class ErrorReportController {
 	public ModelAndView reportWriteResult(int errorNo){
 		ModelAndView mav = new ModelAndView("errorReport_writeResult");
 		mav.addObject("result",errorReportService.getContent(errorNo));
+		System.out.println(errorReportService.getContent(errorNo));
 		return mav;
 	}
 	
