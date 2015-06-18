@@ -23,10 +23,10 @@ $(document).ready(function(){
 <td width="100">Exception Message </td>
 <td witdh="200">${exception.exceptionMessage }</td>
 <td width="50">
-<c:if test="${exception.discussionStatus !=0 }">
+<c:if test="${exception.discussionStatus ==0 }">
 토론없음
 </c:if>
-<c:if test="${exception.discussionStatus ==0 }">
+<c:if test="${exception.discussionStatus ==1 }">
 토론있음
 </c:if>
 </td>
@@ -47,10 +47,10 @@ ${exception.content }
 <td width="100">Error Code </td>
 <td witdh="200">${errorcode.errorCode }</td>
 <td width="50">
-<c:if test="${result.discussionStatus == 1}">
+<c:if test="${errorcode.discussionStatus == 1}">
 토론 있음
 </c:if>
-<c:if test="${result.discussionStatus == 0}">
+<c:if test="${errorcode.discussionStatus == 0}">
 토론 없음
 </c:if>
 </td>
