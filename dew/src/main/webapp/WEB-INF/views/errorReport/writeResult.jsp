@@ -29,10 +29,9 @@ $(document).ready(function(){
 });
 </script>
 <title>ErrorReport Register Result</title>
-${requestScope.result}
 
-<table   border="1" width="800">
-<caption align="left"> Report Register Result</caption>
+<table   class="table" width="800">
+<caption align="left"><h1> Report Register Result</h1></caption>
 <tr>
 <td width="100">
 <c:if test="${requestScope.result.exceptionMessage != null}">
@@ -60,7 +59,7 @@ ${result.date }
 </td>
 </tr>
 <tr>
-<td colspan="4">
+<td colspan="4" height="500">
 <pre>
 ${result.content }
 </pre>

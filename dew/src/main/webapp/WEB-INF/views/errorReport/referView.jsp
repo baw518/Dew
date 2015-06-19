@@ -11,7 +11,7 @@
 <table border="1">
 <caption>Reference</caption>
 <tr >
-<td width="100" rowspan="${fn:length(requestScope.reference)+1}">
+<td width="100" rowspan="${fn:length(requestScope.vo.list)+1}">
 ${type }
 </td>
 <td width="500">
@@ -23,11 +23,11 @@ ${type }
 <td width="70">
 토 론
 </td> 
-<c:forEach items="${requestScope.reference }" var ="refer" varStatus="status">
+<c:forEach items="${requestScope.vo.list }" var ="refer" varStatus="status">
 <tr>
 <td>
 <c:if test="${refer.exceptionMessage != null}">
-${refer.exceptionMessage } 
+<a href="report_showContentByNo.do?errorNo=${refer.errorNo }&type=${type}">${refer.exceptionMessage }</a> 
 </c:if>
 <c:if test="${refer.errorCode != null}">
 ${refer.errorCode } 
@@ -48,3 +48,23 @@ ${refer.errorCode }
 </c:forEach>
 
 </table>
+<br><br>
+
+<center>
+
+	<a href="report_referView.do?pageNo=${requestScope.vo.pagingBean.startPageOfPageGroup-1}&refer=${refer }&type=${type}">
+	<c:if test="${requestScope.vo.pagingBean.previousPageGroup== true && requestScope.vo.pagingBean.nowPageGroup!=1}">◀</c:if>
+	</a>
+
+	
+	<c:forEach var="i" begin="${requestScope.vo.pagingBean.startPageOfPageGroup}" end="${requestScope.vo.pagingBean.endPageOfPageGroup}" step="1">
+		<a href="report_referView.do?pageNo=${i}&refer=${refer }&type=${type}">${i}</a>
+	</c:forEach>
+	
+	<a href="report_referView.do?&pageNo=${requestScope.vo.pagingBean.endPageOfPageGroup+1}&refer=${refer }&type=${type}">
+		<c:if test="${requestScope.vo.pagingBean.nextPageGroup== true}">▶</c:if>
+	</a>
+	
+
+</center>
+<br><br>

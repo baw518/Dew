@@ -27,11 +27,27 @@ select er.error_no as errorNo,e.error_code as errorCode ,  e.exception_message a
 <select id="currentValue" resultType="int">
 select error_no.currval from dual
 </select>
-<select id="getReferException" parameterType="String" resultType="evo">
-select e.error_no as errorNo ,e.exception_message as exceptionMessage, to_char(error_report_date,'yyyy/mm/dd HH24:MI') as reportdate  ,er.discussion_status as discussionstatus from ERROR_REPORT er, ERROR e where e.error_no = er.error_no and e.exception_message =#{value} order by reportDate desc
+<select id="getReferException" parameterType="HashMap" resultType="evo">
+select errorNo,exceptionMessage,reportdate,discussionstatus
+from ( select errorNo,exceptionMessage,reportdate,discussionstatus,ceil(rownum/10) as page
+from ( select e.error_no as errorNo ,e.exception_message as exceptionMessage, to_char(error_report_date,'yyyy/mm/dd HH24:MI') as reportdate  ,er.discussion_status as discussionstatus from ERROR_REPORT er, ERROR e where e.error_no = er.error_no and e.exception_message =#{refer} order by reportDate desc
+)) where page=#{pageNo}
+
+
 </select>
-<select id="getReferError" parameterType="String" resultType="evo">
-select e.error_no as errorNo ,e.error_code as errorCode, to_char(error_report_date,'yyyy/mm/dd HH24:MI') as reportdate  ,er.discussion_status as discussionstatus from ERROR_REPORT er, ERROR e where e.error_no = er.error_no and e.error_code =#{value} order by reportDate desc
+<select id="getReferError" parameterType="HashMap" resultType="evo">
+select errorNo, errorCode,reportdate, discussionstatus
+from
+( select errorNo, errorCode,reportdate, discussionstatus , ceil(rownum/10) as page
+from (select e.error_no as errorNo ,e.error_code as errorCode, to_char(error_report_date,'yyyy/mm/dd HH24:MI') as reportdate  ,er.discussion_status as discussionstatus from ERROR_REPORT er, ERROR e where e.error_no = er.error_no and e.error_code =#refer} order by reportDate desc)
+) where page=#{pageNo}
+
+</select>
+<select id="getAllException" parameterType="String" resultType="int">
+select count(*) from ERROR_REPORT er, ERROR e where e.error_no = er.error_no and e.exception_message =#{value}
+</select>
+<select id="getAllError" parameterType="String" resultType="int">
+select count(*) from ERROR_REPORT er, ERROR e where e.error_no = er.error_no and e.error_code =#{value}
 </select>
 <insert id="writeReportExceptionTitle" parameterType="String">
 insert into error(error_no,exception_message) values(error_no.nextval,#{value})
