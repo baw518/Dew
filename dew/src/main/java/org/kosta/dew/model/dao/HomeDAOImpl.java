@@ -1,5 +1,6 @@
 package org.kosta.dew.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -20,7 +21,7 @@ public class HomeDAOImpl implements HomeDAO {
 	private SqlSessionTemplate sqlSessionTemplate;
 	
 	@Override
-	public List<MemberVO> mainRankingLoad() {
+	public List<HashMap<String, Object>> mainRankingLoad() {
 		
 		return sqlSessionTemplate.selectList("home.mainRankingLoad");
 	}
@@ -60,5 +61,7 @@ public class HomeDAOImpl implements HomeDAO {
 		
 		return sqlSessionTemplate.selectList("home.errorReportErrorCodeList");
 	}
+
+
 
 }

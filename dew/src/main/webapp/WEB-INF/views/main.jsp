@@ -45,11 +45,11 @@
                         <div class="product-item-2">
                             <div class="product-thumb">
                             
-                            	<h4 align="center">기여도랭킹</h4><h6 align="right"><a href="">more</a></h6>
+                            	<h4 align="center">기여도랭킹</h4><h6 align="right"><a href="ranking_listView.do">more</a></h6>
                         		<table class="table">
-	                            	<c:forEach items="${requestScope.rankingList}" varStatus="num" var="r" begin="0" step="1" end="4">
+	                            	<c:forEach items="${requestScope.rankingList}" var="r" begin="0" step="1" end="4">
                             			<tr>
-                            				<td>${num.index+1}위</td><td>${r.id}</td><td>${r.score}</td>
+                            				<td>${r.RANKING}위</td><td>${r.ID}</td><td>${r.CONTRIBUTION}</td>
                             			</tr>
 	                            	</c:forEach>
                         		</table>

@@ -1,5 +1,6 @@
 package org.kosta.dew.model.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -20,7 +21,7 @@ public class HomeServiceImpl implements HomeService {
 	private HomeDAO homeDAO;
 
 	@Override
-	public List<MemberVO> mainRankingLoad() {
+	public List<HashMap<String, Object>> mainRankingLoad() {
 		
 		return homeDAO.mainRankingLoad();
 	}

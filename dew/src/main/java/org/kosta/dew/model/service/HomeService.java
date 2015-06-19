@@ -1,5 +1,6 @@
 package org.kosta.dew.model.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.kosta.dew.model.vo.DiscussVO;
@@ -11,7 +12,7 @@ import org.kosta.dew.model.vo.VideoVO;
 
 public interface HomeService {
 
-	List<MemberVO> mainRankingLoad();
+	List<HashMap<String, Object>> mainRankingLoad();
 
 	List<VideoVO> videoListLoad();
 

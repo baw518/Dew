@@ -1,5 +1,6 @@
 package org.kosta.dew.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -31,7 +32,7 @@ public class HomeController {
 	public String homeView(Model model){
 		
 		//랭킹받아오기
-		List<MemberVO> rankingList = homeService.mainRankingLoad();
+		List<HashMap<String, Object>> rankingList = homeService.mainRankingLoad();
 		model.addAttribute("rankingList", rankingList);
 		
 		//동영상강좌 받아오기
@@ -59,5 +60,17 @@ public class HomeController {
 		model.addAttribute("errorReportErrorCodeList", errorReportErrorCodeList);
 		return "home";
 	}
+	
+	@RequestMapping("ranking_listView.do")
+	public String rangkingListView(Model model){
+		//랭킹받아오기
+		List<HashMap<String,Object>> rankingList = homeService.mainRankingLoad();
+		System.out.println(rankingList);
+		model.addAttribute("rankingList", rankingList);
+		return "ranking_listView";
+	}
+	
+	
+
 	
 }

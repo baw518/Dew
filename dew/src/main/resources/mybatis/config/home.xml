@@ -31,8 +31,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="projectName" column="title" />
 	</resultMap>
  
- 	<select id="mainRankingLoad" resultMap="memberMap">
- 		select id,member_name,member_level,contribution,point from member where member_level not in ('0')  order by contribution desc
+ 	<select id="mainRankingLoad" resultType="map">
+ 		select id,contribution,ranking
+		from (select id,contribution,member_level,rank() over(order by contribution desc)as ranking 
+				from member 
+				where member_level = '1')
  	</select>
  	
  	<select id="videoListLoad" resultMap="videoMap">
