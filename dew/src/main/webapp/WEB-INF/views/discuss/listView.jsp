@@ -11,7 +11,7 @@
 <body> --%>
 <%-- <c:import url="/template/header.jsp"></c:import>	 --%>
 <link rel="stylesheet" href="${initParam.root}/css/dew.css" type="text/css">
-<div class="dewTable" style="position: relative; left:250px;">
+<div class="dewTable">
 	<table class="table" >
 		<caption><h2>discussion게시판</h2></caption>
 		<thead class="thead">

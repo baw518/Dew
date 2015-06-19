@@ -9,28 +9,30 @@ $(document).ready(function(){
 	});
 });
 </script>
+<link rel="stylesheet" href="${initParam.root}/css/dew.css" type="text/css">
 <title>Video 게시판 입니다.</title>
 <br>
-<center><h2>Video게시판</h2></center>
+<div class="dewTable">
 <table class="table">
-	<thead>
+<caption><h2>Video게시판</h2></caption>
+	<thead class="thead">
 	<tr>
-		<th class="no" >NO</th>
-		<th class="title" >제목</th>
-		<th class="id">아이디</th>
-		<th class="date">작성일</th>
-		<th class="hit">HIT</th>
+		<th class="tableNo" >NO</th>
+		<th class="tableTitle" >제목</th>
+		<th class="tableId">아이디</th>
+		<th class="tableDate">작성일</th>
+		<th class="tableHit">HIT</th>
 		</tr>
 	</thead>
 	<tbody>			
 	<c:forEach var="list" items="${requestScope.vo.list}">				
 		<tr>
-		    <td>${list.videoNo }</td>				
-			<td ><a href="video_showContent.do?no=${list.videoNo}">
+		    <td class="tableNo" >${list.videoNo }</td>				
+			<td class="tableTitle" ><a href="video_showContent.do?no=${list.videoNo}">
 			${list.title }</a></td>
-			<td>${list.id }</td>
-			<td>${list.videoDate }</td>
-			<td>${list.hit }</td>
+			<td class="tableId">${list.id }</td>
+			<td class="tableDate">${list.videoDate }</td>
+			<td class="tableHit">${list.hit }</td>
 		</tr>	
 	</c:forEach> 
 	<tr>
@@ -42,18 +44,18 @@ $(document).ready(function(){
 	</tr>
 	</tbody>
 </table>
-
-<center>
+</div>
+<div class="page">
 	<a href="video_listView.do?pageNo=${requestScope.vo.pagingBean.startPageOfPageGroup-1}">
-	<c:if test="${requestScope.vo.pagingBean.previousPageGroup== true && requestScope.vo.pagingBean.nowPageGroup!=1}">◀</c:if>
+	<c:if test="${requestScope.vo.pagingBean.previousPageGroup== true && requestScope.vo.pagingBean.nowPageGroup!=1}"><img src="${initParam.root}images/left.jpg" width="21" height="21"></c:if>
 	</a>
 	<c:forEach var="i" begin="${requestScope.vo.pagingBean.startPageOfPageGroup}" end="${requestScope.vo.pagingBean.endPageOfPageGroup}" step="1">
 		<a href="video_listView.do?pageNo=${i}">${i}</a>
 	</c:forEach>
 	<a href="video_listView.do?&pageNo=${requestScope.vo.pagingBean.endPageOfPageGroup+1}">
-		<c:if test="${requestScope.vo.pagingBean.nextPageGroup== true}">▶</c:if>
+		<c:if test="${requestScope.vo.pagingBean.nextPageGroup== true}"><img src="${initParam.root}images/right.jpg" width="21" height="21"></c:if>
 	</a>
-</center>
+</div>
 
 <br>
 <br>

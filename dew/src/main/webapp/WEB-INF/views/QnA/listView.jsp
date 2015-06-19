@@ -35,17 +35,17 @@ $(document).ready(function(){
 </select> 
 
 
-
+<div class="dewTable">
 <table class="table">
 	<thead>
 	<tr>
-		<th class="no" >NO</th>
+		<th class="tableNo" >NO</th>
 		<th class="choose">글상태</th>
-		<th class="title" >제목</th>
-		<th class="id">아이디</th>
+		<th class="tableTitle" >제목</th>
+		<th class="tableId">아이디</th>
 		<th class="point">걸린포인트</th>
-		<th class="date">작성일</th>
-		<th class="hit">HIT</th>
+		<th class="tableDate">작성일</th>
+		<th class="tableHit">HIT</th>
 		</tr>
 	</thead>
 	<tbody>			
@@ -85,12 +85,12 @@ $(document).ready(function(){
 	</tr>
 	</tbody>
 </table>
-
-<center>
+</div>
+<div class="page">
 	<c:choose>
 		<c:when test="${requestScope.selectGroupNo == all}">
 			<a href="QnA_listView.do?pageNo=${requestScope.vo.pagingBean.startPageOfPageGroup-1}">
-				<c:if test="${requestScope.vo.pagingBean.previousPageGroup== true && requestScope.vo.pagingBean.nowPageGroup!=1}">◀</c:if>
+				<c:if test="${requestScope.vo.pagingBean.previousPageGroup== true && requestScope.vo.pagingBean.nowPageGroup!=1}"><img src="${initParam.root}images/left.jpg" width="21" height="21"></c:if>
 			</a>
 			
 			<c:forEach var="i" begin="${requestScope.vo.pagingBean.startPageOfPageGroup}" end="${requestScope.vo.pagingBean.endPageOfPageGroup}" step="1">
@@ -105,12 +105,12 @@ $(document).ready(function(){
 			</c:forEach>
 			
 			<a href="QnA_listView.do?&pageNo=${requestScope.vo.pagingBean.endPageOfPageGroup+1}">
-				<c:if test="${requestScope.vo.pagingBean.nextPageGroup== true}">▶</c:if>
+				<c:if test="${requestScope.vo.pagingBean.nextPageGroup== true}"><img src="${initParam.root}images/right.jpg" width="21" height="21"></c:if>
 			</a>
 		</c:when>
 		<c:otherwise>
 			<a href="QnA_SelectedListView.do?pageNo=${requestScope.vo.pagingBean.startPageOfPageGroup-1}&qnAGroupNo=${requestScope.selectGroupNo}">
-				<c:if test="${requestScope.vo.pagingBean.previousPageGroup== true && requestScope.vo.pagingBean.nowPageGroup!=1}">◀</c:if>
+				<c:if test="${requestScope.vo.pagingBean.previousPageGroup== true && requestScope.vo.pagingBean.nowPageGroup!=1}"><img src="${initParam.root}images/left.jpg" width="21" height="21"></c:if>
 			</a>
 			
 			<c:forEach var="i" begin="${requestScope.vo.pagingBean.startPageOfPageGroup}" end="${requestScope.vo.pagingBean.endPageOfPageGroup}" step="1">
@@ -125,11 +125,11 @@ $(document).ready(function(){
 			</c:forEach>
 			
 			<a href="QnA_SelectedListView.do?&pageNo=${requestScope.vo.pagingBean.endPageOfPageGroup+1}&qnAGroupNo=${requestScope.selectGroupNo}">
-				<c:if test="${requestScope.vo.pagingBean.nextPageGroup== true}">▶</c:if>
+				<c:if test="${requestScope.vo.pagingBean.nextPageGroup== true}"><img src="${initParam.root}images/right.jpg" width="21" height="21"></c:if>
 			</a>
 		</c:otherwise>
 	</c:choose>
-</center>
+</div>
 
 <br>
 <br>
