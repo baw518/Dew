@@ -43,7 +43,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	</select>
  	
  	<select id="discussListLoad" resultMap="discussMap">
- 		<![CDATA[ select discussion_no,title from discussion where rownum <=13 order by discussion_no desc ]]>
+ 		<![CDATA[ select discussion_no,title from discussion where rownum <=12 order by discussion_no desc ]]>
  	</select>
  	
 
@@ -54,12 +54,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from (select qna_no,title
 				from qna
 				order by ref desc,restep asc)
-		where rownum <= 13
+		where rownum <= 12
 		]]>
  	</select>
  	
  	<select id="projectListLoad" resultMap="projectMap">
- 		<![CDATA[ select project_no,title from project_write where achieve='모집중' and rownum <=5 order by project_no desc ]]>
+ 		<![CDATA[ select project_no,title from project_write where achieve='모집중' and rownum <=12 order by project_no desc ]]>
  	</select>
  	
  	<select id="errorReportExceptionList" resultType="evo">
@@ -69,7 +69,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					from error e , error_report er 
 					where e.error_no = er.error_no and e.error_code is null 
 					order by er.error_report_date desc)
-			where rownum<=5
+			where rownum<=12
 		]]>
  	</select>
  	
@@ -81,7 +81,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					from error e , error_report er 
 					where e.error_no = er.error_no and e.exception_message is null or e.error_code is not null 
 					order by er.error_report_date desc)
-			where rownum <=5
+			where rownum <=12
  		]]>
  	</select>
  </mapper> 		
