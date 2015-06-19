@@ -24,7 +24,7 @@
 			<th class="tableDate">작성일</th>
 			<th class="tableHit">HIT</th>
 			</tr>		
-		</thead>	
+		</thead>
 			<c:forEach var="dsvo" items="${requestScope.dslvo.list}">		
 			<tr>
 			    <td class="tableNo">${dsvo.discussionNo }</td>					

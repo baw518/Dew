@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-
+<link rel="stylesheet" href="${initParam.root}/css/dew.css" type="text/css">
 <title>QnA 게시판 입니다.</title>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script type="text/javascript">
@@ -24,28 +24,34 @@ $(document).ready(function(){
 </script>
 </head>
 
-<center><h2>QnA게시판</h2></center>
 
-분류 : 
-<select id="group">
-	<option value="all">전체보기</option>
-	<c:forEach items="${requestScope.groupList}" var="i">
-		<option value="${i.qnAGroupNo}">${i.qnAGroupName }</option>
-	</c:forEach>
-</select> 
+
+
 
 
 <div class="dewTable">
 <table class="table">
-	<thead>
-	<tr>
-		<th class="tableNo" >NO</th>
-		<th class="choose">글상태</th>
-		<th class="tableTitle" >제목</th>
-		<th class="tableId">아이디</th>
-		<th class="point">걸린포인트</th>
-		<th class="tableDate">작성일</th>
-		<th class="tableHit">HIT</th>
+	<caption><h2>QnA게시판</h2></caption>
+	<thead class="thead">
+		<tr>
+			<th colspan="7">
+			분류 : 
+			<select id="group">
+				<option value="all">전체보기</option>
+				<c:forEach items="${requestScope.groupList}" var="i">
+					<option value="${i.qnAGroupNo}">${i.qnAGroupName }</option>
+				</c:forEach>
+			</select> 
+			</th>
+		</tr>
+		<tr>
+			<th class="tableNo" >NO</th>
+			<th class="choose">글상태</th>
+			<th class="tableTitle" >제목</th>
+			<th class="tableId">아이디</th>
+			<th class="point">걸린포인트</th>
+			<th class="tableDate">작성일</th>
+			<th class="tableHit">HIT</th>
 		</tr>
 	</thead>
 	<tbody>			
@@ -86,6 +92,7 @@ $(document).ready(function(){
 	</tbody>
 </table>
 </div>
+
 <div class="page">
 	<c:choose>
 		<c:when test="${requestScope.selectGroupNo == all}">
