@@ -37,9 +37,7 @@ $(document).ready(function(e){
 	
 <c:forEach items="${requestScope.rankingList}"  var="r" >
 	<c:if test="${sessionScope.mvo.id == r.ID }">
-		<h3 align="right">
-			<font color='blue'>${sessionScope.mvo.id} 님의 랭킹은 ${r.RANKING}위 입니다.</font>
-		</h3>
+		<h3 align="right"><font color='blue'>${sessionScope.mvo.id} 님의 랭킹은 ${r.RANKING}위 입니다.</font></h3>
 	</c:if>
 </c:forEach>
 	
@@ -52,22 +50,20 @@ $(document).ready(function(e){
 	</thead>
 	
 	<tbody>
-	   	<c:forEach var="r" items="${requestScope.rankingList}" >
-	   		<c:choose>
-		   		<c:when test="${sessionScope.mvo.id == r.ID }">
+	<c:forEach var="r" items="${requestScope.rankingList}" >
+		<c:choose>
+			<c:when test="${sessionScope.mvo.id == r.ID }">
 					<tr bgcolor="orange">
 						<td>${r.RANKING}위</td><td>${r.ID}</td><td>${r.CONTRIBUTION}<div id="loc"></div></td>
-					</tr>
-				</c:when>
-				<c:otherwise>
+					</tr></c:when><c:otherwise>
 					<tr>
 						<td>${r.RANKING}위</td><td>${r.ID}</td><td>${r.CONTRIBUTION}</td>
 					</tr>
 				</c:otherwise>
 			</c:choose>
-	   	</c:forEach>
+		</c:forEach>
    	</tbody>
 </table>
 
 <div class="top"><a href="#"><img src="${initParam.root}images/top.jpg" /></a></div>
-<div style="width:10px; height:5000px"></div>
+<div style="width:10px; height:300px"></div>
