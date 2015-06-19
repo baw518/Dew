@@ -252,7 +252,6 @@ public class QnAController {
 		
 		//세션이 풀렸을경우 글수정 작업중지. 로그인폼으로
 		String path ="QnA_ReleaseSession";	
-		
 		if(mvo!=null){
 			//글 수정
 			qnAService.update(vo);

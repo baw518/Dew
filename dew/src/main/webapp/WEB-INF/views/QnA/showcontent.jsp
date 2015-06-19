@@ -35,6 +35,8 @@ $(document).ready(function(){
 		var content = $("#content").val();
 		var id = $("#id").val();
 		var boardNo =  $("#boardNo").val();
+		
+		
 		if(content==""){
 			alert("댓글 내용을 입력하세요");
 			return false;
@@ -305,13 +307,20 @@ $(document).ready(function(){
 							<td>${i.commentDate}</td>
 							<td colspan="3">${i.content}</td>
 							<td>
-								<input type="hidden" id="commentNo" name="commentNo" value="${i.commentNo}">
-								<input type="button" id="commentUpdateText" name="commentUpdateText" value="수정">
-								<input type="button" id="commentDeleteBtn"name="commentDeleteBtn" value="삭제">
-								<input type="button" id="commentReplyWriteView" name="commentReplyWriteView" value="댓글달기">
-								<input type="hidden" id="ref" name="ref" value="${i.ref}">
-								<input type="hidden" id="reStep" name="reStep" value="${i.reStep}">
-								<input type="hidden" id="relevel" name="relevel" value="${i.relevel}">
+								<c:choose>
+								<c:when test="${sessionScope.mvo.id != null }">
+									<input type="hidden" id="commentNo" name="commentNo" value="${i.commentNo}">
+									<input type="button" id="commentUpdateText" name="commentUpdateText" value="수정">
+									<input type="button" id="commentDeleteBtn"name="commentDeleteBtn" value="삭제">
+									<input type="button" id="commentReplyWriteView" name="commentReplyWriteView" value="댓글달기">
+									<input type="hidden" id="ref" name="ref" value="${i.ref}">
+									<input type="hidden" id="reStep" name="reStep" value="${i.reStep}">
+									<input type="hidden" id="relevel" name="relevel" value="${i.relevel}">
+								</c:when>
+								<c:otherwise>
+									&nbsp;
+								</c:otherwise>
+								</c:choose>
 							</td>
 						</tr>
 						<tr>
