@@ -9,10 +9,6 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script type="text/javascript">
 $(document).ready(function(e){
-	var browserHeightSize = $(window).height();
-	var loc = $("#loc").offset();
-	
-	$(document).scrollTop(loc.top-browserHeightSize/2);
 	
 	$(window).scroll(function(){
 		if($(window).scrollTop()>100){
@@ -27,6 +23,11 @@ $(document).ready(function(e){
 		$('html, body').animate({ scrollTop:0 }, 'slow');
 	    	return false;
 	});
+	var browserHeightSize = $(window).height();
+	var loc = $("#loc").offset();
+	
+	$(document).scrollTop(loc.top-browserHeightSize/2);
+	
 
 });
 
