@@ -61,7 +61,7 @@ $(document).ready(function(){
                                    </c:choose>
 </div>
                                    <hr class="hr1">
-<h1 class="logo"><a href="home.do" >DEW</a></h1>
+<h1 class="logo"><a href="home.do" ><img src="${initParam.root }images/logo.jpg"></a></h1>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
