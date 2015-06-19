@@ -4,11 +4,22 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
+	var type ="${requestScope.type}" ;
+	var refer ;
+	$("#reference").click(function(){
+		if(type =="ExceptionMessage"){
+			refer = "${exception.exceptionMessage }";
+		}else{
+			refer = "${errorcode.errorCode }";
+		}
+	});
+	
 	$("#getList").click(function(){
 		location.href="report_listView.do";
-	});	
+	});
+	
 	$("#update").click(function(){
-		var type ="${requestScope.type}" ;
+		
 		if( type =="ExceptionMessage"){
 			location.href="report_updateView.do?errorNo=${requestScope.exception.errorNo}&type="+type;
 		}else if(type == "ErrorCode"){
@@ -68,6 +79,7 @@ ${errorcode.content }
 </c:if>
 <tr>
 <td align="right" colspan="4">
+<input type="button" value="관련글" id="reference">
 <c:if test="${sessionScope.mvo !=null }">
 <input type="button" value="편집" id="update">
 </c:if>
