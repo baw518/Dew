@@ -19,7 +19,7 @@
 		});
 	});
 </script>
-<form action="login.do" method="post">
+<form action="member_login.do" method="post">
   <div id="wrap">
    <h1 class="member">member login</h1>
    <div class="form">
@@ -34,9 +34,9 @@
      <div class="form4"><br>
       <label><input type="checkbox">아이디저장</label>
       <div class="clear"></div>
-      <label><a href="registerView.do">회원가입</a></label> 
-      <label><a href="findidView.do">아이디찾기</a></label>
-      <label><a href="findpasswordView.do">비밀번호 찾기</a></label>
+      <label><a href="member_registerView.do">회원가입</a></label> 
+      <label><a href="member_findidView.do">아이디찾기</a></label>
+      <label><a href="member_findpasswordView.do">비밀번호 찾기</a></label>
      </div>
     </div>
    </div>

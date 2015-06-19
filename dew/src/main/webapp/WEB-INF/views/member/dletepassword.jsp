@@ -20,7 +20,7 @@
 </script> -->
 </head>
 <body>
-<form action="deltemember.do" method="post">
+<form action="member_deletemember.do" method="post">
 비밀번호을 입력하세요<input type="password" name="memberPassword" id="memberPassword"><br>
 <input type="hidden" name="id" id="id" value="${sessionScope.mvo.id}">
 

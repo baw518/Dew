@@ -27,7 +27,7 @@
 </head>
 
 <body>
-<form action="findbypassword.do" method="post">
+<form action="member_findbypassword.do" method="post">
 
 아이디를 입력하세요<input type="text" name="id" id="id"><br>
 생년월일을 입력하세요<input type="text" name="birthDate" id="birthDate"><br>

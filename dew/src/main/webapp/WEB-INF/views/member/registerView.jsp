@@ -49,7 +49,7 @@
 </head>
 <body>
  
-<form  action="register.do" method="post">
+<form  action="member_register.do" method="post">
 <!-- private String id;
 	private String memberName;
 	private String memberPassword;

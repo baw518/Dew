@@ -11,7 +11,7 @@
 
 <script type="text/javascript">
 alert("일치하지 않습니다!!!");
-location.href="findpasswordView.do";
+location.href="member_findpasswordView.do";
 </script>
 </body>
 </html>

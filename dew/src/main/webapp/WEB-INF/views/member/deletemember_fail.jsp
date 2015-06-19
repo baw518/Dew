@@ -11,7 +11,7 @@
 
 <script type="text/javascript">
 alert("일치하지 않습니다!!!");
-location.href="member_findidView.do";
+location.href="member_deleteview.do";
 </script>
 </body>
 </html>
