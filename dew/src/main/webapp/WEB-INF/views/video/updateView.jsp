@@ -29,7 +29,7 @@ $(document).ready(function(){
 		if($("#afile3-list").text() == "") {
 			alert("파일을 올려주세요!");
 			return false;
-		}'
+		}
 	});
 	
     //use jQuery MultiFile Plugin 

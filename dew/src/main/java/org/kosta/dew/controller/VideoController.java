@@ -8,6 +8,7 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
 
 import org.kosta.dew.model.service.VideoService;
@@ -24,11 +25,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class VideoController {
+	
 	@Resource(name="uploadPath")
 	private String path;
 	@Resource
 	private VideoService videoService;
 	private Logger log = LoggerFactory.getLogger(getClass());
+	private String playPath = "http://192.168.7.233:8888\\dew\\upload\\";
 
 	/*
 	 * @RequestMapping("video_write_view") public ModelAndView write(VideoVO
@@ -42,7 +45,7 @@ public class VideoController {
 		String pageNo = request.getParameter("pageNo");
 		//System.out.println(pageNo);
 		VideoListVO vo = videoService.getVideoList(pageNo);
-		//System.out.println(vo);
+		
 		model.addAttribute("vo", vo);
 		return "video_listView";
 	}
@@ -67,17 +70,28 @@ public class VideoController {
 			//log.info("videoContent cookie 존재하고 이전에 해당 게시물 읽었으므로 count 증가x");
 			vvo = videoService.showContentNoHit(no);
 		}
+		// 비디오 파일 경로 가져오기
+		List<HashMap<String, String>> list = videoService.getVideoName(""+no);
+		//System.out.println(vo);
+		for(int i = 0 ; i < list.size() ; i++) {
+			//	System.out.println("db 1번쨰 for문 "+i);
+			String dbFileName = list.get(i).get("VIDEO_FILE_NAME");
+			list.get(i).put("VIDEO_FILE_NAME",playPath+dbFileName);
+		}
+		System.out.println(list);
+		model.addAttribute("list", list);
 		model.addAttribute("vvo", vvo);
 		return "video_showContent";
 	}
 	@RequestMapping("video_delete.do")
 	public String delete(HttpServletRequest request, Model model) {
 		String no = request.getParameter("no");
+		String filePath = new HttpServletRequestWrapper(request).getRealPath("/");
 		List<HashMap<String, String>> list = videoService.getVideoName(no);
 	//	System.out.println(list);
 		//System.out.println(list.get(1).get("VIDEO_FILE_NAME"));
 		for(int i = 0 ; i < list.size() ; i++) {
-			File file = new File(path+list.get(i).get("VIDEO_FILE_NAME"));
+			File file = new File(filePath+path+list.get(i).get("VIDEO_FILE_NAME"));
 			 if(file.exists()) {
 				 file.delete();
 			 }
@@ -105,7 +119,7 @@ public class VideoController {
 		String no = request.getParameter("videoNo");
 	//	System.out.println(no);
 		//System.out.println(vo);
-		
+		String filePath = new HttpServletRequestWrapper(request).getRealPath("/");
 		/* 변수 초기화 부분 */
 		List<HashMap<String, String>> list = videoService.getVideoName(no); // 디비에 해당 글 비디오이름 가져옴
 		List<MultipartFile> list2=mvo.getFile();		// view에서 파일을 가져온다.
@@ -132,7 +146,7 @@ public class VideoController {
 			if(del) { // del이 true이면 디비에 있는 filename이 view에 없음 따라서 삭제해야함
 				videoService.deleteVideoFileName(no,dbFileName); // 해당 게시글에 디비 삭제
 			// System.out.println("디비 삭제"+dbFileName);
-				File file = new File(path+dbFileName);	// 파일 삭제
+				File file = new File(filePath+path+dbFileName);	// 파일 삭제
 				file.delete();
 			//	System.out.println("filedelete ok"+dbFileName);
 			}
@@ -152,7 +166,7 @@ public class VideoController {
 			}
 			if(flag){	// 없으면 파일 새로 생성
 				try {
-					list2.get(i).transferTo(new File(path+fileName));	// 파일 올림
+					list2.get(i).transferTo(new File(filePath+path+fileName));	// 파일 올림
 					videoService.file(vo,fileName);	// 디비에 넣어줌
 					//nameList.add(fileName);	
 				//	System.out.println("fileupload ok:"+fileName);
@@ -181,6 +195,8 @@ public class VideoController {
 		videoService.write(vo);
 	//	System.out.println(vo);
 	//	System.out.println(mvo);
+		String filePath = new HttpServletRequestWrapper(request).getRealPath("/");
+		System.out.println(filePath);
 		List<MultipartFile> list=mvo.getFile();
 		ArrayList<String> nameList=new ArrayList<String>();
 		for(int i=0;i<list.size();i++){
@@ -188,7 +204,8 @@ public class VideoController {
 			String fileName=list.get(i).getOriginalFilename();			
 			if(!fileName.equals("")){
 				try {
-					list.get(i).transferTo(new File(path+fileName));
+					list.get(i).transferTo(new File(filePath+path+fileName));
+					System.out.println(filePath+path+fileName+"경로로 파일올라감");
 					videoService.file(vo,fileName);
 					nameList.add(fileName);
 				//	System.out.println("fileupload ok:"+fileName);

@@ -19,7 +19,9 @@ $(document).ready(function(){
 		}
 	});
 });
+
 </script>
+<!-- <meta name="viewport" content="width=device-width,initial-scale=1.0"> -->
 <table class="table" align="center" >
 	<tr>
 	<td>NO : ${requestScope.vvo.videoNo } </td>
@@ -30,6 +32,16 @@ $(document).ready(function(){
 		<td> ${requestScope.vvo.videoDate }</td>
 		<td>조회수 : ${requestScope.vvo.hit }</td>
 	</tr>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<c:forEach var="list" items="${requestScope.list}">			
+	<tr>
+		<td>
+		<video controls  width="600" height="360" preload="metadata">
+			  <source src="${list.VIDEO_FILE_NAME}"  />
+		</video>
+		</td>
+	</tr>			
+</c:forEach> 
 	<tr>
 		<td colspan="3">
 		<pre>${requestScope.vvo.content}</pre>
