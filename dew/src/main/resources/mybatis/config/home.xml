@@ -43,7 +43,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	</select>
  	
  	<select id="discussListLoad" resultMap="discussMap">
- 		<![CDATA[ select discussion_no,title from discussion where rownum <=16 order by discussion_no desc ]]>
+ 		<![CDATA[ select discussion_no,title from discussion where rownum <=13 order by discussion_no desc ]]>
  	</select>
  	
 
@@ -54,7 +54,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from (select qna_no,title
 				from qna
 				order by ref desc,restep asc)
-		where rownum <= 16
+		where rownum <= 13
 		]]>
  	</select>
  	

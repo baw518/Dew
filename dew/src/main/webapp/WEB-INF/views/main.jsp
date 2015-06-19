@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    <div class="content-section">
+    <div class="content-section" style="margin-left:100px;">
         <div class="container">
             <div class="row">
-                <div class="col-md-5">
+                <div class="col-md-4"style="margin-left:30px;" >
                     <div class="product-item-1">
                         <div class="product-thumb">
                         	
@@ -21,7 +21,7 @@
                         </div> <!-- /.product-thumb -->
                     </div> <!-- /.product-item -->
                 </div> <!-- /.col-md-3 -->
-                <div class="col-md-5">
+                <div class="col-md-4" style="margin-left:10px;">
                     <div class="product-holder">
                         <div class="product-item-2">
                             <div class="product-thumb">
@@ -40,7 +40,7 @@
                         <!-- <div class="clearfix">dfgdfsgdsfg</div> -->
                     </div> <!-- /.product-holder -->
                 </div> <!-- /.col-md-5 -->
-                 <div class="col-md-2">
+                 <div class="col-md-2" style="margin-left:30px;">
                  	 <div class="product-holder">
                         <div class="product-item-2">
                             <div class="product-thumb">
@@ -54,14 +54,7 @@
 	                            	</c:forEach>
                         		</table>
                         		
-                            </div> <!-- /.product-thumb -->
-                        </div> <!-- /.product-item-2 -->
-                    </div> <!-- /.product-holder -->
-                 </div><!-- col-md-2 -->
-                 <div class="col-md-2">
-                 	 <div class="product-holder">
-                        <div class="product-item-2">
-                            <div class="product-thumb">
+
                             
                             	<h4 align="center">동영상강좌</h4><h6 align="right"><a href="video_listView.do">more</a></h6>
                         		<table class="table">
@@ -78,7 +71,7 @@
                  </div><!-- col-md-2 -->
             </div> <!-- /.row -->
             <div class="row">
-                <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="col-md-3 col-sm-6 " style="margin-left:30px;">
                     <div class="product-item-4">
                         <div class="product-thumb">
                         	
@@ -95,7 +88,7 @@
                         </div> <!-- /.product-thumb -->
                     </div> <!-- /.product-item-4 -->
                 </div> <!-- /.col-md-4 -->
-                <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="col-md-3 col-sm-6 " style="margin-left:30px;">
                     <div class="product-item-4">
                         <div class="product-thumb">
                         
@@ -112,7 +105,7 @@
                         </div> <!-- /.product-thumb -->
                     </div> <!-- /.product-item-4 -->
                 </div> <!-- /.col-md-4 -->
-                <div class="col-md-4 col-sm-12 col-xs-12">
+                <div class="col-md-3 col-sm-12 " style="margin-left:30px;">
                     <div class="ads-placemenet">
                     
                         <h4 align="center">프로젝트참여</h4><h6 align="right"><a href="project_listView.do">more</a></h6>
