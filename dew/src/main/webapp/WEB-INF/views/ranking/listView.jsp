@@ -5,8 +5,11 @@
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script type="text/javascript">
-$(document).ready(function(){
-
+$(document).ready(function(e){
+	var browserHeightSize = $(window).height();
+	var loc = $("#loc").offset();
+	
+	$(document).scrollTop(loc.top-browserHeightSize/2);
 });
 
 </script>
@@ -32,7 +35,8 @@ $(document).ready(function(){
 	   		<c:choose>
 		   		<c:when test="${sessionScope.mvo.id == r.ID }">
 					<tr bgcolor="orange">
-						<td>${r.RANKING}위</td><td>${r.ID}</td><td>${r.CONTRIBUTION}</td>
+						
+						<td>${r.RANKING}위</td><td>${r.ID}</td><td>${r.CONTRIBUTION}<div id="loc"></div></td>
 					</tr>
 				</c:when>
 				<c:otherwise>

@@ -65,7 +65,6 @@ public class HomeController {
 	public String rangkingListView(Model model){
 		//랭킹받아오기
 		List<HashMap<String,Object>> rankingList = homeService.mainRankingLoad();
-		System.out.println(rankingList);
 		model.addAttribute("rankingList", rankingList);
 		return "ranking_listView";
 	}
