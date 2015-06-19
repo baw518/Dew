@@ -16,10 +16,10 @@ $(document).ready(function(e){
 	
 	$(window).scroll(function(){
 		if($(window).scrollTop()>100){
-			$('.top').fadeIn('slow'); // 100 픽셀을 초과하여 스크롤 된 다음 표시
+			$('.top').fadeIn('slow'); 
 		}
 	    else{
-	    	$('.top').fadeOut('slow'); // 100 픽셀 이하인 경우 숨김
+	    	$('.top').fadeOut('slow'); 
 	    }
 	});
 	    
