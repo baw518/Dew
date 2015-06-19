@@ -12,7 +12,7 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		$(".loginBtn").submit(function(){
+		$("form").submit(function(){
 			if($(":input[name=id]").val()==""){
 				alert("아이디를 입력하세요!");
 				return false;
@@ -46,23 +46,35 @@
 	
 		});
 </script>
+</head>
+<body>
+ 
 <form  action="member_register.do" method="post">
-<div class="registerForm">
-	<input type="text" class="registerName"  name="memberName" id="memberName" placeholder="이름을 입력해주세요"><br>
-	<input type="text" class="register1" name="id" id="id"  placeholder="아이디를 입력해주세요"><br>
-	<input type="password" class="register2" id="memberPassword"name="memberPassword" placeholder="비밀번호를 입력해주세요"><br>
-	<input type="text" class="registerDate" id="birthDate" name="birthDate" placeholder="생년월일을 8자리 숫자로 입력해주세요"><br>
-	<input type="text" class="registerJob" placeholder="직종을 선택해주세요" readonly="readonly"><br>
-	<c:forEach var="item" varStatus="i" items="${requestScope.list}">
-	<input type="radio" id="jobNo" name="jobNo" value="${item.jobNo}" placeholder="직종선택"><span class="radioText">${item.jobName}</span>
-	</c:forEach> 
-	<br><br>
-	<input type="text" class="register1" id="passwordQuestion" name="passwordQuestion" placeholder="비밀번호 찾기 질문을 입력해주세요"><br>
-	<input type="text" class="register2" id="passwordAnswer" name="passwordAnswer" placeholder="비밀번호 찾기 답을 입력해주세요"><br>
-	<br><br>
-<input type="submit" class="loginBtn" value="SIGN UP">
-</div>
+<!-- private String id;
+	private String memberName;
+	private String memberPassword;
+	private String birthDate;
+	private String memberLevel;
+	private int userType;
+	private int score;
+	private int point;
+	private String passwordQuestion;
+	private String passwordAnswer; -->
+id <input type="text" name="id" id="id" ><br>
+이름<input type="text" name="memberName" id="memberName"><br>
+패스워드 <input type="password" id="memberPassword"name="memberPassword"><br>
+생년월일<input type="text"id="birthDate" name="birthDate"><br>
+질문<input type="text"id="passwordQuestion" name="passwordQuestion"><br>
+질문에 대한 답변<input type="text"id="passwordAnswer" name="passwordAnswer"><br>
+
+<c:forEach var="item" varStatus="i" items="${requestScope.list}">
+ <input type="radio" id="jobNo" name="jobNo" value="${item.jobNo}"> ${item.jobName} <br>
+</c:forEach> 
+<br><input type="submit" value="회원가입">
 </form>
+
+</body>
+</html>
 
 
 

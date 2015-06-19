@@ -12,6 +12,7 @@ $(document).ready(function(){
 		}else{
 			refer = "${errorcode.errorCode }";
 		}
+		location.href="report_referView.do?refer="+refer+"&type="+type;
 	});
 	
 	$("#getList").click(function(){

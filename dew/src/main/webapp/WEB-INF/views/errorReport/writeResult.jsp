@@ -7,14 +7,17 @@
 $(document).ready(function(){
 	var type;
 	var refer;
+	
 	if("${result.exceptionMessage}" !=null){
 		type="ExceptionMessage";
 		refer="${result.exceptionMessage}";
 	}
+	
 	else{ 
 		type="ErrorCode";
 		refer="${result.errorCode}";
 	}
+	
 	$("#getList").click(function(){
 		location.href="report_listView.do";
 	});

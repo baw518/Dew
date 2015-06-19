@@ -1,0 +1,54 @@
+@CHARSET "UTF-8";
+/* 페이징 빈 css  */
+.page {
+	font-size: 15px;
+	text-align: center;
+}
+
+/* table  css */
+.table {
+	text-align: center;
+	font-size: 15px;
+	font-family: 맑은 고딕;
+	width:800px; 
+	color: #2b2937;
+}
+
+.table th{
+	background-color: #2b2937;
+	color: #ffffff;
+}
+
+.table tr:HOVER{
+	background-color: #ccccff;
+}
+
+.table td{
+	height:30px;
+}
+.tableNo {
+	text-align: center;
+	width:10px;
+	
+}
+.tableTitle{
+	text-align: left;
+	width:200px;
+}
+.tableId{
+	text-align: center;
+	width:100px;	
+}
+.tableSubject{
+	text-align: center;
+	width:80px;	
+}
+.tableDate{
+	text-align: center;
+	width:150px;	
+}
+.tableHit{
+	text-align: center;
+	width:80px;	
+}
+

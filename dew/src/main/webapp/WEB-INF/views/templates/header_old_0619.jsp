@@ -10,12 +10,6 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
-	$("#homeBtn").click(function(){
-		location.href="home.do";
-	});
-	$("#loginBtn").click(function(){
-		location.href="member_login_form.do";
-	});
 	$("#errorReportBtn").click(function(){
 		location.href="report_listView.do";
 	});
@@ -31,12 +25,7 @@ $(document).ready(function(){
 	$("#videoBtn").click(function(){
 		location.href="video_listView.do";
 	});
-	$("#mypageBtn").click(function(){
-		location.href="member_mypageForm.do";
-	});
-	$("#logoutBtn").click(function(){
-		location.href="member_logout.do";
-	});
+	
 });
 </script>
 <link rel="stylesheet" href="${initParam.root }css/test.css">
@@ -47,21 +36,22 @@ $(document).ready(function(){
     <link rel="stylesheet" href="${initParam.root }css/templatemo-style.css">
 
 <div id="headWrap" >
-<input type="button"  id="homeBtn" class="headerBtn" value="홈으로">
+
+<a href="home.do"  >홈으로</a>
                                 <c:choose>
                                    <c:when test="${sessionScope.mvo==null }">
-                                   <input type="button"  id="loginBtn" class="headerBtn" value="로그인">
+                                <a href="member_login_form.do">로그인</a>
                                    </c:when>
                                    <c:otherwise>
-                                   <input type="button"  id="errorReportBtn" class="headerBtn" value="에러 리포트 등록">
-                                   <input type="button"  id="mypageBtn" class="headerBtn" value="마이 페이지">
-                                 	<input type="hidden" id="sessionId" value="${sessionScope.vo.id}">
-                                   <input type="button"  id="logoutBtn" class="headerBtn" value="로그아웃">         
+                                <a href="report_writeForm.do">에러 리포트 등록</a>
+                                <a href="member_mypageForm.do">마이 페이지</a>
+                                <a href="member_logout.do">로그아웃</a>                  
                                    </c:otherwise>
                                    </c:choose>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </div>
-                                   <hr class="hr1">
-<h1 class="logo"><a href="home.do" >DEW</a></h1>
+<hr>
+<a href="home.do" ><img src="${initParam.root }images/logo.jpg"></a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
