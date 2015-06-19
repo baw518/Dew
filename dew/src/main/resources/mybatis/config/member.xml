@@ -3,6 +3,10 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="member" > 
+  <resultMap type="uvo" id="userTypeListRM">
+ 		<result property="jobNo" column="job_no" />			
+		<result property="JobName" column="job_name" /> 
+</resultMap>
  <resultMap type="mvo" id="memberListRM">
  		<result property="memberName" column="member_name" />			
 		<result property="memberPassword" column="member_password" /> 
@@ -19,14 +23,37 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 values(#{id},#{memberName},#{memberPassword},to_date(#{birthDate},'yyyymmdd'),#{passwordQuestion},#{passwordAnswer})
 		
 	</insert>
+	<insert id="userregister" parameterType="HashMap" >
+		insert into member_job(id,job_no) values(#{mid},#{jno})
+	</insert>
 	
-	 <resultMap type="uvo" id="userTypeListRM">
- 		<result property="jobNo" column="job_no" />			
-		<result property="jobName" column="job_name" /> 
-</resultMap>
+	<select id="findname" resultMap="userTypeListRM">
+		select job_no,job_name from job where job_no=#{jobNo}
+	</select>
 	<select id="usertype" resultMap="userTypeListRM">
 		select job_no,job_name from job
 	</select>
+  <select id="findbyid" resultMap="memberListRM">
+	select id,member_name,member_password,birth_date,member_level,contribution,point,password_question,password_answer from member where member_name=#{memberName} and birth_date=#{birthDate}
+ </select>
+ <select id="findbypassword" resultMap="memberListRM">
+	select id,member_name,member_password,birth_date,member_level,contribution,point,password_question,password_answer from member where id=#{id} and birth_date=#{birthDate} 
+ </select>
+ <select id="findbypassword2" resultMap="memberListRM">
+	select id,member_name,member_password,birth_date,member_level,contribution,point,password_question,password_answer from member where id=#{id}
+ </select>
+  
+ 
+ <update id="update" parameterType="mvo">
+		update member set member_name=#{memberName},member_password=#{memberPassword},password_question=#{passwordQuestion},password_answer=#{passwordAnswer} where id=#{id}
+	</update>
+
+	<insert id="deletemember" parameterType="mvo" >
+		insert into deleteid(id) values(#{id})
+	</insert>
+	<select id="membercheck" parameterType="string" resultType="int" >
+	select count(*) from deleteid where id=#{value}
+ </select>
  </mapper> 		
  
  

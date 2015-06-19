@@ -104,6 +104,9 @@
 			<input type="button" value="수정" id="updateProBtn" style="margin-left: 330px">
 			<input type="button" value="삭제" id="deleteProBtn" ><br>
 		</c:when>
+		<c:when test="${requestScope.pvo.achieve!='모집중' }">
+			<b style="margin-left: 130px">마감되었습니다.</b>
+		</c:when>
 		<c:otherwise>
 			<span id="switchBtn"><input type="button" value="참가신청" id="joinProBtn" ></span>
 		</c:otherwise>

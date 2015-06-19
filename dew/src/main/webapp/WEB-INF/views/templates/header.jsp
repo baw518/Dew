@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <!DOCTYPE html >
 
 <head>
@@ -41,18 +40,18 @@ $(document).ready(function(){
 <a href="home.do"  >홈으로</a>
                                 <c:choose>
                                    <c:when test="${sessionScope.mvo==null }">
-                                <a href="login_form.do">로그인</a>
+                                <a href="member_login_form.do">로그인</a>
                                    </c:when>
                                    <c:otherwise>
                                 <a href="report_writeForm.do">에러 리포트 등록</a>
                                 <a href="member_mypageForm.do">마이 페이지</a>
-                                <a href="logout.do">로그아웃</a>                  
+                                <a href="member_logout.do">로그아웃</a>                  
                                    </c:otherwise>
                                    </c:choose>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </div>
 <hr>
-<h1 class="logo"><a href="home.do" >DEW</a></h1>
+<a href="home.do" ><img src="${initParam.root }images/logo.jpg"></a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

@@ -7,7 +7,6 @@ public class ProjectListVO {
 	private PagingBean pagingBean;
 	public ProjectListVO() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	public ProjectListVO(List<ProjectVO> list, PagingBean pagingBean) {
 		super();

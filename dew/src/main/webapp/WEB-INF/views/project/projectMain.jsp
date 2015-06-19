@@ -7,9 +7,9 @@
   <script type="text/javascript">
   	$(document).ready(function(){
   		$("#create").mouseover(function(){
-  			$(this).attr({src:"${initParam.root}images/create2.jpg"});
+  			$(this).attr({src:"${initParam.root}images/Create2.jpg"});
   		}).mouseout(function(){
-  			$(this).attr({src:"${initParam.root}images/create.jpg"});
+  			$(this).attr({src:"${initParam.root}images/Create.jpg"});
   	});
   		$("#Join").mouseover(function(){
   			$(this).attr({src:"${initParam.root}images/Join2.jpg"});
@@ -52,12 +52,10 @@
   	});
   </script>
 <body>
-<div class="main">
-<div id="main_view">
-	<img src="${initParam.root}images/create.jpg"  id="create">
-	<img src="${initParam.root}images/Join.jpg"  id="Join">
+<div id="main_viewForm">
+	<img src="${initParam.root}images/Create.jpg"  id="create">
+	<img src="${initParam.root}images/Join.jpg"  id="Join"><br>
 	<img src="${initParam.root}images/want.jpg"  id="want">
 	<img src="${initParam.root}images/manage.jpg"  id="manage">
-</div>
 </div>
 </body>

@@ -4,17 +4,27 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
+	var type ="${requestScope.type}" ;
+	var refer ;
+	$("#reference").click(function(){
+		if(type =="ExceptionMessage"){
+			refer = "${exception.exceptionMessage }";
+		}else{
+			refer = "${errorcode.errorCode }";
+		}
+	});
+	
 	$("#getList").click(function(){
 		location.href="report_listView.do";
 	});
+	
 	$("#update").click(function(){
-		var type ="${requestScope.type}" ;
+		
 		if( type =="ExceptionMessage"){
 			location.href="report_updateView.do?errorNo=${requestScope.exception.errorNo}&type="+type;
 		}else if(type == "ErrorCode"){
 			location.href="report_updateView.do?errorNo=${requestScope.errorcode.errorNo}&type="+type;
 		}
-		
 	});
 });
 </script>
@@ -27,7 +37,7 @@ $(document).ready(function(){
 <c:if test="${exception.discussionStatus ==0 }">
 토론없음
 </c:if>
-<c:if test="${exception.discussionStatus !=0 }">
+<c:if test="${exception.discussionStatus ==1 }">
 토론있음
 </c:if>
 </td>
@@ -48,11 +58,11 @@ ${exception.content }
 <td width="100">Error Code </td>
 <td witdh="200">${errorcode.errorCode }</td>
 <td width="50">
-<c:if test="${errorcode.discussionStatus ==0 }">
-토론없음
+<c:if test="${errorcode.discussionStatus == 1}">
+토론 있음
 </c:if>
-<c:if test="${errorcode.discussionStatus !=0 }">
-토론있음
+<c:if test="${errorcode.discussionStatus == 0}">
+토론 없음
 </c:if>
 </td>
 <td width="150">
@@ -69,6 +79,7 @@ ${errorcode.content }
 </c:if>
 <tr>
 <td align="right" colspan="4">
+<input type="button" value="관련글" id="reference">
 <c:if test="${sessionScope.mvo !=null }">
 <input type="button" value="편집" id="update">
 </c:if>

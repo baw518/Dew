@@ -41,5 +41,20 @@ public interface ProjectService {
 
 	boolean joinCheck(CommentVO pvo);
 
+	void deleteJoinComment(String commentNo);
+
+	void startProject(String projectNo);
+
+	ProjectVO getProjectContentNohit(String projectNo);
+
+	List<CommentVO> countComment(int projectNo);
+
+	void deleteJoinerById(String id,String projectNo);
+
+	void successProject(String projectNo);
+
+	List<ProjectVO> findSuccessProjectById(String id);
+
+
 	
 }

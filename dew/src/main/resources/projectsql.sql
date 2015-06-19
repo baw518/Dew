@@ -91,6 +91,26 @@ select * from project_write
 
  	
  	
+ 	select project_no,id,title,achieve,project_date,progressing_end_date as deadline,hit,point from(select project_no,id,title,achieve,project_date,hit,progressing_end_date,ceil(rownum/10) as page,point 
+		from(select project_no,id,title,achieve,to_char(project_date,'YYYY.MM.DD') as project_date,hit,progressing_end_date,point from project_write order by project_no desc))
+		where page=1
+ 	select * from project_comment
+ 	delete from project_comment where project_comment_no=26
  	
  	
- 	
+ 	select * from project_write
+ 	  	 select distinct p.title,p.achieve,p.progressing,p.point,p.project_no,to_char(p.project_date,'YYYY.MM.DD') as deadline from project_comment c,project_write p where c.type!=2 and p.achieve='진행중' and (p.id='java' or c.id='java')
+
+
+ 	  	 select distinct p.id,p.title,p.achieve,p.progressing,p.point,p.project_no,to_char(p.project_date,'YY.MM.DD') as project_date from project_comment c,project_write p where c.type!=2 and p.achieve='완료' and (p.id='java' or c.id='java') order by project_date desc
+ 	  	 
+ 	  	 
+ 	  	 
+ 	  	 
+ 	  	 
+ 	  	 
+ 	  	 
+ 	  	 
+ 	  	 
+ 	  	 
+ 	  	 

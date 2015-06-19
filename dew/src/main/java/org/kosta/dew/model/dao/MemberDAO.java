@@ -15,6 +15,29 @@ public interface MemberDAO {
 
 	public List<UserTypeVO> usertype(UserTypeVO uvo);
 
+	public MemberVO findbyid(MemberVO vo);
+
+	public MemberVO findbypassword(MemberVO vo);
+
+	public MemberVO findbypassword2(MemberVO vo);
+
+	int userregister(UserTypeVO uvo, MemberVO mvo);
+
+	public UserTypeVO findName(UserTypeVO uvo);
+
+	public int deletemember(MemberVO vo);
+
+	public int update(MemberVO mvo);
+
+	MemberVO deletelogin(MemberVO vo);
+
+
+	public int deltemembercheck(String id);
+
+	
+
+
+
 	
 
 	

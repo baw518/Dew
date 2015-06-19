@@ -12,7 +12,7 @@ public interface DiscussService {
 
 	public abstract int registerDiscussion(DiscussVO divo);
 
-	public abstract DiscussVO findDiscussContent(String no);
+	public abstract DiscussVO findDiscussContent(int no);
 
 	public abstract List<DiscussVO> searchDisscuss(String title);
 
@@ -24,8 +24,14 @@ public interface DiscussService {
 
 	public abstract int deleteDiscussComment(String no);
 
-	public abstract List<CommentVO> findDiscussComment(String discussionNo);
+	public abstract List<CommentVO> findDiscussComment(int no);
 
 	public abstract CommentVO findDiscussCommentByNo(String no);
+
+	DiscussVO findDiscussContenHitUp(int no);
+
+	public abstract void commentReplyStepPlus(CommentVO vo);
+
+	public abstract void ajaxWriteCommentReply(CommentVO vo);
 
 }

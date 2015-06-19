@@ -44,5 +44,25 @@ public class ErrorReportServiceImpl implements ErrorReportService {
 		return errorReportDAO.reportWrite(vo,type,title);
 	}
 
+	@Override
+	public List<ErrorReportVO> getReference(String refer,String type, int pageNum) {
+		return errorReportDAO.getReference(refer,type,pageNum);
+	}
+
+	@Override
+	public int getAllException(String refer) {
+		return errorReportDAO.getAllException(refer);
+	}
+
+	@Override
+	public int getAllError(String refer) {
+		return errorReportDAO.getAllError(refer);
+	}
+
+	@Override
+	public ErrorReportVO getContentByDate(String refer, String date, String type) {
+		return errorReportDAO.getontentByDate(refer,date,type);
+	}
+
 
 }
