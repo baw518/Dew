@@ -20,7 +20,7 @@
 			<%MemberVO mvo=(MemberVO)session.getAttribute("mvo");
   			if(mvo==null){
 %> 			alert("로그인하세요");
-				location.href="login_form.do";
+				location.href="member_login_form.do";
   			<%}else{%>
   				$("#joinComment").html("지원분야 <select id='subjectVal'><option value=''>고르세요</option><c:forEach items='${requestScope.pvo.departVO}' var='dvo'><option value='${dvo.subject}'>${dvo.subject}</option></c:forEach></select><textarea rows='3' cols='53' id='joinCommentArea'></textarea><br><br>");
   				$("#joinCommentArea").focus();
@@ -63,7 +63,7 @@
 			location.href="registerProjectComment.do?content="+$("#commentTextContent").val()+"&projectNo=${requestScope.pvo.projectNo}";
 		});
 		$("#writeCommentLogin").click(function(){
-			location.href="login_form.do";
+			location.href="member_login_form.do";
 		});
 		<%List<CommentVO> cvoList=pvo.getCommentVO();
 		for(int i=0;i<cvoList.size();i++){%>
