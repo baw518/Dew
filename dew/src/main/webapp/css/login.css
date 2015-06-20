@@ -71,3 +71,6 @@ input[id="but"] {
 input[type="checkbox"] {
  margin-top:20px;
 }
+#loginFormView{
+	margin-left: 350px;
+}

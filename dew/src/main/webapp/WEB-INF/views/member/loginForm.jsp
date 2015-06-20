@@ -23,11 +23,13 @@
 <link rel="stylesheet" href="${initParam.root }css/test.css">
 <form action="member_login.do" method="post">
 <br><br><br>
+<div id="loginFormView">
 <div class="loginForm" >
 	<input type="text" class="loginId" id="user" name="id" placeholder="아이디를 입력해주세요"><br>
 	<input type="password" class="loginPw" id="user" name="memberPassword" placeholder="비밀번호를 입력해주세요"><br>
 	<div class="link"> <a href="member_registerView.do">회원가입</a> &nbsp;&nbsp;&nbsp; <a href="member_findidView.do">ID</a> / <a href="member_findpasswordView.do">PW</a></div>
 	<input type="submit" class="loginBtn" value="SIGN IN">
+</div>
 </div>
 <br><br><br>
  </form>
