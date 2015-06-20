@@ -18,6 +18,7 @@
 .table th{
 	background-color: #2b2937;
 	color: #ffffff;
+	text-align:center;
 }
 
 .table tr:HOVER{
@@ -53,3 +54,11 @@
 	width:80px;	
 }
 
+.tPoint{
+	text-align: center;
+	width:70px;	
+}
+.tableChoose{
+	text-align: center;
+	width:90px;	
+}

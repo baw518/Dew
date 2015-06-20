@@ -33,23 +33,24 @@ $(document).ready(function(){
 <table class="table">
 	<caption><h2>QnA게시판</h2></caption>
 	<thead class="thead">
-		<tr>
-			<th colspan="7">
-			분류 : 
-			<select id="group">
-				<option value="all">전체보기</option>
+		<thead>
+			<tr>
+			<th colspan="1">
+				<select id="group">
+				<option value="all">전체</option>
 				<c:forEach items="${requestScope.groupList}" var="i">
 					<option value="${i.qnAGroupNo}">${i.qnAGroupName }</option>
 				</c:forEach>
-			</select> 
-			</th>
-		</tr>
+				</select> 
+			<th>
+			<th colspan="6"></th>
+			<tr>
 		<tr>
 			<th class="tableNo" >NO</th>
-			<th class="choose">글상태</th>
+			<th class="tableChoose">글상태</th>
 			<th class="tableTitle" >제목</th>
 			<th class="tableId">아이디</th>
-			<th class="point">걸린포인트</th>
+			<th class="tPoint">포인트</th>
 			<th class="tableDate">작성일</th>
 			<th class="tableHit">HIT</th>
 		</tr>
@@ -57,18 +58,18 @@ $(document).ready(function(){
 	<tbody>			
 	<c:forEach var="list" items="${requestScope.vo.list}">				
 		<tr>
-		    <td>${list.qnaNo }</td>
-		    <td>
+		    <td >${list.qnaNo }</td>
+		    <td >
 		    	<c:if test="${list.answerStatus==0}"></c:if>
 		    	<c:if test="${list.answerStatus==1}">답변완료</c:if>
 		    	<c:if test="${list.answerStatus==2}">채택된답변</c:if>
 		    	<c:if test="${list.answerStatus==3}"></c:if>
 		    </td>			
-			<td >
+			<td class="tableTitle">
 				<a href="QnA_showContent.do?qnaNo=${list.qnaNo}">${list.title }</a>
 			</td>
-			<td>${list.id }</td>
-			<td>
+			<td >${list.id }</td>
+			<td >
 				<c:choose>
 					<c:when test="${list.restep== 0}">
 						${list.point }
@@ -78,8 +79,8 @@ $(document).ready(function(){
 					</c:otherwise>
 				</c:choose>
 			</td>
-			<td>${list.date }</td>
-			<td>${list.hit }</td>
+			<td >${list.date }</td>
+			<td >${list.hit }</td>
 		</tr>	
 	</c:forEach>
 	<tr>

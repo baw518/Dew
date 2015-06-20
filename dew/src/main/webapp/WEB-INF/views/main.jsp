@@ -24,56 +24,56 @@
 
   <!- Wrapper for slides -->
   <div class="carousel-inner" role="listbox">
-  <div class="item active">
-  <h4 align="center">토론방</h4><h6 align="right" style="padding-right: 100px;"><a href="discussion_listView.do">more&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></h6>	
+  <div class="item active" style="padding-left: 130px; padding-right: 120px; ">
+  <h4 align="center">토론방</h4><h6 align="right"><a href="discussion_listView.do">more&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></h6>	
                         		<table class="table">
 	                        		<c:forEach items="${requestScope.discussList}" var="i">
 	                        			<tr>
-	                        				<td style="padding-left:100px;"><a href="findDiscussContent.do?no=${i.discussionNo}">${i.title}</a></td>
+	                        				<td><a href="findDiscussContent.do?no=${i.discussionNo}">${i.title}</a></td>
 	                        			</tr>
 	                        		</c:forEach>
                         		</table>
   </div>
 
-  <div class="item">
-    <h4 align="center">질의응답</h4><h6 align="right" style="padding-right: 100px;"><a href="QnA_listView.do">more&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></h6>                    
+  <div class="item"  style="padding-left: 130px; padding-right: 120px; ">
+    <h4 align="center">질의응답</h4><h6 align="right" ><a href="QnA_listView.do">more&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></h6>                    
                         		<table class="table">
 	                        		<c:forEach items="${requestScope.qnaList}" var="i">
 	                        			<tr>
-	                        				<td style="padding-left:100px;"><a href="QnA_showContent.do?qnaNo=${i.qnaNo}">${i.title}</a></td>
+	                        				<td><a href="QnA_showContent.do?qnaNo=${i.qnaNo}">${i.title}</a></td>
 	                        			</tr>
 	                        		</c:forEach>
                         		</table>	
                         	
   </div>
 
-  <div class="item">
-  <h4 align="center">Exception</h4><h6 align="right" style="padding-right: 100px;"><a href="report_listView.do">more&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></h6>
+  <div class="item"  style="padding-left: 130px; padding-right: 120px; ">
+  <h4 align="center">Exception</h4><h6 align="right"><a href="report_listView.do">more&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></h6>
                     		<table class="table">
 	                    		<c:forEach items="${requestScope.errorReportExceptionList}" var="i">
 	                    			<tr>
-	                    				<td style="padding-left:100px;"><a href="report_showContent.do?error=${i.exceptionMessage}&type=exception">${i.exceptionMessage}</a></td>
+	                    				<td><a href="report_showContent.do?error=${i.exceptionMessage}&type=exception">${i.exceptionMessage}</a></td>
 	                    			</tr>
 	                    		</c:forEach>
                     		</table>
   </div>
 
-  <div class="item">
- <h4 align="center">ErrorCode</h4><h6 align="right" style="padding-right: 100px;"><a href="report_listView.do" >more&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></h6>
+  <div class="item"  style="padding-left: 130px; padding-right: 120px; ">
+ <h4 align="center">ErrorCode</h4><h6 align="right" ><a href="report_listView.do" >more&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></h6>
                     		<table class="table">
 	                    		<c:forEach items="${requestScope.errorReportErrorCodeList}" var="i">
 	                    			<tr>
-	                    				<td style="padding-left:100px;"><a href="report_showContent.do?error=${i.errorCode}&type=errorcode">${i.errorCode}</a></td>
+	                    				<td><a href="report_showContent.do?error=${i.errorCode}&type=errorcode">${i.errorCode}</a></td>
 	                    			</tr>
 	                    		</c:forEach>
                     		</table>
   </div>
-   <div class="item">
-   <h4 align="center">모집중프로젝트</h4><h6 align="right" style="padding-right: 100px;"><a href="project_listView.do">more&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></h6>
+   <div class="item"  style="padding-left: 130px; padding-right: 120px; ">
+   <h4 align="center">모집중프로젝트</h4><h6 align="right" ><a href="project_listView.do">more&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></h6>
                     		<table class="table">
-	                    		<c:forEach items="${requestScope.projectList}" var="i">
+	                    		<c:forEach items="${requestScope.projectList}" var="i" varStatus="num">
 	                    			<tr>
-	                    				<td style="padding-left:100px;"><a href="project_View.do?projectNo=${i.projectNo}">${i.projectName}</a></td>
+	                    				<td><a href="project_View.do?projectNo=${i.projectNo}">${i.projectName}</a></td>
 	                    			</tr>
 	                    		</c:forEach>
                     		</table>
