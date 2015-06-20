@@ -130,3 +130,7 @@ input[id="joinProBtn2"] {
  font-style: italic;
  margin: 20px;
 }
+
+#popupProForm{
+	cursor: pointer;
+}

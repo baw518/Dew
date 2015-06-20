@@ -135,5 +135,13 @@ public class ProjectServiceImpl implements ProjectService{
 	public void updateProgress(ProjectVO pvo) {
 		projectDAO.updateProgress(pvo);
 	}
+	@Override
+	public List<CommentVO> findJoinListProcess(int projectNo) {
+		return projectDAO.findJoinListProcess(projectNo);
+	}
+	@Override
+	public void mansAjax(ProjectVO pvo) {
+		projectDAO.mansAjax(pvo);
+	}
 
 }

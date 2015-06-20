@@ -57,6 +57,10 @@ public interface ProjectService {
 
 	void updateProgress(ProjectVO pvo);
 
+	List<CommentVO> findJoinListProcess(int projectNo);
+
+	void mansAjax(ProjectVO pvo);
+
 
 	
 }

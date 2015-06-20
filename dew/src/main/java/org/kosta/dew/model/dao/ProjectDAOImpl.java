@@ -132,5 +132,13 @@ public class ProjectDAOImpl implements ProjectDAO{
 	public void updateProgress(ProjectVO pvo) {
 		sqlSessionTemplate.update("project.updateProgress",pvo);
 	}
+	@Override
+	public List<CommentVO> findJoinListProcess(int projectNo) {
+		return sqlSessionTemplate.selectList("project.findJoinListProcess",projectNo);
+	}
+	@Override
+	public void mansAjax(ProjectVO pvo) {
+		sqlSessionTemplate.update("project.mansAjax",pvo);
+	}
 
 }

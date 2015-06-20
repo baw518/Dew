@@ -59,6 +59,8 @@
 	<option value="">-------------------</option>
 	<option value="웹프로그래밍">웹프로그래밍</option>
 	<option value="웹디자인">웹디자인</option>
+	<option value="DB">DB</option>
+	<option value="서버">서버</option>
 	<option value="기타">기타</option>
 </select><br>
 인원
@@ -70,7 +72,7 @@
 배당포인트 <input type="text" name="point"  style="width: 60px" id="point"> <b>p</b><br>
 모집마감일 <input type="text" id="deadline" name="deadline" style="width: 120px"><br>
 <hr>
-한마디<textarea rows="2" cols="28" name="content" id="content"></textarea><hr>
+내용<textarea rows="2" cols="28" name="content" id="content"></textarea><hr>
 <input type="submit" value="등록" id="regProBtn">
 </form>
 </div>

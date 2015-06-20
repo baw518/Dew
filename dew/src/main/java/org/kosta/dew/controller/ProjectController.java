@@ -1,5 +1,7 @@
 package org.kosta.dew.controller;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -180,5 +182,23 @@ public class ProjectController {
 		pvo.setProgressing(progressing);
 		projectService.updateProgress(pvo);
 		return progressing;
+	}
+	@RequestMapping("project_popupProGetJoiner.do")
+	public ModelAndView popupProGetJoiner(int projectNo){
+		List<CommentVO> cvo=projectService.findJoinListProcess(projectNo);
+		if(cvo.size()==0){
+			return new ModelAndView("project/projectPopup");
+		}
+		cvo.get(0).setBoardNo(projectNo);
+		return new ModelAndView("project/projectPopup","cvo",cvo);
+	}
+	@RequestMapping("project_mansAjax.do")
+	@ResponseBody
+	public void mansAjax(int projectNo,String achieve){
+		ProjectVO pvo=new ProjectVO();
+		pvo.setAchieve(achieve);
+		pvo.setProjectNo(projectNo);
+		System.out.println(projectNo+achieve);
+		projectService.mansAjax(pvo);
 	}
 }

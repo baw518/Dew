@@ -27,6 +27,10 @@
   				$("#switchBtn").html("<input type='button' value='신청완료' id='joinProBtn2'>");
   			<%}%>
   			$("#joinProBtn2").click(function(){
+  				if($("#subjectVal").val()==""){
+  					alert("분야를 고르세요");
+  					return false;
+  				}
   				$.ajax({
   					type:"POST",
   					url:"joinProjectAjax.do",

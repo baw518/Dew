@@ -110,7 +110,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   	select p.title,p.progressing,p.point,p.project_no,to_char(c.project_comment_date,'YY-MM-DD') as deadline,c.project_comment_no as hit from project_comment c,project_write p where c.type=1 and c.id=#{value} and c.project_no=p.project_no order by deadline desc
   </select>
   <select id="findProcessProjectById" resultMap="projectRM">
- 	  	 select distinct p.id,p.title,p.achieve,p.progressing,p.point,p.project_no,to_char(p.project_date,'YY.MM.DD') as project_date from project_comment c,project_write p where c.type!=2 and p.achieve='진행중' and (p.id=#{value} or c.id=#{value}) order by project_date desc
+ 	  	 select distinct p.id,p.title,p.achieve,p.progressing,p.point,p.project_no,to_char(p.project_date,'YY.MM.DD') as project_date from project_comment c,project_write p where c.type!=2 and (p.achieve='진행중' or p.achieve='추가모집중') and (p.id=#{value} or c.id=#{value}) order by project_date desc
   </select>
     <select id="findSuccessProject" resultMap="projectRM">
  	  	 select distinct p.id,p.title,p.achieve,p.progressing,p.point,p.project_no,to_char(p.project_date,'YY.MM.DD') as project_date from project_comment c,project_write p where c.type!=2 and p.achieve='완료' and (p.id=#{value} or c.id=#{value}) order by project_date desc
@@ -141,6 +141,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  </update>
  <update id="updateProgress" parameterType="pvo">
  	update project_write set progressing=#{progressing} where project_no=#{projectNo}
+ </update>
+ 
+ <select id="findJoinListProcess" resultType="cmvo">
+ 	 	select p.project_no,c.id,c.content,to_char(p.project_date,'YY.MM.DD') as commentDate,c.project_sub as projectSub from project_write p,project_comment c where p.project_no=c.project_no and (p.achieve='진행중' or p.achieve='추가모집중') and c.type=1 and p.project_no=#{value} order by commentDate desc
+ </select>
+ <update id="mansAjax">
+ 		update project_write set achieve=#{achieve} where project_no=#{projectNo}
  </update>
   </mapper> 
  

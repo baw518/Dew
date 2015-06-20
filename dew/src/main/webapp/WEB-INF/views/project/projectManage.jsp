@@ -40,6 +40,8 @@
   			location.href="project_listView.do";
   		});
   		$("#want").click(function(){
+  			alert("공사중");
+  			return false;
   			location.href="project_projectRequestForm.do";
   		});
   	});
@@ -95,10 +97,16 @@
 			  }
 			    });
 			});
+			$("#popupPro<%=i%>").click(function(){
+	  			window.open("project_popupProGetJoiner.do?projectNo="+<%=ppl.get(i).getProjectNo()%>,"notice","width=350,height=400,top=120,left=950");
+			});
 			<%}%>
  	 });
  	$(function() {
-	    $( "#accordion" ).accordion();
+	    $( "#accordion" ).accordion({
+	    	collapsible: true,
+	    	heightStyle: "content"
+	    });
 	  });
   </script>
 <body>
@@ -114,46 +122,45 @@
 <div id="accordion">
   <h3>전체 프로젝트 <b> (${fn:length(requestScope.pmvo.creatingProject)+fn:length(requestScope.pmvo.joinProject)+fn:length(requestScope.pmvo.processingProject)})</b></h3>
   <div>
-    <c:choose><c:when test='${fn:length(requestScope.pmvo.creatingProject)!=0||fn:length(requestScope.pmvo.joinProject)!=0||fn:length(requestScope.pmvo.processingProject)!=0}'><table border='5' >
-    <tr><td colspan='2' width='700px'>생성중</td></tr><c:forEach items='${requestScope.pmvo.creatingProject}' var='createP'><tr><td>${createP.projectName}</td><td>${createP.project_date}</td></tr></c:forEach>
+    <table border='5' ><tr><td colspan='2' width='700px'>생성중</td></tr><c:forEach items='${requestScope.pmvo.creatingProject}' var='createP'><tr><td>${createP.projectName}</td><td>${createP.project_date}</td></tr></c:forEach>
 	<tr><td colspan='2'>신청중</td></tr><c:forEach items='${requestScope.pmvo.joinProject}' var='joinP'><tr><td>${joinP.projectName}</td><td>${joinP.deadline}</td></tr></c:forEach><tr><td colspan='2'>진행중</td></tr>
-	<c:forEach items='${requestScope.pmvo.processingProject}' var='processP'><tr><td>${processP.projectName}</td><td>${processP.project_date}</td></c:forEach></table></c:when><c:otherwise></c:otherwise></c:choose>
+	<c:forEach items='${requestScope.pmvo.processingProject}' var='processP'><tr><td>${processP.projectName}</td><td>${processP.project_date}</td></c:forEach></table>
   </div>
   <h3>생성중<b> (${fn:length(requestScope.pmvo.creatingProject)})</b></h3>
   <div>
-    <c:choose><c:when test='${fn:length(requestScope.pmvo.creatingProject)!=0}'><table border='5'><tr><td><c:forEach items='${requestScope.pmvo.creatingProject}' var='createP' varStatus='start'>
-    		<table border= "3"><tr><td style='width: 700px'><a href='project_View.do?projectNo=${createP.projectNo}'>${createP.projectName}</a></td></tr> 
+   <table border='5'><tr><td><c:forEach items='${requestScope.pmvo.creatingProject}' var='createP' varStatus='start'>
+    		<table border= "3"><tr><td style='width: 700px;background-color: yellow;'><a href='project_View.do?projectNo=${createP.projectNo}'>${createP.projectName}</a></td></tr> 
   			<tr><td>${createP.point}point 일시 ${createP.project_date} 마감 ${createP.deadline} <input type='button' value='시작' id='startProBtn${start.index}'style='padding: 0px;'><input type='hidden' value='${createP.projectNo}' id='ProBtnHid${start.index}'>
   			<input type='button' value='삭제' id='deleteBtn${start.index}' style='padding: 0px;'></td></tr><tr><td>
   			<c:forEach items='${createP.commentVO }' var='com' varStatus='cp'><br><table border='1' ><tr><td colspan='4'>참가신청자</td></tr>
-  			<tr><td>ID</td><td width="120px">분야</td><td width='350px'>내용</td><td width='160px' >접수일</td></tr><tr><td>${com.id}</td><td>${com.projectSub }</td><td>${com.content}</td><td>${com.commentDate} 
+  			<tr><td width="80px">ID</td><td width="120px">분야</td><td width='350px'>내용</td><td width='160px' >접수일</td></tr><tr><td>${com.id}</td><td>${com.projectSub }</td><td>${com.content}</td><td>${com.commentDate} 
   			<input type='hidden' value='${com.id}' id='deleteJoinerBtnHid${cp.index}'><input type='hidden' value='${createP.projectNo}' id='deleteJoinerBtnHid2${cp.index}'>
-  			<input type='button' value='삭제' style='padding: 0px;' id='deleteJoiner${cp.index}'></td></tr></table></c:forEach><br></td></tr></table><br></c:forEach></td></tr></table></c:when><c:otherwise></c:otherwise></c:choose>
+  			<input type='button' value='삭제' style='padding: 0px;' id='deleteJoiner${cp.index}'></td></tr></table></c:forEach><br></td></tr></table><br></c:forEach></td></tr></table>
   </div>
   <h3>참가신청<b> (${fn:length(requestScope.pmvo.joinProject)})</b></h3>
   <div>
     <!-- 프로젝트 VO를 받아왔는데 코멘트 NO가 필요하므로 프로젝트VO의 hit를 사용하여 받아왔다.  -->
-    <c:choose><c:when test='${fn:length(requestScope.pmvo.joinProject)!=0}'><br><table border='5'>
+   <br><table border='5'>
     <tr><td width='400px'>프로젝트명</td><td width="230px">신청일</td></tr><c:forEach items='${requestScope.pmvo.joinProject}' var='joinP' varStatus='jp'><tr><td>
     <a href='project_View.do?projectNo=${joinP.projectNo}'>${joinP.projectName}</a></td><td> ${joinP.deadline} 
     <input type='button' value='취소' id='deleteJoinBtn${jp.index}'><input type='hidden' value='${joinP.hit}' id='deleteJoinBtnHid${jp.index}'></td>
-   </tr></c:forEach></table><br></c:when><c:otherwise></c:otherwise></c:choose>
+   </tr></c:forEach></table><br>
   </div>
   <h3>진행중<b> (${fn:length(requestScope.pmvo.processingProject)})</b></h3>
   <div>
-    <c:choose><c:when test='${fn:length(requestScope.pmvo.processingProject)!=0}'><table border='5'><tr><td width='600px'>프로젝트명</td>
+    <table border='5'><tr><td width='600px'>프로젝트명</td>
     <td width='120px'>진행률</td><td width='250px'>생성일</td></tr>
     <c:forEach items='${requestScope.pmvo.processingProject}' var='processP' varStatus='pro'><tr><td width='250px'>
-    <a href='project_View.do?projectNo=${processP.projectNo}'>${processP.projectName}</a></td><td> <div id="progressbar${pro.index}"></div>
+    <span id="popupProForm"><span id="popupPro${pro.index }">${processP.projectName}</span></span></td><td> <div id="progressbar${pro.index}"></div>
     </td><td>${processP.project_date}<c:choose><c:when test='${processP.id==sessionScope.mvo.id}'>
     <input type='button' value='완료' id='successBtn${pro.index}'><input type='hidden' value='${processP.projectNo}' id='successBtnHid${pro.index}'>
-    <tr><td colspan="3"><div id="slider${pro.index }"></div></td></tr></c:when></c:choose></td></tr></c:forEach></table><br></c:when><c:otherwise></c:otherwise></c:choose>
+    <tr><td colspan="3"><div id="slider${pro.index }"></div></td></tr></c:when></c:choose></td></tr></c:forEach></table><br>
   </div>
    <h3>완료<b> (${fn:length(requestScope.pmvo.successProject)})</b></h3>
   <div>
-    <c:choose><c:when test='${fn:length(requestScope.pmvo.successProject)!=0}'><table border='5'><tr><td width='600px'>프로젝트명</td><td>완료일</td></tr>
+   <table border='5'><tr><td width='600px'>프로젝트명</td><td>완료일</td></tr>
     <c:forEach items='${requestScope.pmvo.successProject}' var='successP'><tr><td><a href='project_View.do?projectNo=${successP.projectNo}'>${successP.projectName}</a>
-    </td><td>${successP.project_date}</td></tr></c:forEach></table><br></c:when><c:otherwise></c:otherwise></c:choose>
+    </td><td>${successP.project_date}</td></tr></c:forEach></table><br>
   </div>
   <h3>의뢰<b> (0)</b></h3>
   <div>
@@ -163,8 +170,6 @@
 </div>
 </div>
   </div>
-  <script>
-  </script>
     <div id="manageSpace"></div>	
  </c:when></c:choose>
 </body>
