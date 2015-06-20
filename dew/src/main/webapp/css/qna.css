@@ -1,0 +1,13 @@
+@CHARSET "UTF-8";
+/* 페이징 빈 css  */
+
+<!--QnA전용 css -->
+.commentId{
+	width:50px;	
+}
+.commentDate{
+	width:130px;	
+}
+.commentContent{
+	width:350px;
+}

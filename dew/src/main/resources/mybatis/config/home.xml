@@ -27,7 +27,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	
 	 <resultMap type="pvo" id="projectMap">
- 	 	<result property="projectNo" column="qna_no" />						
+ 	 	<result property="projectNo" column="project_no" />						
 		<result property="projectName" column="title" />
 	</resultMap>
  

@@ -61,8 +61,8 @@ $(document).ready(function(){
 		    <td >${list.qnaNo }</td>
 		    <td >
 		    	<c:if test="${list.answerStatus==0}"></c:if>
-		    	<c:if test="${list.answerStatus==1}">답변완료</c:if>
-		    	<c:if test="${list.answerStatus==2}">채택된답변</c:if>
+		    	<c:if test="${list.answerStatus==1}">완료</c:if>
+		    	<c:if test="${list.answerStatus==2}">채택</c:if>
 		    	<c:if test="${list.answerStatus==3}"></c:if>
 		    </td>			
 			<td class="tableTitle">

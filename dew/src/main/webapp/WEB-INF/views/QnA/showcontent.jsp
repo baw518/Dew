@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%-- <link rel="stylesheet" href="${initParam.root}/css/qna.css" type="text/css"> --%>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
@@ -50,9 +51,9 @@ $(document).ready(function(){
 		    	    $("#commentView").html("");
 		    		var c = "";
 		    		$.each(result,function(index,data){
-						 c+="<tr><td>"+data.id+"</td>";
-						 c+="<td>"+data.commentDate+"</td>";
-						 c+="<td>"+data.content+"</td>";
+						 c+="<tr ><td class='commentId'>"+data.id+"</td>";
+						 c+="<td class='commentDate'>"+data.commentDate+"</td>";
+						 c+="<td class='commentContent'>"+data.content+"</td>";
 						 c+="<td><input type='hidden' id='commentNo' name='commentNo' value='"+data.commentNo+"'>"
 						 +"<input type='button' id='commentUpdateText' name='commentUpdateText' value='수정'>"
 						 +"<input type='button' id='commentDeleteBtn' name='commentDeleteBtn' value='삭제'>"+
@@ -95,9 +96,9 @@ $(document).ready(function(){
 		    	  $("#commentView").html("");
 		    		var c = "";
 		    		$.each(result,function(index,data){
-						 c+="<tr><td>"+data.id+"</td>";
-						 c+="<td>"+data.commentDate+"</td>";
-						 c+="<td>"+data.content+"</td>";
+						 c+="<tr ><td class='commentId'>"+data.id+"</td>";
+						 c+="<td class='commentDate'>"+data.commentDate+"</td>";
+						 c+="<td class='commentContent'>"+data.content+"</td>";
 						 c+="<td><input type='hidden' id='commentNo' name='commentNo' value='"+data.commentNo+"'>"
 						 +"<input type='button' id='commentUpdateText' name='commentUpdateText' value='수정'>"
 						 +"<input type='button' id='commentDeleteBtn' name='commentDeleteBtn' value='삭제'>"+
@@ -175,9 +176,9 @@ $(document).ready(function(){
 		    	  $("#commentView").html("");
 		    		var c = "";
 		    		$.each(result,function(index,data){
-						 c+="<tr><td>"+data.id+"</td>";
-						 c+="<td>"+data.commentDate+"</td>";
-						 c+="<td>"+data.content+"</td>";
+						 c+="<tr><td  class='commentId'>"+data.id+"</td>";
+						 c+="<td class='commentDate'>"+data.commentDate+"</td>";
+						 c+="<td class='commentContent'>"+data.content+"</td>";
 						 c+="<td><input type='hidden' id='commentNo' name='commentNo' value='"+data.commentNo+"'>"
 						 +"<input type='button' id='commentUpdateText' name='commentUpdateText' value='수정'>"
 						 +"<input type='button' id='commentDeleteBtn' name='commentDeleteBtn' value='삭제'>"+
@@ -247,9 +248,9 @@ $(document).ready(function(){
 		    	    $("#commentView").html("");
 		    		var c = "";
 		    		$.each(result,function(index,data){
-						 c+="<tr><td>"+data.id+"</td>";
-						 c+="<td>"+data.commentDate+"</td>";
-						 c+="<td>"+data.content+"</td>";
+						 c+="<tr><td class='commentId'>"+data.id+"</td>";
+						 c+="<td class='commentDate'>"+data.commentDate+"</td>";
+						 c+="<td class='commentContent'>"+data.content+"</td>";
 						 c+="<td><input type='hidden' id='commentNo' name='commentNo' value='"+data.commentNo+"'>"
 						 +"<input type='button' id='commentUpdateText' name='commentUpdateText' value='수정'>"
 						 +"<input type='button' id='commentDeleteBtn' name='commentDeleteBtn' value='삭제'>"+
@@ -300,12 +301,13 @@ $(document).ready(function(){
 	
 	<tr>
 		<td colspan="4">
+			<div class="dewTable">
 				<table class="table" align="center" id="commentView">
 					<c:forEach items="${requestScope.cmvo}" var="i" varStatus="index">
 						<tr>
-							<td>${i.id}</td>
-							<td>${i.commentDate}</td>
-							<td colspan="3">${i.content}</td>
+							<td class="commentId">${i.id}</td>
+							<td class="commentDate">${i.commentDate}</td>
+							<td class="commentContent" colspan="3">${i.content}</td>
 							<td>
 								<c:choose>
 								<c:when test="${sessionScope.mvo.id != null }">
@@ -327,6 +329,7 @@ $(document).ready(function(){
 						</tr>
 					</c:forEach>
 				</table>
+				</div>
 			<table class="table">
 				<tr>
 					<td colspan="3"></td>
