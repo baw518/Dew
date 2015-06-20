@@ -2,12 +2,13 @@
     pageEncoding="UTF-8"%>
         <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-  <link rel="stylesheet" href="css/project.css">
+<link rel="stylesheet" href="${initParam.root}/css/dew.css" type="text/css">
 <body>
-<h3 id="projectRegisterLogo">프로젝트 참여</h3>
-<div id="listViewForm">
-<div id="listView">
-<table border="1" width="1000px" align="center" class="listTable">
+
+
+<div id="dewTable">
+<table  class="table">
+<caption><h2>Project List</h2></caption>
 <thead>
 <tr>
 <th class="projectNo">NO</th>
@@ -58,7 +59,6 @@
 	</c:if>
 	</p>
 </div>
-  </div>
-  <div id="listSpace"></div>
+
 </body>
 </html>

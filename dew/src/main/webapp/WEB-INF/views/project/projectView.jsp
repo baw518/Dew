@@ -5,7 +5,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
       <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+ <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <script type="text/javascript">
 	<%ProjectVO pvo=(ProjectVO)request.getAttribute("pvo");%>
 	<%-- var subject=<%=pvo.getDepartVO().get(i).getSubject()%> --%>
@@ -20,7 +22,7 @@
 %> 			alert("로그인하세요");
 				location.href="login_form.do";
   			<%}else{%>
-  				$("#joinComment").html("<textarea rows='3' cols='53' id='joinCommentArea'></textarea><br><br>");
+  				$("#joinComment").html("지원분야 <select id='subjectVal'><option value=''>고르세요</option><c:forEach items='${requestScope.pvo.departVO}' var='dvo'><option value='${dvo.subject}'>${dvo.subject}</option></c:forEach></select><textarea rows='3' cols='53' id='joinCommentArea'></textarea><br><br>");
   				$("#joinCommentArea").focus();
   				$("#switchBtn").html("<input type='button' value='신청완료' id='joinProBtn2'>");
   			<%}%>
@@ -28,7 +30,7 @@
   				$.ajax({
   					type:"POST",
   					url:"joinProjectAjax.do",
-  					data: "joinContent="+$("#joinCommentArea").val()+"&projectNo=${requestScope.pvo.projectNo}",
+  					data: "joinContent="+$("#joinCommentArea").val()+"&projectNo=${requestScope.pvo.projectNo}&projectSub="+$('#subjectVal').val(),
   					success:function(flag){
   						if(flag==true){
   							alert("이미 신청했습니다");
@@ -76,7 +78,11 @@
 			});
 		 <%}%>
 		});
-
+	 $(function() {
+	 	    $( "#progressbar" ).progressbar({
+	 	      value: <%=pvo.getProgressing()%>
+	 	    });
+	 	  });
 </script>
 	<link rel="stylesheet" href="css/project.css">
 <body>
@@ -84,17 +90,21 @@
 <div id="viewForm">
 <div id="view">
 <table border="1" width="500px" align="center">
-<tr><th>프로젝트명</th><td>${requestScope.pvo.projectName}</td></tr>
-<tr><th>작성자</th><td>${requestScope.pvo.id}</td></tr>
-<tr><th>작성일</th><td>${requestScope.pvo.project_date}</td></tr>
+<tr><td colspan="2">프로젝트명</td><td colspan="2">${requestScope.pvo.projectName}</td></tr>
+<tr><td colspan="2">작성자</td><td colspan="2">${requestScope.pvo.id}</td></tr>
+<tr><td colspan="2">작성일</td><td colspan="2">${requestScope.pvo.project_date}</td></tr>
 <c:forEach items="${requestScope.pvo.departVO}" var="dvo" varStatus="i">
-<tr><th>분야</th><td>${dvo.subject}</td></tr>
-<tr><th>인원</th><td>${dvo.mans}<%-- <span id="mans${i.index }"></span> --%></td></tr>
+<tr><td>분야</td><td>${dvo.subject}</td>
+<td>인원</td><td>${dvo.mans}<%-- <span id="mans${i.index }"></span> --%></td></tr>
 </c:forEach>
-<tr><th>배당포인트</th><td>${requestScope.pvo.point}<b>point</b></td></tr>
-<tr><th>모집기간</th><td><span id="date">${requestScope.pvo.deadline}</span></td></tr>
-<tr><td colspan="2" align="center"><b>내용</b></td></tr>
-<tr><td colspan="2"> <br>${requestScope.pvo.content}</td></tr>
+<tr><td colspan="2">배당포인트</td><td colspan="2">${requestScope.pvo.point}<b>point</b></td></tr>
+<c:choose><c:when test="${requestScope.pvo.achieve=='모집중' }"><tr><td colspan="2">모집기간</td>
+<td  colspan="2"><span id="date">${requestScope.pvo.deadline}</span></td></tr></c:when>
+<c:when test="${requestScope.pvo.achieve=='진행중' }"><tr><td colspan="2">진행률</td><td colspan="2">
+<div id="progressbar"></div></td></tr></c:when><c:otherwise></c:otherwise>
+</c:choose>
+<tr><td colspan="4" align="center"><b>내용</b></td></tr>
+<tr><td colspan="4"> <br>${requestScope.pvo.content}</td></tr>
 </table>
 <br>
 <span id="joinComment"></span>

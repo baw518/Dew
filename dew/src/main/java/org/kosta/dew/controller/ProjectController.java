@@ -23,10 +23,6 @@ import org.springframework.web.servlet.ModelAndView;
 public class ProjectController {
 	@Resource
 	private ProjectService projectService;
-	   @RequestMapping("project_main.do")
-	   public String projectMain(){
-		   return "projectView_projectMain";
-	   }
 	   @RequestMapping("project_registerForm.do")
 	   public String projectRegisterShow(){
 		   return "projectView_projectRegister";
@@ -35,18 +31,22 @@ public class ProjectController {
 		public ModelAndView projectRequestView(){
 			return new ModelAndView("projectView_projectRequest");
 		}
-	   @RequestMapping("project_projectManageForm.do")
+	   @RequestMapping("project_main.do")
 		public ModelAndView projectManageView(HttpServletRequest request){
 		   HttpSession session=request.getSession(false);
-			MemberVO mvo=(MemberVO) session.getAttribute("mvo");
-			String id=mvo.getId();
+		   MemberVO mvo=(MemberVO) session.getAttribute("mvo");
+		   if(mvo!=null){
+		   String id=mvo.getId();
 		   ProjectManageVO pmvo=new ProjectManageVO();
 		   pmvo.setCreatingProject(projectService.findProjectById(id));
 		   pmvo.setJoinProject(projectService.findJoinProjectById(id));
 		   pmvo.setProcessingProject(projectService.findProcessProjectById(id));
 		   pmvo.setSuccessProject(projectService.findSuccessProjectById(id));
 			return new ModelAndView("projectView_projectManage","pmvo",pmvo);
-		}
+		   }
+		   return new ModelAndView("redirect:project_listView.do");
+	}
+	   
 		@RequestMapping(value="project_register.do",method=RequestMethod.POST)
 		public ModelAndView registerProject(ProjectVO pvo, DepartVO dvo,HttpServletRequest request){
 			HttpSession session=request.getSession(false);
@@ -112,7 +112,7 @@ public class ProjectController {
 	public ModelAndView deleteProject(String projectNo,boolean manage){
 		String path="redirect:project_listView.do";
 		if(manage==true)
-			path="redirect:project_projectManageForm.do";
+			path="redirect:project_main.do";
 		projectService.deleteDepart(projectNo);
 		projectService.deleteProject(projectNo);
 		return new ModelAndView(path);
@@ -126,7 +126,7 @@ public class ProjectController {
 	}
 	@RequestMapping("joinProjectAjax.do")
 	@ResponseBody
-	public boolean joinProjectAjax(String projectNo,String joinContent,HttpServletRequest request){
+	public boolean joinProjectAjax(String projectNo,String joinContent,String projectSub,HttpServletRequest request){
 		HttpSession session=request.getSession(false);
 		MemberVO mvo=(MemberVO) session.getAttribute("mvo");
 		String id=mvo.getId();
@@ -134,8 +134,12 @@ public class ProjectController {
 		cvo.setBoardNo(Integer.parseInt(projectNo));
 		cvo.setId(id);
 		boolean flag=projectService.joinCheck(cvo);
-		if(flag==false)
-			projectService.joinProject(new CommentVO(Integer.parseInt(projectNo),id,joinContent));
+		if(flag==false){
+			cvo.setBoardNo(Integer.parseInt(projectNo));
+			cvo.setContent(joinContent);
+			cvo.setProjectSub(projectSub);
+			projectService.joinProject(cvo);
+		}
 		return flag;
 	}
 	@RequestMapping("updateProjectComment.do")
@@ -151,21 +155,30 @@ public class ProjectController {
 	@RequestMapping("deleteJoinComment.do")
 	public ModelAndView deleteJoinComment(String commentNo){
 		projectService.deleteJoinComment(commentNo);
-		return new ModelAndView("redirect:project_projectManageForm.do");
+		return new ModelAndView("redirect:project_main.do");
 	}
 	@RequestMapping("project_start.do")
 	public ModelAndView startProject(String projectNo){
 		projectService.startProject(projectNo);
-		return new ModelAndView("redirect:project_projectManageForm.do");
+		return new ModelAndView("redirect:project_main.do");
 	}
 	@RequestMapping("project_deleteJoiner.do")
 	public ModelAndView deleteJoinerById(String id,String projectNo){
 		projectService.deleteJoinerById(id,projectNo);
-		return new ModelAndView("redirect:project_projectManageForm.do");
+		return new ModelAndView("redirect:project_main.do");
 	}
 	@RequestMapping("project_success.do")
 	public ModelAndView successProject(String projectNo){
 		projectService.successProject(projectNo);
-		return new ModelAndView("redirect:project_projectManageForm.do");
+		return new ModelAndView("redirect:project_main.do");
+	}
+	@RequestMapping("updateProgressAjax.do")
+	@ResponseBody
+	public int updateProgressAjax(int projectNo,int progressing){
+		ProjectVO pvo=new ProjectVO();
+		pvo.setProjectNo(projectNo);
+		pvo.setProgressing(progressing);
+		projectService.updateProgress(pvo);
+		return progressing;
 	}
 }

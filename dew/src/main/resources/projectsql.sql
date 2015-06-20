@@ -11,7 +11,7 @@ create table project_write(
 	project_date date not null,
 	progressing_end_date varchar2(50) not null
 )
-select * from qna_comment
+
  drop sequence project_seq;
  create sequence project_seq; 
  
@@ -51,7 +51,8 @@ create table project_comment(
 	id varchar2(50) not null,
 	content clob not null,
 	project_comment_date date not null,
-	type number default 0, 
+	type number default 0,
+	project_sub varchar2(50),
 	constraint fk_reply_project_no_ex foreign key(project_no) references project_write(project_no)
 )
 

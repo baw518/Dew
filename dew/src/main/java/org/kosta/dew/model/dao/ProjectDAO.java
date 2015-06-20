@@ -54,5 +54,7 @@ public interface ProjectDAO {
 
 	List<ProjectVO> findSuccessProjectById(String id);
 
+	void updateProgress(ProjectVO pvo);
+
 
 }

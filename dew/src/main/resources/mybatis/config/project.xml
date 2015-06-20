@@ -86,8 +86,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select project_comment_seq.nextval from dual
 	</selectKey>  
   	insert into project_comment(
-	  project_comment_no,project_no,id,content,type,project_comment_date) 
-	  values(#{commentNo},#{boardNo},#{id},#{content},1,sysdate)
+	  project_comment_no,project_no,id,content,type,project_comment_date,project_sub) 
+	  values(#{commentNo},#{boardNo},#{id},#{content},1,sysdate,#{projectSub})
   </insert>
   
   <delete id="deleteProjectComment" parameterType="int">
@@ -129,7 +129,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	update project_write set achieve='진행중' where project_no=#{value}
  </update>
  <select id="findJoinList" resultType="cmvo">
- 	select p.project_no,c.id,c.content,to_char(p.project_date,'YY.MM.DD') as commentDate from project_write p,project_comment c where p.project_no=c.project_no and p.achieve='모집중' and c.type=1 and p.project_no=#{value} order by commentDate desc
+ 	select p.project_no,c.id,c.content,to_char(p.project_date,'YY.MM.DD') as commentDate,c.project_sub as projectSub from project_write p,project_comment c where p.project_no=c.project_no and p.achieve='모집중' and c.type=1 and p.project_no=#{value} order by commentDate desc
   </select>
  
  <delete id="deleteJoinerById" parameterType="cmvo">
@@ -138,6 +138,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  
  <update id="successProject">
  	update project_write set project_date=sysdate, achieve='완료' where project_no=#{value}
+ </update>
+ <update id="updateProgress" parameterType="pvo">
+ 	update project_write set progressing=#{progressing} where project_no=#{projectNo}
  </update>
   </mapper> 
  

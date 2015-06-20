@@ -131,5 +131,9 @@ public class ProjectServiceImpl implements ProjectService{
 	public List<ProjectVO> findSuccessProjectById(String id) {
 		return projectDAO.findSuccessProjectById(id);
 	}
+	@Override
+	public void updateProgress(ProjectVO pvo) {
+		projectDAO.updateProgress(pvo);
+	}
 
 }

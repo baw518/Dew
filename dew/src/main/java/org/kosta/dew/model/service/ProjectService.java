@@ -55,6 +55,8 @@ public interface ProjectService {
 
 	List<ProjectVO> findSuccessProjectById(String id);
 
+	void updateProgress(ProjectVO pvo);
+
 
 	
 }

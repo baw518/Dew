@@ -128,5 +128,9 @@ public class ProjectDAOImpl implements ProjectDAO{
 	public List<ProjectVO> findSuccessProjectById(String id) {
 		return sqlSessionTemplate.selectList("project.findSuccessProject",id);
 	}
+	@Override
+	public void updateProgress(ProjectVO pvo) {
+		sqlSessionTemplate.update("project.updateProgress",pvo);
+	}
 
 }

@@ -10,12 +10,13 @@ public class CommentVO {
 	private int ref;
 	private int reStep;
 	private int relevel;
+	private String projectSub;
 	public CommentVO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public CommentVO(int commentNo, int boardNo, String id, String content,
-			String commentDate, int ref, int reStep, int relevel) {
+			String commentDate, int ref, int reStep, int relevel,String projectSub) {
 		super();
 		this.commentNo = commentNo;
 		this.boardNo = boardNo;
@@ -25,6 +26,7 @@ public class CommentVO {
 		this.ref = ref;
 		this.reStep = reStep;
 		this.relevel = relevel;
+		this.projectSub = projectSub;
 	}
 	
 	public CommentVO(int boardNo, String id, String content) {
@@ -86,6 +88,12 @@ public class CommentVO {
 	}
 	public void setRelevel(int relevel) {
 		this.relevel = relevel;
+	}
+	public String getProjectSub(){
+		return projectSub;
+	}
+	public void setProjectSub(String projectSub){
+		this.projectSub = projectSub;
 	}
 	@Override
 	public String toString() {
