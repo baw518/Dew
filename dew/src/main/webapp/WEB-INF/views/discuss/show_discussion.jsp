@@ -93,6 +93,18 @@ $(document).ready(function(){
 		$("#commentUpdateBtn").click(function(){
 			location.href="updateDiscussComment.do?no="+commentNo+"&index="+no+"&content="+$("#auto_textarea2").val();
 		}); 
+		$(document).on("click", "#commentUpdateCancel" , function(e){
+			if(!confirm("입력한 내용을 취소하시겠습니까??")){
+				return false;
+			}
+			var hiddenContent = $(this).next().val();
+			$(this).parent().html(hiddenContent);
+
+			/* $(this).parent().html("con"); */
+			
+		//	location.href="QnA_showContent.do?qnaNo=${requestScope.qvo.qnaNo }";
+			
+		});
 		}
 	});
 	
@@ -112,10 +124,14 @@ $(document).ready(function(){
 		$(this).parent().parent().next().html(p);
 		
 	});
-	
+
 	$(document).on("click", "#commentReplyCancel", function(){
+		if(!confirm("입력한 내용을 취소하시겠습니까???")){
 			return false;
+		}
+		$(this).parent().parent().html("");
 	});
+	
 	
 	$(document).on("click", "#commentReplyWriteBtn", function(){
 		var id = $("#id").val();

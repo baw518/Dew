@@ -32,7 +32,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="commentDate" column="discussion_comment_date" /> 
 	</resultMap>
 	<select id="findDiscussComment" resultMap="discussCommentRM">
-		select discussion_comment_no,id,discussion_no,content,to_char(discussion_comment_date,'YYYY-MM-DD HH:MI') as discussion_comment_date,ref,restep,relevel from discussion_comment where discussion_no=#{value}
+		select discussion_comment_no,id,discussion_no,content,to_char(discussion_comment_date,'YYYY-MM-DD HH:MI') as discussion_comment_date,ref,restep,relevel from discussion_comment where discussion_no=#{value} order by ref asc,restep asc
 	</select>
 	<delete id="deleteDiscussComment" parameterType="cmvo">
 		delete from discussion_comment where discussion_comment_no=#{value}
