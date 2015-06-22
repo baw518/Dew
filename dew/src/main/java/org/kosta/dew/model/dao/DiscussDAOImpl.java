@@ -97,5 +97,11 @@ public class DiscussDAOImpl implements DiscussDAO {
 		// TODO Auto-generated method stub
 		sqlSessionTemplate.insert("discuss.ajaxWriteCommentReply", vo);
 	}
+	@Override
+	public void delete(String no) {
+		System.out.println("딜리트디에오"+no);
+		sqlSessionTemplate.delete("discuss.deleteContentComment",no);	
+		sqlSessionTemplate.delete("discuss.deleteContent",no);	
+	}
 	
 }

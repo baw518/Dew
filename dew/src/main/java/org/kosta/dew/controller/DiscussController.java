@@ -207,4 +207,12 @@ public class DiscussController {
 		List<CommentVO> cmvo = discussService.findDiscussComment(vo.getBoardNo());
 		return cmvo;
 	}
+	//관리자가 게시글을 강제삭제
+	@RequestMapping("delete.do")
+	public String delete(HttpServletRequest request){
+		String no = request.getParameter("discussionNo");
+		System.out.println("디리트컨트롤러"+no);
+		discussService.delete(no);
+		return "redirect:discussion_listView.do";
+	}
 }

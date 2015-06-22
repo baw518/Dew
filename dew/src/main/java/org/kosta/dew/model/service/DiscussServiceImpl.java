@@ -102,4 +102,10 @@ public class DiscussServiceImpl implements DiscussService {
 		discussDAO.ajaxWriteCommentReply(vo);
 		
 	}
+	@Override
+	public void delete(String no) {
+		System.out.println("딜리트서비스"+no);
+		discussDAO.delete(no);
+		
+	}
 }

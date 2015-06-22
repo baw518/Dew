@@ -66,4 +66,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	 	insert into discussion_comment(discussion_comment_no,discussion_no,id,content,discussion_comment_date,ref,restep,relevel)
  	 	values(discussion_comment_no.nextval,#{boardNo},#{id},#{content},sysdate,#{ref},#{reStep},#{relevel})
  	 </insert>
+ 	 <delete id="deleteContentComment" parameterType="dsvo">
+ 	 	delete from discussion_comment where discussion_no=#{value}
+ 	 </delete>
+ 	 <delete id="deleteContent" parameterType="dsvo">
+ 	 	delete from discussion where discussion_no=#{value}
+ 	 </delete>
+ 	 
  </mapper> 		

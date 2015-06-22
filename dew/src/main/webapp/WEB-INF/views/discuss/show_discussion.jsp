@@ -178,6 +178,14 @@ $(document).ready(function(){
 		alert("삭제요청되었습니다.");
 	});
 	
+	//관리자가 삭제 버튼 누를 시
+	$("#delete").click(function(){
+		var no  = $("#no").val();
+		var q = confirm(no+"게시글을 삭제하시겠습니까?");
+		if(q){	
+		location.href="delete.do?discussionNo="+no;
+		}
+	});
 });//ready
 </script>
  <div align="right">
@@ -185,6 +193,9 @@ $(document).ready(function(){
  <!-- 게시글 작성자와 로그인한 회원이 일치할 때 삭제요청 가능. -->
  <c:if test="${sessionScope.mvo.id == requestScope.dsvo.id}">
  <input type="button" id="deleteManager" name="deleteManager" value="삭제 요청">
+ </c:if>
+ <c:if test="${sessionScope.mvo.memberLevel == 0}">
+ 	<input type="button" value="삭제" id="delete">
  </c:if>
  </div>
  <br>

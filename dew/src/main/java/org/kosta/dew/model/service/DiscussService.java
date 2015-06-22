@@ -34,4 +34,6 @@ public interface DiscussService {
 
 	public abstract void ajaxWriteCommentReply(CommentVO vo);
 
+	public abstract void delete(String no);
+
 }
