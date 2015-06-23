@@ -2,6 +2,7 @@ package org.kosta.dew.model.service;
 
 import java.util.List;
 
+import org.kosta.dew.model.vo.MemberListVO;
 import org.kosta.dew.model.vo.MemberVO;
 import org.kosta.dew.model.vo.UserTypeVO;
 
@@ -18,6 +19,7 @@ public interface MemberService {
 	public int deletemember(MemberVO mvo);
 	public int update(MemberVO vo);
 	public abstract int deltemembercheck(String id);
+	public abstract MemberListVO allMember(String pageNo);
 	
 	
 	

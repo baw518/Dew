@@ -25,7 +25,7 @@
 </script>
 
 </head>
-
+<div class="main">
 <body>
 <form action="member_findbypassword.do" method="post">
 

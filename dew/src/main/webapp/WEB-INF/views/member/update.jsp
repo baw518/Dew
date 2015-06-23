@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<div class="main">
 <form name="updateForm" action="member_update.do" method="post">
 아이디 <input type="text" name="id" value="${sessionScope.mvo.id}" readonly="readonly"><br>
 이름 <input type="text" name=memberName value="${sessionScope.mvo.memberName}"><br>
@@ -17,6 +18,7 @@
 
 <input type="submit" value="수정하기" >
 </form>
+</div>
 </body>
 </html>
 

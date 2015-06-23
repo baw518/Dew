@@ -135,7 +135,6 @@ public class MemberController {
 
 	@RequestMapping("member_deletemember.do")
 	public ModelAndView deletemember(HttpServletRequest request, MemberVO vo) {
-
 		System.out.println(request.getAttribute("id"));
 
 		memberSerivce.deletemember(vo);
@@ -191,5 +190,8 @@ public class MemberController {
 
 		return "member_profileform";
 	}
-
+	@RequestMapping("member_view.do")
+	public ModelAndView memberView(String pageNo,Model model){
+		return new ModelAndView("member_memberView","mlvo",memberSerivce.allMember(pageNo));
+	}
 }

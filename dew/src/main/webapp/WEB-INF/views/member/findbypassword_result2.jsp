@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
+<div class="main">
 비밀번호는 ${requestScope.vo.memberPassword}입니다
+</div>
 </body>
 </html>

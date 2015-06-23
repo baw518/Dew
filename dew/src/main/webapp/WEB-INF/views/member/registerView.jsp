@@ -46,6 +46,7 @@
 	
 		});
 </script>
+<div class="main">
 <form  action="member_register.do" method="post">
 <div class="registerForm">
 	<input type="text" class="registerName"  name="memberName" id="memberName" placeholder="이름을 입력해주세요"><br>
@@ -63,6 +64,7 @@
 <input type="submit" class="loginBtn" value="SIGN UP">
 </div>
 </form>
+</div>
 
 
 

@@ -5,7 +5,9 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.kosta.dew.model.dao.MemberDAO;
+import org.kosta.dew.model.vo.MemberListVO;
 import org.kosta.dew.model.vo.MemberVO;
+import org.kosta.dew.model.vo.PagingBean;
 import org.kosta.dew.model.vo.UserTypeVO;
 import org.springframework.stereotype.Service;
 
@@ -64,6 +66,18 @@ public class MemberServiceImpl implements MemberService {
 	public int deltemembercheck(String id) {
 		
 		return memberDAO.deltemembercheck(id);
+	}
+	@Override
+	public MemberListVO allMember(String pageNo) {
+		// TODO Auto-generated method stub
+		if(pageNo==null||pageNo=="") {
+			pageNo="1";
+		}
+		List<MemberVO> list= memberDAO.allMember(pageNo);
+		int total = memberDAO.totalMember();
+		PagingBean paging=new PagingBean(total,Integer.parseInt(pageNo));
+		MemberListVO mlvo = new MemberListVO(list, paging);	
+		return mlvo;
 	}
 	
 	

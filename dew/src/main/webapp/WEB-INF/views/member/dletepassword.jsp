@@ -20,11 +20,13 @@
 </script> -->
 </head>
 <body>
+<div class="main">
 <form action="member_deletemember.do" method="post">
 비밀번호을 입력하세요<input type="password" name="memberPassword" id="memberPassword"><br>
 <input type="hidden" name="id" id="id" value="${sessionScope.mvo.id}">
 
 <br><input type="submit" id="passwordptn" value="회원탈퇴">
 </form>
+</div>
 </body>
 </html>

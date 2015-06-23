@@ -93,18 +93,6 @@ $(document).ready(function(){
 		$("#commentUpdateBtn").click(function(){
 			location.href="updateDiscussComment.do?no="+commentNo+"&index="+no+"&content="+$("#auto_textarea2").val();
 		}); 
-		$(document).on("click", "#commentUpdateCancel" , function(e){
-			if(!confirm("입력한 내용을 취소하시겠습니까??")){
-				return false;
-			}
-			var hiddenContent = $(this).next().val();
-			$(this).parent().html(hiddenContent);
-
-			/* $(this).parent().html("con"); */
-			
-		//	location.href="QnA_showContent.do?qnaNo=${requestScope.qvo.qnaNo }";
-			
-		});
 		}
 	});
 	
@@ -124,14 +112,10 @@ $(document).ready(function(){
 		$(this).parent().parent().next().html(p);
 		
 	});
-
-	$(document).on("click", "#commentReplyCancel", function(){
-		if(!confirm("입력한 내용을 취소하시겠습니까???")){
-			return false;
-		}
-		$(this).parent().parent().html("");
-	});
 	
+	$(document).on("click", "#commentReplyCancel", function(){
+			return false;
+	});
 	
 	$(document).on("click", "#commentReplyWriteBtn", function(){
 		var id = $("#id").val();
@@ -178,38 +162,30 @@ $(document).ready(function(){
 		alert("삭제요청되었습니다.");
 	});
 	
-	//관리자가 삭제 버튼 누를 시
-	$("#delete").click(function(){
-		var no  = $("#no").val();
-		var q = confirm(no+"게시글을 삭제하시겠습니까?");
-		if(q){	
-		location.href="delete.do?discussionNo="+no;
-		}
-	});
 });//ready
 </script>
+<div class="main">
  <div align="right">
  <br>
  <!-- 게시글 작성자와 로그인한 회원이 일치할 때 삭제요청 가능. -->
  <c:if test="${sessionScope.mvo.id == requestScope.dsvo.id}">
  <input type="button" id="deleteManager" name="deleteManager" value="삭제 요청">
  </c:if>
- <c:if test="${sessionScope.mvo.memberLevel == 0}">
- 	<input type="button" value="삭제" id="delete">
- </c:if>
  </div>
  <br>
- <table id="discussView" class="table" align="center">
+ <table id="discussView"  class="dewTable" >
+ <thead>
  	<tr>
- 		<td id="discussionNo" class="discussionNo"> ${requestScope.dsvo.discussionNo} </td>
- 		<td class="title"> ${requestScope.dsvo.title} </td>
- 		<td class="discussionSubject">${requestScope.dsvo.discussionSubject} </td>
- 		<td class="discussionDate"> ${requestScope.dsvo.discussionDate} </td>
- 		<td class="hit"> ${requestScope.dsvo.hit} </td>
+ 		<th id="discussionNo" class="discussionNo"> ${requestScope.dsvo.discussionNo} </th>
+ 		<th class="title"> ${requestScope.dsvo.title} </th>
+ 		<th class="discussionSubject">${requestScope.dsvo.discussionSubject} </th>
+ 		<th class="discussionDate"> ${requestScope.dsvo.discussionDate} </th>
+ 		<th class="hit"> ${requestScope.dsvo.hit} </th>
  	</tr>
  	<tr>
- 		<td class="id" colspan="5" align="left">${requestScope.dsvo.id} </td>
+ 		<th class="id" colspan="5" align="left" >${requestScope.dsvo.id} </th>
  	</tr>
+ 	</thead>
  	<tr>
  		<td class="content" colspan="5" align="center">
  		<pre>${requestScope.dsvo.content} </pre></td>
@@ -249,5 +225,5 @@ $(document).ready(function(){
  	</tr> 
 	</c:if>
  	</table>
-
+</div>
 

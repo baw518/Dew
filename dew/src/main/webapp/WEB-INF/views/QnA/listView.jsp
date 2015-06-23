@@ -29,22 +29,20 @@ $(document).ready(function(){
 
 
 
-<div class="dewTable">
-<table class="table">
+<div class="main" align="center">
+<table class="dewTable">
 	<caption><h2>QnA게시판</h2></caption>
 	<thead class="thead">
 		<thead>
 			<tr>
-			<th colspan="1">
+			<th colspan="1" style="border-bottom-color: #ffffff" colspan="7" >
 				<select id="group">
 				<option value="all">전체</option>
 				<c:forEach items="${requestScope.groupList}" var="i">
 					<option value="${i.qnAGroupNo}">${i.qnAGroupName }</option>
 				</c:forEach>
 				</select> 
-			<th>
-			<th colspan="6"></th>
-			<tr>
+			</th>
 		<tr>
 			<th class="tableNo" >NO</th>
 			<th class="tableChoose">글상태</th>
@@ -66,7 +64,7 @@ $(document).ready(function(){
 		    	<c:if test="${list.answerStatus==3}"></c:if>
 		    </td>			
 			<td class="tableTitle">
-				<a href="QnA_showContent.do?qnaNo=${list.qnaNo}">${list.title }</a>
+				<a href="QnA_showContent.do?qnaNo=${list.qnaNo}"  class="hover_font">${list.title }</a>
 			</td>
 			<td >${list.id }</td>
 			<td >
@@ -84,7 +82,7 @@ $(document).ready(function(){
 		</tr>	
 	</c:forEach>
 	<tr>
-		<td colspan="7" align="right">
+		<td colspan="7" align="right" style="border-bottom-color: #ffffff">
 			<c:if test="${sessionScope.mvo != null}">
 				<a href="QnA_WriteForm.do"><img  src="${initParam.root}images/qna_write.jpg" border="0"></a>
 			</c:if>
@@ -92,7 +90,7 @@ $(document).ready(function(){
 	</tr>
 	</tbody>
 </table>
-</div>
+
 
 <div class="page">
 	<c:choose>
@@ -142,4 +140,4 @@ $(document).ready(function(){
 <br>
 <br>
 <br>
-
+</div>

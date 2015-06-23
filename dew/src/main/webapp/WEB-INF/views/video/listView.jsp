@@ -12,8 +12,8 @@ $(document).ready(function(){
 <link rel="stylesheet" href="${initParam.root}/css/dew.css" type="text/css">
 <title>Video 게시판 입니다.</title>
 <br>
-<div class="dewTable">
-<table class="table">
+<div class="main" align="center">
+<table class="dewTable">
 <caption><h2>Video게시판</h2></caption>
 	<thead class="thead">
 	<tr>
@@ -28,7 +28,7 @@ $(document).ready(function(){
 	<c:forEach var="list" items="${requestScope.vo.list}">				
 		<tr>
 		    <td class="tableNo" >${list.videoNo }</td>				
-			<td class="tableTitle" ><a href="video_showContent.do?no=${list.videoNo}">
+			<td class="tableTitle" ><a href="video_showContent.do?no=${list.videoNo}" class="hover_font" >
 			${list.title }</a></td>
 			<td class="tableId">${list.id }</td>
 			<td class="tableDate">${list.videoDate }</td>
@@ -36,7 +36,7 @@ $(document).ready(function(){
 		</tr>	
 	</c:forEach> 
 	<tr>
-		<td colspan="5" align="right">
+		<td colspan="5" align="right" style="border-bottom-color: #ffffff">
 			 <c:if test="${sessionScope.mvo.memberLevel == 0}">
 				<input type="button" value="글쓰기" id="write">
 			</c:if>
@@ -44,7 +44,6 @@ $(document).ready(function(){
 	</tr>
 	</tbody>
 </table>
-</div>
 <div class="page">
 	<a href="video_listView.do?pageNo=${requestScope.vo.pagingBean.startPageOfPageGroup-1}">
 	<c:if test="${requestScope.vo.pagingBean.previousPageGroup== true && requestScope.vo.pagingBean.nowPageGroup!=1}"><img src="${initParam.root}images/left.jpg" width="21" height="21"></c:if>
@@ -55,6 +54,7 @@ $(document).ready(function(){
 	<a href="video_listView.do?&pageNo=${requestScope.vo.pagingBean.endPageOfPageGroup+1}">
 		<c:if test="${requestScope.vo.pagingBean.nextPageGroup== true}"><img src="${initParam.root}images/right.jpg" width="21" height="21"></c:if>
 	</a>
+</div>
 </div>
 
 <br>

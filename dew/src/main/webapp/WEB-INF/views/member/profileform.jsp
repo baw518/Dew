@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<div class="main">
 <form  action="member_profile.do" method="post">
 아이디 <input type="text" name="id" value="${sessionScope.mvo.id}" readonly="readonly"><br>
 이름 <input type="text" name=memberName value="${sessionScope.mvo.memberName}" readonly="readonly"><br>
@@ -23,7 +24,7 @@
 <a href="member_updateview.do">회원정보 수정하기</a><br>
 <a href="member_deleteview.do">회원탈퇴하기</a><br>
 
-
+</div>
 
 </body>
 </html>

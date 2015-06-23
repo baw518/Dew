@@ -88,6 +88,16 @@ public class MemberDAOImpl implements MemberDAO {
 		// TODO Auto-generated method stub
 		return sqlSessionTemplate.selectOne("member.membercheck",id);
 	}
+	@Override
+	public List<MemberVO> allMember(String pageNo) {
+		// TODO Auto-generated method stub
+		return sqlSessionTemplate.selectList("member.allMember",pageNo);
+	}
+	@Override
+	public int totalMember() {
+		// TODO Auto-generated method stub
+		return sqlSessionTemplate.selectOne("member.totalMember");
+	}
 	
 	
 }

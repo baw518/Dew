@@ -1,0 +1,68 @@
+
+/* 빨강색 로그인 버튼 부분 */
+a.login_button {
+	display: block;
+	min-height: 40px!important;
+	min-width: 150px!important;
+	background: #5cabfc!important;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+	color: #FFF!important;
+	text-align: center;
+	line-height: 250%;
+	font-family: NanumGothic;
+	font-size: 0.75em;
+	margin: 30px auto;
+}
+input.login_button {
+	display: block;
+	min-height: 30px!important;
+	min-width: 150px!important;
+	background: #FF4848!important;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+	color: #FFF!important;
+	text-align: center;
+	line-height: 180%;
+	font-family: NanumGothic;
+	font-size: 13pt;
+ 	margin: 5px 55px auto; 
+}
+a.login_button {
+	padding: 4px 8px;
+}
+
+a.login_button:hover, input.login_button:hover {
+	background:#FF2424!important;
+	text-decoration:none;
+	cursor:pointer;
+}
+a.login_button:active {
+	background: #559fea!important;
+}
+
+.login_button {
+	font-size: 11pt!important;
+	margin-bottom: 20px!important;
+}
+
+a.login_button {
+	font-size: 13pt!important;
+	margin: 0;
+}
+
+/* 아이디 패스워드 입력 폼 */
+input.input_form{
+	padding-left:5px;
+ 	margin: 5px 30px auto;
+}
+
+/* 아이디 찾기,비밀번호 찾기, 회원 가입 */
+a.menu_font_red{
+	color:#FF4848;
+	margin-left:50px;
+	font-size: 0.7em!important;
+	margin-bottom: 20px!important;
+}

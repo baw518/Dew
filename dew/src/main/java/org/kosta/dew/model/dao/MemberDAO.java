@@ -34,6 +34,10 @@ public interface MemberDAO {
 
 	public int deltemembercheck(String id);
 
+	public List<MemberVO> allMember(String pageNo);
+
+	public int totalMember();
+
 	
 
 

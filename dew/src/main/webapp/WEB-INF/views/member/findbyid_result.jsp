@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
+<div class="main">
 아이디는 ${requestScope.vo.id}입니다
+</div>
 </body>
 </html>

@@ -7,9 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
+<div class="main">
 <a href="home.do">홈으로</a><hr>
 ${sessionScope.mvo.id}님 회원 정보 수정 ok
-
+</div>
 <br><br>
 
 </body>

@@ -5,36 +5,17 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="css/dew.css" />
+
 <title>Tiles Layout</title>
 </head>
-<body>
-<div id="container">
+<body id="indexBody">
+<div >
 	<div id="header"><tiles:insertAttribute name="header" /></div>
-	<div id="main"><tiles:insertAttribute name="main" /></div>
+	<div id="left"><tiles:insertAttribute name="left" /></div>
+	<div id="container"><tiles:insertAttribute name="main" /></div>
 	<div id="footer"><tiles:insertAttribute name="footer" /></div>
 </div>
-<%-- table layout 방식을 css 로 변경  --%>
-<%-- <table width="100%" border="1" cellpadding="5">
-<tr height="100">
- <td colspan="2">
- 	<tiles:insertAttribute name="header"></tiles:insertAttribute>
- </td> 
-</tr>
-<tr height="400">
- <td width="200" valign="top">
- <tiles:insertAttribute name="left"></tiles:insertAttribute>
- </td>
- <td valign="top">
- <tiles:insertAttribute name="main"></tiles:insertAttribute>
- </td>
-</tr>
-<tr height="70">
- <td colspan="2">
- <tiles:insertAttribute name="footer"></tiles:insertAttribute>
- </td>
-</tr>
-</table> --%>
+
 </body>
 </html>
-
-

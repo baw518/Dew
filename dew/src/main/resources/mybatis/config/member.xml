@@ -54,35 +54,16 @@ values(#{id},#{memberName},#{memberPassword},to_date(#{birthDate},'yyyymmdd'),#{
 	<select id="membercheck" parameterType="string" resultType="int" >
 	select count(*) from deleteid where id=#{value}
  </select>
+ <select id="allMember"  resultMap="memberListRM">
+		select id,member_name,member_password,birth_date,member_level,contribution,point,password_question,password_answer
+ 	from(	select id,member_name,member_password,birth_date,member_level,contribution,point,password_question,password_answer,ceil(rownum/10) as page 
+ 			from(select id,member_name,member_password,birth_date,member_level,contribution,point,password_question,password_answer 
+ 				   from member 
+				   )
+		  )
+	where page=#{value}
+ </select>
+ 	<select id="totalMember" resultType="int">
+		select count(*)  from member
+	</select>
  </mapper> 		
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

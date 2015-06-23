@@ -2,23 +2,23 @@
     pageEncoding="UTF-8"%>
         <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<link rel="stylesheet" href="${initParam.root}/css/dew.css" type="text/css">
+<link rel="stylesheet" href="${initParam.root}css/dew.css" type="text/css">
 <body>
 
 
-<div id="dewTable">
-<table  class="table">
+<div class="main" align="center">
+<table class="dewTable">
 <caption><h2>Project List</h2></caption>
 <thead>
 <tr>
-<th class="projectNo">NO</th>
-<th class="projectAchieve">상태</th>
-<th class="projectName">프로젝트명</th>
-<th class="writer">작성자</th>
-<th class="point">포인트</th>
-<th class="deadline">모집기간</th>
-<th class="project_date">작성일</th>
-<th>hit</th>
+<th scope="cols">NO</th>
+<th scope="cols">상태</th>
+<th scope="cols">프로젝트명</th>
+<th scope="cols">작성자</th>
+<th scope="cols">포인트</th>
+<th scope="cols">모집기간</th>
+<th scope="cols">작성일</th>
+<th scope="cols">hit</th>
 </tr>
 </thead>
 <tbody>
@@ -26,7 +26,7 @@
 <tr>
 <td>${plist.projectNo}</td>
 <td>${plist.achieve}</td>
-<td><a href="project_View.do?projectNo=${plist.projectNo}">${plist.projectName} [${fn:length(plist.commentVO)}]</a></td>
+<td><a href="project_View.do?projectNo=${plist.projectNo}" class="hover_font">${plist.projectName} [${fn:length(plist.commentVO)}]</a></td>
 <td>${plist.id}</td>
 <td>${plist.point}<b>p</b></td>
 <td class="deadlinelist">${plist.deadline}</td>

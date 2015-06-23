@@ -78,8 +78,8 @@ background-color:#2b2937;
 	float: left;
 }
 .logo  {
-  float: left;
-  margin: 2px 0 0 0;
+  float: center;
+  margin: 20px 0 0 0;
   font-size: 5em;
   text-transform: uppercase;
 }

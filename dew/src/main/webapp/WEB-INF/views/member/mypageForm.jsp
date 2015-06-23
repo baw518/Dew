@@ -7,9 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<div class="main">
 <a href="member_profileForm.do">프로필 보기</a>
-
+</div>
 
 </body>
 </html>
