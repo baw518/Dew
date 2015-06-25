@@ -22,33 +22,36 @@ $(document).ready(function(){
 
 </script>
 <!-- <meta name="viewport" content="width=device-width,initial-scale=1.0"> -->
-<table class="table" align="center" >
+<div class="main">
+<table class="dewTable" align="center" >
+<thead>
 	<tr>
-	<td>NO : ${requestScope.vvo.videoNo } </td>
-		<td colspan="2">${requestScope.vvo.title} </td>
+	<th>NO : ${requestScope.vvo.videoNo } </th>
+		<th colspan="2">${requestScope.vvo.title} </th>
 	</tr>
 	<tr>
-		<td>작성자 :  ${requestScope.vvo.id }</td>
-		<td> ${requestScope.vvo.videoDate }</td>
-		<td>조회수 : ${requestScope.vvo.hit }</td>
+		<th>작성자 :  ${requestScope.vvo.id }</th>
+		<th> ${requestScope.vvo.videoDate }</th>
+		<th>조회수 : ${requestScope.vvo.hit }</th>
 	</tr>
+	</thead>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<c:forEach var="list" items="${requestScope.list}">			
 	<tr>
 		<td>
-		<video controls  width="600" height="360" preload="metadata">
+		<video controls  width="600" height="360" preload="metadata" >
 			  <source src="${list.VIDEO_FILE_NAME}"  />
 		</video>
 		</td>
 	</tr>			
 </c:forEach> 
 	<tr>
-		<td colspan="3">
+		<td colspan="3" >
 		<pre>${requestScope.vvo.content}</pre>
 		</td>
 	</tr>
 	<tr>
-		<td valign="middle" align="center" colspan="3">
+		<td valign="middle" align="center" colspan="3" style="border-bottom-color: #ffffff">
 			<input type="button" value="목록" id="list">
 			<c:if test="${sessionScope.mvo.memberLevel == 0}">
 				<input type="button" value="수정" id="update">
@@ -57,3 +60,4 @@ $(document).ready(function(){
 		 </td>
 	</tr>
 </table>
+</div>

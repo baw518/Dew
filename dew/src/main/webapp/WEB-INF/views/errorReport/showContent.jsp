@@ -29,24 +29,28 @@ $(document).ready(function(){
 	});
 });
 </script>
-<table class="table" >
+<link rel="stylesheet" href="${initParam.root}/css/dew.css" type="text/css">
+<div class="main">
+<table class="dewTable" >
 <c:if test="${requestScope.exception !=null }">
+<thead>
 <tr>
-<td width="100">Exception Message </td>
-<td witdh="200">${exception.exceptionMessage }</td>
-<td width="50">
+<th>Exception Message </th>
+<th>${exception.exceptionMessage }</th>
+<th>
 <c:if test="${exception.discussionStatus ==0 }">
 토론없음
 </c:if>
 <c:if test="${exception.discussionStatus ==1 }">
 토론있음
 </c:if>
-</td>
-<td width="150">
+</th>
+<td>
 최종 편집일 :<br>
 ${exception.date }
 </td>
 </tr>
+</thead>
 <tr><td colspan="4">
 <pre>
 ${exception.content }
@@ -55,22 +59,24 @@ ${exception.content }
 
 </c:if>
 <c:if test="${requestScope.errorcode !=null }">
+<thead>
 <tr>
-<td width="100">Error Code </td>
-<td witdh="200">${errorcode.errorCode }</td>
-<td width="50">
+<th>Error Code </th>
+<th>${errorcode.errorCode }</th>
+<th>
 <c:if test="${errorcode.discussionStatus == 1}">
 토론 있음
 </c:if>
 <c:if test="${errorcode.discussionStatus == 0}">
 토론 없음
 </c:if>
-</td>
-<td width="150">
+</th>
+<th width="150">
 최종 편집일 :<br>
 ${errorcode.date }
-</td>
+</th>
 </tr>
+</thead>
 <tr><td colspan="4">
 <pre>
 ${errorcode.content }
@@ -89,3 +95,4 @@ ${errorcode.content }
 </tr>
 </table>
 
+</div>

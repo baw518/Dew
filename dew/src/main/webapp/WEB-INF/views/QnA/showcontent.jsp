@@ -4,6 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%-- <link rel="stylesheet" href="${initParam.root}/css/qna.css" type="text/css"> --%>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+
 <script type="text/javascript">
 $(document).ready(function(){
 
@@ -268,14 +269,15 @@ $(document).ready(function(){
 	
 });
 </script>
+<link rel="stylesheet" href="${initParam.root}/css/dew.css" type="text/css">
 
-
-
-<table class="table" align="center" >
+<div class="main" align="center">
+<table class="dewTable">
+<thead>
 	<tr>
-		<td>NO : ${requestScope.qvo.qnaNo } </td>
-		<td colspan="2">${requestScope.qvo.title} </td>
-		<td>
+		<th>NO : ${requestScope.qvo.qnaNo } </th>
+		<th colspan="2">${requestScope.qvo.title} </th>
+		<th>
 			<c:if test="${requestScope.qvo.answerStatus !=0 }">
 				답변완료된 글입니다.
 			</c:if>
@@ -285,14 +287,15 @@ $(document).ready(function(){
 					<input type="button" name="replyChoose" id="replyChoose" value="답변채택">
 				</c:if>
 			</c:if>
-		</td>
+		</th>
 	</tr>
 	<tr>
-		<td>작성자 :  ${requestScope.qvo.id }</td>
-		<td>질문작성일 : ${requestScope.qvo.date }</td>
-		<td>포인트 : ${requestScope.qvo.point }</td>
-		<td>조회수 : ${requestScope.qvo.hit }</td>
+		<th>작성자 :  ${requestScope.qvo.id }</th>
+		<th>질문작성일 : ${requestScope.qvo.date }</th>
+		<th>포인트 : ${requestScope.qvo.point }</th>
+		<th>조회수 : ${requestScope.qvo.hit }</th>
 	</tr>
+	</thead>
 	<tr>
 		<td colspan="4">
 		<pre>${requestScope.qvo.content}</pre>
@@ -301,7 +304,7 @@ $(document).ready(function(){
 	
 	<tr>
 		<td colspan="4">
-			<div class="dewTable">
+			
 				<table class="table" align="center" id="commentView">
 					<c:forEach items="${requestScope.cmvo}" var="i" varStatus="index">
 						<tr>
@@ -329,7 +332,7 @@ $(document).ready(function(){
 						</tr>
 					</c:forEach>
 				</table>
-				</div>
+			
 			<table class="table">
 				<tr>
 					<td colspan="3"></td>
@@ -348,12 +351,12 @@ $(document).ready(function(){
 		</td>
 	</tr>
 	<tr>
-		<td>
+		<td style="border-bottom-color: #ffffff">
 			<c:if test="${sessionScope.mvo ne null}">
 				<input type="button" id="reply" name="reply" value="답글달기">
 			</c:if>
 		</td>
-		<td valign="middle" align="center" colspan="2">
+		<td valign="middle" align="center" colspan="2" style="border-bottom-color: #ffffff"  >
 			<input type="button" id="list" name="list" value="목록" id="list">
 			<c:if test="${sessionScope.mvo.id == requestScope.qvo.id  || sessionScope.mvo.memberLevel == 0  }">
 				<input type="button" value="글수정" name="change" id="change">
@@ -363,3 +366,4 @@ $(document).ready(function(){
 		 <td></td>
 	</tr>
 </table>
+</div>
