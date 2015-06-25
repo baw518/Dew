@@ -15,6 +15,7 @@ public interface ErrorReportDAO {
 	List<ErrorReportVO> getReference(String refer, String type, int pageNum);
 	int getAllException(String refer);
 	int getAllError(String refer);
-	ErrorReportVO getontentByDate(String refer, String date, String type);
+	List<ErrorReportVO> findWord(String startWord, String endWord,String containsWord,String type);
+	int reportUpdate(ErrorReportVO vo);
 
 }

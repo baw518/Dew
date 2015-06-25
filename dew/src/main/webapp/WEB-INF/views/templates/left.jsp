@@ -35,7 +35,7 @@
 		<img src="${initParam.root }images/team.png">
 		<ul class="leftmenu">
 			 <li><a href="member_mypageForm.do" class="list_font">my page</a></li>
-			 <li><a href="report_listView.do" class="list_font">add errorReport</a></li>
+			 <li><a href="report_writeForm.do" class="list_font">add errorReport</a></li>
 			 <li><a href="member_logout.do" class="list_font">logout</a></li>   
 		</ul>
 		</c:otherwise>

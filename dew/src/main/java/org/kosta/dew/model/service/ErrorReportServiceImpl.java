@@ -59,9 +59,16 @@ public class ErrorReportServiceImpl implements ErrorReportService {
 		return errorReportDAO.getAllError(refer);
 	}
 
+
+
 	@Override
-	public ErrorReportVO getContentByDate(String refer, String date, String type) {
-		return errorReportDAO.getontentByDate(refer,date,type);
+	public List<ErrorReportVO> findWord(String startWord, String endWord, String containsWord,String type) {
+		return errorReportDAO.findWord(startWord,endWord,containsWord,type);
+	}
+
+	@Override
+	public int reportUpdate(ErrorReportVO vo) {
+		return errorReportDAO.reportUpdate(vo);
 	}
 
 

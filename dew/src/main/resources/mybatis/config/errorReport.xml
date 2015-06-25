@@ -13,10 +13,10 @@ select distinct(e.exception_message) as errorCode   from error e , error_report 
 </select>
 
 <select id="getContentException" parameterType="String" resultType="evo">
-select e.error_no as errorNo ,e.exception_message as exceptionMessage, to_char(error_report_date,'yyyy/mm/dd HH24:MI') as reportdate , er.content as content ,er.discussion_status as discussionstatus from ERROR_REPORT er, ERROR e where e.error_no = er.error_no and e.exception_message =#{value} and er.error_report_date = (select max(er.error_report_date)    from error_report er, error e  where er.error_no =e.error_no and  e.exception_message =#{value})
+select e.error_no as errorNo ,e.exception_message as exceptionMessage, to_char(error_report_date,'yyyy/mm/dd HH24:MI') as reportdate , er.content as content ,er.discussion_status as discussionstatus, er.id as id from ERROR_REPORT er, ERROR e where e.error_no = er.error_no and e.exception_message =#{value} and er.error_report_date = (select max(er.error_report_date)    from error_report er, error e  where er.error_no =e.error_no and  e.exception_message =#{value})
 </select>
 <select id="getContentErrorCode" parameterType="String" resultType="evo">
-select e.error_no as errorNo ,e.error_code as errorCode, to_char(error_report_date,'yyyy/mm/dd HH24:MI') as reportdate , er.content as content, er.discussion_status as discussionstatus from ERROR_REPORT er, ERROR e where e.error_no = er.error_no and e.error_code =#{value} and er.error_report_date = (select max(er.error_report_date)    from error_report er, error e  where er.error_no =e.error_no and  e.error_code =#{value})
+select e.error_no as errorNo ,e.error_code as errorCode, to_char(error_report_date,'yyyy/mm/dd HH24:MI') as reportdate , er.content as content, er.discussion_status as discussionstatus, er.id as id from ERROR_REPORT er, ERROR e where e.error_no = er.error_no and e.error_code =#{value} and er.error_report_date = (select max(er.error_report_date)    from error_report er, error e  where er.error_no =e.error_no and  e.error_code =#{value})
 </select>
 <select id="showErrorReportVO" parameterType="int" resultType="evo">
 select e.error_code as errorCode ,e.error_no as errorNo,  e.exception_message as exceptionMessage,to_char(error_report_date,'yyyy/mm/dd HH24:MI') as reportdate,er.content as content, er.id as id, er.discussion_status as discussionstatus from ERROR_REPORT er, ERROR e where e.error_no = er.error_no and e.error_no = #{value}
@@ -49,6 +49,40 @@ select count(*) from ERROR_REPORT er, ERROR e where e.error_no = er.error_no and
 <select id="getAllError" parameterType="String" resultType="int">
 select count(*) from ERROR_REPORT er, ERROR e where e.error_no = er.error_no and e.error_code =#{value}
 </select>
+<sql id="findWordError">
+select distinct(e.error_code) as errorCode  from error e , error_report er where e.error_no = er.error_no and e.exception_message is null
+</sql>
+<sql id="findWordException">
+select distinct(e.exception_message) as exceptionMessage   from error e , error_report er where e.error_no = er.error_no and e.error_code is null
+</sql>
+<select id="startWithException" parameterType="String" resultType="evo">
+<include refid="findWordException"/> 
+<![CDATA[  and e.exception_message like #{value}||'%' ]]>order by e.exception_message asc</select>
+<select id="endWithException" parameterType="String" resultType="evo">
+<include refid="findWordException"/>
+<![CDATA[  and e.exception_message like'%' || #{value}  ]]>order by e.exception_message asc
+</select>
+<select id="containsException" parameterType="String" resultType="evo">
+<include refid="findWordException"/>
+<![CDATA[  and e.exception_message like'%'||#{value} ||'%']]>order by e.exception_message asc
+</select>
+<select id="startWithError" parameterType="String" resultType="evo">
+<include refid="findWordError"/> 
+<![CDATA[and e.error_code like  #{value}||'%']]>  order by e.error_code asc
+</select>
+<select id="endWithError" parameterType="String" resultType="evo">
+<include refid="findWordError"/> 
+<![CDATA[and e.error_code like '%'||#{value}]]>  order by e.error_code asc
+</select>
+<select id="containsError" parameterType="String" resultType="evo">
+<include refid="findWordError"/>
+<![CDATA[and e.error_code like '%'||#{value}||'%']]>  order by e.error_code asc
+</select>
+<update id="update" parameterType="evo">
+update error_report set content = #{content}, error_report_date=sysdate where error_no= #{errorNo}
+</update>
+
+
 <insert id="writeReportExceptionTitle" parameterType="String">
 insert into error(error_no,exception_message) values(error_no.nextval,#{value})
 </insert>

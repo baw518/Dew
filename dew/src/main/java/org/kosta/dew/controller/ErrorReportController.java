@@ -10,7 +10,6 @@ import org.kosta.dew.model.service.ErrorReportService;
 import org.kosta.dew.model.vo.ErrorReportListVO;
 import org.kosta.dew.model.vo.ErrorReportVO;
 import org.kosta.dew.model.vo.PagingBean;
-import org.kosta.dew.model.vo.QnAGroupVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,13 +25,16 @@ public class ErrorReportController {
 		return "errorReport_writeForm";
 	}
 	
+	@RequestMapping("report_findWordView.do")
+	public String reportFindWordView(){
+		return "errorReport_findWord";
+	}
+	
 	@RequestMapping("report_updateView.do")
 	public ModelAndView reportUpdateView(String errorNo,String type){
-		System.out.println("report_updateView.do start \n errorNo :" + errorNo);
 		ModelAndView mav = new ModelAndView("errorReport_updateForm");
 		mav.addObject("evo", errorReportService.getContent(Integer.parseInt(errorNo)));
 		mav.addObject("type",type);
-		//System.out.println("report_updateView : evo >"+   );
 		return mav;
 	}
 	
@@ -80,6 +82,7 @@ public class ErrorReportController {
 			mav.addObject("errorcode",vo);
 			mav.addObject("type","ErrorCode");
 		}
+		System.out.println(vo);
 		return mav;
 	}
 	
@@ -96,18 +99,22 @@ public class ErrorReportController {
 		return "errorReport_showContent";
 	}
 	@RequestMapping("report_write.do")
-	public ModelAndView reportWrite(HttpSession session,ErrorReportVO vo, String type,String title){
-		int errorNo = errorReportService.reportWrite(vo,type,title);
-		System.out.println("vo : " + vo  + " type : " + type + " title : " + title);
-		ModelAndView mav = new ModelAndView("redirect:/report_write_result.do?errorNo="+ errorNo);
-		return mav;
+	public String reportWrite(HttpSession session,ErrorReportVO vo, String type,String title,String command,Model model){
+		int errorNo = -1 ;
+		System.out.println(vo);
+		if (command.equals("register")){
+			errorNo = errorReportService.reportWrite(vo,type,title);
+		}else{
+			errorNo = errorReportService.reportUpdate(vo);
+		}
+	//	return "redirect:/report_write_result.do?errorNo="+ errorNo;
+		return null;
 	}
 	
 	@RequestMapping("report_write_result.do")
 	public ModelAndView reportWriteResult(int errorNo){
 		ModelAndView mav = new ModelAndView("errorReport_writeResult");
 		mav.addObject("result",errorReportService.getContent(errorNo));
-		System.out.println(errorReportService.getContent(errorNo));
 		return mav;
 	}
 	
@@ -117,5 +124,14 @@ public class ErrorReportController {
 		return "redirect:/report_write_result.do?errorNo="+errorNo;
 	}
 	
+	@RequestMapping("report_findWord.do")
+	public String reportFindWord(String startWord ,String endWord ,String containsWord ,String type, Model model){
+		System.out.println("StartWord : " + startWord + " endWord : " + endWord + " containsWord : " + containsWord);
+		List<ErrorReportVO> list = errorReportService.findWord(startWord, endWord, containsWord, type);
+		model.addAttribute("result",list);
+		model.addAttribute("type",type);
+		System.out.println(errorReportService.findWord(startWord, endWord, containsWord, type));
+		return "errorReport_findResult";
+	}
 	
 }

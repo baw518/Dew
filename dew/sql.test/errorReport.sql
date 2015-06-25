@@ -10,7 +10,9 @@ select e.error_code as errorCode, to_char(error_report_date,'yyyy/mm/dd HH24:MI:
 
 select e.error_code as errorCode ,  e.exception_message as exceptionMessage,to_char(error_report_date,'yyyy/mm/dd HH24:MI:SS') as reportdate, er.id, er.discussion_status as discussionstatus from ERROR_REPORT er, ERROR e where e.error_no = er.error_no and e.error_no = '3'
 
-select * from error_report
+select * from error_report er, error e where er.error_no = e.error_no;
+
+update error_report set content = 'aaaaaa', error_report_date=sysdate where error_no= '96'
 
 select er.* , e.*  from ERROR_REPORT er, ERROR e where e.error_no = er.error_no
 
@@ -59,6 +61,9 @@ select distinct(e.exception_message) as errorCode   from error e , error_report 
 -- reference Exception value(exceptionMessage)
 select e.error_no as errorNo ,e.exception_message as exceptionMessage, to_char(error_report_date,'yyyy/mm/dd HH24:MI:SS') as reportdate  ,er.discussion_status as discussionstatus from ERROR_REPORT er, ERROR e where e.error_no = er.error_no and e.exception_message =#{value} order by reportDate desc
 
+-- update
+update error_report set content = 'aaaaaa', error_report_date=sysdate where error_no= '96'
+
 select e.error_no as errorNo ,e.error_code as errorCode, to_char(error_report_date,'yyyy/mm/dd HH24:MI:SS') as reportdate  ,er.discussion_status as discussionstatus from ERROR_REPORT er, ERROR e where e.error_no = er.error_no and e.error_code ='org.apache.jasper.JasperException: Exception in JSP:' order by reportDate desc
 
 select errorNo,exceptionMessage,reportdate,discussionstatus
@@ -74,3 +79,4 @@ select count(*) from ERROR_REPORT er, ERROR e where e.error_no = er.error_no and
 
 select count(*) from ERROR_REPORT er, ERROR e where e.error_no = er.error_no and e.error_code =#{value}
 
+select * from error_report;
