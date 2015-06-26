@@ -59,40 +59,38 @@ $(document).ready(function(){
 
 <form action="QnA_Write.do" method="post" id="writeForm">
 	<h2>질문글쓰기</h2>
-	 <table class="table" >
-		  <tbody>
-			  <tr>
-			  	<td>분류 :</td>
-			  	<td>
-					<select id="groupNo" name="groupNo"> 
-						<c:forEach items="${requestScope.groupList}" var="i">
-							<option value="${i.qnAGroupNo}">${i.qnAGroupName }</option>
-						</c:forEach>
-					</select>
-				</td>
-			  	<td>제목</td>
-			  	<td colspan="3">
-			  		<input type="text" id="title" name="title">
-			  	</td>
-			  	<td>아이디</td>
-			  	<td><input type="text" id="id" name="id" value="${sessionScope.mvo.id}" readonly></td>
-			  	<td>포인트</td>
-			  	<td ><input type="text" id="point" name="point" ></td>
-			  </tr>
-			  <tr>
-			  	<td></td>
-			  	<td colspan="7" align="left">
-			   	&nbsp;&nbsp;
-			  	<textarea cols="190" rows="30" id="content" name="content"></textarea>
-			  	</td>
-			  	<td><span id="pointView">사용가능한 포인트 : ${sessionScope.mvo.point}</span></td>
-			  </tr> 
-			  <tr>
-			  	<td colspan="9" align="center" >
-				    <img class="action" src="${initParam.root}images/qna_write_complete.jpg" id="writeBtn">
-				    <input type="button" id="cancel" value="작성취소">
-			  	</td>  
-			  </tr>
-		  </tbody>
+	 <table class="table">
+		  <tr>
+		  	<td>분류 :</td>
+		  	<td>
+				<select id="groupNo" name="groupNo"> 
+					<c:forEach items="${requestScope.groupList}" var="i">
+						<option value="${i.qnAGroupNo}">${i.qnAGroupName }</option>
+					</c:forEach>
+				</select>
+			</td>
+		  	<td>제목</td>
+		  	<td colspan="3">
+		  		<input type="text" id="title" name="title">
+		  	</td>
+		  	<td>아이디</td>
+		  	<td><input type="text" id="id" name="id" value="${sessionScope.mvo.id}" readonly></td>
+		  	<td>포인트</td>
+		  	<td ><input type="text" id="point" name="point" ></td>
+		  </tr>
+		  <tr>
+		  	<td></td>
+		  	<td colspan="7" align="left">
+		   	&nbsp;&nbsp;
+		  	<textarea cols="190" rows="30" id="content" name="content"></textarea>
+		  	</td>
+		  	<td><span id="pointView">사용가능한 포인트 : ${sessionScope.mvo.point}</span></td>
+		  </tr> 
+		  <tr>
+		  	<td colspan="9" align="center" >
+			    <img class="action" src="${initParam.root}images/qna_write_complete.jpg" id="writeBtn">
+			    <input type="button" id="cancel" value="작성취소">
+		  	</td>  
+		  </tr>
 	 </table>
 </form>
