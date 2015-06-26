@@ -5,9 +5,11 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.kosta.dew.model.dao.DiscussDAO;
+import org.kosta.dew.model.dao.ErrorReportDAO;
 import org.kosta.dew.model.vo.CommentVO;
 import org.kosta.dew.model.vo.DiscussListVO;
 import org.kosta.dew.model.vo.DiscussVO;
+import org.kosta.dew.model.vo.ErrorReportVO;
 import org.kosta.dew.model.vo.PagingBean;
 import org.kosta.dew.model.vo.discussionRequestVO;
 import org.springframework.stereotype.Service;
@@ -16,6 +18,8 @@ import org.springframework.stereotype.Service;
 public class DiscussServiceImpl implements DiscussService {
 	@Resource(name="discussDAOImpl")
 	private DiscussDAO discussDAO;
+	@Resource(name="errorReportDAOImpl")
+	private ErrorReportDAO errorReportDAO;
 	/* (non-Javadoc)
 	 * @see org.kosta.dew.model.service.DiscussService#getAllDiscussList(java.lang.String)
 	 */
@@ -133,6 +137,23 @@ public class DiscussServiceImpl implements DiscussService {
 			flag = true;
 		}
 		return flag;
+	}
+	@Override
+	public void InsertDiscussRequest(String no) {
+		// TODO Auto-generated method stub
+		discussDAO.insertDiscussRequest(no);
+	}
+	/**
+	 * 토론방 등록요청페이지(관리자)에서 등록
+	 * - report 업데이트
+	 * - discuss 인설트
+	 */
+	@Override
+	public void insert(int no) {
+		// TODO Auto-generated method stub
+		
+		ErrorReportVO vo = errorReportDAO.getContent(no);
+		System.out.println(vo);
 	}
 
 

@@ -46,5 +46,7 @@ public interface DiscussDAO {
 
 	public abstract void insertRequest(discussionRequestVO vo);
 
+	public abstract void insertDiscussRequest(String no);
+
 
 }

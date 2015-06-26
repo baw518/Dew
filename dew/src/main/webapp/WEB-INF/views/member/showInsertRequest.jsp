@@ -23,21 +23,24 @@
 	});
 </script>
 <div class="main">
+${type }
 <c:choose>
 	<c:when test="${sessionScope.mvo.memberLevel == 0}">
 <table class="dewTable">
 	<thead>
 	<tr>
+		<th></th>
 		<th>Id</th>
 		<th>No</th>
 		<th></th>
 	</tr>
-	<c:forEach items="${requestScope.list}" var="list">
+	<c:forEach items="${requestScope.list}" var="list" varStatus="status">
 		<tr>
+			<td>${count.count}</td>
 			<td>${list.id }</td>
 			<td>${list.no }</td>
 			<td align="center">
-			<input type="button" name="insert" value="삭제" onclick="insertBoard('${list.no}')">
+			<input type="button" name="insert" value="등록" onclick="insertBoard('${list.no}')">
 			<input type="button" name="noInsert" value="취소" onclick="noInsertBoard('${list.no}')">			
 			</td>
 		</tr>

@@ -253,7 +253,10 @@ public class DiscussController {
 	@RequestMapping("discussion_requestInsert.do")
 	public String requestInsert(HttpServletRequest request){
 		int no = Integer.parseInt(request.getParameter("no"));
-		DiscussVO vo = discussService.findDiscussContent(no);
+		/*
+		 * 요청 페이지 no로 에러리포트 vo 받아오기
+		 */
+		discussService.insert(no);
 		/*
 		 * 게시글 no로 에러리포트 정보를 가져와서
 		 * 토론방에 등록하는 메소드
@@ -267,7 +270,7 @@ public class DiscussController {
 	public String requestNoInsert(HttpServletRequest request){
 		String no = request.getParameter("no");
 		// discussRequest 테이블 내용 삭제
-		/*discussService.InsertDiscussRequest(no);*/
+		discussService.InsertDiscussRequest(no);
 		return "redirect:member_insertRequest.do";
 	}
 }
