@@ -8,7 +8,7 @@
 <c:if test="${requestScope.errorCode != null }">
 	애러코드 검색결과<br>
 	<c:forEach items="${requestScope.errorCode}" var="i">
-		<a href="report_showContent.do?error=${i.errorCode}&type=error">${i.errorCode}</a><br>
+		<a href="report_showContent.do?error=${i.errorCode}&type=error">${i.errorCode}</a>&nbsp;&nbsp;&nbsp;&nbsp;<font color="#B0B0B0">${i.date }</font><br>
 		${i.content}<br><br>
 	</c:forEach>
 	<br>
@@ -20,7 +20,7 @@
 <c:if test="${requestScope.exception != null }">
 	exception 검색결과<br>
 	<c:forEach items="${requestScope.exception}" var="i">
-		<a href="report_showContent.do?error=${i.exceptionMessage}&type=exception">${i.exceptionMessage }</a> <br>
+		<a href="report_showContent.do?error=${i.exceptionMessage}&type=exception">${i.exceptionMessage }</a>&nbsp;&nbsp;&nbsp;&nbsp;<font color="#B0B0B0">${i.date}</font><br>
 		${i.content }<br><br>
 	</c:forEach>
 	<br>
@@ -31,7 +31,7 @@
 <c:if test="${requestScope.qna != null }">
 	질의응답 검색결과<br>
 	<c:forEach items="${requestScope.qna}" var="i">
-		<a href="QnA_showContent.do?qnaNo=${i.qnaNo}">${i.title }</a><br>
+		<a href="QnA_showContent.do?qnaNo=${i.qnaNo}">${i.title }</a>&nbsp;&nbsp;&nbsp;&nbsp;<font color="#B0B0B0">${i.date }</font><br>
 		 ${i.content }<br><br>
 	</c:forEach>
 	<br>
@@ -42,7 +42,7 @@
 <c:if test="${requestScope.discuss != null }">
 	토론방 검색결과<br>
 	<c:forEach items="${requestScope.discuss}" var="i">
-		<a href="findDiscussContent.do?no=${i.discussionNo}">${i.title }</a><br>
+		<a href="findDiscussContent.do?no=${i.discussionNo}">${i.title }</a>&nbsp;&nbsp;&nbsp;&nbsp;<font color="#B0B0B0">${i.discussionDate }</font><br>
 		${i.content }<br><br>
 	</c:forEach>
 	<br>
@@ -53,7 +53,7 @@
 <c:if test="${requestScope.project != null }">
 	프로젝트 검색결과<br>
 	<c:forEach items="${requestScope.project}" var="i">
-		<a href="project_View.do?projectNo=${i.projectNo }">${i.projectName}</a><br>
+		<a href="project_View.do?projectNo=${i.projectNo }">${i.projectName}</a>&nbsp;&nbsp;&nbsp;&nbsp;<font color="#B0B0B0">${i.project_date }</font><br>
 		${i.content }<br><br>
 	</c:forEach>
 	<br>
@@ -64,7 +64,7 @@
 <c:if test="${requestScope.video != null }">
 	동영상강의 검색 결과<br>
 	<c:forEach items="${requestScope.video}" var="i">
-		<a href="video_showContent.do?no=${i.videoNo}">${i.title }</a><br>
+		<a href="video_showContent.do?no=${i.videoNo}">${i.title }</a>&nbsp;&nbsp;&nbsp;&nbsp;<font color="#B0B0B0">${i.videoDate }</font><br>
 		${i.content }<br><br>
 	</c:forEach>
 	<br>
