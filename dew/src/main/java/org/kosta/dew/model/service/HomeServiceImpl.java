@@ -2,6 +2,7 @@ package org.kosta.dew.model.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -61,4 +62,5 @@ public class HomeServiceImpl implements HomeService {
 		// TODO 자동 생성된 메소드 스텁
 		return homeDAO.errorReportErrorCodeList();
 	}
+
 }

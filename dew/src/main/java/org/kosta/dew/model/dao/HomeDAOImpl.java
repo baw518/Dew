@@ -2,6 +2,7 @@ package org.kosta.dew.model.dao;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -61,7 +62,5 @@ public class HomeDAOImpl implements HomeDAO {
 		
 		return sqlSessionTemplate.selectList("home.errorReportErrorCodeList");
 	}
-
-
 
 }
