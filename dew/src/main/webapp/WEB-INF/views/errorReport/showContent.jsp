@@ -40,7 +40,7 @@ $(document).ready(function(){
 		}else if(type == "ErrorCode"){
 			location.href="insertManager.do?no=${requestScope.errorcode.errorNo}&id=${sessionScope.mvo.id}&type="+type;
 		}
-		
+		alert("등록요청되었습니다.")
 	});
 });
 </script>
@@ -75,30 +75,31 @@ ${exception.content }
 </td></tr>
 
 </c:if>
+${error }
 <c:if test="${requestScope.errorcode !=null }">
-<thead>
-<tr>
-<th>Error Code </th>
-<th>${errorcode.errorCode }</th>
-<th>
-<c:if test="${errorcode.discussionStatus == 1}">
-토론 있음
-</c:if>
-<c:if test="${errorcode.discussionStatus == 0}">
-토론 없음
-</c:if>
-</th>
-<th width="150">
-최종 편집일 :<br>
-${errorcode.date }
-</th>
-</tr>
-</thead>
-<tr><td colspan="4">
-<pre>
-${errorcode.content }
-</pre>
-</td></tr>
+	<thead>
+	<tr>
+	<th>Error Code </th>
+	<th>${errorcode.errorCode }</th>
+	<th>
+	<c:if test="${errorcode.discussionStatus == 1}">
+	토론 있음
+	</c:if>
+	<c:if test="${errorcode.discussionStatus == 0}">
+	토론 없음
+	</c:if>
+	</th>
+	<th width="150">
+	최종 편집일 :<br>
+	${errorcode.date }
+	</th>
+	</tr>
+	</thead>
+	<tr><td colspan="4">
+	<pre>
+	${errorcode.content }
+	</pre>
+	</td></tr>
 
 </c:if>
 <tr>
