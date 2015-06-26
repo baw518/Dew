@@ -183,11 +183,12 @@ public class DiscussController {
 	@RequestMapping("insertManager.do")
 	public String insertManager(HttpServletRequest request){
 		int no = Integer.parseInt(request.getParameter("no"));
-		// errorNo 받아오3
+		String type = request.getParameter("type");
 		String id = request.getParameter("id");
+		System.out.println(type);
 		discussionRequestVO vo = new discussionRequestVO(id, null, no);
 		discussService.insertRequest(vo);
-		return "다시 쇼컨텐츠로";
+		return "redirect:report_showContentByNo.do?errorNo="+no+"&type="+type;
 	}
 	/**
 	 * 토론방 삭제요청 

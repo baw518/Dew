@@ -36,10 +36,11 @@ $(document).ready(function(){
 	});
 	$("#insertManagerBtn").click(function(){
 		if( type =="ExceptionMessage"){
-			location.href="insertManager.do?no=${requestScope.exception.errorNo}";
+			location.href="insertManager.do?no=${requestScope.exception.errorNo}&id=${sessionScope.mvo.id}&type="+type;
 		}else if(type == "ErrorCode"){
-			location.href="insertManager.do?no=${requestScope.errorcode.errorNo}";
+			location.href="insertManager.do?no=${requestScope.errorcode.errorNo}&id=${sessionScope.mvo.id}&type="+type;
 		}
+		
 	});
 });
 </script>
