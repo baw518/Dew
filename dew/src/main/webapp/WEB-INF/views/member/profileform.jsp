@@ -5,26 +5,76 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-</head>
-<body>
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script>
+	$(document).ready(function(){
+		$(":input[name=updateView]").click(function(){
+			location.href="member_updateview.do";
+		});
+		$(":input[name=deleteView]").click(function(){
+			location.href="member_deleteview.do";
+		});
+	});
+</script>
 <div class="main">
+
 <form  action="member_profile.do" method="post">
-아이디 <input type="text" name="id" value="${sessionScope.mvo.id}" readonly="readonly"><br>
-이름 <input type="text" name=memberName value="${sessionScope.mvo.memberName}" readonly="readonly"><br>
-비밀번호<input type="text" name="memberPassword" value="${sessionScope.mvo.memberPassword}" readonly="readonly"><br>
-생년월일<input type="text" name="birthDate" value="${sessionScope.mvo.birthDate}"readonly="readonly"><br>
-사용자 점수<input type="text" name="score" value="${sessionScope.mvo.score}" readonly="readonly"><br>
-보유머니<input type="text" name="point" value="${sessionScope.mvo.point}" readonly="readonly"><br>
-질문<input type="text" name="passwordQuestion" value="${sessionScope.mvo.passwordQuestion}" readonly="readonly"><br>
-질문에대한답변<input type="text" name="passwordAnswer" value="${sessionScope.mvo.passwordAnswer}" readonly="readonly"><br>
-
-
+<table class="dewTable">
+	<thead>
+		<tr>
+		<th style="border-bottom: 1px solid #cccccc">회원아이디</th>
+		<td>${sessionScope.mvo.id}</td>
+		</tr>
+	</thead>
+	<thead>
+		<tr>
+		<th style="border-bottom: 1px solid #cccccc">이름</th>
+		<td>${sessionScope.mvo.memberName}</td>
+		</tr>
+	</thead>
+	<thead>
+		<tr>
+		<th style="border-bottom: 1px solid #cccccc">비밀번호</th>
+		<td>${sessionScope.mvo.memberPassword}</td>
+		</tr>
+	</thead>
+	<thead>
+		<tr>
+		<th style="border-bottom: 1px solid #cccccc">생년월일</th>
+		<td>${sessionScope.mvo.birthDate}</td>
+		</tr>
+	</thead>
+	<thead>
+		<tr>
+		<th style="border-bottom: 1px solid #cccccc">사용자 점수</th>
+		<td>${sessionScope.mvo.score}</td>
+		</tr>
+	</thead>
+	<thead>
+		<tr>
+		<th style="border-bottom: 1px solid #cccccc">보유머니</th>
+		<td>${sessionScope.mvo.point}</td>
+		</tr>
+	</thead>
+	<thead>
+		<tr>
+		<th style="border-bottom: 1px solid #cccccc">비밀번호 찾기 질문</th>
+		<td>${sessionScope.mvo.passwordQuestion}</td>
+		</tr>
+	</thead>
+	<thead>
+		<tr>
+		<th style="border-bottom: 1px solid #cccccc">비밀번호 찾기 질문 답</th>
+		<td>${sessionScope.mvo.passwordAnswer}</td>
+		</tr>
+	</thead>
+	<tr>
+		<td colspan="2" style="border-bottom-color: #ffffff" align="center">
+			<input type="button" name="updateView" value="정보수정">
+			<input type="button" name="deleteView" value="회원탈퇴">
+		</td>
+	</tr>
+</table>
 </form>
-<a href="member_mypageForm.do">마이페이지 홈으로</a><br>
-<a href="member_updateview.do">회원정보 수정하기</a><br>
-<a href="member_deleteview.do">회원탈퇴하기</a><br>
 
 </div>
-
-</body>
-</html>
