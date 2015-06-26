@@ -29,6 +29,9 @@
 					}
 		});
 	});
+		$("#joinChat").click(function(){
+  			location.href="joinChat.do?projectNo="+$('#projectNo').val();
+		});
 	});
 	
 </script>
@@ -40,14 +43,16 @@
 <tr><th colspan="2">팀원현황</th></tr>
 <c:forEach items="${requestScope.cvo }" var="c">
 <tr>
-	<td>${c.id } <input type="button" value="쪽지"></td><td>${c.projectSub }</td>
+	<td>${c.id }</td><td>${c.projectSub }</td>
 </tr>
 <input type="hidden" value="${c.boardNo }" id="projectNo">
 </c:forEach>
 </table>
 <br><br>
 <div align="center">
-<input type="button" value="추가모집" style="padding: 20px;" id="moreMans"><input type="button" value="모집중단" style="padding: 20px;" id="stopMans"><input type="button" value="채팅방 입장" style="padding: 20px;">
+<input type="button" value="추가모집" style="padding: 20px;" id="moreMans">
+<input type="button" value="모집중단" style="padding: 20px;" id="stopMans">
+<input type="button" value="채팅방 입장" style="padding: 20px;" id="joinChat">
 </div>
 </c:when>
 <c:otherwise>

@@ -9,12 +9,13 @@ import org.kosta.dew.model.vo.DepartVO;
 import org.kosta.dew.model.vo.ProjectVO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public class ProjectDAOImpl implements ProjectDAO{
 	@Resource
 	private SqlSessionTemplate sqlSessionTemplate;
-	
+	@Transactional
 	@Override
 	public void registerProject(ProjectVO pvo,DepartVO dvo){
 		String[] subject=dvo.getSubject().split(",");
@@ -45,12 +46,12 @@ public class ProjectDAOImpl implements ProjectDAO{
 		return sqlSessionTemplate.selectOne("project.getTotalPostingCountProject");
 	}
 	@Override
-	public void deleteProject(String projectNo) {
+	public void deleteProject(int projectNo) {
 		sqlSessionTemplate.delete("project.deleteProjectCommentByProNo",projectNo);
 		sqlSessionTemplate.delete("project.deleteProject",projectNo);
 	}
 	@Override
-	public void deleteDepart(String projectNo) {
+	public void deleteDepart(int projectNo) {
 		sqlSessionTemplate.delete("project.deleteDepart",projectNo);
 	}
 	@Override
@@ -139,6 +140,26 @@ public class ProjectDAOImpl implements ProjectDAO{
 	@Override
 	public void mansAjax(ProjectVO pvo) {
 		sqlSessionTemplate.update("project.mansAjax",pvo);
+	}
+	@Override
+	public List<ProjectVO> getReqProjectList(String pageNo) {
+		return sqlSessionTemplate.selectList("project.getReqProjectList",pageNo);
+	}
+	@Override
+	public void registerReqProject(ProjectVO pvo) {
+		sqlSessionTemplate.insert("project.registerReq",pvo);
+	}
+	@Override
+	public List<String> findChatRecordByNo(int projectNo) {
+		return sqlSessionTemplate.selectList("project.findChatRecord",projectNo);
+	}
+	@Override
+	public void sendChatAjax(ProjectVO pvo) {
+		sqlSessionTemplate.insert("project.sendChatAjax",pvo);
+	}
+	@Override
+	public void deleteChat(int projectNo) {
+		sqlSessionTemplate.delete("project.deleteChat",projectNo);
 	}
 
 }

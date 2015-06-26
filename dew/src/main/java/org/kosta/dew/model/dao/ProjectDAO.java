@@ -16,9 +16,9 @@ public interface ProjectDAO {
 
 	int getTotalPostingCount();
 
-	void deleteProject(String projectNo);
+	void deleteProject(int projectNo);
 
-	void deleteDepart(String projectNo);
+	void deleteDepart(int projectNo);
 
 	void updateProject(ProjectVO pvo, DepartVO dvo);
 
@@ -59,4 +59,14 @@ public interface ProjectDAO {
 	List<CommentVO> findJoinListProcess(int projectNo);
 
 	void mansAjax(ProjectVO pvo);
+
+	List<ProjectVO> getReqProjectList(String pageNo);
+
+	void registerReqProject(ProjectVO pvo);
+
+	List<String> findChatRecordByNo(int projectNo);
+
+	void sendChatAjax(ProjectVO pvo);
+
+	void deleteChat(int projectNo);
 }

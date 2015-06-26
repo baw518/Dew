@@ -11,15 +11,15 @@ public interface ProjectService {
 
 	void registerProject(ProjectVO pvo, DepartVO dvo);
 
-	ProjectVO getProjectContent(String no);
+	ProjectVO getProjectContent(String projectNo);
 
 	List<ProjectVO> getProjectList(String pageNo);
 
 	int getTotalPostingCount();
 
-	void deleteProject(String projectNo);
+	void deleteProject(int projectNo);
 
-	void deleteDepart(String projectNo);
+	void deleteDepart(int projectNo);
 
 	ProjectListVO makeProjectListVO(String pageNo);
 
@@ -60,6 +60,14 @@ public interface ProjectService {
 	List<CommentVO> findJoinListProcess(int projectNo);
 
 	void mansAjax(ProjectVO pvo);
+
+	ProjectListVO makeReqProjectListVO(String pageNo);
+
+	void registerReqProject(ProjectVO pvo);
+
+	List<String> findChatRecordByNo(int projectNo);
+
+	void sendChatAjax(ProjectVO pvo);
 
 
 	

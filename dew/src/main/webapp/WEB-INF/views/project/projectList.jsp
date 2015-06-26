@@ -28,8 +28,9 @@
 <td>${plist.achieve}</td>
 <td><a href="project_View.do?projectNo=${plist.projectNo}" class="hover_font">${plist.projectName} [${fn:length(plist.commentVO)}]</a></td>
 <td>${plist.id}</td>
+<c:choose><c:when test="${plist.achieve!='의뢰'}">
 <td>${plist.point}<b>p</b></td>
-<td class="deadlinelist">${plist.deadline}</td>
+<td class="deadlinelist">${plist.deadline}</td></c:when><c:otherwise><td></td><td></td></c:otherwise></c:choose>
 <td>${plist.project_date}</td>
 <td>${plist.hit}</td>
 </tr>
