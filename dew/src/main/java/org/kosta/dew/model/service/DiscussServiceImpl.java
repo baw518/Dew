@@ -119,6 +119,12 @@ public class DiscussServiceImpl implements DiscussService {
 		
 	}
 	@Override
+	public void insertRequest(discussionRequestVO vo) {
+		// TODO Auto-generated method stub
+		discussDAO.insertRequest(vo);
+	}
+	
+	@Override
 	public boolean findDeleteRequest(int discussionNo) {
 		// TODO Auto-generated method stub
 		boolean flag = false;
@@ -128,5 +134,6 @@ public class DiscussServiceImpl implements DiscussService {
 		}
 		return flag;
 	}
+
 
 }

@@ -43,5 +43,7 @@ public interface DiscussService {
 
 	public abstract boolean findDeleteRequest(int discussionNo);
 
+	public abstract void insertRequest(discussionRequestVO vo);
+
 
 }

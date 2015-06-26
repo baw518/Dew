@@ -44,5 +44,7 @@ public interface DiscussDAO {
 
 	public abstract discussionRequestVO findDeleteRequest(int discussionNo);
 
+	public abstract void insertRequest(discussionRequestVO vo);
+
 
 }

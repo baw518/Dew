@@ -118,5 +118,10 @@ public class DiscussDAOImpl implements DiscussDAO {
 		// TODO Auto-generated method stub
 		return sqlSessionTemplate.selectOne("discuss.findDeleteRequest",discussionNo);
 	}
+	@Override
+	public void insertRequest(discussionRequestVO vo) {
+		// TODO Auto-generated method stub
+		sqlSessionTemplate.insert("discuss.insertRequest",vo);
+	}
 
 }
