@@ -34,7 +34,13 @@ $(document).ready(function(){
 			location.href="report_updateView.do?errorNo=${requestScope.errorcode.errorNo}&type="+type;
 		}
 	});
-
+	$("#insertManagerBtn").click(function(){
+		if( type =="ExceptionMessage"){
+			location.href="insertManager.do?no=${requestScope.exception.errorNo}";
+		}else if(type == "ErrorCode"){
+			location.href="insertManager.do?no=${requestScope.errorcode.errorNo}";
+		}
+	});
 });
 </script>
 <link rel="stylesheet" href="${initParam.root}/css/dew.css" type="text/css">
@@ -100,6 +106,7 @@ ${errorcode.content }
 <input type="button" value="관련글" id="reference">
 
 	<c:if test="${sessionScope.mvo !=null }">
+	<input type="button" value="토론 등록 요청" id="insertManagerBtn">
 			<c:if test="${sessionScope.mvo.id == errorcode.id }">
 			 <input type="button" value="내글편집하기" id="myupdate">
 			</c:if>
