@@ -21,9 +21,13 @@ public class ProjectServiceImpl implements ProjectService{
 		projectDAO.registerProject(pvo, dvo);
 	}
 	@Override
-	public ProjectVO getProjectContent(String no){
-		projectDAO.updateHit(no);
-		return projectDAO.getProjectContent(no);
+	public ProjectVO getProjectContent(String projectNo){
+		projectDAO.updateHit(projectNo);
+		return projectDAO.getProjectContent(projectNo);
+	}
+	@Override
+	public ProjectVO getProjectContentNohit(String projectNo) {
+		return projectDAO.getProjectContent(projectNo);
 	}
 	@Override
 	public List<ProjectVO> getProjectList(String pageNo) {
@@ -34,11 +38,11 @@ public class ProjectServiceImpl implements ProjectService{
 		return projectDAO.getTotalPostingCount();
 	}
 	@Override
-	public void deleteProject(String projectNo) {
+	public void deleteProject(int projectNo) {
 		projectDAO.deleteProject(projectNo);
 	}
 	@Override
-	public void deleteDepart(String projectNo) {
+	public void deleteDepart(int projectNo) {
 		projectDAO.deleteDepart(projectNo);
 	}
 	
@@ -109,10 +113,6 @@ public class ProjectServiceImpl implements ProjectService{
 		projectDAO.startProject(projectNo);
 	}
 	@Override
-	public ProjectVO getProjectContentNohit(String projectNo) {
-		return projectDAO.getProjectContent(projectNo);
-	}
-	@Override
 	public List<CommentVO> countComment(int projectNo) {
 		return projectDAO.countComment(projectNo);
 	}
@@ -142,6 +142,40 @@ public class ProjectServiceImpl implements ProjectService{
 	@Override
 	public void mansAjax(ProjectVO pvo) {
 		projectDAO.mansAjax(pvo);
+	}
+	@Override
+	public ProjectListVO makeReqProjectListVO(String pageNo) {
+		int pn=1;
+		if(pageNo!=null)
+			pn=Integer.parseInt(pageNo);
+		 List<ProjectVO> plist = projectDAO.getReqProjectList(Integer.toString(pn));
+		 int total=projectDAO.getTotalPostingCount();
+		 PagingBean pagingBean=new PagingBean(total,pn);
+		 return new ProjectListVO(plist,pagingBean);
+	}
+	@Override
+	public void registerReqProject(ProjectVO pvo) {
+		projectDAO.registerReqProject(pvo);
+	}
+	@Override
+	public List<String> findChatRecordByNo(int projectNo) {
+		List<String> list=projectDAO.findChatRecordByNo(projectNo);
+		if(list.size()==0){
+			ProjectVO pvo=new ProjectVO();
+			pvo.setProjectNo(projectNo);
+			pvo.setContent("채팅방입니다");
+			projectDAO.sendChatAjax(pvo);
+			pvo.setContent("접속됨..");
+			projectDAO.sendChatAjax(pvo);
+			list=projectDAO.findChatRecordByNo(projectNo);
+		}else if(list.size()>=16){
+			projectDAO.deleteChat(projectNo);
+		}
+		return list;
+	}
+	@Override
+	public void sendChatAjax(ProjectVO pvo) {
+		projectDAO.sendChatAjax(pvo);
 	}
 
 }

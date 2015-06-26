@@ -90,11 +90,21 @@
 </script>
 	<link rel="stylesheet" href="css/project.css">
 <body>
-<h3 id="projectRegisterLogo">프로젝트</h3>
+<h3 id="projectRegisterLogo">Project</h3>
 <div id="viewForm">
 <div id="view">
 <table border="1" width="500px" align="center">
-<tr><td colspan="2">프로젝트명</td><td colspan="2">${requestScope.pvo.projectName}</td></tr>
+   <c:choose>
+    <c:when test="${requestScope.pvo.achieve=='의뢰' }">
+    <tr><td colspan="2">프로젝트명</td><td colspan="2">${requestScope.pvo.projectName}</td></tr>
+<tr><td colspan="2">작성자</td><td colspan="2">${requestScope.pvo.id}</td></tr>
+<tr><td colspan="2">작성일</td><td colspan="2">${requestScope.pvo.project_date}</td></tr>
+<tr><td colspan="4" align="center"><b>내용</b></td></tr>
+<tr><td colspan="4"> <br>${requestScope.pvo.content}<br><c:choose><c:when test="${requestScope.pvo.deadline!='noImage' }">
+<img src="${initParam.root}upload/${requestScope.pvo.deadline}"> </c:when></c:choose></td></tr>
+    </c:when>
+    <c:otherwise>
+    <tr><td colspan="2">프로젝트명</td><td colspan="2">${requestScope.pvo.projectName}</td></tr>
 <tr><td colspan="2">작성자</td><td colspan="2">${requestScope.pvo.id}</td></tr>
 <tr><td colspan="2">작성일</td><td colspan="2">${requestScope.pvo.project_date}</td></tr>
 <c:forEach items="${requestScope.pvo.departVO}" var="dvo" varStatus="i">
@@ -109,6 +119,8 @@
 </c:choose>
 <tr><td colspan="4" align="center"><b>내용</b></td></tr>
 <tr><td colspan="4"> <br>${requestScope.pvo.content}</td></tr>
+    </c:otherwise>
+    </c:choose>
 </table>
 <br>
 <span id="joinComment"></span>
@@ -118,11 +130,13 @@
 			<input type="button" value="수정" id="updateProBtn" style="margin-left: 330px">
 			<input type="button" value="삭제" id="deleteProBtn" ><br>
 		</c:when>
-		<c:when test="${requestScope.pvo.achieve!='모집중' }">
+		<c:when test="${requestScope.pvo.achieve!='모집중'&&requestScope.pvo.achieve!='의뢰'&&requestScope.pvo.achieve!='추가모집중' }">
 			<b style="margin-left: 130px">마감되었습니다.</b>
 		</c:when>
 		<c:otherwise>
+			<c:choose><c:when test="${requestScope.pvo.achieve!='의뢰' }">
 			<span id="switchBtn"><input type="button" value="참가신청" id="joinProBtn" ></span>
+			</c:when></c:choose>
 		</c:otherwise>
 	</c:choose>
 <div id="commentForm">
