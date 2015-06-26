@@ -17,7 +17,7 @@ public interface ErrorReportService {
 	int getAllError(String refer);
 	List<ErrorReportVO> findWord(String startWord, String endWord, String containsWord,String type);
 	int reportUpdate(ErrorReportVO vo);
-
+	//ErrorReportVO duplicateTitle(String id, String title,String type);
 	
 
 

@@ -55,6 +55,12 @@ select distinct(e.error_code) as errorCode  from error e , error_report er where
 <sql id="findWordException">
 select distinct(e.exception_message) as exceptionMessage   from error e , error_report er where e.error_no = er.error_no and e.error_code is null
 </sql>
+<select id="duplicateTitleException" parameterType="HashMap" resultType="evo">
+select e.error_no as errorNo  from error e, error_report er where e.error_no = er.error_no and er.id =#{id} and e.exception_message = #{title}
+</select>
+<select id="duplicateTitleError" parameterType="HashMap" resultType="evo">
+select e.error_no as errorNo  from error e, error_report er where e.error_no = er.error_no and er.id =#{id} and e.error_code = #{title}
+</select>
 <select id="startWithException" parameterType="String" resultType="evo">
 <include refid="findWordException"/> 
 <![CDATA[  and e.exception_message like #{value}||'%' ]]>order by e.exception_message asc</select>
@@ -81,7 +87,6 @@ select distinct(e.exception_message) as exceptionMessage   from error e , error_
 <update id="update" parameterType="evo">
 update error_report set content = #{content}, error_report_date=sysdate where error_no= #{errorNo}
 </update>
-
 
 <insert id="writeReportExceptionTitle" parameterType="String">
 insert into error(error_no,exception_message) values(error_no.nextval,#{value})

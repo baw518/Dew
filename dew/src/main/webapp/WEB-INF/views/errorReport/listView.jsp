@@ -6,30 +6,33 @@
 <br><br>
 <div class="main" align="center">	
 <table class="dewErrorReportTable" >
-<caption><font size="25">E x c e p t i o n<br></font><br>
-<hr></caption>
+<caption><font size="25">E x c e p t i o n</font><br>
+<hr></caption><br>
 
 <tr>
 <c:forEach items="${requestScope.exception }" var = "evo" varStatus="status">
-<td width="300" height="50" align="left"><a href="report_showContent.do?error=${evo }&type=exception" class="hover_font"><u>${evo }</u></a></td>
+<td ><a href="report_showContent.do?error=${evo }&type=exception" class="hover_font"><u>${evo }</u></a></td>
 	<c:if test="${status.count != fn:length(requestScope.exception)-1 }">
 		<c:if test="${status.count %3==0}"></tr><tr></c:if> 
 	</c:if>
 </c:forEach>
 </tr>
 </table>
+
 <br><br><br>
+
 <table class="dewErrorReportTable">
 <caption ><font size="25">E r r o r C o d e</font><br>
 <hr></caption><br>
 <tr>
 <c:forEach items="${requestScope.errorcode }" var="cvo" varStatus="status">
-<td width="300" height="50" align="left"><a href="report_showContent.do?error=${cvo }&type=error" class="hover_font"><u>${cvo }</u></a></td>
+<td ><a href="report_showContent.do?error=${cvo }&type=error" class="hover_font"><u>${cvo }</u></a></td>
 	<c:if test="${status.count != fn:length(requestScope.errorcode)-1 }">
 		<c:if test="${status.count %3==0}"></tr><tr></c:if> 
 	</c:if>
 </c:forEach>
 </tr>
 </table>
+<br><br><br>
 <br><br>
 </div>

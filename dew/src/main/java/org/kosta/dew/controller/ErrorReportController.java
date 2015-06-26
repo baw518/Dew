@@ -82,13 +82,12 @@ public class ErrorReportController {
 			mav.addObject("errorcode",vo);
 			mav.addObject("type","ErrorCode");
 		}
-		System.out.println(vo);
 		return mav;
 	}
 	
 	@RequestMapping("report_showContentByNo.do")
 	public String reportShowCotentByNo(Model model,int errorNo,String type){
-		System.out.println(" ERROR NO : " + errorNo);
+		// System.out.println(" ERROR NO : " + errorNo);
 		if(type.equals("ExceptionMessage")){
 			model.addAttribute("exception", errorReportService.getContent(errorNo));
 			model.addAttribute("type", "ExceptionMessage");
@@ -101,14 +100,17 @@ public class ErrorReportController {
 	@RequestMapping("report_write.do")
 	public String reportWrite(HttpSession session,ErrorReportVO vo, String type,String title,String command,Model model){
 		int errorNo = -1 ;
-		System.out.println(vo);
 		if (command.equals("register")){
+			// System.out.println(type);
 			errorNo = errorReportService.reportWrite(vo,type,title);
+			if(errorNo == -1 ){
+				return "errorReport_registerFail";
+			}
 		}else{
 			errorNo = errorReportService.reportUpdate(vo);
 		}
-	//	return "redirect:/report_write_result.do?errorNo="+ errorNo;
-		return null;
+		return "redirect:/report_write_result.do?errorNo="+ errorNo;
+
 	}
 	
 	@RequestMapping("report_write_result.do")
@@ -126,11 +128,11 @@ public class ErrorReportController {
 	
 	@RequestMapping("report_findWord.do")
 	public String reportFindWord(String startWord ,String endWord ,String containsWord ,String type, Model model){
-		System.out.println("StartWord : " + startWord + " endWord : " + endWord + " containsWord : " + containsWord);
+		// System.out.println("StartWord : " + startWord + " endWord : " + endWord + " containsWord : " + containsWord);
 		List<ErrorReportVO> list = errorReportService.findWord(startWord, endWord, containsWord, type);
 		model.addAttribute("result",list);
 		model.addAttribute("type",type);
-		System.out.println(errorReportService.findWord(startWord, endWord, containsWord, type));
+		// System.out.println(errorReportService.findWord(startWord, endWord, containsWord, type));
 		return "errorReport_findResult";
 	}
 	
