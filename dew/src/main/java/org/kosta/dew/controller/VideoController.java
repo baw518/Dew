@@ -196,7 +196,7 @@ public class VideoController {
 	//	System.out.println(vo);
 	//	System.out.println(mvo);
 		String filePath = new HttpServletRequestWrapper(request).getRealPath("/");
-		System.out.println(filePath);
+		//System.out.println(filePath);
 		List<MultipartFile> list=mvo.getFile();
 		ArrayList<String> nameList=new ArrayList<String>();
 		for(int i=0;i<list.size();i++){
