@@ -15,9 +15,10 @@
 <input type="radio" name="type" value="errorcode">ErrorCode</td>
 <td><input type="text" name="title" width="500"></td></tr>
 <tr><td align="center" colspan="2">내용 :<pre> <TEXTAREA name="content" rows="15" cols="100"></TEXTAREA></pre></td></tr>
-<tr><td align="right" colspan="2">
+<tr><td align="right" c olspan="2">
 <input type="hidden" name="id" value="${sessionScope.mvo.id }">
 <input type="hidden" name="writer" value="${sessionScope.mvo.memberName }">
+<input type="hidden" name="command" value="register">
 <input type="submit" value="등록"></td></tr>
 </table>
 </form>

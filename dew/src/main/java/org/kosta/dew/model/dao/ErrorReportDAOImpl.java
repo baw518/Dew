@@ -112,6 +112,27 @@ public class ErrorReportDAOImpl implements ErrorReportDAO {
 		return vo.getErrorNo();
 	}
 
+	@Override
+	public boolean duplicateTitle(ErrorReportVO vo, String type, String title) {
+		Map map =new HashMap();
+		map.put("id", vo.getId());
+		map.put("title", title);
+		if(type.equals("exception") || type.equals("ExceptionMessage")){
+			System.out.println("vo dupli" + vo +" title : " +title);
+			if(sqlSessionTemplate.selectOne("errorReport.duplicateTitleException", map) == null){
+				return false;
+			}else{
+				return true;
+			}
+		}else{
+			if(sqlSessionTemplate.selectOne("errorReport.duplicateTitleError", map) == null){
+				return false;
+			}else{
+				return true;
+			}
+		}
+	}
+
 
 
 
