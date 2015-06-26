@@ -7,8 +7,9 @@ import javax.annotation.Resource;
 
 import org.kosta.dew.model.service.HomeService;
 import org.kosta.dew.model.vo.DiscussVO;
+import org.kosta.dew.model.vo.ErrorReportListVO;
 import org.kosta.dew.model.vo.ErrorReportVO;
-import org.kosta.dew.model.vo.MemberVO;
+import org.kosta.dew.model.vo.PagingBean;
 import org.kosta.dew.model.vo.ProjectVO;
 import org.kosta.dew.model.vo.QnAVO;
 import org.kosta.dew.model.vo.VideoVO;
@@ -61,6 +62,11 @@ public class HomeController {
 		return "home";
 	}
 	
+	/**
+	 * 랭킹보기
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("ranking_listView.do")
 	public String rangkingListView(Model model){
 		//랭킹받아오기
@@ -69,7 +75,5 @@ public class HomeController {
 		return "ranking_listView";
 	}
 	
-	
 
-	
 }
