@@ -175,7 +175,7 @@ public class DiscussController {
 		return cmvo;
 	}
 	/**
-	 * 토론방 삭제요청 
+	 * 토론방 등록요청 
 	 * 관리자에게 토론방 게시글 넘버,아이디를 넘김
 	 * @param request
 	 * @return
@@ -183,13 +183,14 @@ public class DiscussController {
 	@RequestMapping("insertManager.do")
 	public String insertManager(HttpServletRequest request){
 		int no = Integer.parseInt(request.getParameter("no"));
+		// errorNo 받아오3
 		String id = request.getParameter("id");
 		discussionRequestVO vo = new discussionRequestVO(id, null, no);
 		discussService.insertRequest(vo);
-		return "redirect:QnA_showContent.do?qnaNo="+no;
+		return "다시 쇼컨텐츠로";
 	}
 	/**
-	 * 토론방 등록요청 
+	 * 토론방 삭제요청 
 	 * 관리자에게 토론방 게시글 넘버,아이디를 넘김
 	 * @param request
 	 * @return
