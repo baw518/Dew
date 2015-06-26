@@ -26,15 +26,15 @@
 		<img src="${initParam.root }images/manager.png">
 		<ul class="leftmenu">
 			<li><a href="member_view.do" class="list_font">회원관리</a></li>
-			<li><a href="#" class="list_font">토론방 등록 요청</a></li>
-			<li><a href="#" class="list_font">토론방 삭제 요청</a></li>
+			<li><a href="member_insertRequest.do" class="list_font">토론방 등록 요청</a></li>
+			<li><a href="member_deleteRequest.do" class="list_font">토론방 삭제 요청</a></li>
 			<li><a href="member_logout.do" class="list_font">로그아웃</a></li>   
 		</ul>
 		</c:when>
 		<c:otherwise>
 		<img src="${initParam.root }images/team.png">
 		<ul class="leftmenu">
-			 <li><a href="member_mypageForm.do" class="list_font">my page</a></li>
+			 <li><a href="member_profileForm.do" class="list_font">my page</a></li>
 			 <li><a href="report_listView.do" class="list_font">add errorReport</a></li>
 			 <li><a href="member_logout.do" class="list_font">logout</a></li>   
 		</ul>

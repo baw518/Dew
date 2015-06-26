@@ -42,8 +42,17 @@ ${evo.date }
 <tr><td align="right" colspan="4">
 <input type="hidden" name="id" value="${sessionScope.mvo.id }">
 <input type="hidden" name="writer" value="${sessionScope.mvo.memberName }">
+<c:choose>
+<c:when test="${sessionScope.mvo.id == requestScope.evo.id }">
+<input type="hidden" name="errorNo" value="${evo.errorNo }">
+<input type="hidden" name="command" value="update">
+<input type="submit" value="편집" >
+</c:when>
+<c:otherwise>
+<input type="hidden" name="command" value="register">
 <input type="submit" value="등록">
-
+</c:otherwise>
+</c:choose>
 
 </td></tr>
 </table>

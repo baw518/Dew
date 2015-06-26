@@ -66,4 +66,11 @@ values(#{id},#{memberName},#{memberPassword},to_date(#{birthDate},'yyyymmdd'),#{
  	<select id="totalMember" resultType="int">
 		select count(*)  from member
 	</select>
+
+ 	 <select id="showDeleteRequest" resultType="drvo">
+ 	 select id,separation,no from discussionRequest  where separation='삭제' order by no asc
+ 	 </select>
+ 	 <select id="showInsertRequest" resultType="drvo">
+ 	 select id,separation,no from discussionRequest  where separation='등록' order by no asc
+ 	 </select>
  </mapper> 		

@@ -9,6 +9,7 @@ import org.kosta.dew.model.vo.CommentVO;
 import org.kosta.dew.model.vo.DiscussListVO;
 import org.kosta.dew.model.vo.DiscussVO;
 import org.kosta.dew.model.vo.PagingBean;
+import org.kosta.dew.model.vo.discussionRequestVO;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -104,8 +105,35 @@ public class DiscussServiceImpl implements DiscussService {
 	}
 	@Override
 	public void delete(String no) {
-		System.out.println("딜리트서비스"+no);
 		discussDAO.delete(no);
 		
 	}
+	@Override
+	public void deleteRequest(discussionRequestVO vo) {
+		// TODO Auto-generated method stub
+		discussDAO.deleteRequest(vo);
+	}
+	@Override
+	public void deleteDiscussRequest(String no) {
+		discussDAO.deleteDiscussRequest(no);
+		
+	}
+	@Override
+	public void insertRequest(discussionRequestVO vo) {
+		// TODO Auto-generated method stub
+		discussDAO.insertRequest(vo);
+	}
+	
+	@Override
+	public boolean findDeleteRequest(int discussionNo) {
+		// TODO Auto-generated method stub
+		boolean flag = false;
+		discussionRequestVO vo = discussDAO.findDeleteRequest(discussionNo);
+		if(vo!=null){
+			flag = true;
+		}
+		return flag;
+	}
+
+
 }

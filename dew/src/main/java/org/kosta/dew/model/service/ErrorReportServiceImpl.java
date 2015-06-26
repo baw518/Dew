@@ -41,6 +41,9 @@ public class ErrorReportServiceImpl implements ErrorReportService {
 
 	@Override
 	public int reportWrite(ErrorReportVO vo, String type,String title) {
+		if (errorReportDAO.duplicateTitle(vo,type,title)== true){
+			return -1;
+		}
 		return errorReportDAO.reportWrite(vo,type,title);
 	}
 
@@ -59,10 +62,19 @@ public class ErrorReportServiceImpl implements ErrorReportService {
 		return errorReportDAO.getAllError(refer);
 	}
 
+
+
 	@Override
-	public ErrorReportVO getContentByDate(String refer, String date, String type) {
-		return errorReportDAO.getontentByDate(refer,date,type);
+	public List<ErrorReportVO> findWord(String startWord, String endWord, String containsWord,String type) {
+		return errorReportDAO.findWord(startWord,endWord,containsWord,type);
 	}
+
+	@Override
+	public int reportUpdate(ErrorReportVO vo) {
+		return errorReportDAO.reportUpdate(vo);
+	}
+
+
 
 
 }

@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 
 import org.kosta.dew.model.vo.MemberVO;
 import org.kosta.dew.model.vo.UserTypeVO;
+import org.kosta.dew.model.vo.discussionRequestVO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -99,5 +100,15 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlSessionTemplate.selectOne("member.totalMember");
 	}
 	
+	@Override
+	public List<discussionRequestVO> showDeleteRequest() {
+		// TODO Auto-generated method stub
+		return sqlSessionTemplate.selectList("member.showDeleteRequest");
+	}
+	@Override
+	public List<discussionRequestVO> showInsertRequest() {
+		// TODO Auto-generated method stub
+		return sqlSessionTemplate.selectList("member.showInsertRequest");
+	}
 	
 }

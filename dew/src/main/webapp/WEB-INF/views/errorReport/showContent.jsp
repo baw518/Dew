@@ -27,10 +27,27 @@ $(document).ready(function(){
 			location.href="report_updateView.do?errorNo=${requestScope.errorcode.errorNo}&type="+type;
 		}
 	});
+	$("#myupdate").click(function(){
+		if( type =="ExceptionMessage"){
+			location.href="report_updateView.do?errorNo=${requestScope.exception.errorNo}&type="+type;
+		}else if(type == "ErrorCode"){
+			location.href="report_updateView.do?errorNo=${requestScope.errorcode.errorNo}&type="+type;
+		}
+	});
+	$("#insertManagerBtn").click(function(){
+		if( type =="ExceptionMessage"){
+			location.href="insertManager.do?no=${requestScope.exception.errorNo}&id=${sessionScope.mvo.id}&type="+type;
+		}else if(type == "ErrorCode"){
+			location.href="insertManager.do?no=${requestScope.errorcode.errorNo}&id=${sessionScope.mvo.id}&type="+type;
+		}
+		
+	});
 });
 </script>
 <link rel="stylesheet" href="${initParam.root}/css/dew.css" type="text/css">
 <div class="main">
+
+
 <table class="dewTable" >
 <c:if test="${requestScope.exception !=null }">
 <thead>
@@ -86,11 +103,30 @@ ${errorcode.content }
 </c:if>
 <tr>
 <td align="right" colspan="4">
+
 <input type="button" value="관련글" id="reference">
-<c:if test="${sessionScope.mvo !=null }">
-<input type="button" value="편집" id="update">
+
+	<c:if test="${sessionScope.mvo !=null }">
+	<input type="button" value="토론 등록 요청" id="insertManagerBtn">
+			<c:if test="${sessionScope.mvo.id == errorcode.id }">
+			 <input type="button" value="내글편집하기" id="myupdate">
+			</c:if>
+			<c:if test="${sessionScope.mvo.id == exception.id }">
+			 <input type="button" value="내글편집하기" id="myupdate">
+			</c:if>
+			<c:if test="${requestScope.exception !=null }">
+				<c:if test="${sessionScope.mvo.id != exception.id }">
+					<input type="button" value="편집하기" id="update">
+				</c:if>
+			</c:if>
+			<c:if test="${requestScope.errorcode !=null }">	
+				<c:if test="${sessionScope.mvo.id != errorcode.id }">
+					<input type="button" value="편집하기" id="update">
+				</c:if>
+			</c:if>	
 </c:if>
 <input type="button" value="목록" id="getList">
+
 </td>
 </tr>
 </table>

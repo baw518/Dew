@@ -51,11 +51,9 @@ public class ErrorReportDAOImpl implements ErrorReportDAO {
 	public int reportWrite(ErrorReportVO vo, String type,String title) {
 		
 		if(type.equals("exception") || type.equals("ExceptionMessage")){
-			System.out.println("write : "  +type);
 			sqlSessionTemplate.insert("errorReport.writeReportExceptionTitle", title);
 			sqlSessionTemplate.insert("errorReport.writeReportException", vo);
 		}else{
-			System.out.println("write : "  +type);
 			sqlSessionTemplate.insert("errorReport.writeReportErrorcodeTitle", title);
 			sqlSessionTemplate.insert("errorReport.writeReportErrorcode", vo);
 		}
@@ -85,17 +83,54 @@ public class ErrorReportDAOImpl implements ErrorReportDAO {
 		return sqlSessionTemplate.selectOne("errorReport.getAllError",refer);
 	}
 
+
+
 	@Override
-	public ErrorReportVO getontentByDate(String refer, String date, String type) {
-		Map map =new HashMap();
-		map.put("refer", refer);
-		map.put("date", date);		
+	public List<ErrorReportVO> findWord(String startWord, String endWord ,String containsWord,String type) {	
 		if(type.equals("ExceptionMessage")){
-			return sqlSessionTemplate.selectOne("",map);
+			if ( startWord.length() != 0 ){
+				return sqlSessionTemplate.selectList("errorReport.startWithException",startWord);
+			}else if(  endWord.length() != 0){
+				return sqlSessionTemplate.selectList("errorReport.endWithException",endWord);
+			}else{
+				return sqlSessionTemplate.selectList("errorReport.containsException",containsWord);
+			}
 		}else{
-			return sqlSessionTemplate.selectOne("",map);	
+			if ( !startWord.equals("") ){
+				return sqlSessionTemplate.selectList("errorReport.startWithError",startWord);
+			}else if(  !endWord.equals("")){
+				return sqlSessionTemplate.selectList("errorReport.endWithError",endWord);
+			}else{
+				return sqlSessionTemplate.selectList("errorReport.containsError",containsWord);
+			}
 		}
-		
+	}
+
+	@Override
+	public int reportUpdate(ErrorReportVO vo) {
+		sqlSessionTemplate.update("errorReport.update", vo);
+		return vo.getErrorNo();
+	}
+
+	@Override
+	public boolean duplicateTitle(ErrorReportVO vo, String type, String title) {
+		Map map =new HashMap();
+		map.put("id", vo.getId());
+		map.put("title", title);
+		if(type.equals("exception") || type.equals("ExceptionMessage")){
+			System.out.println("vo dupli" + vo +" title : " +title);
+			if(sqlSessionTemplate.selectOne("errorReport.duplicateTitleException", map) == null){
+				return false;
+			}else{
+				return true;
+			}
+		}else{
+			if(sqlSessionTemplate.selectOne("errorReport.duplicateTitleError", map) == null){
+				return false;
+			}else{
+				return true;
+			}
+		}
 	}
 
 

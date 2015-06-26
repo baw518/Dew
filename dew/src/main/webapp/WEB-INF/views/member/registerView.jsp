@@ -46,33 +46,82 @@
 	
 		});
 </script>
+<link rel="stylesheet" href="${initParam.root }css/dew.css">
 <div class="main">
-<form  action="member_register.do" method="post">
-<div class="registerForm">
-	<input type="text" class="registerName"  name="memberName" id="memberName" placeholder="이름을 입력해주세요"><br>
-	<input type="text" class="register1" name="id" id="id"  placeholder="아이디를 입력해주세요"><br>
-	<input type="password" class="register2" id="memberPassword"name="memberPassword" placeholder="비밀번호를 입력해주세요"><br>
-	<input type="text" class="registerDate" id="birthDate" name="birthDate" placeholder="생년월일을 8자리 숫자로 입력해주세요"><br>
-	<input type="text" class="registerJob" placeholder="직종을 선택해주세요" readonly="readonly"><br>
-	<c:forEach var="item" varStatus="i" items="${requestScope.list}">
-	<input type="radio" id="jobNo" name="jobNo" value="${item.jobNo}" placeholder="직종선택"><span class="radioText">${item.jobName}</span>
-	</c:forEach> 
-	<br><br>
-	<input type="text" class="register1" id="passwordQuestion" name="passwordQuestion" placeholder="비밀번호 찾기 질문을 입력해주세요"><br>
-	<input type="text" class="register2" id="passwordAnswer" name="passwordAnswer" placeholder="비밀번호 찾기 답을 입력해주세요"><br>
-	<br><br>
-<input type="submit" class="loginBtn" value="SIGN UP">
+<form class="form-horizontal" role="form" action="member_register.do" method="post">
+              <div class="form-group">
+                <div class="col-sm-2" style="margin-bottom: 10px">
+                  <label class="control-label">File</label>
+                </div>
+                <div class="col-sm-10" style="margin-bottom: 10px">
+                  <input type="file" class="">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-2">
+                  <label class="control-label" >Name</label>
+                </div>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" placeholder="Name" name="memberName" id="memberName">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-2">
+                  <label class="control-label">ID</label>
+                </div>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" placeholder="ID" name="id" id="id" >
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-2">
+                  <label for="inputPassword3" class="control-label">Password</label>
+                </div>
+                <div class="col-sm-10">
+                  <input type="password" class="form-control" id="inputPassword3" placeholder="Password" id="memberPassword"name="memberPassword">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-2">
+                  <label class="control-label">Date</label>
+                </div>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" placeholder="YYYYMMDD" id="birthDate" name="birthDate">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-2" style="margin-bottom: 10px">
+                  <label class="control-label">Jobs</label>
+                </div>
+                <div class="col-sm-10" style="margin-bottom: 10px">
+                  <div class="radio" >
+                  	<c:forEach var="item" varStatus="i" items="${requestScope.list}">
+                  	   <label class="radio-inline">
+                      <input type="radio"  id="jobNo" name="jobNo" value="${item.jobNo}" >${item.jobName}</label>
+                  	</c:forEach> 
+                  </div>
+                </div>
+              </div>
+                <div class="form-group">
+                <div class="col-sm-2">
+                  <label class="control-label">P.Q</label>
+                </div>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" placeholder="password search Question" id="passwordQuestion" name="passwordQuestion">
+                </div>
+              </div>
+                <div class="form-group">
+                <div class="col-sm-2">
+                  <label class="control-label">P.A</label>
+                </div>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" placeholder="password search Answer"  id="passwordAnswer" name="passwordAnswer">
+                </div>
+              </div>
+    			<br>
+                <div class="col-sm-offset-2 col-sm-10" align="center">
+                  <button type="submit" class="btn btn-default">Sign in</button>
+                </div>
+            
+            </form>
 </div>
-</form>
-</div>
-
-
-
-
-
-
-
-
-
-
-

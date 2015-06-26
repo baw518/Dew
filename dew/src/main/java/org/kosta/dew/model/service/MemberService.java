@@ -5,6 +5,7 @@ import java.util.List;
 import org.kosta.dew.model.vo.MemberListVO;
 import org.kosta.dew.model.vo.MemberVO;
 import org.kosta.dew.model.vo.UserTypeVO;
+import org.kosta.dew.model.vo.discussionRequestVO;
 
 public interface MemberService {
 
@@ -20,7 +21,8 @@ public interface MemberService {
 	public int update(MemberVO vo);
 	public abstract int deltemembercheck(String id);
 	public abstract MemberListVO allMember(String pageNo);
-	
+	public abstract List<discussionRequestVO> showDeleteRequest();
+	public abstract List<discussionRequestVO> showInsertRequest();
 	
 	
 }

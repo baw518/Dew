@@ -9,6 +9,7 @@ import org.kosta.dew.model.vo.MemberListVO;
 import org.kosta.dew.model.vo.MemberVO;
 import org.kosta.dew.model.vo.PagingBean;
 import org.kosta.dew.model.vo.UserTypeVO;
+import org.kosta.dew.model.vo.discussionRequestVO;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -80,7 +81,15 @@ public class MemberServiceImpl implements MemberService {
 		return mlvo;
 	}
 	
-	
+	@Override
+	public List<discussionRequestVO> showDeleteRequest() {
+		return  memberDAO.showDeleteRequest();
+	}
+	@Override
+	public List<discussionRequestVO> showInsertRequest() {
+		// TODO Auto-generated method stub
+		return memberDAO.showInsertRequest();
+	}
 	
 	
 }

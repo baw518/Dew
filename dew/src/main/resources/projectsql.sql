@@ -9,7 +9,8 @@ create table project_write(
 	hit number default 0,
 	point number default 0,
 	project_date date not null,
-	progressing_end_date varchar2(50) not null
+	progressing_end_date varchar2(100) not null,
+	req number default 0
 )
 
  drop sequence project_seq;
@@ -82,27 +83,21 @@ select * from project_write
    select from project_write where project_no= and id=
    --TYPE :  0 작성 1 참여 2 댓글
   
+drop table chat
+create table chat(
+	chat_no number not null,
+	project_no number not null,
+	chat_content varchar2(100) not null,
+	constraint fk_chat_project_no_ex foreign key(project_no) references project_write(project_no)
+)
+insert into chat(project_no,chat_content) values(40,'네 안녕하세요')
+select * from chat
+		
+drop sequence project_chat_seq;
+create sequence project_chat_seq;
 
+insert into chat(chat_no,project_no,chat_content) values(project_chat_seq.nextval,40,'하이')
+delete from chat where chat_no=(select min(chat_no) from chat where project_no=40)
+ 		select chat_content from chat where project_no=40 order by chat_no asc
 
- 	select project_comment_no as commentNo, project_no as boardNo,id,content,project_comment_date as commentDate from project_comment where project_no=4 and id='java1' and type=1
-
- 	
- 	
- 	  	select p.title,p.progressing,p.point,p.project_no,to_char(c.project_comment_date,'YYYY-MM-DD HH:MI') as deadline from project_comment c,project_write p where c.type=1 and c.id='java' and c.project_no=p.project_no
-
- 	
- 	
- 	select project_no,id,title,achieve,project_date,progressing_end_date as deadline,hit,point from(select project_no,id,title,achieve,project_date,hit,progressing_end_date,ceil(rownum/10) as page,point 
-		from(select project_no,id,title,achieve,to_char(project_date,'YYYY.MM.DD') as project_date,hit,progressing_end_date,point from project_write order by project_no desc))
-		where page=1
- 	select * from project_comment
- 	delete from project_comment where project_comment_no=26
- 	
- 	
- 	select * from project_write 	  	 
- 	  	 
- 	  	 
-
- 	  	 
- 	  	 
- 	  	 
+select * from member
