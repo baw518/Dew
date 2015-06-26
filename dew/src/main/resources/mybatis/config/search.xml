@@ -44,10 +44,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="errorCode" parameterType="hashmap" resultType="evo">
 	<![CDATA[
-		select errorNo, errorCode,reportdate, discussionstatus,id,content,hit
+		select errorNo, errorCode,reportDate, discussionstatus,id,content,hit
 		from
-		( 	select errorNo, errorCode,reportdate, discussionstatus , ceil(rownum/10) as page ,id, content, hit
-			from (select e.error_no as errorNo ,e.error_code as errorCode, to_char(error_report_date,'yyyy/mm/dd HH24:MI') as reportdate  ,er.discussion_status as discussionstatus ,id, content, hit
+		( 	select errorNo, errorCode,reportDate, discussionstatus , ceil(rownum/10) as page ,id, content, hit
+			from (select e.error_no as errorNo ,e.error_code as errorCode, to_char(error_report_date,'yyyy/mm/dd HH24:MI') as reportDate  ,er.discussion_status as discussionstatus ,id, content, hit
 					from ERROR_REPORT er, ERROR e 
 					where e.error_no = er.error_no and e.error_code like '%' || #{wordName} || '%' or er.content like '%' || #{wordName} || '%' and e.error_code is not null
 					order by reportDate desc)
@@ -66,9 +66,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="exception" parameterType="hashmap" resultType="evo">
 		<![CDATA[
-		select errorNo,exceptionMessage,reportdate,discussionstatus,id,content,hit
-		from ( select errorNo,exceptionMessage,reportdate,discussionstatus,ceil(rownum/10) as page,id,content,hit
-					from ( select e.error_no as errorNo ,e.exception_message as exceptionMessage, to_char(error_report_date,'yyyy/mm/dd HH24:MI') as reportdate  ,er.discussion_status as discussionstatus ,id,content,hit
+		select errorNo,exceptionMessage,reportDate,discussionstatus,id,content,hit
+		from ( select errorNo,exceptionMessage,reportDate,discussionstatus,ceil(rownum/10) as page,id,content,hit
+					from ( select e.error_no as errorNo ,e.exception_message as exceptionMessage, to_char(error_report_date,'yyyy/mm/dd HH24:MI') as reportDate  ,er.discussion_status as discussionstatus ,id,content,hit
 							 from ERROR_REPORT er, ERROR e 
 							 where e.error_no = er.error_no and e.exception_message like '%' || #{wordName} || '%' or er.content like '%' || #{wordName} || '%' and exception_message is not null
 							 order by reportDate desc)
@@ -151,6 +151,76 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT count(video_no)
 		FROM video_tutorial 
 		where title like '%' || #{wordName} || '%' or content like '%' || #{wordName} || '%'
+	</select>
+	
+	
+	<select id="threeErrorCode" parameterType="string" resultType="evo">
+	<![CDATA[
+		select errorNo, errorCode,reportDate, discussionstatus , rownum ,id, content, hit
+		from (select e.error_no as errorNo ,e.error_code as errorCode, to_char(error_report_date,'yyyy/mm/dd HH24:MI') as reportDate  ,er.discussion_status as discussionstatus ,id, content, hit
+				from ERROR_REPORT er, ERROR e 
+				where e.error_no = er.error_no and e.error_code like '%' || #{value} || '%' or er.content like '%' || #{value} || '%' and e.error_code is not null
+				order by reportDate desc)
+		where rownum<=3
+		]]>
+	</select>
+	
+	<select id="threeException" parameterType="string" resultType="evo">
+	<![CDATA[
+		select errorNo,exceptionMessage,reportDate,discussionstatus, rownum,id,content,hit
+		from ( select e.error_no as errorNo ,e.exception_message as exceptionMessage, to_char(error_report_date,'yyyy/mm/dd HH24:MI') as reportDate  ,er.discussion_status as discussionstatus ,id,content,hit
+				 from ERROR_REPORT er, ERROR e 
+				 where e.error_no = er.error_no and e.exception_message like '%' || #{value} || '%' or er.content like '%' || #{value} || '%' and exception_message is not null
+				 order by reportDate desc)
+		where rownum <=3
+	]]>
+	</select>
+	
+	<select id="threeQnA" parameterType="string" resultMap="qMap">
+	<![CDATA[
+		select qna_no,id,group_no,title,content,qna_date,hit,point,answer_status,ref,restep,relevel, rownum
+	   	from(select qna_no,id,group_no,title,content,to_char(qna_date,'YYYY.MM.DD') as qna_date,hit,point,answer_status,ref,restep,relevel 
+		   	  from qna
+		      where title like '%' || #{value} || '%' or content like '%' || #{value} || '%'
+		      order by ref desc,restep asc
+	 	)
+	 	where rownum<=3
+	 	]]>
+	</select>
+	
+	<select id="threeDiscuss" parameterType="string" resultMap="discussMap">
+	<![CDATA[
+		select discussion_no,id,title,content,discussion_date,hit,discussion_subject, rownum
+		from(select discussion_no,id,title,content,to_char(discussion_date,'YYYY.MM.DD') as discussion_date,hit,discussion_subject 
+		   	   from discussion 
+		 	   where title like '%' || #{value} || '%' or content like '%' || #{value} || '%'
+		   	   order by discussion_no desc
+		)
+		where rownum <=3
+		]]>
+	</select>
+	
+	<select id="threeProject" parameterType="string" resultMap="projectMap">
+	<![CDATA[
+	select project_no,id,title,content,achieve,project_date,hit,progressing_end_date,rownum,point 
+	from(select project_no,id,title,content,achieve,to_char(project_date,'YYYY.MM.DD') as project_date,hit,progressing_end_date as progressing_end_date,point 
+			from project_write
+			where title like '%' || #{value} || '%' or content like '%' || #{value} || '%'
+			order by project_no desc)
+	where rownum<=3
+	]]>
+	</select>
+	
+	<select id="threeVideo" parameterType="string" resultMap="videoMap">
+	<![CDATA[
+		SELECT video_no,title,content,hit,id,video_date,rownum 
+		from (SELECT video_no,title,content,hit,id,to_char(video_date,'YYYY-MM-DD') as video_date 
+				FROM video_tutorial 
+				where title like '%' || #{value} || '%' or content like '%' || #{value} || '%'
+				order by video_no desc
+		)
+		where rownum <=3
+		]]>
 	</select>
  </mapper> 		
 

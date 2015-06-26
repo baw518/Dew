@@ -70,7 +70,7 @@ a {
 
 /* left 영역 네비게이션 부분 */
 .left {
-	height: 550px;
+	min-height: 1400px;
 	width: 20%;
 	float: left; /* 엘리먼트 부유 위치 지정 left, float 을 사용해 div 를 수평으로 나란히
 							정렬하기 위해 사용 */

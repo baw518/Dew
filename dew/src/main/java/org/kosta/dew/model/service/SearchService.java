@@ -34,4 +34,16 @@ public interface SearchService {
 	List<VideoVO> searchVideo(HashMap<String, String> map);
 
 	int getSearchVideoCount(String wordName);
+
+	List<ErrorReportVO> searchThreeErrorCode(String wordName);
+
+	List<ErrorReportVO> searchThreeException(String wordName);
+
+	List<QnAVO> searchThreeQnA(String wordName);
+
+	List<DiscussVO> searchThreeDiscuss(String wordName);
+
+	List<ProjectVO> searchThreeProject(String wordName);
+
+	List<VideoVO> searchThreeVideo(String wordName);
 }

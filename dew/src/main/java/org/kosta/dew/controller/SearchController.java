@@ -158,10 +158,30 @@ public class SearchController {
 					
 					path = "search_videoListView";
 				}
-				//    /는 있지만 게시판을 찾을수 없는경우, /게시판이름을 제외하고 뒤의 단어만을 검색한다. 모든게시판을 검색.
+				//    /는 있지만 게시판을 찾을수 없는경우, /를 제외하고 뒤의 단어만을 검색한다. 모든게시판을 검색.
 				else{
+					//리스트에 검색어에 대한 결과 3개씩 넣기.
+					List<ErrorReportVO> errorCodeList = searchService.searchThreeErrorCode(wordName);
+					List<ErrorReportVO> exceptionList = searchService.searchThreeException(wordName);
+					List<QnAVO> qnaList = searchService.searchThreeQnA(wordName);
+					List<DiscussVO> discussList = searchService.searchThreeDiscuss(wordName);
+					List<ProjectVO> projectList = searchService.searchThreeProject(wordName);
+					List<VideoVO> videoList = searchService.searchThreeVideo(wordName);
 					
-					
+					//리스트 보냄
+					if(errorCodeList.size()!=0)
+						model.addAttribute("errorCode", errorCodeList);
+					if(exceptionList.size()!=0)
+						model.addAttribute("exception", exceptionList);
+					if(qnaList.size()!=0)
+						model.addAttribute("qna",qnaList );
+					if(discussList.size()!=0)
+						model.addAttribute("discuss",discussList );
+					if(projectList.size()!=0)
+						model.addAttribute("project",projectList );
+					if(videoList.size()!=0)
+						model.addAttribute("video",videoList );
+		
 					//검색어도 보냄
 					model.addAttribute("wordName", wordName);
 				}
@@ -169,13 +189,46 @@ public class SearchController {
 		}
 		//검색어의 맨앞에 /가 없는경우, 모든게시판을 검색.
 		else{
-			System.out.println("/가없어");
+			String wordName = word;
+			
+			//리스트에 검색어에 대한 결과 3개씩 넣기.
+			List<ErrorReportVO> errorCodeList = searchService.searchThreeErrorCode(wordName);
+			List<ErrorReportVO> exceptionList = searchService.searchThreeException(wordName);
+			List<QnAVO> qnaList = searchService.searchThreeQnA(wordName);
+			List<DiscussVO> discussList = searchService.searchThreeDiscuss(wordName);
+			List<ProjectVO> projectList = searchService.searchThreeProject(wordName);
+			List<VideoVO> videoList = searchService.searchThreeVideo(wordName);
+			System.out.println(errorCodeList);
+			//리스트 보냄
+			if(errorCodeList.size()!=0)
+				model.addAttribute("errorCode", errorCodeList);
+			if(exceptionList.size()!=0)
+				model.addAttribute("exception", exceptionList);					
+			if(qnaList.size()!=0)
+				model.addAttribute("qna",qnaList );			
+			if(discussList.size()!=0)
+				model.addAttribute("discuss",discussList );	
+			if(projectList.size()!=0)
+				model.addAttribute("project",projectList );
+			if(videoList.size()!=0){
+				model.addAttribute("video",videoList );
+			}
+				
+
+			//검색어도 보냄
+			model.addAttribute("wordName", wordName);
 		}
-		
 		
 		return path;
 	}
 	
+	/**
+	 * 애러코드 페이징적용 검색결과
+	 * @param pageNo
+	 * @param wordName
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("search_errorCodeListView.do")
 	public String errorCodeWordListView(String pageNo, String wordName,Model model){
 		//map에 페이지번호와 검색어 넣기
@@ -197,10 +250,16 @@ public class SearchController {
 		//검색어도 보냄
 		model.addAttribute("wordName", wordName);
 		
-		
 		return "search_errorCodeListView";
 	}
 
+	/**
+	 * exception 페이징적용 검색결과
+	 * @param pageNo
+	 * @param wordName
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("search_exceptionListView.do")
 	public String exceptionListView(String pageNo, String wordName,Model model){
 		//map에 페이지번호와 검색어 넣기
@@ -225,6 +284,13 @@ public class SearchController {
 		return "search_exceptionListView";
 	}
 	
+	/**
+	 * qna 페이징적용 검색결과
+	 * @param pageNo
+	 * @param wordName
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("search_qnaListView.do")
 	public String qnaListView(String pageNo, String wordName,Model model){
 		//map에 페이지번호와 검색어 넣기
@@ -249,6 +315,13 @@ public class SearchController {
 		return "search_qnaListView";
 	}
 	
+	/**
+	 * 토론방 페이징적용 검색결과
+	 * @param pageNo
+	 * @param wordName
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("search_discussListView.do")
 	public String discussListView(String pageNo, String wordName,Model model){
 		//map에 페이지번호와 검색어 넣기
@@ -273,6 +346,13 @@ public class SearchController {
 		return "search_discussListView";
 	}
 	
+	/**
+	 * 프로젝트 페이징적용 검색결과
+	 * @param pageNo
+	 * @param wordName
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("search_projectListView.do")
 	public String projectListView(String pageNo, String wordName,Model model){
 		//map에 페이지번호와 검색어 넣기
@@ -297,6 +377,13 @@ public class SearchController {
 		return "search_projectListView";
 	}
 	
+	/**
+	 * 동영상강의 페이징적용 검색결과
+	 * @param pageNo
+	 * @param wordName
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("search_videoListView.do")
 	public String videoListView(String pageNo, String wordName,Model model){
 		//map에 페이지번호와 검색어 넣기

@@ -91,4 +91,40 @@ public class SearchDAOImpl implements SearchDAO {
 		return sqlSessionTemplate.selectOne("search.getSearchVideoCount",wordName);
 	}
 
+	@Override
+	public List<ErrorReportVO> searchThreeErrorCode(String wordName) {
+		// TODO 자동 생성된 메소드 스텁
+		return sqlSessionTemplate.selectList("search.threeErrorCode",wordName);
+	}
+
+	@Override
+	public List<ErrorReportVO> searchThreeException(String wordName) {
+		// TODO 자동 생성된 메소드 스텁
+		return sqlSessionTemplate.selectList("search.threeException", wordName);
+	}
+
+	@Override
+	public List<QnAVO> searchThreeQnA(String wordName) {
+		// TODO 자동 생성된 메소드 스텁
+		return sqlSessionTemplate.selectList("search.threeQnA",wordName);
+	}
+
+	@Override
+	public List<DiscussVO> searchThreeDiscuss(String wordName) {
+		// TODO 자동 생성된 메소드 스텁
+		return sqlSessionTemplate.selectList("search.threeDiscuss",wordName);
+	}
+
+	@Override
+	public List<ProjectVO> searchThreeProject(String wordName) {
+		// TODO 자동 생성된 메소드 스텁
+		return sqlSessionTemplate.selectList("search.threeProject",wordName);
+	}
+
+	@Override
+	public List<VideoVO> searchThreeVideo(String wordName) {
+		// TODO 자동 생성된 메소드 스텁
+		return sqlSessionTemplate.selectList("search.threeVideo",wordName);
+	}
+
 }

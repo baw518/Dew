@@ -90,4 +90,40 @@ public class SearchServiceImpl implements SearchService{
 		// TODO 자동 생성된 메소드 스텁
 		return searchDAO.getSearchVideoCount(wordName);
 	}
+
+	@Override
+	public List<ErrorReportVO> searchThreeErrorCode(String wordName) {
+		// TODO 자동 생성된 메소드 스텁
+		return searchDAO.searchThreeErrorCode(wordName);
+	}
+
+	@Override
+	public List<ErrorReportVO> searchThreeException(String wordName) {
+		// TODO 자동 생성된 메소드 스텁
+		return searchDAO.searchThreeException(wordName);
+	}
+
+	@Override
+	public List<QnAVO> searchThreeQnA(String wordName) {
+		// TODO 자동 생성된 메소드 스텁
+		return searchDAO.searchThreeQnA(wordName);
+	}
+
+	@Override
+	public List<DiscussVO> searchThreeDiscuss(String wordName) {
+		// TODO 자동 생성된 메소드 스텁
+		return searchDAO.searchThreeDiscuss(wordName);
+	}
+
+	@Override
+	public List<ProjectVO> searchThreeProject(String wordName) {
+		// TODO 자동 생성된 메소드 스텁
+		return searchDAO.searchThreeProject(wordName);
+	}
+
+	@Override
+	public List<VideoVO> searchThreeVideo(String wordName) {
+		// TODO 자동 생성된 메소드 스텁
+		return searchDAO.searchThreeVideo(wordName);
+	}
 }
