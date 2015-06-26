@@ -12,7 +12,12 @@
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script type="text/javascript">
 	 $(document).ready(function() {
-		setTimeout("refreshChat()",3000); 
+		 $.ajax({
+				type : "POST",
+				url : "sendChatAjax.do",
+				data : "projectNo=" + <%=list.get(list.size()-1)%>+"&content="+$("#sessionId").val()+"님 입장",
+			});
+		setTimeout("refreshChat()",1000); 
 		$("#content").keydown(function(evt){
 			if((evt.keyCode)&&(evt.keyCode==13)){
 				sendMess();
@@ -57,6 +62,7 @@
 			<td><input type="text" style="width: 290px" id="content" ></td>
 		</tr>
 	</table>
+	<input type="hidden" value="${sessionScope.mvo.id }" id="sessionId">
 	<img src="${initParam.root}images/back.jpg" onclick="location.href='project_popupProGetJoiner.do?projectNo='+<%=list.get(list.size()-1)%>">
 </body>
 </html>
