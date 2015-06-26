@@ -11,9 +11,15 @@
 </script>
 
 <div class="main">
-<form name="updateForm" action="member_update.do" method="post">
+<form name="updateForm" action="member_update.do" method="post" enctype="multipart/form-data">
 
 <table class="dewTable">
+	<thead>
+		<tr>
+		<th style="border-bottom: 1px solid #cccccc">회원 이미지</th>
+		<td><img src="${initParam.root}upload/${sessionScope.mvo.id}.jpg" width="150px"><br><input type="file" name="memberImage"></td>
+		</tr>
+	</thead>
 	<thead>
 		<tr>
 		<th style="border-bottom: 1px solid #cccccc">회원아이디</th>

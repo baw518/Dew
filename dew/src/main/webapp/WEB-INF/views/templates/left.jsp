@@ -32,7 +32,7 @@
 		</ul>
 		</c:when>
 		<c:otherwise>
-		<img src="${initParam.root }images/team.png">
+		<span style="margin-left: 50px"><img src="${initParam.root }upload/${sessionScope.mvo.id}.jpg" width="150px"></span>
 		<ul class="leftmenu">
 			 <li><a href="member_profileForm.do" class="list_font">my page</a></li>
 			 <li><a href="report_listView.do" class="list_font">add errorReport</a></li>

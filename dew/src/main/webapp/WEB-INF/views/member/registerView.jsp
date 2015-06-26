@@ -48,13 +48,13 @@
 </script>
 <link rel="stylesheet" href="${initParam.root }css/dew.css">
 <div class="main">
-<form class="form-horizontal" role="form" action="member_register.do" method="post">
+<form class="form-horizontal" role="form" action="member_register.do" method="post" enctype="multipart/form-data">
               <div class="form-group">
                 <div class="col-sm-2" style="margin-bottom: 10px">
                   <label class="control-label">File</label>
                 </div>
                 <div class="col-sm-10" style="margin-bottom: 10px">
-                  <input type="file" class="">
+                  <input type="file" name="image" accept="image/jpeg">
                 </div>
               </div>
               <div class="form-group">

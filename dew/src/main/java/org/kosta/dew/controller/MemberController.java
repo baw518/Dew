@@ -1,6 +1,9 @@
 package org.kosta.dew.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
@@ -67,16 +70,37 @@ public class MemberController {
 	}
 	@RequestMapping("member_register.do")
 	public String register(HttpServletRequest request,
-			HttpServletResponse response, MemberVO vo, UserTypeVO uvo) {
-
+			HttpServletResponse response, MemberVO vo, UserTypeVO uvo,MultipartFile image) {
 		uvo = memberSerivce.findName(uvo);
-
 		memberSerivce.register(vo);
-
 		memberSerivce.userregister(uvo, vo);
-
+		int n=0;
+		if(!(image.isEmpty())){
+			try {
+				image.transferTo(new File(path+vo.getId()+".jpg"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}else{
+			FileInputStream fis=null;
+			FileOutputStream fos=null;
+			try {
+				fis=new FileInputStream(path+"noImage.jpg");
+				fos=new FileOutputStream(path+vo.getId()+".jpg");
+				byte buffer[]=new byte[1024];
+				while((n=fis.read(buffer))!=-1){
+					fos.write(buffer,0,n);
+					fos.flush();
+				}
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 		return "member_register_result";
 	}
+
 
 	@RequestMapping("member_registerView.do")
 	public ModelAndView registerForm(HttpServletRequest request,
@@ -167,16 +191,33 @@ public class MemberController {
 		return "member_update";
 	}
 
+	@Resource(name="uploadPath")
+    private String path;
 	@RequestMapping("member_update.do")
 	public ModelAndView updateMember(HttpServletRequest request,
-			HttpServletResponse response, MemberVO vo) {
-
-		System.out.println(vo);
+			HttpServletResponse response, MemberVO vo, MultipartFile memberImage) throws InterruptedException {
 		HttpSession session = request.getSession(false);
+		FileOutputStream fos = null;
 		if (session != null) {// 세션이 연결되어있을때
+			if(memberImage.getOriginalFilename()!=""){
+			try {
+				byte[] imageData=memberImage.getBytes();
+				fos=new FileOutputStream(path+vo.getId()+".jpg");
+				fos.write(imageData);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}finally{
+				if(fos!=null){
+					try {
+						fos.close();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+			}
 			memberSerivce.update(vo);
 			session.setAttribute("vo", vo);
-
 		}
 
 		return new ModelAndView("member_update_result");
