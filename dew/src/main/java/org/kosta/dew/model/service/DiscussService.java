@@ -5,6 +5,7 @@ import java.util.List;
 import org.kosta.dew.model.vo.CommentVO;
 import org.kosta.dew.model.vo.DiscussListVO;
 import org.kosta.dew.model.vo.DiscussVO;
+import org.kosta.dew.model.vo.discussionRequestVO;
 
 public interface DiscussService {
 
@@ -35,5 +36,12 @@ public interface DiscussService {
 	public abstract void ajaxWriteCommentReply(CommentVO vo);
 
 	public abstract void delete(String no);
+
+	public abstract void deleteRequest(discussionRequestVO vo);
+
+	public abstract void deleteDiscussRequest(String no);
+
+	public abstract boolean findDeleteRequest(int discussionNo);
+
 
 }

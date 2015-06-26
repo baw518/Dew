@@ -1,4 +1,4 @@
-package org.kosta.dew.controller;
+ package org.kosta.dew.controller;
 
 import java.util.List;
 
@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.kosta.dew.model.service.DiscussService;
 import org.kosta.dew.model.vo.CommentVO;
 import org.kosta.dew.model.vo.DiscussVO;
+import org.kosta.dew.model.vo.discussionRequestVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
@@ -57,6 +58,7 @@ public class DiscussController {
 		
 		List<CommentVO> cmvo = discussService.findDiscussComment(no);
 		model.addAttribute("cmvo",cmvo);
+
 		
 		return "discussion_show_discussion";
 
@@ -180,10 +182,10 @@ public class DiscussController {
 	 */
 	@RequestMapping("deleteManager.do")
 	public String deleteManager(HttpServletRequest request){
-		String discussionNo = request.getParameter("discussionNo");
-		/*
-		 * 관리자에게 넘기는 메소드
-		 */
+		int discussionNo = Integer.parseInt(request.getParameter("discussionNo"));
+		String id = request.getParameter("id");
+		discussionRequestVO vo = new discussionRequestVO(id, null, discussionNo);
+		discussService.deleteRequest(vo);
 		return "redirect:findDiscussContent.do?no="+discussionNo;
 	}
 	
@@ -207,12 +209,49 @@ public class DiscussController {
 		List<CommentVO> cmvo = discussService.findDiscussComment(vo.getBoardNo());
 		return cmvo;
 	}
-	//관리자가 게시글을 강제삭제
+	//관리자가 게시글을 강제삭제(쇼컨텐츠에서)
 	@RequestMapping("delete.do")
 	public String delete(HttpServletRequest request){
 		String no = request.getParameter("discussionNo");
-		System.out.println("디리트컨트롤러"+no);
 		discussService.delete(no);
 		return "redirect:discussion_listView.do";
+	}
+	//삭제요청 페이지에서 게시글 삭제
+	@RequestMapping("discussion_requestDelete.do")
+	public String requestDelete(HttpServletRequest request){
+		String no = request.getParameter("no");
+		discussService.delete(no);
+		// discussRequest 테이블 내용도 삭제
+		discussService.deleteDiscussRequest(no);
+		return "redirect:member_deleteRequest.do";
+	}
+	//삭제요청 페이지에서 게시글 삭제요청을 취소
+	@RequestMapping("discussion_requestNoDelete.do")
+	public String requestNoDelete(HttpServletRequest request){
+		String no = request.getParameter("no");
+		// discussRequest 테이블 내용도 삭제
+		discussService.deleteDiscussRequest(no);
+		return "redirect:member_deleteRequest.do";
+	}
+	//등록요청 페이지에서 게시글 등록
+	@RequestMapping("discussion_requestInsert.do")
+	public String requestInsert(HttpServletRequest request){
+		int no = Integer.parseInt(request.getParameter("no"));
+		DiscussVO vo = discussService.findDiscussContent(no);
+		/*
+		 * 게시글 no로 에러리포트 정보를 가져와서
+		 * 토론방에 등록하는 메소드
+		 */
+		/*// discussRequest 테이블 내용 삭제
+		discussService.InsertDiscussRequest(no);*/
+		return "redirect:member_insertRequest.do";
+	}
+	//등록요청 페이지에서 게시글 등록요청을 취소
+	@RequestMapping("discussion_requestNoInsert.do")
+	public String requestNoInsert(HttpServletRequest request){
+		String no = request.getParameter("no");
+		// discussRequest 테이블 내용 삭제
+		/*discussService.InsertDiscussRequest(no);*/
+		return "redirect:member_insertRequest.do";
 	}
 }

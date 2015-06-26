@@ -1,5 +1,7 @@
 package org.kosta.dew.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
@@ -11,9 +13,11 @@ import javax.servlet.http.HttpSession;
 import org.kosta.dew.model.service.MemberService;
 import org.kosta.dew.model.vo.MemberVO;
 import org.kosta.dew.model.vo.UserTypeVO;
+import org.kosta.dew.model.vo.discussionRequestVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -61,7 +65,6 @@ public class MemberController {
 		session.invalidate();
 		return "redirect:home.do";
 	}
-
 	@RequestMapping("member_register.do")
 	public String register(HttpServletRequest request,
 			HttpServletResponse response, MemberVO vo, UserTypeVO uvo) {
@@ -193,5 +196,17 @@ public class MemberController {
 	@RequestMapping("member_view.do")
 	public ModelAndView memberView(String pageNo,Model model){
 		return new ModelAndView("member_memberView","mlvo",memberSerivce.allMember(pageNo));
+	}
+	@RequestMapping("member_deleteRequest.do")
+	public String deleteRequest(Model model){
+		List<discussionRequestVO> list = memberSerivce.showDeleteRequest();
+		model.addAttribute("list", list);
+		return "member_showDeleteRequest";
+	}
+	@RequestMapping("member_insertRequest.do")
+	public String insertRequest(Model model){
+		List<discussionRequestVO> list = memberSerivce.showInsertRequest();
+		model.addAttribute("list", list);
+		return "member_showInsertRequest";
 	}
 }

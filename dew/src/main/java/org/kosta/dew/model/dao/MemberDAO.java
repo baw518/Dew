@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.kosta.dew.model.vo.MemberVO;
 import org.kosta.dew.model.vo.UserTypeVO;
+import org.kosta.dew.model.vo.discussionRequestVO;
 
 public interface MemberDAO {
 
@@ -38,7 +39,9 @@ public interface MemberDAO {
 
 	public int totalMember();
 
-	
+	public abstract List<discussionRequestVO> showDeleteRequest();
+
+	public List<discussionRequestVO> showInsertRequest();
 
 
 

@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 
 import org.kosta.dew.model.vo.CommentVO;
 import org.kosta.dew.model.vo.DiscussVO;
+import org.kosta.dew.model.vo.discussionRequestVO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 @Repository
@@ -99,9 +100,23 @@ public class DiscussDAOImpl implements DiscussDAO {
 	}
 	@Override
 	public void delete(String no) {
-		System.out.println("딜리트디에오"+no);
 		sqlSessionTemplate.delete("discuss.deleteContentComment",no);	
 		sqlSessionTemplate.delete("discuss.deleteContent",no);	
 	}
-	
+	@Override
+	public void deleteRequest(discussionRequestVO vo) {
+		// TODO Auto-generated method stub
+		sqlSessionTemplate.insert("discuss.deleteRequest",vo);
+	}
+	@Override
+	public void deleteDiscussRequest(String no) {
+		// TODO Auto-generated method stub
+		sqlSessionTemplate.delete("discuss.deleteDiscussRequest",no);
+	}
+	@Override
+	public discussionRequestVO findDeleteRequest(int discussionNo) {
+		// TODO Auto-generated method stub
+		return sqlSessionTemplate.selectOne("discuss.findDeleteRequest",discussionNo);
+	}
+
 }

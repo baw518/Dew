@@ -1,0 +1,250 @@
+/* body */
+#indexBody {
+	margin: 0px;
+	padding: 0px;
+	background-color: white;
+}
+
+/* container 영역 */
+#container {
+	width: 90%;
+	/* left 250(padding 5+5) + main 650(padding 5+5) + border 1+1 */
+	margin-left: auto; /* 좌우 여백 동일하게 하여 중앙 정렬 효과 */
+	margin-right: auto;
+}
+
+/* header 영역*/
+#header {
+	width: 100%;
+	height: 180px; padding : 7px; /* 내용과 테두리 사이 간격 할당 */
+	/* border-bottom: 5px solid silver; */
+	background-color: white;
+	padding: 7px;			
+}
+#header_logo{
+	text-align: center;
+}
+/* header의 메뉴 부분 */
+#main_navi {
+	margin: 30px auto 30px;
+	width: 80%;
+}
+
+#main_navi ul {
+	list-style: none;
+	text-align: center;
+	margin: 0 auto;
+}
+
+#main_navi li {
+	display: inline;
+	margin: 0 20px;
+}
+
+#main_navi a {
+	color: #747474;
+	font-weight: lighter;
+	font-size: 13pt;
+}
+
+#main_navi a:hover {
+	color: #FF9090;
+	text-decoration: none;
+}
+
+/* #main_title {
+	font-family: NanumGothic;
+	padding-top: 30px;
+	width: 212px;
+	margin: 0 auto 30px !important;
+} */
+
+a {
+	text-decoration: none !important
+}
+
+.gray_hr {
+	color: #FF9090;
+	width: 85%;
+}
+
+/* left 영역 네비게이션 부분 */
+.left {
+	height: 550px;
+	width: 20%;
+	float: left; /* 엘리먼트 부유 위치 지정 left, float 을 사용해 div 를 수평으로 나란히
+							정렬하기 위해 사용 */
+	padding: 30px;
+	-moz-border-radius: 12px;
+	-khtml-border-radius: 12px;
+	-webkit-border-radius: 12px;
+	border-radius: 12px;
+	margin-left: 70px;
+	
+}
+.loginForm {
+	padding: 5px;
+	height: 200px;
+	float: left; /* 엘리먼트 부유 위치 지정 left, float 을 사용해 div 를 수평으로 나란히
+							정렬하기 위해 사용 */
+}
+.menu {
+	padding: 5px;
+	float: left; /* 엘리먼트 부유 위치 지정 left, float 을 사용해 div 를 수평으로 나란히
+							정렬하기 위해 사용 */
+}
+.menu_left{
+		width:150px;
+		font-size: 13pt;
+		margin: 5px auto;
+	}
+
+
+.main {
+	margin-top:30px;
+	height: 80%;
+	width: 60%;
+	float: left;
+	padding: 5px;
+	-moz-border-radius: 12px;
+	-khtml-border-radius: 12px;
+	-webkit-border-radius: 12px;
+	border-radius: 12px;
+}
+.gallery img{
+	width: 650px;
+	height: 150px;
+}
+.main_center{
+	height: 80%;
+	width: 60%;
+	padding: 20px;
+	-moz-border-radius: 12px;
+	-khtml-border-radius: 12px;
+	-webkit-border-radius: 12px;
+	border-radius: 12px;
+}
+.right {
+	margin-top:40px;
+	height: 550px;
+	/* width: 20%; */
+	float: left; /* 엘리먼트 부유 위치 지정  , float 을 사용해 div 를 수평으로 나란히
+							정렬하기 위해 사용 */
+}
+
+#footer {
+	text-align: center;
+	height: 80px;
+	clear: both; /* float 을 사용한 요소 아래에 위치 시킨다. */
+	border-top: 2px solid #D8D8D8;
+	background-color: #EAEAEA;
+}
+
+.main_center{
+	margin: 0 auto;
+	margin-top:30px;
+}
+
+.gallery {
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.search  {
+  font-family:나눔고딕;
+  text-align:left;
+  margin: 18px 0 0 0;
+  font-size: 12px;
+  width: 170px;
+}
+
+.leftmenu{
+	margin-left: 50px;
+	font-family: 나눔고딕;
+	font-size: 14px;
+}
+.loginmenu{
+	/* margin-left: px; */ 
+  font-family: 나눔고딕;
+	font-size: 17px;
+	list-style-type: none;
+}
+/* .dewTeble{
+	width: 800px;
+}
+table.dewTable th{
+	background-color: #fbe7ac;
+}
+ */
+table.dewTable {
+	width:800px;
+    border-collapse: collapse;
+    text-align: left;
+    line-height: 1.5;
+    font-family: 나눔고딕;
+    font-size: 15px;
+    color: #666666;
+
+}
+table.dewTable thead th {
+    padding: 10px;
+    font-weight: bold;
+    vertical-align: top;
+    color: #666666;
+    border-bottom: 3px solid #fbe762;
+    background-color: #ffffff;
+    
+}
+table.dewTable tr:hover{
+	background-color: #f8f8f8;
+}
+
+table.dewTable td {
+    width: auto;
+    padding: 10px;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+}
+
+a.list_font{
+	color:#FF4848;
+}
+a.hover_font{
+	color:#FF4848;
+}
+a.hover_font:hover{
+	color:#6724b9;
+	
+}
+
+table.dewErrorReportTable {
+	width:800px;
+    border-collapse: collapse;
+    text-align: left;
+    line-height: 1.5;
+    font-family: 나눔고딕;
+    font-size: 15px;
+    color: #666666;
+
+}
+table.dewErrorReportTable thead th {
+    padding: 10px;
+    font-weight: bold;
+    vertical-align: top;
+    color: #666666;
+    border-bottom: 3px solid #fbe762;
+    background-color: #ffffff;
+    
+}
+table.dewErrorReportTable tr:hover{
+	background-color: #f8f8f8;
+}
+
+table.dewErrorReportTable td {
+    width: auto;
+    padding: 10px;
+    vertical-align: top;
+    border-left: 1px solid #ccc;
+    border-right:1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}

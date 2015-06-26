@@ -28,7 +28,7 @@ $(document).ready(function(){
 				$.each(data,function(i,data){  
 					 c+="<tr><td>"+data.id+"</td>";
 					 c+="<td>"+data.commentDate+"</td>";
-					 c+="<td>"+data.content+"</td>";
+					 c+="<td class='contentTd'>"+data.content+"</td>";
 					 c+="<td><input type='hidden' id='commentNo' name='commentNo' value='"+data.commentNo+"'>"
 					 +"<input type='button' id='commentUpdateText' name='commentUpdateText' value='수정'>"
 					 +"<input type='button' id='commentDeleteBtn' name='commentDeleteBtn' value='삭제'>"+
@@ -139,11 +139,11 @@ $(document).ready(function(){
 		    		$.each(result,function(index,data){
 						 c+="<tr><td>"+data.id+"</td>";
 						 c+="<td>"+data.commentDate+"</td>";
-						 c+="<td>"+data.content+"</td>";
+						 c+="<td  class='contentTd'>"+data.content+"</td>";
 						 c+="<td><input type='hidden' id='commentNo' name='commentNo' value='"+data.commentNo+"'>"
 						 +"<input type='button' id='commentUpdateText' name='commentUpdateText' value='수정'>"
 						 +"<input type='button' id='commentDeleteBtn' name='commentDeleteBtn' value='삭제'>"+
-						 "<input type='button' id='commentReplyWriteView' name='commentReplyWriteView' value='댓글달기'>"+
+						 "<input type='button' id='commentReplyWriteView' name='commentReplyWriteView' value='답글'>"+
 						 "<input type='hidden' id='ref' name='ref' value='"+data.ref+"'>"+
 						 "<input type='hidden' id='reStep' name='reStep' value='"+data.reStep+"'>"+
 						 "<input type='hidden' id='relevel' name='relevel' value='"+data.relevel+"'></td>";
@@ -158,8 +158,18 @@ $(document).ready(function(){
 	//삭제 요청 버튼 누를 시
 	$("#deleteManager").click(function(){
 		var no = $("#no").val();
-		location.href="deleteManager.do?discussionNo="+no;
+		var id = $("#id").val();
+		location.href="deleteManager.do?discussionNo="+no+"&id="+id;
 		alert("삭제요청되었습니다.");
+	});
+	
+	//삭제 버튼 누를 시(관리자)
+	$("#deleteContent").click(function(){
+		var no = $("#no").val();
+		var q = confirm(no+"번 게시글을 삭제하시겠습니까?");
+		if(q){			
+		location.href="delete.do?discussionNo="+no;
+		}
 	});
 	
 });//ready
@@ -168,8 +178,13 @@ $(document).ready(function(){
  <div align="right">
  <br>
  <!-- 게시글 작성자와 로그인한 회원이 일치할 때 삭제요청 가능. -->
- <c:if test="${sessionScope.mvo.id == requestScope.dsvo.id}">
+
+
+<c:if test="${sessionScope.mvo.id != null}">
  <input type="button" id="deleteManager" name="deleteManager" value="삭제 요청">
+</c:if>
+ <c:if test="${sessionScope.mvo.memberLevel == 0}">
+ <input type="button" id="deleteContent" name="deleteContent" value="삭제"> 
  </c:if>
  </div>
  <br>
@@ -197,7 +212,7 @@ $(document).ready(function(){
 						<tr>
 							<td>${i.id}</td>
 							<td>${i.commentDate}</td>
-							<td colspan="3">${i.content}</td>
+							<td colspan="3" class="contentTd">${i.content}</td>
 							<td>
 								<input type="hidden" id="commentNo" name="commentNo" value="${i.commentNo}">
 								<input type="button" id="commentUpdateText" name="commentUpdateText" value="수정">
