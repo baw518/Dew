@@ -113,7 +113,7 @@ public class DiscussController {
 	@ResponseBody
 	public CommentVO updateDiscussCommentForm(HttpServletRequest request){
 		String no = request.getParameter("no");
-		System.out.println(no);
+		
 		CommentVO cmvo = discussService.findDiscussCommentByNo(no);
 		return cmvo;
 	}
@@ -130,7 +130,7 @@ public class DiscussController {
 		String index = request.getParameter("index");
 		String content=request.getParameter("content");
 		CommentVO cmvo = new CommentVO(no, content);
-		System.out.println(cmvo);
+		
 		discussService.updateDiscussComment(cmvo);
 		return "redirect:findDiscussContent.do?no="+index;
 	}
@@ -144,7 +144,7 @@ public class DiscussController {
 	public ModelAndView deleteDiscussComment(HttpServletRequest request){
 		String no = request.getParameter("no");
 		String index = request.getParameter("index");
-		System.out.println("no "+no);
+		
 		discussService.deleteDiscussComment(no);	
 		return new ModelAndView("redirect:findDiscussContent.do?no="+index);
 	}
@@ -168,10 +168,10 @@ public class DiscussController {
 	@RequestMapping("replyView.do")
 	@ResponseBody
 	public CommentVO replyView(HttpServletRequest request){
-		System.out.println("리프으으을");
+	
 		String no = request.getParameter("no");
 		CommentVO cmvo = discussService.findDiscussCommentByNo(no);
-		System.out.println("리플폼 +"+no);
+	
 		return cmvo;
 	}
 	/**
@@ -185,9 +185,9 @@ public class DiscussController {
 		int no = Integer.parseInt(request.getParameter("no"));
 		String type = request.getParameter("type");
 		String id = request.getParameter("id");
-		System.out.println(type);
 		discussionRequestVO vo = new discussionRequestVO(id, null, no);
 		discussService.insertRequest(vo);
+
 		return "redirect:report_showContentByNo.do?errorNo="+no+"&type="+type;
 	}
 	/**

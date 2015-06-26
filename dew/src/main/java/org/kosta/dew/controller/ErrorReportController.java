@@ -92,7 +92,7 @@ public class ErrorReportController {
 			model.addAttribute("exception", errorReportService.getContent(errorNo));
 			model.addAttribute("type", "ExceptionMessage");
 		}else{
-			model.addAttribute("error", errorReportService.getContent(errorNo));
+			model.addAttribute("errorcode", errorReportService.getContent(errorNo));
 			model.addAttribute("type", "ErrorCode");
 		}
 		return "errorReport_showContent";
