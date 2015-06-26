@@ -75,6 +75,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	 <insert id="deleteRequest" parameterType="drvo">
  	 insert into discussionRequest(id,separation,no) values(#{id},'삭제',#{no})
  	 </insert>
+ 	 <insert id="insertRequest" parameterType="drvo">
+ 	 insert into discussionRequest(id,separation,no) values(#{id},'등록',#{no})
+ 	 </insert>
 	<delete id="deleteDiscussRequest" parameterType="dsvo">
 		delete from discussionRequest where no=#{value}
 	</delete>

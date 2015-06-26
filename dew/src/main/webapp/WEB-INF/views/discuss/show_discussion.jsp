@@ -194,12 +194,8 @@ $(document).ready(function(){
  <!-- 게시글 작성자와 로그인한 회원이 일치할 때 삭제요청 가능. -->
 
 
-<c:if test="${sessionScope.mvo.id != null}">
- <input type="button" id="deleteManager" name="deleteManager" value="삭제 요청">
-</c:if>
- <c:if test="${sessionScope.mvo.memberLevel == 0}">
- <input type="button" id="deleteContent" name="deleteContent" value="삭제"> 
- </c:if>
+
+
  </div>
  <br>
  <table id="discussView"  class="dewTable" >
@@ -242,6 +238,7 @@ $(document).ready(function(){
 						</tr>
 					</c:forEach>
 				</table>
+				</td></tr>
 	<c:if test="${sessionScope.mvo.id != null}">
  	<tr>
 	<td colspan="5" align="center">
@@ -253,6 +250,14 @@ $(document).ready(function(){
 	</td> 
  	</tr> 
 	</c:if>
+	<tr><td colspan="5" align="center" style="border-bottom-color: #ffffff">
+	<c:if test="${sessionScope.mvo.id != null && sessionScope.mvo.memberLevel != 0}">
+ <input type="button" id="deleteManager" name="deleteManager" value="삭제 요청">
+</c:if>
+  <c:if test="${sessionScope.mvo.memberLevel == 0}">
+ <input type="button" id="deleteContent" name="deleteContent" value="삭제"> 
+ </c:if>
+ </td></tr>
  	</table>
 </div>
 
