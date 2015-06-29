@@ -88,3 +88,6 @@ select select e.error_no as errorNo  from error e, error_report er where e.error
 update (select e.exception_message as exceptionMessage, e.error_code as errorCode, er.discussion_status as discussionstatus from error e, error_report er where e.error_no = er.error_no) set discussionstatus=0 where  exceptionMessage='123'
 --  change exception Message discuss
 update (select e.exception_message as exceptionMessage, e.error_code as errorCode, er.discussion_status as discussionstatus from error e, error_report er where e.error_no = er.error_no) set discussionstatus=0 where  errorCode='123'
+
+delete from error e,error_report er where e.error_no = er.error_no 
+delete from error_report
