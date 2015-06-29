@@ -17,66 +17,71 @@
 <div class="container">
 
 <div class="main">
-<img src="images/a.png"  >
 
+<div>
+	<img alt="안보이시나요" src="${initParam.root }images/main.jpg" height="300px">
+</div>
+<br><br>
+<div style="float: left; width: 300px;">
+Exception Message <span style="margin-left: 100px"><a href="#" class="hover_font">more</a></span><hr>
+ <c:forEach items="#{errorReportExceptionList }" var="exception">
+ ${exception.exceptionMessage }<br>
+ </c:forEach>
+</div>
+<div style="float: left; margin-left: 30px; width: 300px;">
+Error Code <span style="margin-left: 150px"><a href="#" class="hover_font">more</a></span><hr>
+ <c:forEach items="#{errorReportErrorCodeList }" var="error">
+ ${error.errorCode }<br>
+ </c:forEach>
+</div>
 
+<div style="float: left; margin-top:50px ;width: 630px;">
+QnA Board <span style="margin-left: 480px" ><a href="#" class="hover_font">more</a></span><hr>
+ <c:forEach items="${qnaList }" var="qna">
+ <span style="width:100px">${qna.qnaNo } </span> <span style="margin-left:100px; width:400px;'">${qna.title }</span><br>
+ </c:forEach>
+ </div>
+<div style="float: left; margin-top:50px ; width: 630px;">
+Discuss Board <span style="margin-left: 460px" ><a href="#" class="hover_font">more</a></span><hr>
+ <c:forEach items="${discussList }" var="discuss">
+ <span style="width:100px">${discuss.discussionNo } </span> <span style="margin-left:100px; width:400px;">${discuss.title }</span><br>
+ </c:forEach>
+</div>
 
-<table border=1>
-	<tr>
-		<td style="margin-top: 0px;padding-top: 0px;">
-			<table >
-				<tr>
-					<td colspan="2" width="300px"><span class="index_th">최근
-							게시물</span>
-					<hr></td>
-				</tr>
-				
-			</table>
-		</td>
-		
-		<td></td>
-		
-		<td style="margin-top: 0px;padding-top: 0px;">
-		
-			<table >
-				<tr>
-					<td colspan="2" width="300px"><span class="index_th">인기
-							게시물</span>
-					<hr></td>
-				</tr>
-				
-			</table>
+<div style="float: left; margin-top:50px ; width: 630px;">
+Project Recruitment <span style="margin-left: 415px" ><a href="#" class="hover_font">more</a></span><hr>
+ <c:forEach items="${projectList }" var="project">
+ <span style="width:100px">${project.projectNo } </span> <span style="margin-left:100px; width:400px;">${project.projectName }</span><br>
+ </c:forEach>
+</div>
 
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<table style="float: left;">
-				<tr>
-					<td colspan="2" width="300px"><span class="index_th">자유
-							게시판<span style="margin-left: 180px"><a
-								href="board.inven?category=freeboard&contentType=1">more</a></span>
-					</span>
-					<hr></td>
-				</tr>
-				
-			</table>
-
-		</td>
-		
-		<td></td>
-		
-		<td></td>
-	</tr>
-</table></div>
-<div class="right">
-<h4 align="center">기여도랭킹</h4><h6 align="right"><a href="">more</a></h6>
-                        		<table class="table">
+<div style="float: left; margin-top:50px ; width: 630px;">
+Video Board <span style="margin-left: 470px" ><a href="#" class="hover_font">more</a></span><hr>
+ <c:forEach items="${videoList }" var="video">
+ <span style="width:100px">${video.videoNo } </span> <span style="margin-left:100px; width:400px;">${video.title }</span><br>
+ </c:forEach>
+</div>
+</div>
+<div class="right" style="width:150px;">
+기여도랭킹<a href="#" class="hover_font" style="font-size: 6px;" >more</a>
+                        		<%-- <table class="table">
 	                            	<c:forEach items="${requestScope.rankingList}" varStatus="num" var="r" begin="0" step="1" end="4">
                             			<tr>
                             				<td>${num.index+1}위</td><td>${r.id}</td><td>${r.score}</td>
                             			</tr>
-	                            	</c:forEach>
+	                            	</c:forEach> --%>
+	                            <table>
+	                            <c:forEach items="${rankingList }" varStatus="num" var="rank" begin="0" step="1" end="4">
+		                            <tr>	
+		                              	<td>
+		                            			${rank.RANKING }
+		                            	</td>
+		                            	<td>
+												${rank.ID }
+										</td>		
+		                            </tr>	
+	                            </c:forEach>	
+                        		
                         		</table>
 </div>
 </div>
