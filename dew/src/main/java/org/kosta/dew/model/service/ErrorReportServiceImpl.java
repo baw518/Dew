@@ -40,7 +40,7 @@ public class ErrorReportServiceImpl implements ErrorReportService {
 	}
 
 	@Override
-	public int reportWrite(ErrorReportVO vo, String type,String title) {
+	public int writeReport(ErrorReportVO vo, String type,String title) {
 		if (errorReportDAO.duplicateTitle(vo,type,title)== true){
 			return -1;
 		}

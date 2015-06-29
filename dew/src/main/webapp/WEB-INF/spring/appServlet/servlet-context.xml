@@ -3,7 +3,9 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 <!-- 어노테이션컨트롤러관련 설정
@@ -54,7 +56,7 @@ class="org.springframework.web.servlet.view.UrlBasedViewResolver">
 -->
 <bean id="uploadPath" class="java.lang.String">
 	<constructor-arg>
-		<value>C:\\Users\\KOST\\git\\Dew\\dew\\src\\main\\webapp\\upload\\</value>
+		<value>C:\\Users\\KOSTA\\git\\Dew\\dew\\src\\main\\webapp\\upload\\</value>
 	</constructor-arg>
 </bean>
 <bean id="beanNameViewResolver"
@@ -63,4 +65,8 @@ class="org.springframework.web.servlet.view.UrlBasedViewResolver">
 </bean>
 <!-- 파일다운로드를 위한 view를 설정 -->
 <bean name="downloadView" class="org.kosta.dew.controller.DownloadView"></bean>
+
+<!-- AOP 설정 -->
+<context:component-scan base-package="org.kosta.dew"/>
+<aop:aspectj-autoproxy/>
 </beans>

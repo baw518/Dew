@@ -84,3 +84,7 @@ select count(*) from ERROR_REPORT er, ERROR e where e.error_no = er.error_no and
 select * from error_report;
 
 select select e.error_no as errorNo  from error e, error_report er where e.error_no = er.error_no and er.id ='q' and e.exception_message = '123'
+--  change exception Message discuss
+update (select e.exception_message as exceptionMessage, e.error_code as errorCode, er.discussion_status as discussionstatus from error e, error_report er where e.error_no = er.error_no) set discussionstatus=0 where  exceptionMessage='123'
+--  change exception Message discuss
+update (select e.exception_message as exceptionMessage, e.error_code as errorCode, er.discussion_status as discussionstatus from error e, error_report er where e.error_no = er.error_no) set discussionstatus=0 where  errorCode='123'

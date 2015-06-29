@@ -4,5 +4,5 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script type="text/javascript">
 alert("로그인 세션이 풀렸습니다. 로그인을 다시 해주세요.");
-location.href="login_form.do";
+location.href="home.do";
 </script>

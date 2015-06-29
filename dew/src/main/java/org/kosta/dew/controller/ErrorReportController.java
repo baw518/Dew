@@ -102,7 +102,7 @@ public class ErrorReportController {
 		int errorNo = -1 ;
 		if (command.equals("register")){
 			// System.out.println(type);
-			errorNo = errorReportService.reportWrite(vo,type,title);
+			errorNo = errorReportService.writeReport(vo,type,title);
 			if(errorNo == -1 ){
 				return "errorReport_registerFail";
 			}
@@ -122,7 +122,7 @@ public class ErrorReportController {
 	
 	@RequestMapping("report_update.do")
 	public String reportUpdate(ErrorReportVO vo, String type,String title){
-		int errorNo = errorReportService.reportWrite(vo,type,title);
+		int errorNo = errorReportService.writeReport(vo,type,title);
 		return "redirect:/report_write_result.do?errorNo="+errorNo;
 	}
 	
