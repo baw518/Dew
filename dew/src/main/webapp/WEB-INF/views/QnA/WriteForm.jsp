@@ -56,31 +56,35 @@ $(document).ready(function(){
 	});
 });
 </script>
+<link rel="stylesheet" href="${initParam.root}/css/dew.css" type="text/css">
+<div class="main">
 <br><br>
 <form action="QnA_Write.do" method="post" id="writeForm">
-	<h2>질문글쓰기</h2>
-	 <table class="table">
+	<h1 align="center">질문글쓰기</h1>
+	 <table class="dewTable">
+	 <thead>
 		  <tr>
-		  	<td>분류 :</td>
-		  	<td>
+		  	<th>분류 :</th>
+		  	<th>
 				<select id="groupNo" name="groupNo"> 
 					<c:forEach items="${requestScope.groupList}" var="i">
 						<option value="${i.qnAGroupNo}">${i.qnAGroupName }</option>
 					</c:forEach>
 				</select>
-			</td>
-			<td>아이디</td>
-		  	<td><input type="text" id="id" name="id" value="${sessionScope.mvo.id}" readonly></td>
-		  	<td>포인트</td>
-		  	<td ><input type="text" id="point" name="point" ></td>
+			</th>
+			<th>아이디</th>
+		  	<th><input type="text" id="id" name="id" value="${sessionScope.mvo.id}" readonly></th>
+		  	<th>포인트</th>
+		  	<th ><input type="text" id="point" name="point" ></th>
 		  </tr>
 		  <tr>
-		  	<td>제목</td>
-		  	<td colspan="4">
+		  	<th>제목</th>
+		  	<th colspan="4">
 		  		<input type="text" id="title" name="title" size="40">
-		  	</td>
+		  	</th>
 			<td><div id="pointView">사용가능한 포인트 : ${sessionScope.mvo.point}</div></td>
 		  </tr>
+		  </thead>
 		  <tr>
 		  	<td colspan="6" align="left">
 		   	&nbsp;&nbsp;
@@ -88,10 +92,11 @@ $(document).ready(function(){
 		  	</td>	
 		  </tr> 
 		  <tr>
-		  	<td colspan="6" align="center" >
+		  	<td colspan="6" align="center"  style="border-bottom-color: #ffffff">
 			    <img class="action" src="${initParam.root}images/qna_write_complete.jpg" id="writeBtn">
 			    <input type="button" id="cancel" value="작성취소">
 		  	</td>  
 		  </tr>
 	 </table>
 </form>
+</div>
