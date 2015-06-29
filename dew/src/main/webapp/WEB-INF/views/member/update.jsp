@@ -17,7 +17,7 @@
 	<thead>
 		<tr>
 		<th style="border-bottom: 1px solid #cccccc">회원 이미지</th>
-		<td><img src="${initParam.root}upload/${sessionScope.mvo.id}.jpg" width="150px"><br><input type="file" name="memberImage"></td>
+		<td><img src="${initParam.root}upload/img/${sessionScope.mvo.id}.jpg" width="150px"><br><input type="file" name="memberImage"></td>
 		</tr>
 	</thead>
 	<thead>

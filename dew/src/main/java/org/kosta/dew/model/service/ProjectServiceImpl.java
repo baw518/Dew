@@ -99,7 +99,6 @@ public class ProjectServiceImpl implements ProjectService{
 	@Override
 	public boolean joinCheck(CommentVO cvo) {
 		boolean flag=false;
-		System.out.println(projectDAO.joinCheck(cvo));
 		if(projectDAO.joinCheck(cvo)!=null)
 			flag=true;
 		return  flag;

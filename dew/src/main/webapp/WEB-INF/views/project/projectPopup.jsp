@@ -43,7 +43,7 @@
 <tr><th colspan="3">팀원현황</th></tr>
 <c:forEach items="${requestScope.cvo }" var="c">
 <tr>
-	<td width="80px"><img src="${initParam.root }upload/${c.id }.jpg" width="80px" height="80px"></td><td>${c.id }</td><td>${c.projectSub }</td>
+	<td width="80px"><img src="${initParam.root }upload/img/${c.id }.jpg" width="80px" height="80px"></td><td>${c.id }</td><td>${c.projectSub }</td>
 </tr>
 <input type="hidden" value="${c.boardNo }" id="projectNo">
 </c:forEach>
