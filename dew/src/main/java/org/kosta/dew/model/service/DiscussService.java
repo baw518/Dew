@@ -45,7 +45,7 @@ public interface DiscussService {
 
 	public abstract void insertRequest(discussionRequestVO vo);
 
-	public abstract void InsertDiscussRequest(String no);
+	public abstract void InsertDiscussRequest(int no);
 
 	public abstract void insert(int no);
 

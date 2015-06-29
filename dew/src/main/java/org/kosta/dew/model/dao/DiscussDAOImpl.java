@@ -124,7 +124,7 @@ public class DiscussDAOImpl implements DiscussDAO {
 		sqlSessionTemplate.insert("discuss.insertRequest",vo);
 	}
 	@Override
-	public void insertDiscussRequest(String no) {
+	public void insertDiscussRequest(int no) {
 		// TODO Auto-generated method stub
 		sqlSessionTemplate.delete("discuss.insertDiscussRequest",no);
 	}

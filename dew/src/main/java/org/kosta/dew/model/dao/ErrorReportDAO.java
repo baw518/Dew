@@ -18,5 +18,6 @@ public interface ErrorReportDAO {
 	List<ErrorReportVO> findWord(String startWord, String endWord,String containsWord,String type);
 	int reportUpdate(ErrorReportVO vo);
 	boolean duplicateTitle(ErrorReportVO vo, String type, String title);
+	void updateDiscussionStatus(int errorNo);
 
 }

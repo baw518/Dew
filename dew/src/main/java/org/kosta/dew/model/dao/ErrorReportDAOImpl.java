@@ -133,6 +133,12 @@ public class ErrorReportDAOImpl implements ErrorReportDAO {
 		}
 	}
 
+	@Override
+	public void updateDiscussionStatus(int errorNo) {
+		// TODO Auto-generated method stub
+		sqlSessionTemplate.update("errorReport.updateDiscussionStatus",errorNo);
+	}
+
 
 
 

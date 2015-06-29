@@ -102,7 +102,9 @@ insert into error(error_no,error_code) values(error_no.nextval,#{value})
 insert into error_report(error_report_no,error_no,id,error_report_date,content)
 values(error_report_no.nextval,error_no.currval,#{id},sysdate,#{content})
 </insert>
-
+<update id="updateDiscussionStatus" parameterType="int">
+update (select e.error_no as errorNo , e.exception_message as exceptionMessage, e.error_code as errorCode, er.discussion_status as discussionstatus from error e, error_report er where e.error_no = er.error_no) set discussionstatus=1 where errorNo=#{value}
+</update>
  </mapper> 		
  
  

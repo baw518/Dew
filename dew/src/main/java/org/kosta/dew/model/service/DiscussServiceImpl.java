@@ -139,7 +139,7 @@ public class DiscussServiceImpl implements DiscussService {
 		return flag;
 	}
 	@Override
-	public void InsertDiscussRequest(String no) {
+	public void InsertDiscussRequest(int no) {
 		// TODO Auto-generated method stub
 		discussDAO.insertDiscussRequest(no);
 	}
@@ -147,13 +147,28 @@ public class DiscussServiceImpl implements DiscussService {
 	 * 토론방 등록요청페이지(관리자)에서 등록
 	 * - report 업데이트
 	 * - discuss 인설트
+	 * 1.no로 에러 가져오기
+	 * 2. 가져온 에러vo 업데이트
+	 * 3. 가져온 에러vo로 insert
+	 * exceptionMessage/errorCode
 	 */
 	@Override
 	public void insert(int no) {
 		// TODO Auto-generated method stub
 		
 		ErrorReportVO vo = errorReportDAO.getContent(no);
-		System.out.println(vo);
+		//토론상태 업데이트
+		errorReportDAO.updateDiscussionStatus(vo.getErrorNo());
+		//제목구해오기
+		String title = null;
+		if(vo.getExceptionMessage()!=null){
+			title=vo.getExceptionMessage();
+		}else if(vo.getErrorCode()!=null){
+			title=vo.getErrorCode();
+		}
+		DiscussVO dsvo = new DiscussVO(vo.getId(), title, vo.getContent(), title);
+		//토론방 insert
+		discussDAO.registerDiscussion(dsvo);
 	}
 
 
