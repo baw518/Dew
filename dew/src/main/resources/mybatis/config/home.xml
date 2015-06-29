@@ -67,7 +67,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			select exceptionMessage
 			from(select distinct(e.exception_message) as exceptionMessage, er.error_report_date as reportDate   
 					from error e , error_report er 
-					where e.error_no = er.error_no and e.error_code is null 
+					where e.error_no = er.error_no and e.error_code is null or e.exception_message is not null
 					order by er.error_report_date desc)
 			where rownum<=5
 		]]>
