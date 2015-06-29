@@ -1,6 +1,7 @@
 package org.kosta.dew.controller;
 
 import java.io.File;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -109,8 +110,9 @@ public class VideoController {
 		return "redirect:video_listView.do";
 	}
 	@RequestMapping("video_updateView.do")
-	public String updateView(Model model,int no) {
+	public String updateView(Model model,int no,List path) {
 		VideoVO vo = videoService.showContentNoHit(no);
+		System.out.println( "path : " + path);
 		model.addAttribute("vvo", vo);
 		return "video_updateView";
 	}
