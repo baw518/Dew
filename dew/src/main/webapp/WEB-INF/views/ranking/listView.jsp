@@ -42,10 +42,11 @@ $(document).ready(function(e){
 </c:forEach>
 	
 <br>
+<center>
 <table class="table">
 	<thead>
 		<tr>
-			<td class="ranking">순위</td><td class="id">아이디</td><td class="score">기여도</td>
+			<td class="ranking" width="100">순위</td><td class="id" width="150">아이디</td><td class="score" width="100">기여도</td>
 		</tr>
 	</thead>
 	
@@ -64,6 +65,6 @@ $(document).ready(function(e){
 		</c:forEach>
    	</tbody>
 </table>
-
+</center>
 <div class="top"><a href="#"><img src="${initParam.root}images/top.jpg" /></a></div>
 <div style="width:10px; height:300px"></div>
