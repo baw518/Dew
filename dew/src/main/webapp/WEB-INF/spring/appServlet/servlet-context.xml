@@ -56,7 +56,7 @@ class="org.springframework.web.servlet.view.UrlBasedViewResolver">
 -->
 <bean id="uploadPath" class="java.lang.String">
 	<constructor-arg>
-		<value>C:\\Users\\KOSTA\\git\\Dew\\dew\\src\\main\\webapp\\upload\\</value>
+		<value>C:\\Users\\KOSTA_00_004\\git\\Dew\\dew\\src\\main\\webapp\\upload\\</value>
 	</constructor-arg>
 </bean>
 <bean id="beanNameViewResolver"
