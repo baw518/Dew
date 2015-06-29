@@ -238,7 +238,7 @@ public class MemberController {
 			}
 			}
 			memberService.update(vo);
-			session.setAttribute("vo", vo);
+			session.setAttribute("mvo", vo);
 		}
 
 		return new ModelAndView("member_update_result");
