@@ -88,68 +88,42 @@
 	 	    });
 	 	  });
 </script>
-	
+	<link rel="stylesheet" href="css/project.css">
 	<link rel="stylesheet" href="css/dew.css">
 <body>
 <div class="main" align="center">
 <h3 id="projectRegisterLogo">Project</h3>
 <div id="viewForm" >
 <div id="view">
-
-
- <table class="dewTable">
-     <c:choose>
+<table class="dewTable" style="width: 500px" >
+   <c:choose>
     <c:when test="${requestScope.pvo.achieve=='의뢰' }">
-<thead>
-	<tr>
-		<th>${requestScope.pvo.projectName}</th>
-		<th>${requestScope.pvo.id}</th>
-		<th>${requestScope.pvo.project_date}</th>
-	</tr>
-	<tr>
-		<td colspan="7">${requestScope.pvo.content}<br><c:choose><c:when test="${requestScope.pvo.deadline!='noImage' }">
-<img src="${initParam.root}upload/${requestScope.pvo.deadline}" width="500px" style="padding: 5px"> </c:when></c:choose></td>
-	</tr>
-</thead>
+    <tr><td colspan="2">프로젝트명</td><td colspan="2">${requestScope.pvo.projectName}</td></tr>
+<tr><td colspan="2">작성자</td><td colspan="2">${requestScope.pvo.id}</td></tr>
+<tr><td colspan="2">작성일</td><td colspan="2">${requestScope.pvo.project_date}</td></tr>
+<tr><td colspan="4" align="center" style="border-bottom: 3px solid #fbe762"><b>내용</b></td></tr>
+<tr><td colspan="4"> <br>${requestScope.pvo.content}<br><c:choose><c:when test="${requestScope.pvo.deadline!='noImage' }">
+<img src="${initParam.root}upload/${requestScope.pvo.deadline}" width="500px" style="padding: 5px"> </c:when></c:choose></td></tr>
     </c:when>
     <c:otherwise>
-    <thead>
-	<tr>
-		<th>프로젝트명 : </th>
-		<th>${requestScope.pvo.projectName}</th>
-		<th>작성자 : </th>
-		<th>${requestScope.pvo.id}</th>
-		<th>${requestScope.pvo.project_date}</th>
-		<th>${requestScope.pvo.point}<b>point</b></th>
-	</tr>
-	<tr>
-		
-		<tr>
-		<th>분야</th>
-		<th colspan="3">
-		<c:forEach items="${requestScope.pvo.departVO}" var="dvo" varStatus="i">
-		${dvo.subject} (${dvo.mans})
-		</c:forEach>
-		</th>
-		<c:choose><c:when test="${requestScope.pvo.achieve=='모집중' }">
-		<th>모집기간</th>
-			<th><span id="date">${requestScope.pvo.deadline}</span></th>
-		</c:when>
-		<c:when test="${requestScope.pvo.achieve=='진행중' }">
-		<th>진행률</th>
-		<th><div id="progressbar"></div></th>		
-		</c:when><c:otherwise></c:otherwise>
+    <tr><td colspan="2"  style="border-right: 1px solid #ccc">프로젝트명</td><td colspan="2">${requestScope.pvo.projectName}</td></tr>
+<tr><td colspan="2" style="border-right: 1px solid #ccc">작성자</td><td colspan="2">${requestScope.pvo.id}</td></tr>
+<tr><td colspan="2" style="border-right: 1px solid #ccc">작성일</td><td colspan="2">${requestScope.pvo.project_date}</td></tr>
+<c:forEach items="${requestScope.pvo.departVO}" var="dvo" varStatus="i">
+<tr><td style="border-right: 1px solid #ccc">분야</td><td style="border-right: 1px solid #ccc">${dvo.subject}</td>
+<td style="border-right: 1px solid #ccc">인원</td><td>${dvo.mans}<%-- <span id="mans${i.index }"></span> --%></td></tr>
+</c:forEach>
+<tr><td colspan="2" style="border-right: 1px solid #ccc">배당포인트</td><td colspan="2">${requestScope.pvo.point}<b>point</b></td></tr>
+<c:choose><c:when test="${requestScope.pvo.achieve=='모집중' }"><tr><td colspan="2">모집기간</td>
+<td  colspan="2"><span id="date">${requestScope.pvo.deadline}</span></td></tr></c:when>
+<c:when test="${requestScope.pvo.achieve=='진행중' }"><tr><td colspan="2" style="border-right: 1px solid #ccc">진행률</td><td colspan="2">
+<div id="progressbar"></div></td></tr></c:when><c:otherwise></c:otherwise>
 </c:choose>
-		</tr>
-	<tr>
-		<td colspan="7">${requestScope.pvo.content}</td>
-	</tr>
-</thead>
-    
+<tr><td colspan="4" align="center" style="border-bottom: 3px solid #fbe762"><b>내용</b></td></tr>
+<tr><td colspan="4"> <br>${requestScope.pvo.content}</td></tr>
     </c:otherwise>
     </c:choose>
-  </table>
-
+</table>
 <br>
 <span id="joinComment"></span>
 <input type="button" value="목록" id="backBtn">
@@ -203,7 +177,54 @@
   </div>
   <div id="space"></div>
   
-
+ <table class="dewTable">
+     <c:choose>
+    <c:when test="${requestScope.pvo.achieve=='의뢰' }">
+<thead>
+	<tr>
+		<th>${requestScope.pvo.projectName}</th>
+		<th>${requestScope.pvo.id}</th>
+		<th>${requestScope.pvo.project_date}</th>
+	</tr>
+	<tr>
+		<td colspan="7">${requestScope.pvo.content}<br><c:choose><c:when test="${requestScope.pvo.deadline!='noImage' }">
+<img src="${initParam.root}upload/${requestScope.pvo.deadline}" width="500px" style="padding: 5px"> </c:when></c:choose></td>
+	</tr>
+</thead>
+    </c:when>
+    <c:otherwise>
+    <thead>
+	<tr>
+		<th>${requestScope.pvo.projectName}</th>
+		<th>${requestScope.pvo.id}</th>
+		<th>${requestScope.pvo.project_date}</th>
+		<th>${requestScope.pvo.point}<b>point</b></th>
+	</tr>
+	<tr>
+		
+		<c:forEach items="${requestScope.pvo.departVO}" var="dvo" varStatus="i">
+		<th>분야</th><th>${dvo.subject}</th>
+		<th>인원</th><th>${dvo.mans}</th>
+		</c:forEach>
+			<c:choose><c:when test="${requestScope.pvo.achieve=='모집중' }">
+		<th>모집기간</th>
+		<th><span id="date">${requestScope.pvo.deadline}</span></th>
+		</c:when>
+		<c:when test="${requestScope.pvo.achieve=='진행중' }">
+		<th>진행률</th>
+		<th><div id="progressbar"></div></th>		
+		</c:when><c:otherwise></c:otherwise>
+</c:choose>
+	</tr>
+	<tr>
+		<td colspan="7">${requestScope.pvo.content}<c:choose><c:when test="${requestScope.pvo.deadline!='noImage' }">
+<img src="${initParam.root}upload/${requestScope.pvo.deadline}" width="500px" style="padding: 5px"> </c:when></c:choose></td>
+	</tr>
+</thead>
+    
+    </c:otherwise>
+    </c:choose>
+  </table>
   
   </div>
 </body>
