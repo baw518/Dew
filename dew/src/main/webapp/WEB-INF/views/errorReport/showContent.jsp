@@ -68,10 +68,10 @@ ${exception.date }
 </td>
 </tr>
 </thead>
-<tr><td colspan="4">
-<pre>
+<tr><td colspan="4" >
+
 ${exception.content }
-</pre>
+
 </td></tr>
 
 </c:if>
@@ -95,15 +95,15 @@ ${error }
 	</th>
 	</tr>
 	</thead>
-	<tr><td colspan="4">
-	<pre>
+	<tr ><td colspan="4" >
+
 	${errorcode.content }
-	</pre>
+
 	</td></tr>
 
 </c:if>
 <tr>
-<td align="right" colspan="4">
+<td align="right" colspan="4" style="border-bottom-color: #ffffff">
 
 <input type="button" value="관련글" id="reference">
 

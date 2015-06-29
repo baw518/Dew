@@ -14,9 +14,9 @@
 <form method="post" action="report_write.do">
 <table class="dewTable">
 <thead>
-<tr><th width="100"><input type="radio" name="type" value="exception">Exception<br>
+<tr><th width="150"  align="center"><input type="radio" name="type" value="exception">Exception<br>
 <input type="radio" name="type" value="errorcode">ErrorCode</th>
-<th><input type="text" name="title" width="500" style="width: 80%; margin-left: 20px;"></th></tr>
+<th ><input type="text" name="title" width="500" style="width: 80%; margin-left: 20px; height: 70%; margin-top: 8px"></th></tr>
 </thead>
 <tr><td align="center" colspan="2">내용 :<pre> <TEXTAREA name="content" rows="15" cols="100"></TEXTAREA></pre></td></tr>
 <tr><td align="right" colspan="2" style="border-bottom-color: #ffffff">

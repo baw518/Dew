@@ -37,11 +37,11 @@
 </c:forEach>
 </tbody>
 </table>
-<p class="paging" align="center">
+<p class="page" align="center">
 <c:set var="pb" value="${requestScope.plvo.pagingBean}"></c:set>
 <c:if test="${pb.previousPageGroup}">
 	<a href="project_listView.do?pageNo=${pb.startPageOfPageGroup-1}">
-	◀ </a>	
+	<img src="${initParam.root}images/left.jpg" width="21" height="21"> </a>	
 	</c:if>
 <c:forEach var="i" begin="${pb.startPageOfPageGroup}" 
 	end="${pb.endPageOfPageGroup}">
@@ -56,7 +56,7 @@
 	</c:forEach>
 	<c:if test="${pb.nextPageGroup}">
 	<a href="project_listView.do?pageNo=${pb.endPageOfPageGroup+1}">
-	▶</a>
+	<img src="${initParam.root}images/right.jpg" width="21" height="21"></a>
 	</c:if>
 	</p>
 </div>

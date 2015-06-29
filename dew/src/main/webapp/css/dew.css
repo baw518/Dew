@@ -302,3 +302,9 @@ table.dewTable td.contentTd{
 .page a:HOVER{
 	color:#66afe9;
 }
+
+table.dewTable td.contentTd{
+	width:300px;
+	table-layout:fixed; 
+	word-break:break-all;
+}
