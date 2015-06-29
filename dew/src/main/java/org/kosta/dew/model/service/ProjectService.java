@@ -9,7 +9,7 @@ import org.kosta.dew.model.vo.ProjectVO;
 
 public interface ProjectService {
 
-	void registerProject(ProjectVO pvo, DepartVO dvo);
+	void writeProject(ProjectVO pvo, DepartVO dvo);
 
 	ProjectVO getProjectContent(String projectNo);
 
@@ -63,7 +63,7 @@ public interface ProjectService {
 
 	ProjectListVO makeReqProjectListVO(String pageNo);
 
-	void registerReqProject(ProjectVO pvo);
+	void writeReqProject(ProjectVO pvo);
 
 	List<String> findChatRecordByNo(int projectNo);
 

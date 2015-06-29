@@ -15,9 +15,6 @@ import org.springframework.stereotype.Repository;
 public class MemberDAOImpl implements MemberDAO {
 	@Resource
 	private SqlSessionTemplate sqlSessionTemplate;
-	/* (non-Javadoc)
-	 * @see org.kosta.dew.model.dao.MemberDAO#login(org.kosta.dew.model.vo.MemberVO)
-	 */
 	@Override
 	public MemberVO login(MemberVO vo){
 		return sqlSessionTemplate.selectOne("member.login",vo);

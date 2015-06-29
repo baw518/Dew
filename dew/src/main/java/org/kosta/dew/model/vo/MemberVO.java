@@ -1,14 +1,24 @@
 package org.kosta.dew.model.vo;
 
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class MemberVO {
+	@Size(min=4,max=10) 
 	private String id;
+	@NotEmpty
 	private String memberName;
+	@Size(min=4,max=10)
 	private String memberPassword;
+	@Size(min=8,max=8)
 	private String birthDate;
 	private String memberLevel;
 	private int score;
 	private int point;
+	@NotEmpty
 	private String passwordQuestion;
+	@NotEmpty
 	private String passwordAnswer;
 	public MemberVO() {
 		super();

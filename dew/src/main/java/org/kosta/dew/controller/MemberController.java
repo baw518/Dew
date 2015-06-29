@@ -12,14 +12,16 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.kosta.dew.model.service.MemberService;
 import org.kosta.dew.model.vo.MemberVO;
-import org.kosta.dew.model.vo.UserTypeVO;
 import org.kosta.dew.model.vo.discussionRequestVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -40,7 +42,6 @@ public class MemberController {
 		// 카운터가 0나오면 탈퇴한 회원이 아니다 1나오면 탈퇴한 회원
 		vo = memberService.login(vo);
 		if (count == 0) {
-			System.out.println("로그인.do vo = " + vo);
 			if (vo != null) {
 				HttpSession session = request.getSession();
 				session.setAttribute("mvo", vo);
@@ -60,7 +61,19 @@ public class MemberController {
 		session.invalidate();
 		return "redirect:home.do";
 	}
-	@RequestMapping("member_register.do")
+
+	/*@RequestMapping(value="member_registerView.do",method=RequestMethod.GET)
+	public ModelAndView registerForm(HttpServletRequest request,
+			UserTypeVO uvo, String radio) {
+		List<UserTypeVO> list = memberService.usertype(uvo);
+		return new ModelAndView("member_registerView", "list", list);
+	}*/
+	@RequestMapping(value="member_registerView.do",method=RequestMethod.GET)
+	public ModelAndView registerForm() {
+		return new ModelAndView("member_registerView", "memberVO", new MemberVO());
+	}
+
+	/*@RequestMapping("member_register.do")
 	public String register(HttpServletRequest request,
 			HttpServletResponse response, MemberVO vo, UserTypeVO uvo,MultipartFile image) {
 		uvo = memberService.findName(uvo);
@@ -91,18 +104,40 @@ public class MemberController {
 			}
 		}
 		return "member_register_result";
+	}*/
+	@RequestMapping(value="member_register.do",method=RequestMethod.POST)
+	public String register(@Valid MemberVO memberVO, BindingResult result, MultipartFile image) {
+		if(result.hasErrors()){
+			return "member_registerView";
+		}
+		int n=0;
+		if(!(image.isEmpty())){
+			try {
+				image.transferTo(new File(path+"img/"+memberVO.getId()+".jpg"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}else{
+			FileInputStream fis=null;
+			FileOutputStream fos=null;
+			try {
+				fis=new FileInputStream(path+"img/"+"noImage.jpg");
+				fos=new FileOutputStream(path+"img/"+memberVO.getId()+".jpg");
+				byte buffer[]=new byte[1024];
+				while((n=fis.read(buffer))!=-1){
+					fos.write(buffer,0,n);
+					fos.flush();
+				}
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		memberService.register(memberVO);
+		return "member_register_result";
 	}
-
-
-	@RequestMapping("member_registerView.do")
-	public ModelAndView registerForm(HttpServletRequest request,
-			UserTypeVO uvo, String radio) {
-
-		List<UserTypeVO> list = memberService.usertype(uvo);
-
-		return new ModelAndView("member_registerView", "list", list);
-	}
-
+	
 	@RequestMapping("member_findidView.do")
 	public String findbyidView() {
 
@@ -113,10 +148,8 @@ public class MemberController {
 	public ModelAndView finbyid(HttpServletRequest request, MemberVO vo,
 			HttpServletResponse response) throws UnsupportedEncodingException {
 		ModelAndView mv = null;
-
 		vo = memberService.findbyid(vo);
 		if (vo != null) {
-
 			mv = new ModelAndView("member_findbyid_result", "vo", vo);
 		} else {
 			mv = new ModelAndView("member_findbyid_fail");
@@ -154,11 +187,7 @@ public class MemberController {
 
 	@RequestMapping("member_deletemember.do")
 	public ModelAndView deletemember(HttpServletRequest request, MemberVO vo) {
-		System.out.println(request.getAttribute("id"));
-
 		memberService.deletemember(vo);
-
-		System.out.println("dleteo vo = " + vo);
 		HttpSession session = request.getSession(false);
 		if (session != null) {// 세션이 연결되어있을때
 
@@ -194,7 +223,7 @@ public class MemberController {
 			if(memberImage.getOriginalFilename()!=""){
 			try {
 				byte[] imageData=memberImage.getBytes();
-				fos=new FileOutputStream(path+vo.getId()+".jpg");
+				fos=new FileOutputStream(path+"img/"+vo.getId()+".jpg");
 				fos.write(imageData);
 			} catch (IOException e) {
 				e.printStackTrace();

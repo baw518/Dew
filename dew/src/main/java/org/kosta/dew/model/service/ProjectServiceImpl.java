@@ -17,7 +17,7 @@ public class ProjectServiceImpl implements ProjectService{
 	private ProjectDAO projectDAO;
 
 	@Override
-	public void registerProject(ProjectVO pvo,DepartVO dvo){
+	public void writeProject(ProjectVO pvo,DepartVO dvo){
 		projectDAO.registerProject(pvo, dvo);
 	}
 	@Override
@@ -154,7 +154,7 @@ public class ProjectServiceImpl implements ProjectService{
 		 return new ProjectListVO(plist,pagingBean);
 	}
 	@Override
-	public void registerReqProject(ProjectVO pvo) {
+	public void writeReqProject(ProjectVO pvo) {
 		projectDAO.registerReqProject(pvo);
 	}
 	@Override

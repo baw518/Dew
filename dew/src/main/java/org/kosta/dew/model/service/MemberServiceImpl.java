@@ -11,15 +11,11 @@ import org.kosta.dew.model.vo.PagingBean;
 import org.kosta.dew.model.vo.UserTypeVO;
 import org.kosta.dew.model.vo.discussionRequestVO;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class MemberServiceImpl implements MemberService {
-	@Resource(name="memberDAOImpl")
+	@Resource
 	private MemberDAO memberDAO;
-	/* (non-Javadoc)
-	 * @see org.kosta.dew.model.service.MemberService#login(org.kosta.dew.model.vo.MemberVO)
-	 */
 	@Override
 	public MemberVO login(MemberVO vo){
 		return memberDAO.login(vo);
