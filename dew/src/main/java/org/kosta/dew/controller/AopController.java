@@ -14,7 +14,11 @@ import org.kosta.dew.model.vo.QnAVO;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
-
+/**
+ * aop
+ * @author KOSTA
+ *
+ */
 //context-componet scan 대상이 되도록 하여 컨테이너가 bean을 생성하도록 한다. 
 @Component
 //Aspect 어노테이션을 명시하여 공통기능정의 빈임을 컨테이너에게 알린다.
@@ -24,8 +28,10 @@ public class AopController {
 	@Resource
 	private AopService aopService;
 	
-	// aop adview를 before로 명시하여 대상 메서드 실행전에 아래 공통기능이 수행되도록 하고 
-	// pointcut은 execution으로 명시하여 ServiceImpl클래스의 write로 시작되는 매서드가 적용대상이 되도록 한다.
+	/**
+	 * 글등록할경우 회원의 기여도가 1씩 증가
+	 * @param point
+	 */
 	@After("execution(public * org.kosta..*ServiceImpl.write*(..))")
 	public void afterMemberContribution(JoinPoint point){
 		Object param[] = point.getArgs();
@@ -51,5 +57,7 @@ public class AopController {
 		}
 		aopService.memberUpContribution(id);
 	}
+	
+	
 
 }
