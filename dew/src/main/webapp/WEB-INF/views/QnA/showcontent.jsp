@@ -305,7 +305,7 @@ $(document).ready(function(){
 	<tr>
 		<td colspan="4">
 			
-				<table class="table" align="center" id="commentView">
+				<table class="dewTable" align="left" id="commentView">
 					<c:forEach items="${requestScope.cmvo}" var="i" varStatus="index">
 						<tr>
 							<td class="commentId">${i.id}</td>
@@ -333,13 +333,13 @@ $(document).ready(function(){
 					</c:forEach>
 				</table>
 			
-			<table class="table">
+			<table class="table" align="left">
 				<tr>
 					<td colspan="3"></td>
 				<tr>
 				<c:if test="${sessionScope.mvo ne null}">
 					<tr>
-						<td colspan="2"><input type="text" name="content" id="content" size="150"></td>
+						<td colspan="2"><input type="text" name="content" id="content" size="100"></td>
 						<td align="left">
 							<input type="button" name="commentWriteBtn" id="commentWriteBtn" value="댓글등록">
 							<input type="hidden" name="id" id="id" value="${sessionScope.mvo.id }">
@@ -363,7 +363,7 @@ $(document).ready(function(){
 				<input type="button" value="글삭제" name="delete" id="delete">
 			</c:if>
 		 </td>
-		 <td></td>
+		 
 	</tr>
 </table>
 </div>
