@@ -19,7 +19,9 @@
    }
 </script>
 <link rel="stylesheet" href="css/project.css">
+<link rel="stylesheet" href="css/dew.css">
 <body>
+<div class="main">
 <h3 id="projectRegisterLogo">Project Request</h3>
 <div id="registerProjectForm" >
 <form action="project_reqRegister.do" method="post" class="regform" onsubmit="return checkRegit()" enctype="multipart/form-data" >
@@ -31,5 +33,6 @@
 <hr>
 <input type="submit" value="등록" id="regProBtn" id="img">
 </form>
+</div>
 </div>
 </body>

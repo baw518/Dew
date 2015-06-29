@@ -45,7 +45,9 @@
   });
   </script>
 <link rel="stylesheet" href="css/project.css">
+<link rel="stylesheet" href="css/dew.css">
 <body>
+<div class="main">
 <h3 id="projectRegisterLogo">Project Register</h3>
 <div id="registerProjectForm" >
 <form action="project_register.do" method="post" class="regform" onsubmit="return checkRegit()">
@@ -75,5 +77,6 @@
 내용<textarea rows="2" cols="28" name="content" id="content"></textarea><hr>
 <input type="submit" value="등록" id="regProBtn">
 </form>
+</div>
 </div>
 </body>

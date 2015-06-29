@@ -89,9 +89,11 @@
 	 	  });
 </script>
 	<link rel="stylesheet" href="css/project.css">
+	<link rel="stylesheet" href="css/dew.css">
 <body>
+<div class="main" align="center">
 <h3 id="projectRegisterLogo">Project</h3>
-<div id="viewForm">
+<div id="viewForm" >
 <div id="view">
 <table border="1" width="500px" align="center">
    <c:choose>
@@ -174,4 +176,5 @@
 </div>
   </div>
   <div id="space"></div>
+  </div>
 </body>
