@@ -11,7 +11,7 @@ public interface DiscussService {
 
 	public abstract DiscussListVO getAllDiscussList(String pageNo);
 
-	public abstract int registerDiscussion(DiscussVO divo);
+	public abstract int writeDiscussion(DiscussVO divo);
 
 	public abstract DiscussVO findDiscussContent(int no);
 

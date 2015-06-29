@@ -37,7 +37,7 @@ public class DiscussServiceImpl implements DiscussService {
 	 * @see org.kosta.dew.model.service.DiscussService#registerDiscussion(org.kosta.dew.model.vo.DiscussVO)
 	 */
 	@Override
-	public int registerDiscussion(DiscussVO dsvo){
+	public int writeDiscussion(DiscussVO dsvo){
 		return discussDAO.registerDiscussion(dsvo);
 	}
 	/* (non-Javadoc)
