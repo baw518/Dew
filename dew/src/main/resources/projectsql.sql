@@ -87,7 +87,8 @@ drop table chat
 create table chat(
 	chat_no number not null,
 	project_no number not null,
-	chat_content varchar2(100) not null,
+	chat_content clob not null,
+	chat_date date not null,
 	constraint fk_chat_project_no_ex foreign key(project_no) references project_write(project_no)
 )
 insert into chat(project_no,chat_content) values(40,'네 안녕하세요')

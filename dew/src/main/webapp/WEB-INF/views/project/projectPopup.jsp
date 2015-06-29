@@ -40,10 +40,10 @@
 <c:choose>
 <c:when test="${requestScope.cvo!=null }">
 <table border="1" cellpadding="12" width="330px">
-<tr><th colspan="2">팀원현황</th></tr>
+<tr><th colspan="3">팀원현황</th></tr>
 <c:forEach items="${requestScope.cvo }" var="c">
 <tr>
-	<td>${c.id }</td><td>${c.projectSub }</td>
+	<td width="80px"><img src="${initParam.root }upload/${c.id }.jpg" width="80px" height="80px"></td><td>${c.id }</td><td>${c.projectSub }</td>
 </tr>
 <input type="hidden" value="${c.boardNo }" id="projectNo">
 </c:forEach>

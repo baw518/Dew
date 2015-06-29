@@ -15,7 +15,7 @@
 		 $.ajax({
 				type : "POST",
 				url : "sendChatAjax.do",
-				data : "projectNo=" + <%=list.get(list.size()-1)%>+"&content="+$("#sessionId").val()+"님 입장",
+				data : "projectNo=" + <%=list.get(list.size()-1)%>+"&content=님 입장",
 			});
 		setTimeout("refreshChat()",1000); 
 		$("#content").keydown(function(evt){
@@ -31,9 +31,9 @@
 			url : "refreshChatAjax.do",
 			data : "projectNo=" + <%=list.get(list.size()-1)%>,
 			success : function(list) {
-				var mess=list[0];
+				var mess=list[0].content+" "+list[0].commentDate;
 				for(var i=1;i<list.length;i++){
-				mess+="<br>"+list[i];
+				mess+="<br>"+list[i].content+" "+list[i].commentDate;
 				}
 				$("#chatSpan").html(mess);
 				setTimeout("refreshChat()",500); 
@@ -52,17 +52,16 @@
 <body>
 	<table border="1" cellpadding="5">
 		<tr>
-			<td width="320px" height="320px" valign="top">
-			<span id="chatSpan">
+			<td width="320px" height="320px" valign="top" >
+			<span id="chatSpan" >
 			<c:forEach items="${requestScope.list }" var="list"  end="${fn:length(requestScope.list)-2}">
-			${list }<br>
+			${list.content } ${list.commentDate }<br>
 			</c:forEach></span></td>
 		</tr>
 		<tr>
-			<td><input type="text" style="width: 290px" id="content" ></td>
+			<td><input type="text" style="width: 310px" id="content" ></td>
 		</tr>
 	</table>
-	<input type="hidden" value="${sessionScope.mvo.id }" id="sessionId">
 	<img src="${initParam.root}images/back.jpg" onclick="location.href='project_popupProGetJoiner.do?projectNo='+<%=list.get(list.size()-1)%>">
 </body>
 </html>

@@ -25,35 +25,27 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class MemberController {
-	@Resource(name = "memberServiceImpl")
-	private MemberService memberSerivce;
+	@Resource
+	private MemberService memberService;
 
 	@RequestMapping("member_login_form.do")
 	public String loginForm() {
-
 		return "member_loginForm";
 	}
 
 	@RequestMapping("member_login.do")
 	public ModelAndView login(HttpServletRequest request, MemberVO vo) {
-		String id = request.getParameter("id");
-		String password = request.getParameter("memberPassword");
 		String url = "";
-
-		int count = memberSerivce.deltemembercheck(vo.getId());
+		int count = memberService.deltemembercheck(vo.getId());
 		// 카운터가 0나오면 탈퇴한 회원이 아니다 1나오면 탈퇴한 회원
-
-		vo = memberSerivce.login(vo);
+		vo = memberService.login(vo);
 		if (count == 0) {
 			System.out.println("로그인.do vo = " + vo);
 			if (vo != null) {
 				HttpSession session = request.getSession();
-
 				session.setAttribute("mvo", vo);
-
 				url = "redirect:home.do";
 			} else if (vo == null) {
-
 				url = "error";
 			}
 		} else if (count == 1) {
@@ -71,9 +63,9 @@ public class MemberController {
 	@RequestMapping("member_register.do")
 	public String register(HttpServletRequest request,
 			HttpServletResponse response, MemberVO vo, UserTypeVO uvo,MultipartFile image) {
-		uvo = memberSerivce.findName(uvo);
-		memberSerivce.register(vo);
-		memberSerivce.userregister(uvo, vo);
+		uvo = memberService.findName(uvo);
+		memberService.register(vo);
+		memberService.userregister(uvo, vo);
 		int n=0;
 		if(!(image.isEmpty())){
 			try {
@@ -106,7 +98,7 @@ public class MemberController {
 	public ModelAndView registerForm(HttpServletRequest request,
 			UserTypeVO uvo, String radio) {
 
-		List<UserTypeVO> list = memberSerivce.usertype(uvo);
+		List<UserTypeVO> list = memberService.usertype(uvo);
 
 		return new ModelAndView("member_registerView", "list", list);
 	}
@@ -122,7 +114,7 @@ public class MemberController {
 			HttpServletResponse response) throws UnsupportedEncodingException {
 		ModelAndView mv = null;
 
-		vo = memberSerivce.findbyid(vo);
+		vo = memberService.findbyid(vo);
 		if (vo != null) {
 
 			mv = new ModelAndView("member_findbyid_result", "vo", vo);
@@ -142,7 +134,7 @@ public class MemberController {
 	public ModelAndView findbypassword(HttpServletRequest request, MemberVO vo,
 			HttpServletResponse response) throws UnsupportedEncodingException {
 		ModelAndView mv = null;
-		vo = memberSerivce.findbypassword(vo);
+		vo = memberService.findbyid(vo);
 		if (vo != null) {
 			mv = new ModelAndView("member_findbypassword_result", "vo", vo);
 		} else {
@@ -155,7 +147,7 @@ public class MemberController {
 	public ModelAndView findbypassword2(HttpServletRequest request,
 			MemberVO vo, HttpServletResponse response)
 			throws UnsupportedEncodingException {
-		vo = memberSerivce.findbypassword2(vo);
+		vo = memberService.findbypassword2(vo);
 
 		return new ModelAndView("member_findbypassword_result2", "vo", vo);
 	}
@@ -164,7 +156,7 @@ public class MemberController {
 	public ModelAndView deletemember(HttpServletRequest request, MemberVO vo) {
 		System.out.println(request.getAttribute("id"));
 
-		memberSerivce.deletemember(vo);
+		memberService.deletemember(vo);
 
 		System.out.println("dleteo vo = " + vo);
 		HttpSession session = request.getSession(false);
@@ -216,7 +208,7 @@ public class MemberController {
 				}
 			}
 			}
-			memberSerivce.update(vo);
+			memberService.update(vo);
 			session.setAttribute("vo", vo);
 		}
 
@@ -236,17 +228,17 @@ public class MemberController {
 	}
 	@RequestMapping("member_view.do")
 	public ModelAndView memberView(String pageNo,Model model){
-		return new ModelAndView("member_memberView","mlvo",memberSerivce.allMember(pageNo));
+		return new ModelAndView("member_memberView","mlvo",memberService.allMember(pageNo));
 	}
 	@RequestMapping("member_deleteRequest.do")
 	public String deleteRequest(Model model){
-		List<discussionRequestVO> list = memberSerivce.showDeleteRequest();
+		List<discussionRequestVO> list = memberService.showDeleteRequest();
 		model.addAttribute("list", list);
 		return "member_showDeleteRequest";
 	}
 	@RequestMapping("member_insertRequest.do")
 	public String insertRequest(Model model){
-		List<discussionRequestVO> list = memberSerivce.showInsertRequest();
+		List<discussionRequestVO> list = memberService.showInsertRequest();
 		model.addAttribute("list", list);
 		return "member_showInsertRequest";
 	}

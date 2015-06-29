@@ -159,12 +159,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		insert into project_write(project_no,title,id,content,achieve,project_date,progressing_end_date) 
  		values(#{projectNo},#{projectName},#{id},#{content},#{achieve},sysdate,#{deadline})
  	</insert>
- 	
- 	<select id="findChatRecord" resultType="String">
- 		select chat_content from chat where project_no=#{value} order by chat_no asc
+ 	<select id="findChatRecord" resultType="cmvo">
+ 		select chat_content as content,to_char(chat_date,'HH24:MI') as commentDate from chat where project_no=#{value} order by chat_no asc
  	</select>
  	<insert id="sendChatAjax" parameterType="pvo">
- 		insert into chat(chat_no,project_no,chat_content) values(project_chat_seq.nextval,#{projectNo},#{content})
+ 		insert into chat(chat_no,project_no,chat_content,chat_date) values(project_chat_seq.nextval,#{projectNo},#{content},sysdate)
  	</insert>
  	<delete id="deleteChat">
  		delete from chat where chat_no=(select min(chat_no) from chat where project_no=#{value})

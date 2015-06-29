@@ -2,27 +2,39 @@ package org.kosta.dew.model.service;
 
 import java.util.List;
 
-import org.kosta.dew.model.vo.MemberListVO;
 import org.kosta.dew.model.vo.MemberVO;
 import org.kosta.dew.model.vo.UserTypeVO;
 import org.kosta.dew.model.vo.discussionRequestVO;
+import org.springframework.web.multipart.MultipartFile;
+
 
 public interface MemberService {
 
-	public abstract MemberVO login(MemberVO vo);
-	public int register(MemberVO mvo);
-	public List<UserTypeVO> usertype(UserTypeVO uvo);
-	public MemberVO findbyid(MemberVO vo);
-	public MemberVO findbypassword(MemberVO vo);
-	public MemberVO findbypassword2(MemberVO vo);
-	public int userregister(UserTypeVO uvo, MemberVO mvo);
-	public abstract UserTypeVO findName(UserTypeVO uvo);
-	public int deletemember(MemberVO mvo);
-	public int update(MemberVO vo);
-	public abstract int deltemembercheck(String id);
-	public abstract MemberListVO allMember(String pageNo);
-	public abstract List<discussionRequestVO> showDeleteRequest();
-	public abstract List<discussionRequestVO> showInsertRequest();
-	
+	int deltemembercheck(String id);
+
+	MemberVO login(MemberVO vo);
+
+	UserTypeVO findName(UserTypeVO uvo);
+
+	int register(MemberVO vo);
+
+	int userregister(UserTypeVO uvo, MemberVO vo);
+
+	List<UserTypeVO> usertype(UserTypeVO uvo);
+
+	MemberVO findbyid(MemberVO vo);
+
+	MemberVO findbypassword2(MemberVO vo);
+
+	int deletemember(MemberVO vo);
+
+	int update(MemberVO vo);
+
+	Object allMember(String pageNo);
+
+	List<discussionRequestVO> showDeleteRequest();
+
+	List<discussionRequestVO> showInsertRequest();
+
 	
 }
