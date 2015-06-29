@@ -25,12 +25,13 @@
 </script>
 
 </head>
-<div class="main">
+<div class="main" align="center">
 <body>
 <form action="member_findbypassword.do" method="post">
 
-아이디를 입력하세요<input type="text" name="id" id="id"><br>
-생년월일을 입력하세요<input type="text" name="birthDate" id="birthDate"><br>
+<input type="text" class="form-control" placeholder="Id" name="id" id="id"><br>
+<input type="text" class="form-control" placeholder="Date(yyyymmdd)" name="birthDate" id="birthDate"><br>
+
 
 
 <br><input type="submit" value="비밀번호 찾기">
