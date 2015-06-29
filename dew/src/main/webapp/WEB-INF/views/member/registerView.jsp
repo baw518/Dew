@@ -1,15 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+ <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script type="text/javascript" src="jquery-1.11.0.js"></script>
-
+         <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <title>Insert title here</title>
-<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-
 <script type="text/javascript">
 	$(document).ready(function(){
 		$(".loginBtn").submit(function(){
@@ -21,12 +19,10 @@
 				alert("비밀번호를 입력하세요!");
 				return false;
 			}
-			
 			else if($(":input[name=birthDate]").val()==""){
 				alert("생년월일를 입력하세요!");
 				return false;
 			}
-			
 			else if($(":input[name=passwordQuestion]").val()==""){
 				alert("질문을 입력하세요!");
 				return false;
@@ -39,16 +35,13 @@
 					alert("제대로된 생년월일 8글자 입력해주세요");
 					return false;
 				}
-			}
-			
-			
+			}		
 		});
-	
 		});
 </script>
 <link rel="stylesheet" href="${initParam.root }css/dew.css">
 <div class="main">
-<form class="form-horizontal" role="form" action="member_register.do" method="post" enctype="multipart/form-data">
+<form:form action="member_register.do" method="post" role="form" commandName="memberVO" class="form-horizontal" enctype="multipart/form-data">
               <div class="form-group">
                 <div class="col-sm-2" style="margin-bottom: 10px">
                   <label class="control-label">File</label>
@@ -63,6 +56,7 @@
                 </div>
                 <div class="col-sm-10">
                   <input type="text" class="form-control" placeholder="Name" name="memberName" id="memberName">
+                   <font color="red"><form:errors path="memberName"></form:errors></font>
                 </div>
               </div>
               <div class="form-group">
@@ -71,6 +65,7 @@
                 </div>
                 <div class="col-sm-10">
                   <input type="text" class="form-control" placeholder="ID" name="id" id="id" >
+                  <font color="red"><form:errors path="id"></form:errors></font>
                 </div>
               </div>
               <div class="form-group">
@@ -79,17 +74,19 @@
                 </div>
                 <div class="col-sm-10">
                   <input type="password" class="form-control" id="inputPassword3" placeholder="Password" id="memberPassword"name="memberPassword">
+               	  <font color="red"><form:errors path="memberPassword"></form:errors></font>
                 </div>
               </div>
               <div class="form-group">
                 <div class="col-sm-2">
-                  <label class="control-label">Date</label>
+                  <label class="control-label">BirthDay</label>
                 </div>
                 <div class="col-sm-10">
                   <input type="text" class="form-control" placeholder="YYYYMMDD" id="birthDate" name="birthDate">
+                   <font color="red"><form:errors path="birthDate"></form:errors></font>
                 </div>
               </div>
-              <div class="form-group">
+              <%-- <div class="form-group">
                 <div class="col-sm-2" style="margin-bottom: 10px">
                   <label class="control-label">Jobs</label>
                 </div>
@@ -101,13 +98,14 @@
                   	</c:forEach> 
                   </div>
                 </div>
-              </div>
+              </div> --%>
                 <div class="form-group">
                 <div class="col-sm-2">
                   <label class="control-label">P.Q</label>
                 </div>
                 <div class="col-sm-10">
                   <input type="text" class="form-control" placeholder="password search Question" id="passwordQuestion" name="passwordQuestion">
+                   <font color="red"><form:errors path="passwordQuestion"></form:errors></font>
                 </div>
               </div>
                 <div class="form-group">
@@ -116,6 +114,7 @@
                 </div>
                 <div class="col-sm-10">
                   <input type="text" class="form-control" placeholder="password search Answer"  id="passwordAnswer" name="passwordAnswer">
+                   <font color="red"><form:errors path="passwordAnswer"></form:errors></font>
                 </div>
               </div>
     			<br>
@@ -123,5 +122,5 @@
                   <button type="submit" class="btn btn-default">Sign in</button>
                 </div>
             
-            </form>
+   </form:form>
 </div>

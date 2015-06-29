@@ -84,7 +84,7 @@ public class ProjectController {
 			HttpSession session=request.getSession(false);
 			MemberVO mvo=(MemberVO) session.getAttribute("mvo");
 			pvo.setId(mvo.getId());
-			projectService.registerProject(pvo, dvo);
+			projectService.writeProject(pvo, dvo);
 			return new ModelAndView("redirect:project_View.do?projectNo="+pvo.getProjectNo());
 	}
 		 /**
@@ -103,11 +103,10 @@ public class ProjectController {
 				pvo.setId(mvo.getId());
 				String fileName;
 				if(picture.getOriginalFilename()!=""){
-					//pvo.setDeadline(path+picture.getOriginalFilename());
 					pvo.setDeadline(picture.getOriginalFilename());
 					fileName=picture.getOriginalFilename();
 					try{
-						picture.transferTo(new File(path+fileName));
+						picture.transferTo(new File(path+"img/"+fileName));
 					}catch(Exception e){
 						e.printStackTrace();
 					}
@@ -115,7 +114,7 @@ public class ProjectController {
 					pvo.setDeadline("noImage");
 				}
 				pvo.setAchieve("의뢰");
-				projectService.registerReqProject(pvo);
+				projectService.writeReqProject(pvo);
 				return new ModelAndView("redirect:project_View.do?projectNo="+pvo.getProjectNo());
 		}
 		/**
@@ -203,15 +202,12 @@ public class ProjectController {
 	 */
 	@RequestMapping("project_delete.do")
 	public ModelAndView deleteProject(int projectNo,boolean manage){
-		String path="redirect:project_listView.do";
-		System.out.println(projectNo);
-		System.out.println(manage);
+		String delPath="redirect:project_listView.do";
 		if(manage==true)
-			path="redirect:project_main.do";
+			delPath="redirect:project_main.do";
 		projectService.deleteDepart(projectNo);
 		projectService.deleteProject(projectNo);
-		System.out.println('끝');
-		return new ModelAndView(path);
+		return new ModelAndView(delPath);
 	}
 	/**
 	 * 프로젝트내용화면에서 댓글을 작성합니다.

@@ -23,7 +23,7 @@
 		</form>
 		</c:when>
 		<c:when test="${sessionScope.mvo.memberLevel == 0}">
-		<img src="${initParam.root }images/manager.png">
+		<img src="${initParam.root }images/${sessionScope.mvo.id }.jpg">
 		<ul class="leftmenu">
 			<li><a href="member_view.do" class="list_font">회원관리</a></li>
 			<li><a href="member_insertRequest.do" class="list_font">토론방 등록 요청</a></li>
@@ -32,7 +32,7 @@
 		</ul>
 		</c:when>
 		<c:otherwise>
-		<span style="margin-left: 50px"><img src="${initParam.root }upload/${sessionScope.mvo.id}.jpg" width="150px"></span>
+		<span style="margin-left: 50px"><img src="${initParam.root }upload/img/${sessionScope.mvo.id}.jpg" width="150px"></span>
 		<ul class="leftmenu">
 			 <li><a href="member_profileForm.do" class="list_font">my page</a></li>
 			 <li><a href="report_writeForm.do" class="list_font">add errorReport</a></li>
