@@ -5,8 +5,9 @@
 <script type="text/javascript">
 
 </script>
-<div >
-	<table>
+<link rel="stylesheet" href="${initParam.root}/css/dew.css" type="text/css">
+<div class="main">
+	<table class="dewTable">
 		<thead>
 		<tr><th>
 			${type }
