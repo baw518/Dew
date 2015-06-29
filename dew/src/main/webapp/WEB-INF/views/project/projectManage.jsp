@@ -157,7 +157,7 @@
     <table border='5'><tr style="background-color: yellow"><td width='600px'>프로젝트명</td>
     <td width='120px'>진행률</td><td width='250px'>생성일</td></tr>
     <c:forEach items='${requestScope.pmvo.processingProject}' var='processP' varStatus='pro'><tr><td width='250px'>
-    <span id="popupProForm"><span id="popupPro${pro.index }">${processP.projectName}</span></span></td><td> <div id="progressbar${pro.index}"></div>
+    <span id="popupProForm"><span id="popupPro${pro.index }"><U><font color="blue">${processP.projectName}</font></U></span></span></td><td> <div id="progressbar${pro.index}"></div>
     </td><td>${processP.project_date}<c:choose><c:when test='${processP.id==sessionScope.mvo.id}'>
     <input type='button' value='완료' id='successBtn${pro.index}'><input type='hidden' value='${processP.projectNo}' id='successBtnHid${pro.index}'>
     <tr><td colspan="3"><div id="slider${pro.index }"></div></td></tr></c:when></c:choose></td></tr></c:forEach></table><br>

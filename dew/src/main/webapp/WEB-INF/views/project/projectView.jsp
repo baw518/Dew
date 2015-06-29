@@ -101,7 +101,7 @@
 <tr><td colspan="2">작성일</td><td colspan="2">${requestScope.pvo.project_date}</td></tr>
 <tr><td colspan="4" align="center"><b>내용</b></td></tr>
 <tr><td colspan="4"> <br>${requestScope.pvo.content}<br><c:choose><c:when test="${requestScope.pvo.deadline!='noImage' }">
-<img src="${initParam.root}upload/${requestScope.pvo.deadline}"> </c:when></c:choose></td></tr>
+<img src="${initParam.root}upload/${requestScope.pvo.deadline}" width="500px" style="padding: 5px"> </c:when></c:choose></td></tr>
     </c:when>
     <c:otherwise>
     <tr><td colspan="2">프로젝트명</td><td colspan="2">${requestScope.pvo.projectName}</td></tr>
