@@ -54,25 +54,26 @@ $(document).ready(function(){
 			  		</c:forEach>
 					
 				</td>
-			  	<td>제목</td>
-			  	<td colspan="3">
-			  		<input type="text" id="title" name="title" value="RE:${requestScope.qvo.title}" >
-			  	</td>
 			  	<td>아이디</td>
 			  	<td><input type="text" id="id" name="id" value="${sessionScope.mvo.id}" readonly></td>
 			  	<td>포인트</td>
 			  	<td ><input type="text" id="point" name="point" value="${requestScope.qvo.point }" readonly></td>
 			  </tr>
 			  <tr>
-			  	<td></td>
-			  	<td colspan="7" align="left">
+			  	<td>제목</td>
+			  	<td colspan="5">
+			  		<input type="text" id="title" name="title" size="100" value="RE:${requestScope.qvo.title}" >
+			  	</td>
+			  </tr>
+			  <tr>
+			  	<td colspan="6" align="left">
 			   	&nbsp;&nbsp;
-			  	<textarea cols="190" rows="30" id="content" name="content"></textarea>
+			  	<textarea cols="110" rows="40" id="content" name="content"></textarea>
 			  	</td>
 			  	<td><span id="pointView"></span></td>
 			  </tr> 
 			  <tr>
-			  	<td colspan="9" align="center" >
+			  	<td colspan="6" align="center" >
 				    <input type="button" id="reply" name="reply" value="글등록">
 				    <input type="button" id="cancel" name="cancel" value="작성취소">
 			  	</td>  

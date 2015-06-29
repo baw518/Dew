@@ -56,7 +56,7 @@ $(document).ready(function(){
 	});
 });
 </script>
-
+<br><br>
 <form action="QnA_Write.do" method="post" id="writeForm">
 	<h2>질문글쓰기</h2>
 	 <table class="table">
@@ -69,25 +69,26 @@ $(document).ready(function(){
 					</c:forEach>
 				</select>
 			</td>
-		  	<td>제목</td>
-		  	<td colspan="3">
-		  		<input type="text" id="title" name="title">
-		  	</td>
-		  	<td>아이디</td>
+			<td>아이디</td>
 		  	<td><input type="text" id="id" name="id" value="${sessionScope.mvo.id}" readonly></td>
 		  	<td>포인트</td>
 		  	<td ><input type="text" id="point" name="point" ></td>
 		  </tr>
 		  <tr>
-		  	<td></td>
-		  	<td colspan="7" align="left">
-		   	&nbsp;&nbsp;
-		  	<textarea cols="190" rows="30" id="content" name="content"></textarea>
+		  	<td>제목</td>
+		  	<td colspan="4">
+		  		<input type="text" id="title" name="title" size="40">
 		  	</td>
-		  	<td><span id="pointView">사용가능한 포인트 : ${sessionScope.mvo.point}</span></td>
+			<td><div id="pointView">사용가능한 포인트 : ${sessionScope.mvo.point}</div></td>
+		  </tr>
+		  <tr>
+		  	<td colspan="6" align="left">
+		   	&nbsp;&nbsp;
+		  	<textarea cols="100" rows="30" id="content" name="content"></textarea>
+		  	</td>	
 		  </tr> 
 		  <tr>
-		  	<td colspan="9" align="center" >
+		  	<td colspan="6" align="center" >
 			    <img class="action" src="${initParam.root}images/qna_write_complete.jpg" id="writeBtn">
 			    <input type="button" id="cancel" value="작성취소">
 		  	</td>  
