@@ -52,7 +52,7 @@ $(document).ready(function(){
 		    	    $("#commentView").html("");
 		    		var c = "";
 		    		$.each(result,function(index,data){
-						 c+="<tr ><td class='commentId'>"+data.id+"</td>";
+						 c+="<tr ><td class='commentId'><img src='${initParam.root }upload/img/"+data.id+".jpg' width='30px'>"+data.id+"</td>";
 						 c+="<td class='commentDate'>"+data.commentDate+"</td>";
 						 c+="<td class='commentContent'>"+data.content+"</td>";
 						 c+="<td><input type='hidden' id='commentNo' name='commentNo' value='"+data.commentNo+"'>"
@@ -97,7 +97,7 @@ $(document).ready(function(){
 		    	  $("#commentView").html("");
 		    		var c = "";
 		    		$.each(result,function(index,data){
-						 c+="<tr ><td class='commentId'>"+data.id+"</td>";
+						 c+="<tr ><td class='commentId'><img src='${initParam.root }upload/img/"+data.id+".jpg' width='30px'>"+data.id+"</td>";
 						 c+="<td class='commentDate'>"+data.commentDate+"</td>";
 						 c+="<td class='commentContent'>"+data.content+"</td>";
 						 c+="<td><input type='hidden' id='commentNo' name='commentNo' value='"+data.commentNo+"'>"
@@ -158,12 +158,11 @@ $(document).ready(function(){
 	
 	
 	$(document).on("click", "#commentUpdateBtn", function(e){
-		var commentNo_update = $(this).parent().parent().children().children().val();
+		var commentNo_update = $(this).parent().parent().children().children().prev().val();
 		var commentContent_update = $(this).prev().val();
 		var id = $("#id").val();
 		var boardNo = $("#boardNo").val();
- 		
-		if(commentContent_update==""){
+ 		if(commentContent_update==""){
 			alert("내용을 입력하세요");
 			return false;
 		} 
@@ -177,7 +176,7 @@ $(document).ready(function(){
 		    	  $("#commentView").html("");
 		    		var c = "";
 		    		$.each(result,function(index,data){
-						 c+="<tr><td  class='commentId'>"+data.id+"</td>";
+						 c+="<tr><td  class='commentId'><img src='${initParam.root }upload/img/"+data.id+".jpg' width='30px'>"+data.id+"</td>";
 						 c+="<td class='commentDate'>"+data.commentDate+"</td>";
 						 c+="<td class='commentContent'>"+data.content+"</td>";
 						 c+="<td><input type='hidden' id='commentNo' name='commentNo' value='"+data.commentNo+"'>"
@@ -192,7 +191,7 @@ $(document).ready(function(){
 		    		c+="<tr></tr>";
 					$("#commentView").html(c);   
 		      }
-		});
+		}); 
 		
 
 	});
@@ -249,7 +248,7 @@ $(document).ready(function(){
 		    	    $("#commentView").html("");
 		    		var c = "";
 		    		$.each(result,function(index,data){
-						 c+="<tr><td class='commentId'>"+data.id+"</td>";
+						 c+="<tr><td class='commentId'><img src='${initParam.root }upload/img/"+data.id+".jpg' width='30px'>"+data.id+"</td>";
 						 c+="<td class='commentDate'>"+data.commentDate+"</td>";
 						 c+="<td class='commentContent'>"+data.content+"</td>";
 						 c+="<td><input type='hidden' id='commentNo' name='commentNo' value='"+data.commentNo+"'>"
@@ -290,7 +289,7 @@ $(document).ready(function(){
 		</th>
 	</tr>
 	<tr>
-		<th height="30px">>작성자 : <img src="${initParam.root }upload/img/${requestScope.qvo.id}.jpg" width="30px"> ${requestScope.qvo.id }</th>
+		<th height="30px">작성자 : <img src="${initParam.root }upload/img/${requestScope.qvo.id}.jpg" width="30px"> ${requestScope.qvo.id }</th>
 		<th>질문작성일 : ${requestScope.qvo.date }</th>
 		<th>포인트 : ${requestScope.qvo.point }</th>
 		<th>조회수 : ${requestScope.qvo.hit }</th>
