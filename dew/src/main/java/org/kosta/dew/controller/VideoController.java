@@ -1,7 +1,6 @@
 package org.kosta.dew.controller;
 
 import java.io.File;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -80,6 +79,10 @@ public class VideoController {
 			list.get(i).put("VIDEO_FILE_NAME",playPath+dbFileName);
 		}
 		System.out.println(list);
+		String content = "";
+	    content = vvo.getContent().replaceAll("<", "&lt;");
+	    content = content.replaceAll(">", "&gt");
+	    vvo.setContent(content);
 		model.addAttribute("list", list);
 		model.addAttribute("vvo", vvo);
 		return "video_showContent";
