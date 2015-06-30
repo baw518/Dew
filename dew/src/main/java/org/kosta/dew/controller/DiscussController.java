@@ -54,9 +54,21 @@ public class DiscussController {
 			// discussCookie 존재하고 이전에 해당 게시물 읽었으므로 count 증가x");
 			dsvo = discussService.findDiscussContent(no);
 		}
+		
+	     String content = "";
+	      content = dsvo.getContent().replaceAll("<", "&lt;");
+	      content = content.replaceAll(">", "&gt");
+	      dsvo.setContent(content);
+		
 		model.addAttribute("dsvo",dsvo);
 		
 		List<CommentVO> cmvo = discussService.findDiscussComment(no);
+		for(int i =0; i<cmvo.size();i++){
+			String c = "";
+			c = cmvo.get(i).getContent().replaceAll("<", "&lt;");
+			c = c.replaceAll(">", "&gt");
+			cmvo.get(i).setContent(c);
+		}
 		model.addAttribute("cmvo",cmvo);
 
 		
@@ -115,6 +127,10 @@ public class DiscussController {
 		String no = request.getParameter("no");
 		
 		CommentVO cmvo = discussService.findDiscussCommentByNo(no);
+		String c = "";
+		c = cmvo.getContent().replaceAll("<", "&lt;");
+		c = c.replaceAll(">", "&gt");
+		cmvo.setContent(c);
 		return cmvo;
 	}
 	/**
@@ -130,7 +146,12 @@ public class DiscussController {
 		String index = request.getParameter("index");
 		String content=request.getParameter("content");
 		CommentVO cmvo = new CommentVO(no, content);
-		
+	
+			String c = "";
+			c = cmvo.getContent().replaceAll("<", "&lt;");
+			c = c.replaceAll(">", "&gt");
+			cmvo.setContent(c);
+
 		discussService.updateDiscussComment(cmvo);
 		return "redirect:findDiscussContent.do?no="+index;
 	}
@@ -161,8 +182,16 @@ public class DiscussController {
 		String id = request.getParameter("id");
 		String content=request.getParameter("content");
 		cmvo = new CommentVO(no, id, content);
+
+			String c = "";
+			c = cmvo.getContent().replaceAll("<", "&lt;");
+			c = c.replaceAll(">", "&gt");
+			cmvo.setContent(c);
+
 		discussService.registerDiscussComment(cmvo);
 		List<CommentVO> cmlist = discussService.findDiscussComment(no);
+		
+		
 		return cmlist;
 	}
 	@RequestMapping("replyView.do")
@@ -171,7 +200,10 @@ public class DiscussController {
 	
 		String no = request.getParameter("no");
 		CommentVO cmvo = discussService.findDiscussCommentByNo(no);
-	
+		String c = "";
+		c = cmvo.getContent().replaceAll("<", "&lt;");
+		c = c.replaceAll(">", "&gt");
+		cmvo.setContent(c);
 		return cmvo;
 	}
 	/**
@@ -223,6 +255,12 @@ public class DiscussController {
 		
 		//해당글의 커맨트리스트 받아오기
 		List<CommentVO> cmvo = discussService.findDiscussComment(vo.getBoardNo());
+		for(int i =0; i<cmvo.size();i++){
+			String c = "";
+			c = cmvo.get(i).getContent().replaceAll("<", "&lt;");
+			c = c.replaceAll(">", "&gt");
+			cmvo.get(i).setContent(c);
+		}
 		return cmvo;
 	}
 	//관리자가 게시글을 강제삭제(쇼컨텐츠에서)

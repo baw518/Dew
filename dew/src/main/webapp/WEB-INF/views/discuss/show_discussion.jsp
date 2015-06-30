@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%--  ${requestScope.dsvo}  --%>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script>
@@ -213,7 +214,10 @@ $(document).ready(function(){
  	</thead>
  	<tr>
  		<td class="content" colspan="5" align="center">
- 		<pre>${requestScope.dsvo.content} </pre></td>
+
+ 		<pre>${requestScope.dsvo.content} </pre>
+ 		
+ 		</td>
  	</tr>
  	<tr>
 		<td colspan="4">
