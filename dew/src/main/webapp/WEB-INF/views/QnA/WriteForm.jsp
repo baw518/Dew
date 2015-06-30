@@ -111,22 +111,21 @@ $(document).ready(function(){
 		  	<th colspan="4">
 		  		<input type="text" id="title" name="title" size="40">
 		  	</th>
-			<td><div id="pointView">사용가능한 포인트 : ${sessionScope.mvo.point}</div></td>
+			<th><div id="pointView">사용가능한 포인트 : ${sessionScope.mvo.point}</div></th>
 		  </tr>
-		  </thead>
 		  <tr>
-		  	<td colspan="6" align="left">
+		  	<th colspan="6" align="left">
 		   	&nbsp;&nbsp;
-		  	<textarea cols="100" rows="10" id="content" name="content"></textarea>
-		  	</td>	
+		  	<textarea cols="111" rows="10" id="content" name="content"></textarea>
+		  	</th>	
 		  </tr> 
 		  <tr>
 		  	<td colspan="6" align="center"  style="border-bottom-color: #ffffff">
 		  		<input type="button" onclick="submitContents(this);" value="글쓰기" />
-			    <img class="action" src="${initParam.root}images/qna_write_complete.jpg" id="writeBtn">
 			    <input type="button" id="cancel" value="작성취소">
 		  	</td>  
 		  </tr>
+		  </thead>
 	 </table>
 </form>
 
