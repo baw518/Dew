@@ -2,16 +2,17 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
+<link rel="stylesheet" href="${initParam.root}/css/dew.css" type="text/css">
 <!DOCTYPE html >
 <meta charset="UTF-8">
 <title>Reference View</title>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
-
-<table border="1">
+<div class="main">
+<table class="dewTable">
 <caption>Reference</caption>
+
 <tr >
-<td width="100" rowspan="${fn:length(requestScope.vo.list)+1}">
+<td width="100" rowspan="${fn:length(requestScope.vo.list)+1}"  style="border-right: 3px solid #fbe762">
 ${type }
 </td>
 <td width="500">
@@ -27,7 +28,7 @@ ${type }
 <tr>
 <td>
 <c:if test="${refer.exceptionMessage != null}">
-<a href="report_showContentByNo.do?errorNo=${refer.errorNo }&type=${type}">${refer.exceptionMessage }</a> 
+<a href="report_showContentByNo.do?errorNo=${refer.errorNo }&type=${type}" class="hover_font">${refer.exceptionMessage }</a> 
 </c:if>
 <c:if test="${refer.errorCode != null}">
 ${refer.errorCode } 
@@ -50,10 +51,10 @@ ${refer.errorCode }
 </table>
 <br><br>
 
-<center>
+<div class="page" align="center">
 
 	<a href="report_referView.do?pageNo=${requestScope.vo.pagingBean.startPageOfPageGroup-1}&refer=${refer }&type=${type}">
-	<c:if test="${requestScope.vo.pagingBean.previousPageGroup== true && requestScope.vo.pagingBean.nowPageGroup!=1}">◀</c:if>
+	<c:if test="${requestScope.vo.pagingBean.previousPageGroup== true && requestScope.vo.pagingBean.nowPageGroup!=1}"><img src="${initParam.root}images/left.jpg" width="21" height="21"></c:if>
 	</a>
 
 	
@@ -62,9 +63,11 @@ ${refer.errorCode }
 	</c:forEach>
 	
 	<a href="report_referView.do?&pageNo=${requestScope.vo.pagingBean.endPageOfPageGroup+1}&refer=${refer }&type=${type}">
-		<c:if test="${requestScope.vo.pagingBean.nextPageGroup== true}">▶</c:if>
+		<c:if test="${requestScope.vo.pagingBean.nextPageGroup== true}"><img src="${initParam.root}images/right.jpg" width="21" height="21"></c:if>
 	</a>
 	
 
-</center>
+</div>
+
 <br><br>
+</div>

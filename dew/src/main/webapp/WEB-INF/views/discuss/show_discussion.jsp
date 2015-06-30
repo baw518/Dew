@@ -243,7 +243,7 @@ $(document).ready(function(){
  	<tr>
 	<td colspan="5" align="center">
 	<!-- 크기가 크롬에선 자동으로 바뀌게할 수 있으니 css에서 resize:none; 해주기 -->
-	<textarea id="auto_textarea" cols="50" rows="2" class="textarea m-tcol-c" maxlength="1000" style="overflow:hidden"></textarea>
+	<textarea id="auto_textarea" cols="50" rows="2" class="textarea m-tcol-c" maxlength="1000" style="overflow:hidden; width: 603px; margin-bottom: 15px "></textarea>
  	<input type="image" src="http://cafeimgs.naver.net/cafe4/btn_cmt_cfm_v1.gif" alt="확인" id="submit">
  	<input type="hidden" name="id" id="id" value="${sessionScope.mvo.id }">
 	<input type="hidden" name="no" id="no" value="${requestScope.dsvo.discussionNo}">

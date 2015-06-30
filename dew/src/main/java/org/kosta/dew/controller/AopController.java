@@ -41,21 +41,25 @@ public class AopController {
 			if(param[i] instanceof QnAVO){
 				QnAVO vo = (QnAVO) param[i];
 				id = vo.getId();
+				aopService.memberUpContribution(id);
 			}
 			else if(param[i] instanceof ProjectVO){
 				ProjectVO vo = (ProjectVO)param[i];
 				id = vo.getId();
+				aopService.memberUpContribution(id);
 			}
 			else if(param[i] instanceof DiscussVO){
 				DiscussVO vo = (DiscussVO)param[i];
 				id = vo.getId();
+				aopService.memberUpContribution(id);
 			}
 			else if(param[i] instanceof ErrorReportVO){
 				ErrorReportVO vo = (ErrorReportVO)param[i];
 				id = vo.getId();
+				aopService.memberUpContribution(id);
 			}
 		}
-		aopService.memberUpContribution(id);
+		
 	}
 	
 	

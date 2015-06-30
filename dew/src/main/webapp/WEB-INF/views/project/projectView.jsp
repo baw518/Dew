@@ -152,7 +152,7 @@
 
 <br>
 <span id="joinComment"></span>
-<input type="button" value="목록" id="backBtn">
+<input type="button" value="목록" id="backBtn" >
 	<c:choose>
 		<c:when test="${sessionScope.mvo.id==requestScope.pvo.id }">
 			<input type="button" value="수정" id="updateProBtn" style="margin-left: 330px">
@@ -163,12 +163,12 @@
 		</c:when>
 		<c:otherwise>
 			<c:choose><c:when test="${requestScope.pvo.achieve!='의뢰' }">
-			<span id="switchBtn"><input type="button" value="참가신청" id="joinProBtn" ></span>
+			<span id="switchBtn" style="text-align: right;"><input type="button" value="참가신청" id="joinProBtn" ></span>
 			</c:when></c:choose>
 		</c:otherwise>
 	</c:choose>
 <div id="commentForm">
-	<table border="1" id="commentTable" class="dewTable">
+	<table style="border: 1px soild #ccc" id="commentTable" class="dewTable">
 	<c:forEach var="cvo" items="${requestScope.pvo.commentVO}" varStatus="c">
 		<tr><td id="writer">${cvo.id }</td>
 			 <td><span id="commentContent${c.index }" >${cvo.content }</span>
@@ -194,8 +194,8 @@
 		<input type="button" value="로그인" id="writeCommentLogin">
 		</c:when>
 		<c:otherwise>
-		<input type="text" id="commentTextContent">
-	<input type="button" value="댓글작성" id="writeComment">
+		<input type="text" id="commentTextContent" style="width: 500px;margin-top: 5px">
+	<input type="button" value="댓글작성" id="writeComment" >
 		</c:otherwise>
 	</c:choose>
 </div>

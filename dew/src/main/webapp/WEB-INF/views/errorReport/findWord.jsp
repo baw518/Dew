@@ -5,6 +5,8 @@
 <script type="text/javascript">
 
 </script>
+<link rel="stylesheet" href="${initParam.root}/css/dew.css" type="text/css">
+
 <form method="post" action="report_findWord.do">
 <input type="radio" name="type" value="ExceptionMessage">Exception &nbsp;
 <input type="radio" name="type" value="ErrorCode">ErrorCode <br>

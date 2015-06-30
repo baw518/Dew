@@ -5,41 +5,44 @@
 <script type="text/javascript">
 
 </script>
-
+<link rel="stylesheet" href="${initParam.root}/css/dew.css" type="text/css">
 <title>Report_updateForm</title>
+<div class="main">
 <form method="post" action="report_write.do">
-<table border="1" class="table">
-<tr><td width="100">
+<table class="dewTable">
+<thead>
+<tr><th width="100">
 ${type }
-</td>
+</th>
 <c:choose>
 <c:when test="${evo.exceptionMessage !=null }">
-<td>${evo.exceptionMessage }
+<th>${evo.exceptionMessage }
 <input type="hidden" name="title" value="${evo.exceptionMessage }">
 <input type="hidden" name="type" value="exception">
-</td>
+</th>
 </c:when>
 <c:otherwise>
-<td>${evo.errorCode }
-<input type="hidden" name="title" value="${evo.errorCode }"></td>
+<th>${evo.errorCode }
+<input type="hidden" name="title" value="${evo.errorCode }"></th>
 <input type="hidden" name="type" value="errorcode">
 </c:otherwise>
 </c:choose>
-<td width="50">
+<th width="100">
 <c:if test="${evo.discussionStatus == 1}">
 토론 있음
 </c:if>
 <c:if test="${evo.discussionStatus == 0}">
 토론 없음
 </c:if>
-</td>
-<td width="150">
+</th>
+<th width="150">
 최종 편집일 :<br>
 ${evo.date }
-</td>
+</th>
 </tr>
+</thead>
 <tr><td align="center" colspan="4">내용 :<pre> <TEXTAREA name="content" rows="15" cols="100" >${evo.content }</TEXTAREA></pre></td></tr>
-<tr><td align="right" colspan="4">
+<tr><td align="right" colspan="4" style="border-bottom-color: #ffffff">
 <input type="hidden" name="id" value="${sessionScope.mvo.id }">
 <input type="hidden" name="writer" value="${sessionScope.mvo.memberName }">
 <c:choose>
@@ -57,3 +60,4 @@ ${evo.date }
 </td></tr>
 </table>
 </form>
+</div>

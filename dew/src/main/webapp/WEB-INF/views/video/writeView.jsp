@@ -51,21 +51,21 @@ $(document).ready(function(){
     });  
 });
 </script>
-
-
-<h3>동영상 올리기</h3>
+<link rel="stylesheet" href="${initParam.root}/css/dew.css" type="text/css">
+<div class="main">
+<h1 align="center">동영상 올리기</h3>
 
 <form name="multiform" id="multiform" action="video_write.do"
                                       method="POST"  enctype="multipart/form-data" ><!-- enctype="multipart/form-data" -->  
-    <table class="table" align="center" >
-    <tr><td>제목: <input type="text" id="title" name="title"></input></td></tr>
+    <table class="dewTable" align="center" >
+    <thead><tr><th>제목: <input type="text" id="title" name="title"></input></th></tr></thead>
     <tr><td>내용: <textarea rows = "30" cols ="70" id="content" name="content" ></textarea><input type="hidden" id="videoPath" name="videoPath"  value="123"></td></tr>
     
     <!-- 다중 파일업로드  -->
   <tr><td>동영상 <input type="file" class="afile3" id ="file" name="file" /></td></tr>
     <tr><td id="afile3-list" id="afile3-list" style="border:2px solid #c9c9c9;min-height:50px"></td></tr>
    
-   <tr><td> 
+   <tr><td style="border-bottom-color: #ffffff; text-align: center"> 
     <input type="hidden" id="id" name="id"  value ="${sessionScope.mvo.id }">
    <input type="submit" id="write" value="글쓰기"/></td></tr>
 	</table>
@@ -73,7 +73,7 @@ $(document).ready(function(){
 
 <div id="result"></div>
 
-
+</div>
 <!-- 
 <script>
 
@@ -188,3 +188,4 @@ $(document).ready(function(){
 			 </td>
 		</tr>
 	</table> --%>
+

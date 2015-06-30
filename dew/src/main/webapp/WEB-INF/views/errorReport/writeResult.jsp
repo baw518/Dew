@@ -32,35 +32,38 @@ $(document).ready(function(){
 });
 </script>
 <title>ErrorReport Register Result</title>
-
-<table   class="table" width="800">
+  <link rel="stylesheet" href="${initParam.root}/css/dew.css" type="text/css">
+  <div class="main">
+<table   class="dewTable" width="800">
 <caption align="left"><h1> Report Register Result</h1></caption>
+<thead>
 <tr>
-<td width="100">
+<th width="100">
 <c:if test="${requestScope.result.exceptionMessage != null}">
 ExceptionMessage
 </c:if>
 <c:if test="${requestScope.result.errorCode != null}">
 ErrorCode
 </c:if>
-</td>
-<td width="500">
+</th>
+<th width="500">
  ${requestScope.result.exceptionMessage }
 ${requestScope.result.errorCode }
-</td>
-<td width="50">
+</th>
+<th width="150">
 <c:if test="${result.discussionStatus == 1}">
 토론 있음
 </c:if>
 <c:if test="${result.discussionStatus == 0}">
 토론 없음
 </c:if> 
-</td>
-<td width="400">
+</th>
+<th width="300">
 최종 편집일 :<br>
 ${result.date }
-</td>
+</th>
 </tr>
+</thead>
 <tr>
 <td colspan="4" height="500">
 <pre>
@@ -69,10 +72,11 @@ ${result.content }
 </td>
 </tr>
 <tr >
-	<td colspan="4" align="right" >
+	<td colspan="4" align="right"  style="border-bottom-color: #ffffff">
 		<input type="button" value="관련글" id="reference">
 		<input type="button" value="수정" id="update">
 		<input type="button" value="목록" id="getList">
 	</td>
 </tr>
 </table>
+  </div>

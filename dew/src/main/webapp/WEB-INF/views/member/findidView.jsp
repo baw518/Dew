@@ -26,10 +26,12 @@
 </head>
 
 <body>
-<div class="main">
+<div class="main" align="center">
 <form action="member_findbyid.do" method="post">
-이름    을 입력하세요<input type="text" name="memberName" id="memberName"><br>
-생년월일을 입력하세요<input type="text" name="birthDate" id="birthDate"><br>
+
+<input type="text" class="form-control" placeholder="Name" name="memberName" id="memberName"><br>
+<input type="text" class="form-control" placeholder="Date(yyyymmdd)" name="birthDate" id="birthDate"><br>
+
 <br><input type="submit" value="아이디 찾기">
 </form>
 </div>

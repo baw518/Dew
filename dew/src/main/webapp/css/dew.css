@@ -289,3 +289,22 @@ table.dewTable td.contentTd{
 .dewCommentTable{
 	background-color: #f8f8f8;
 }
+
+.page {
+	font-size: 15px;
+	text-align: center;
+	color:#66afe9;
+}
+
+.page a{
+	color:#FF4848;
+}
+.page a:HOVER{
+	color:#66afe9;
+}
+
+table.dewTable td.contentTd{
+	width:300px;
+	table-layout:fixed; 
+	word-break:break-all;
+}

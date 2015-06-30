@@ -87,7 +87,7 @@ public class VideoController {
 	@RequestMapping("video_delete.do")
 	public String delete(HttpServletRequest request, Model model) {
 		String no = request.getParameter("no");
-		String filePath = new HttpServletRequestWrapper(request).getRealPath("/");
+		String filePath = ""; // ""; // new HttpServletRequestWrapper(request).getRealPath("/");
 		List<HashMap<String, String>> list = videoService.getVideoName(no);
 	//	System.out.println(list);
 		//System.out.println(list.get(1).get("VIDEO_FILE_NAME"));
@@ -121,7 +121,7 @@ public class VideoController {
 		String no = request.getParameter("videoNo");
 	//	System.out.println(no);
 		//System.out.println(vo);
-		String filePath = new HttpServletRequestWrapper(request).getRealPath("/");
+		String filePath = ""; // new HttpServletRequestWrapper(request).getRealPath("/");
 		/* 변수 초기화 부분 */
 		List<HashMap<String, String>> list = videoService.getVideoName(no); // 디비에 해당 글 비디오이름 가져옴
 		List<MultipartFile> list2=mvo.getFile();		// view에서 파일을 가져온다.
@@ -197,7 +197,7 @@ public class VideoController {
 		videoService.write(vo);
 	//	System.out.println(vo);
 	//	System.out.println(mvo);
-		String filePath = new HttpServletRequestWrapper(request).getRealPath("/");
+		String filePath = ""; // new HttpServletRequestWrapper(request).getRealPath("/");
 		//System.out.println(filePath);
 		List<MultipartFile> list=mvo.getFile();
 		ArrayList<String> nameList=new ArrayList<String>();
