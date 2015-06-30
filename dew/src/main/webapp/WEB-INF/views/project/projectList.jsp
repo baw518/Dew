@@ -6,9 +6,8 @@
 <body>
 
 
-<div class="main" align="center">
+<div class="main" align="center" style="margin-top: 50px">
 <table class="dewTable">
-<caption><h2>Project List</h2></caption>
 <thead>
 <tr>
 <th scope="cols">NO</th>

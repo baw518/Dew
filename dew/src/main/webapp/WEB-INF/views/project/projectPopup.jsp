@@ -39,20 +39,20 @@
 <body>
 <c:choose>
 <c:when test="${requestScope.cvo!=null }">
-<table border="1" cellpadding="12" width="330px">
+<table cellpadding="12" width="330px">
 <tr><th colspan="3">팀원현황</th></tr>
 <c:forEach items="${requestScope.cvo }" var="c">
 <tr>
-	<td width="80px"><img src="${initParam.root }upload/img/${c.id }.jpg" width="80px" height="80px"></td><td>${c.id }</td><td>${c.projectSub }</td>
+	<td width="60px"><img src="${initParam.root }upload/img/${c.id }.jpg" width="60px" height="60px"></td><td>${c.id }</td><td>${c.projectSub }</td>
 </tr>
 <input type="hidden" value="${c.boardNo }" id="projectNo">
 </c:forEach>
 </table>
 <br><br>
 <div align="center">
-<input type="button" value="추가모집" style="padding: 20px;" id="moreMans">
-<input type="button" value="모집중단" style="padding: 20px;" id="stopMans">
-<input type="button" value="채팅방 입장" style="padding: 20px;" id="joinChat">
+<img src="${initParam.root }images/moreMan.jpg" id="moreMans">
+<img src="${initParam.root }images/stopMan.jpg" id="stopMans">
+<img src="${initParam.root }images/joinChat.jpg" id="joinChat">
 </div>
 </c:when>
 <c:otherwise>

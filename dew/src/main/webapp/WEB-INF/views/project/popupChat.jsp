@@ -52,16 +52,16 @@
 <body>
 	<table border="1" cellpadding="5">
 		<tr>
-			<td width="320px" height="320px" valign="top" >
+			<td width="320px" height="320px" valign="top" style="background-color: #F0FFF0">
 			<span id="chatSpan" >
 			<c:forEach items="${requestScope.list }" var="list"  end="${fn:length(requestScope.list)-2}">
 			${list.content } ${list.commentDate }<br>
 			</c:forEach></span></td>
 		</tr>
 		<tr>
-			<td><input type="text" style="width: 310px" id="content" ></td>
+			<td style="padding: 0px"><input type="text" style="width: 320px" id="content"></td>
 		</tr>
 	</table>
-	<img src="${initParam.root}images/back.jpg" onclick="location.href='project_popupProGetJoiner.do?projectNo='+<%=list.get(list.size()-1)%>">
+	<img src="${initParam.root}images/backJoin.jpg" onclick="location.href='project_popupProGetJoiner.do?projectNo='+<%=list.get(list.size()-1)%>">
 </body>
 </html>
