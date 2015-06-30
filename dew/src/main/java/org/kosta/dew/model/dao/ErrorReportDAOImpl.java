@@ -50,6 +50,12 @@ public class ErrorReportDAOImpl implements ErrorReportDAO {
 	@Override
 	public int reportWrite(ErrorReportVO vo, String type,String title) {
 		
+	      String content = "";
+	      content = vo.getContent().replaceAll("<", "&lt;");
+	      content = content.replaceAll(">", "&gt");
+	      vo.setContent(content);
+		
+		
 		if(type.equals("exception") || type.equals("ExceptionMessage")){
 			sqlSessionTemplate.insert("errorReport.writeReportExceptionTitle", title);
 			sqlSessionTemplate.insert("errorReport.writeReportException", vo);
@@ -108,6 +114,12 @@ public class ErrorReportDAOImpl implements ErrorReportDAO {
 
 	@Override
 	public int reportUpdate(ErrorReportVO vo) {
+		
+	      String content = "";
+	      content = vo.getContent().replaceAll("<", "&lt;");
+	      content = content.replaceAll(">", "&gt");
+	      vo.setContent(content);
+	      
 		sqlSessionTemplate.update("errorReport.update", vo);
 		return vo.getErrorNo();
 	}
