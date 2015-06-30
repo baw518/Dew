@@ -22,9 +22,10 @@
 <link rel="stylesheet" href="css/dew.css">
 <body>
 <div class="main">
-<h3 id="projectRegisterLogo">Project Request</h3>
+<h3 id="projectRegisterLogo"><font color=#FFCA9B>Project Request</font></h3>
 <div id="registerProjectForm" >
-<form action="project_reqRegister.do" method="post" class="regform" onsubmit="return checkRegit()" enctype="multipart/form-data" >
+<form action="project_reqRegister.do" method="post" class="regform" onsubmit="return checkRegit()" enctype="multipart/form-data" 
+style="background-color: #FDF5DC;border-color: #FFD5B4">
 <hr>
 제목
 <input type="text" name="projectName" id="projectName"><hr>

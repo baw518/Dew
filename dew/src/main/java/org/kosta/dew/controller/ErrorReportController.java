@@ -100,6 +100,10 @@ public class ErrorReportController {
 	@RequestMapping("report_write.do")
 	public String reportWrite(HttpSession session,ErrorReportVO vo, String type,String title,String command,Model model){
 		int errorNo = -1 ;
+		String content = "";
+		content = vo.getContent().replaceAll("<", "&lt;");
+		content = content.replaceAll(">", "&gt");
+		vo.setContent(content);
 		if (command.equals("register")){
 			// System.out.println(type);
 			errorNo = errorReportService.writeReport(vo,type,title);

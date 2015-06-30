@@ -1,7 +1,7 @@
 select er.error_report_no as errorNo,e.exception_message as exceptionMessage, er.discussion_status as discussionstatus  from ERROR_REPORT er, ERROR e where e.error_no = er.error_no and e.exception_message is not null ;
 select * from ERROR_REPORT er, ERROR e where e.error_no = er.error_no and e.error_code is not null ;
 select  er.error_report_no as errorNo,e.exception_message as exceptionMessage, er.discussion_status as discussionstatus  from ERROR_REPORT er, ERROR e where e.error_no = er.error_no and e.exception_message is not null ;
-
+select * from qna
 select distinct e.exception_message as exceptionMessage, er.error_report_no as errorNo,  er.discussion_status as discussionstatus  from ERROR_REPORT er, ERROR e where e.error_no = er.error_no and e.exception_message is not null
 select distinct e.error_code as errorCode , er.error_report_no as errorNo,  er.discussion_status as discussionstatus  from ERROR_REPORT er, ERROR e where e.error_no = er.error_no and e.error_code is not null ;
 
@@ -159,3 +159,5 @@ from ( select errorNo,exceptionMessage,reportdate,discussionstatus,ceil(rownum/1
 from ( select e.error_no as errorNo ,e.exception_message as exceptionMessage, to_char(error_report_date,'yyyy/mm/dd HH24:MI') as reportdate  ,er.discussion_status as discussionstatus from ERROR_REPORT er, ERROR e where e.error_no = er.error_no and e.exception_message ='java.lang.ClassCastException' order by reportDate desc
 )) where page='1'
 
+
+select * from discussion 
