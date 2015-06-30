@@ -159,7 +159,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select errorNo, errorCode,reportDate, discussionstatus , rownum ,id, content, hit
 		from (select e.error_no as errorNo ,e.error_code as errorCode, to_char(error_report_date,'yyyy/mm/dd HH24:MI') as reportDate  ,er.discussion_status as discussionstatus ,id, content, hit
 				from ERROR_REPORT er, ERROR e 
-				where e.error_no = er.error_no and e.error_code like '%' || #{value} || '%' or er.content like '%' || #{value} || '%' and e.error_code is not null
+				where e.error_no = er.error_no and e.error_code like '%' || #{value} || '%'  and e.error_code is not null
 				order by reportDate desc)
 		where rownum<=3
 		]]>
@@ -170,7 +170,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select errorNo,exceptionMessage,reportDate,discussionstatus, rownum,id,content,hit
 		from ( select e.error_no as errorNo ,e.exception_message as exceptionMessage, to_char(error_report_date,'yyyy/mm/dd HH24:MI') as reportDate  ,er.discussion_status as discussionstatus ,id,content,hit
 				 from ERROR_REPORT er, ERROR e 
-				 where e.error_no = er.error_no and e.exception_message like '%' || #{value} || '%' or er.content like '%' || #{value} || '%' and exception_message is not null
+				 where e.error_no = er.error_no and e.exception_message like '%' || #{value} || '%'  and exception_message is not null
 				 order by reportDate desc)
 		where rownum <=3
 	]]>
