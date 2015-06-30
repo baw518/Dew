@@ -33,7 +33,7 @@ public class SearchController {
 	 */
 	@RequestMapping("search_resultListView.do")
 	public String resultListView(String word,Model model){
-		String path = "search/alcls";
+		String path = "search/allListView";
 		
 		//검색어의 맨앞에 /가있다면,  /게시판의 내용만 검색하여 결과를 보여준다.
 		if(word.startsWith("/")){
@@ -59,7 +59,7 @@ public class SearchController {
 				if(boardName.equals("error") || boardName.equals("errorcode") || boardName.equals("애러") || boardName.equals("애러코드")){
 					//리스트에 검색어에 대한 결과 넣기
 					List<ErrorReportVO> list = searchService.searchErrorCode(map);
-					
+	
 					//페이징
 					PagingBean pagingBean = new PagingBean(searchService.getSearchErrorCodeCount(wordName),pageNum);
 					
@@ -198,7 +198,7 @@ public class SearchController {
 			List<DiscussVO> discussList = searchService.searchThreeDiscuss(wordName);
 			List<ProjectVO> projectList = searchService.searchThreeProject(wordName);
 			List<VideoVO> videoList = searchService.searchThreeVideo(wordName);
-			System.out.println(errorCodeList);
+			//System.out.println(errorCodeList);
 			//리스트 보냄
 			if(errorCodeList.size()!=0)
 				model.addAttribute("errorCode", errorCodeList);

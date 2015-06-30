@@ -60,7 +60,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<![CDATA[
 		select count(e.error_no)
 		from ERROR_REPORT er, ERROR e 
-		where e.error_no = er.error_no and e.error_code like '%' || #{wordName} || '%' or er.content like '%' || #{wordName} || '%' and e.error_code is not null
+		where e.error_no = er.error_no and e.error_code like '%' || #{wordName} || '%'  and e.error_code is not null
 	]]>
 	</select>
 	
@@ -80,7 +80,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<![CDATA[
 		 select count(e.error_no)
 		 from ERROR_REPORT er, ERROR e 
-		 where e.error_no = er.error_no and e.exception_message like '%' || #{wordName} || '%' or er.content like '%' || #{wordName} || '%' and exception_message is not null
+		 where e.error_no = er.error_no and e.exception_message like '%' || #{wordName} || '%'  and exception_message is not null
 	]]>
 	</select>
 	
