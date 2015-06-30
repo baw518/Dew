@@ -124,3 +124,38 @@ delete from error_report
 					order by reportDate desc)
 			) 
 		where page='1'
+
+		select distinct(e.exception_message) as exceptionMessage,error_report_date  as reportDate 
+					from error e , error_report er 
+					where e.error_no = er.error_no and e.error_code is null or e.exception_message is not null
+					order by er.error_report_date desc
+					
+select distinct(e.error_code) as errorCode , er.error_report_date as reportDate 
+					from error e , error_report er 
+					where e.error_no = er.error_no and e.exception_message is null or e.error_code is not null 
+					order by er.error_report_date desc		
+select errorCode
+		from( select distinct(e.error_code) as errorCode , er.error_report_date   
+		         from error e , error_report er 
+		         where e.error_no = er.error_no and e.exception_message is null 
+		         order by er.error_report_date desc
+) where rownum <=5
+select distinct(e.exception_message) as errorCode ,er.error_report_date   from error e , error_report er where e.error_no = er.error_no and e.error_code is null order by er.error_report_date desc
+ 			select exceptionMessage
+					from( select distinct(e.exception_message) as exceptionMessage ,er.error_report_date   
+					         from error e , error_report er 
+					         where e.error_no = er.error_no and e.error_code is null order by er.error_report_date desc)
+			where rownum<=5
+			
+			
+select errorNo, errorCode,reportdate, discussionstatus
+from
+( select errorNo, errorCode,reportdate, discussionstatus , ceil(rownum/10) as page
+from (select e.error_no as errorNo ,e.error_code as errorCode, to_char(error_report_date,'yyyy/mm/dd HH24:MI') as reportdate  ,er.discussion_status as discussionstatus from ERROR_REPORT er, ERROR e where e.error_no = er.error_no and e.error_code ='ORA-00001 : 유일성 제약조건에 위배됩니다 (unique constraint violated)'} order by reportDate desc)
+) 
+
+select errorNo,exceptionMessage,reportdate,discussionstatus
+from ( select errorNo,exceptionMessage,reportdate,discussionstatus,ceil(rownum/10) as page
+from ( select e.error_no as errorNo ,e.exception_message as exceptionMessage, to_char(error_report_date,'yyyy/mm/dd HH24:MI') as reportdate  ,er.discussion_status as discussionstatus from ERROR_REPORT er, ERROR e where e.error_no = er.error_no and e.exception_message ='java.lang.ClassCastException' order by reportDate desc
+)) where page='1'
+

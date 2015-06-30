@@ -68,12 +68,8 @@ ${exception.date }
 </td>
 </tr>
 </thead>
-<tr><td colspan="4" >
-
-${exception.content }
-
+<tr><td colspan="4" ><pre>${exception.content }</pre>
 </td></tr>
-
 </c:if>
 ${error }
 <c:if test="${requestScope.errorcode !=null }">
@@ -96,9 +92,7 @@ ${error }
 	</tr>
 	</thead>
 	<tr ><td colspan="4" >
-
-	${errorcode.content }
-
+	<pre>${errorcode.content }</pre>
 	</td></tr>
 
 </c:if>
@@ -108,7 +102,12 @@ ${error }
 <input type="button" value="관련글" id="reference">
 
 	<c:if test="${sessionScope.mvo !=null }">
-	<input type="button" value="토론 등록 요청" id="insertManagerBtn">
+			<c:if test="${exception.discussionStatus == 0 }">
+			<input type="button" value="토론 등록 요청" id="insertManagerBtn">
+			</c:if>
+			<c:if test="${errorcode.discussionStatus == 0}">
+			<input type="button" value="토론 등록 요청" id="insertManagerBtn">
+			</c:if>
 			<c:if test="${sessionScope.mvo.id == errorcode.id }">
 			 <input type="button" value="내글편집하기" id="myupdate">
 			</c:if>

@@ -9,7 +9,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 </select>
 
 <select id="getReportExceptionMessage" resultType="String">
-select distinct(e.exception_message) as errorCode   from error e , error_report er where e.error_no = er.error_no and e.error_code is null order by e.exception_message asc
+select distinct(e.exception_message) as exceptionMessage   from error e , error_report er where e.error_no = er.error_no and e.error_code is null order by e.exception_message asc
 </select>
 
 <select id="getContentException" parameterType="String" resultType="evo">
@@ -39,7 +39,7 @@ from ( select e.error_no as errorNo ,e.exception_message as exceptionMessage, to
 select errorNo, errorCode,reportdate, discussionstatus
 from
 ( select errorNo, errorCode,reportdate, discussionstatus , ceil(rownum/10) as page
-from (select e.error_no as errorNo ,e.error_code as errorCode, to_char(error_report_date,'yyyy/mm/dd HH24:MI') as reportdate  ,er.discussion_status as discussionstatus from ERROR_REPORT er, ERROR e where e.error_no = er.error_no and e.error_code =#refer} order by reportDate desc)
+from (select e.error_no as errorNo ,e.error_code as errorCode, to_char(error_report_date,'yyyy/mm/dd HH24:MI') as reportdate  ,er.discussion_status as discussionstatus from ERROR_REPORT er, ERROR e where e.error_no = er.error_no and e.error_code =#{refer} order by reportDate desc)
 ) where page=#{pageNo}
 
 </select>
