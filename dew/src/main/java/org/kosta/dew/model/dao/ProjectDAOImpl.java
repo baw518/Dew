@@ -161,5 +161,13 @@ public class ProjectDAOImpl implements ProjectDAO{
 	public void deleteChat(int projectNo) {
 		sqlSessionTemplate.delete("project.deleteChat",projectNo);
 	}
+	@Override
+	public void deleteAllChat(String projectNo) {
+		sqlSessionTemplate.delete("project.deleteAllChat",projectNo);
+	}
+	@Override
+	public ProjectVO findProjectByNo(int projectNo) {
+		return sqlSessionTemplate.selectOne("project.findProjectByNo",projectNo);
+	}
 
 }

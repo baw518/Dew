@@ -107,8 +107,8 @@
 		<th>${requestScope.pvo.project_date}</th>
 	</tr>
 	<tr>
-		<td colspan="7">${requestScope.pvo.content}<br><c:choose><c:when test="${requestScope.pvo.deadline!='noImage' }">
-<img src="${initParam.root}upload/${requestScope.pvo.deadline}" width="500px" style="padding: 5px"> </c:when></c:choose></td>
+		<td colspan="7" align="center">${requestScope.pvo.content}<br><c:choose><c:when test="${requestScope.pvo.deadline!='noImage' }">
+<img src="${initParam.root}upload/img/${requestScope.pvo.deadline}" width="500px" style="padding: 5px"> </c:when></c:choose></td>
 	</tr>
 </thead>
     </c:when>

@@ -102,3 +102,4 @@ delete from chat where chat_no=(select min(chat_no) from chat where project_no=4
  		select chat_content from chat where project_no=40 order by chat_no asc
 
 select * from member
+select * from project_write

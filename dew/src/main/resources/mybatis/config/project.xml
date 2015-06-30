@@ -15,7 +15,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		from project_write
   </sql>
   
-  
 <select id="findProjectByNo" resultMap="projectRM">
  		<include refid="findProject"/> 
  		where project_no=#{value}
@@ -167,6 +166,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	</insert>
  	<delete id="deleteChat">
  		delete from chat where chat_no=(select min(chat_no) from chat where project_no=#{value})
+ 	</delete>
+ 	<delete id="deleteAllChat">
+ 		delete from chat where project_no=#{value}
  	</delete>
   </mapper> 
  

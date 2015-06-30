@@ -176,5 +176,14 @@ public class ProjectServiceImpl implements ProjectService{
 	public void sendChatAjax(ProjectVO pvo) {
 		projectDAO.sendChatAjax(pvo);
 	}
+	@Override
+	public void deleteAllChat(String projectNo) {
+		projectDAO.deleteAllChat(projectNo);
+	}
+	@Override
+	public ProjectVO findProjectByNo(int projectNo) {
+		return projectDAO.findProjectByNo(projectNo);
+	}
+
 
 }

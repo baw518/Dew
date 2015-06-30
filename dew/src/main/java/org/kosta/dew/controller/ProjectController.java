@@ -205,6 +205,9 @@ public class ProjectController {
 		String delPath="redirect:project_listView.do";
 		if(manage==true)
 			delPath="redirect:project_main.do";
+		ProjectVO pvo=projectService.findProjectByNo(projectNo);
+		File file=new File(path+"img/"+pvo.getDeadline());
+		file.delete();
 		projectService.deleteDepart(projectNo);
 		projectService.deleteProject(projectNo);
 		return new ModelAndView(delPath);
@@ -304,13 +307,14 @@ public class ProjectController {
 		return new ModelAndView("redirect:project_main.do");
 	}
 	/**
-	 * projectNo를 받아와 프로젝트의 achieve를 완료로 수정합니다.
+	 * projectNo를 받아와 프로젝트의 achieve를 완료로 수정하고 해당 팀 채팅내역삭제.
 	 * @param projectNo
 	 * @return
 	 */
 	@RequestMapping("project_success.do")
 	public ModelAndView successProject(String projectNo){
 		projectService.successProject(projectNo);
+		projectService.deleteAllChat(projectNo);
 		return new ModelAndView("redirect:project_main.do");
 	}
 	/**
@@ -355,6 +359,11 @@ public class ProjectController {
 		pvo.setProjectNo(projectNo);
 		projectService.mansAjax(pvo);
 	}
+	/**
+	 * 프로젝트 팀별 채팅에 참가합니다
+	 * @param projectNo
+	 * @return
+	 */
 	@RequestMapping("joinChat.do")
 	public ModelAndView joinChat(int projectNo){
 		List<String> list=new ArrayList<String>();
@@ -362,6 +371,12 @@ public class ProjectController {
 		list.add(Integer.toString(projectNo));
 		return new ModelAndView("project/popupChat","list",list);
 	}
+	/**
+	 * 채팅창에 글을 쓰는 기능입니다.
+	 * @param projectNo
+	 * @param content
+	 * @param request
+	 */
 	@RequestMapping("sendChatAjax")
 	public void sendChatAjax(int projectNo,String content,HttpServletRequest request){
 		HttpSession session=request.getSession(false);
@@ -371,6 +386,11 @@ public class ProjectController {
 		pvo.setContent(mvo.getId()+": "+content);
 		projectService.sendChatAjax(pvo);
 	}
+	/**
+	 * 채팅창을 계속 새로고침 해주는 메서드입니다.
+	 * @param projectNo
+	 * @return
+	 */
 	@RequestMapping("refreshChatAjax.do")
 	@ResponseBody
 	public List<String> refreshChatAjax(int projectNo){

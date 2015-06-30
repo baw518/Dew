@@ -69,4 +69,9 @@ public interface ProjectDAO {
 	void sendChatAjax(ProjectVO pvo);
 
 	void deleteChat(int projectNo);
+
+	void deleteAllChat(String projectNo);
+
+	ProjectVO findProjectByNo(int projectNo);
+
 }

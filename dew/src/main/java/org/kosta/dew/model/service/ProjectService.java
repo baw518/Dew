@@ -69,6 +69,10 @@ public interface ProjectService {
 
 	void sendChatAjax(ProjectVO pvo);
 
+	void deleteAllChat(String projectNo);
+
+	ProjectVO findProjectByNo(int projectNo);
+
 
 	
 }
