@@ -290,7 +290,7 @@ $(document).ready(function(){
 		</th>
 	</tr>
 	<tr>
-		<th>작성자 :  ${requestScope.qvo.id }</th>
+		<th height="30px">>작성자 : <img src="${initParam.root }upload/img/${requestScope.qvo.id}.jpg" width="30px"> ${requestScope.qvo.id }</th>
 		<th>질문작성일 : ${requestScope.qvo.date }</th>
 		<th>포인트 : ${requestScope.qvo.point }</th>
 		<th>조회수 : ${requestScope.qvo.hit }</th>
@@ -308,7 +308,7 @@ $(document).ready(function(){
 				<table class="dewTable" align="left" id="commentView">
 					<c:forEach items="${requestScope.cmvo}" var="i" varStatus="index">
 						<tr>
-							<td class="commentId">${i.id}</td>
+							<td class="commentId"><img src="${initParam.root }upload/img/${i.id}.jpg" width="30px">${i.id}</td>
 							<td class="commentDate">${i.commentDate}</td>
 							<td class="commentContent" colspan="3">${i.content}</td>
 							<td>

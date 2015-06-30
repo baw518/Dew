@@ -170,7 +170,7 @@
 <div id="commentForm">
 	<table style="border: 1px soild #ccc" id="commentTable" class="dewTable">
 	<c:forEach var="cvo" items="${requestScope.pvo.commentVO}" varStatus="c">
-		<tr><td id="writer">${cvo.id }</td>
+		<tr><td id="writer" height="30px"><img src="${initParam.root }upload/img/${cvo.id}.jpg" width="30px">${cvo.id }</td>
 			 <td><span id="commentContent${c.index }" >${cvo.content }</span>
 			 <input type="hidden" value="${cvo.content }" id="commentContentHidden${c.index }">
 			 <c:choose>

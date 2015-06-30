@@ -208,7 +208,7 @@ $(document).ready(function(){
  		<th class="hit"> ${requestScope.dsvo.hit} </th>
  	</tr>
  	<tr>
- 		<th class="id" colspan="5" align="left" >${requestScope.dsvo.id} </th>
+ 		<th class="id" colspan="5" align="left" height="30px"><img src="${initParam.root }upload/img/${dsvo.id}.jpg" width="30px">${requestScope.dsvo.id} </th>
  	</tr>
  	</thead>
  	<tr>
@@ -220,7 +220,7 @@ $(document).ready(function(){
 				<table class="dewCommentTable" align="center" id="commentView">
 					<c:forEach items="${requestScope.cmvo}" var="i" varStatus="index">
 						<tr>
-							<td>${i.id}</td>
+							<td height="30px"><img src="${initParam.root }upload/img/${i.id}.jpg" width="30px">${i.id}</td>
 							<td>${i.commentDate}</td>
 							<td colspan="3" class="contentTd">${i.content}</td>
 							<td>
