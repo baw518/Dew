@@ -91,3 +91,36 @@ update (select e.exception_message as exceptionMessage, e.error_code as errorCod
 
 delete from error e,error_report er where e.error_no = er.error_no 
 delete from error_report
+
+      select errorNo,exceptionMessage,reportDate,discussionstatus, rownum,id,content,hit
+      from ( select e.error_no as errorNo ,e.exception_message as exceptionMessage, to_char(error_report_date,'yyyy/mm/dd HH24:MI') as reportDate  ,er.id as id, er.content as content 
+             from ERROR_REPORT er, ERROR e 
+             where e.error_no = er.error_no and e.exception_message like '%ex%' or er.content like '%ex%' and e.exception_message is not null
+             order by reportDate desc)
+      where rownum <=3
+      
+      select errorNo,exceptionMessage,reportDate,discussionstatus, rownum,id,content,hit
+      from ( select e.error_no as errorNo ,e.exception_message as exceptionMessage, to_char(error_report_date,'yyyy/mm/dd HH24:MI') as reportDate  ,er.id as id, er.content as content 
+             from ERROR_REPORT er, ERROR e 
+             where e.error_no = er.error_no and e.exception_message like '%e%'  and e.exception_message is not null
+             order by reportDate desc)
+      where rownum <=3
+      
+      
+      select errorNo,exceptionMessage,reportDate,discussionstatus,id,content,hit
+		from ( select errorNo,exceptionMessage,reportDate,discussionstatus,ceil(rownum/10) as page,id,content,hit
+					from ( select e.error_no as errorNo ,e.exception_message as exceptionMessage, to_char(error_report_date,'yyyy/mm/dd HH24:MI') as reportDate  ,er.discussion_status as discussionstatus ,id,content,hit
+							 from ERROR_REPORT er, ERROR e 
+							 where e.error_no = er.error_no and e.exception_message like '%Ex%'  and exception_message is not null
+							 order by reportDate desc)
+		) where page= '1'
+		
+		select errorNo, errorCode,reportDate, discussionstatus,id,content,hit
+		from
+		( 	select errorNo, errorCode,reportDate, discussionstatus , ceil(rownum/10) as page ,id, content, hit
+			from (select e.error_no as errorNo ,e.error_code as errorCode, to_char(error_report_date,'yyyy/mm/dd HH24:MI') as reportDate  ,er.discussion_status as discussionstatus ,id, content, hit
+					from ERROR_REPORT er, ERROR e 
+					where e.error_no = er.error_no and e.error_code like '%H%' and e.error_code is not null
+					order by reportDate desc)
+			) 
+		where page='1'

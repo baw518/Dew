@@ -33,7 +33,7 @@ public class SearchController {
 	 */
 	@RequestMapping("search_resultListView.do")
 	public String resultListView(String word,Model model){
-		String path = "search_allListView";
+		String path = "search/alcls";
 		
 		//검색어의 맨앞에 /가있다면,  /게시판의 내용만 검색하여 결과를 보여준다.
 		if(word.startsWith("/")){

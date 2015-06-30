@@ -34,6 +34,7 @@ public class SearchDAOImpl implements SearchDAO {
 	@Override
 	public List<ErrorReportVO> searchException(HashMap<String, String> map) {
 		// TODO 자동 생성된 메소드 스텁
+		System.out.println("searchDAO (searchException): "+ sqlSessionTemplate.selectList("search.exception",map));
 		return sqlSessionTemplate.selectList("search.exception",map);
 	}
 
