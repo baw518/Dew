@@ -116,6 +116,11 @@ public class QnAController {
 				}
 			}
 		}
+		 String content = "";
+	     content = qvo.getContent().replaceAll("<", "&lt;");
+	     content = content.replaceAll(">", "&gt");
+	    qvo.setContent(content);
+	
 		model.addAttribute("qvo", qvo);
 		
 

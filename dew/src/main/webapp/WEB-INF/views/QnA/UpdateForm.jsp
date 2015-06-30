@@ -60,7 +60,7 @@ $(document).ready(function(){
 			  	<td></td>
 			  	<td colspan="7" align="left">
 			   	&nbsp;&nbsp;
-			  	<textarea cols="190" rows="30" id="content" name="content"></textarea>
+			  	<textarea cols="110" rows="30" id="content" name="content"><div></div></textarea>
 			  	</td>
 			  	<td><span id="pointView"></span></td>
 			  </tr> 
