@@ -30,7 +30,7 @@ $(document).ready(function(){
 		    <td class="tableNo" >${list.videoNo }</td>				
 			<td class="tableTitle" ><a href="video_showContent.do?no=${list.videoNo}" class="hover_font" >
 			${list.title }</a></td>
-			<td class="tableId">${list.id }</td>
+			<td class="tableId"height="30px"><img src="${initParam.root }upload/img/${list.id}.jpg" width="30px">${list.id }</td>
 			<td class="tableDate">${list.videoDate }</td>
 			<td class="tableHit">${list.hit }</td>
 		</tr>	

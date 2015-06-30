@@ -66,7 +66,7 @@ $(document).ready(function(){
 			<td class="tableTitle">
 				<a href="QnA_showContent.do?qnaNo=${list.qnaNo}"  class="hover_font">${list.title }</a>
 			</td>
-			<td >${list.id }</td>
+			<td height="30px"><img src="${initParam.root }upload/img/${list.id}.jpg" width="30px">${list.id }</td>
 			<td >
 				<c:choose>
 					<c:when test="${list.restep== 0}">
