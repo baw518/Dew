@@ -35,6 +35,22 @@ public class ProjectController {
 		public ModelAndView projectRequestView(){
 			return new ModelAndView("projectView_projectRequest");
 		}
+	   @RequestMapping("project_ReqUpdate.do")
+		public ModelAndView projectRequestUpdate(ProjectVO pvo, MultipartFile picture,HttpServletRequest request){
+		   HttpSession session=request.getSession(false);
+			MemberVO mvo=(MemberVO) session.getAttribute("mvo");
+			pvo.setId(mvo.getId());
+			String fileName;
+			pvo.setDeadline(picture.getOriginalFilename());
+			fileName=picture.getOriginalFilename();
+			try{
+				picture.transferTo(new File(path+"img/"+fileName));
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			projectService.updateReq(pvo);
+			return new ModelAndView("redirect:project_View.do?projectNo="+pvo.getProjectNo());
+		}
 	   /**
 	    * 세션으로 받아온 아이디로 포함되어있는 프로젝트리스틀 찾아서
 	    * ProjectManageVO로 생성하여 프로젝트 관리화면으로 이동합니다.
@@ -178,9 +194,13 @@ public class ProjectController {
 	 * @return
 	 */
 	@RequestMapping("project_updateForm.do")
-	public ModelAndView updateProjectForm(String projectNo){
+	public ModelAndView updateProjectForm(String projectNo,boolean req){
 		ProjectVO pvo=projectService.getProjectContent(projectNo);
+		if(req==true){
+			return new ModelAndView("projectView_projectReqUpdate","pvo",pvo);
+		}else{
 		return new ModelAndView("projectView_projectUpdate","pvo",pvo);
+		}
 	}
 	/**
 	 * 수정할 데이터를 받아와 DB를 update시킵니다.
@@ -193,6 +213,7 @@ public class ProjectController {
 		projectService.updateProject(pvo,dvo);
 		return new ModelAndView("redirect:project_View.do?projectNo="+pvo.getProjectNo());
 	}
+	
 	/**
 	 * projectNo를 받아와 프로젝트를 삭제합니다.
 	 * 프로젝트 관리화면에서 지울시에는 manage가 true로 들어와 프로젝트관리화면으로 리턴됩니다.

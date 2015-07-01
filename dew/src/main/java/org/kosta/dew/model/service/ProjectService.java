@@ -73,6 +73,8 @@ public interface ProjectService {
 
 	ProjectVO findProjectByNo(int projectNo);
 
+	void updateReq(ProjectVO pvo);
+
 
 	
 }

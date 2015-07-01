@@ -15,7 +15,7 @@
 			<%MemberVO mvo=(MemberVO)session.getAttribute("mvo");
   			if(mvo==null){
 %> 			alert("로그인하세요");
-				location.href="member_login_form.do";
+				location.href="home.do";
   			<%}else{%>
   				$("#joinComment").html("지원분야 <select id='subjectVal'><option value=''>고르세요</option><c:forEach items='${requestScope.pvo.departVO}' var='dvo'><option value='${dvo.subject}'>${dvo.subject}</option></c:forEach></select><br><textarea rows='3' cols='53' id='joinCommentArea'></textarea><br><br>");
   				$("#joinCommentArea").focus();
@@ -52,7 +52,11 @@
 			location.href="project_delete.do?projectNo=${requestScope.pvo.projectNo}";
 		});
 		$("#updateProBtn").click(function(){
+			<%if(pvo.getAchieve().equals("의뢰")){%>
+			location.href="project_updateForm.do?projectNo=${requestScope.pvo.projectNo}&req=true";
+			<%}else{%>
 			location.href="project_updateForm.do?projectNo=${requestScope.pvo.projectNo}";
+			<%}%>
 		});
 		$("#writeComment").click(function(){
 			if($("#commentTextContent").val()==""){
@@ -62,7 +66,7 @@
 			location.href="registerProjectComment.do?content="+$("#commentTextContent").val()+"&projectNo=${requestScope.pvo.projectNo}";
 		});
 		$("#writeCommentLogin").click(function(){
-			location.href="member_login_form.do";
+			location.href="home.do";
 		});
 		<%List<CommentVO> cvoList=pvo.getCommentVO();
 		for(int i=0;i<cvoList.size();i++){%>
@@ -73,7 +77,7 @@
 		$("#updateCommentBtn<%=i%>").click(function(){
 			$("#commentContent<%=i%>").html(" <input type='hidden' value='${cvo.commentNo }'><input type='text' id='updateComment<%=i%>' >");
 			$("#updateComment<%=i%>").val($('#commentContentHidden<%=i%>').val());
-			$("#commentTextSpan<%=i%>").html(" <input type='button' value='수정' id='updateCommentSpanBtn<%=i%>'>");
+			$("#commentTextSpan<%=i%>").html("<img src='${initParam.root }images/cmtUpdateBtn.jpg' id='updateCommentSpanBtn<%=i%>' >");
 			 $("#commentTextSpan<%=i%>").on("click","#updateCommentSpanBtn<%=i%>", function(){
 				 location.href="updateProjectComment.do?commentNo="+$('#commentNo<%=i%>').val()+"&boardNo=${requestScope.pvo.projectNo}"
 					+"&content="+$('#updateComment<%=i%>').val();
@@ -151,7 +155,7 @@
     </c:otherwise>
     </c:choose>
   </table>
-<c:if test="${requestScope.pvo.achieve=='모집중'&&sessionScope.mvo.id!=requestScope.pvo.id }">
+<c:if test="${(requestScope.pvo.achieve=='모집중'||requestScope.pvo.achieve=='추가모집중')&&sessionScope.mvo.id!=requestScope.pvo.id }">
 			<span id="switchBtn" ><img src="${initParam.root }images/joinProBtn.jpg" id="joinProBtn"></span>
 			</c:if>
 <br>

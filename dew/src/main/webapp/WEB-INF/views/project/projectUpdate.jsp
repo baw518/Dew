@@ -29,7 +29,7 @@ function checkUpdate(){
 		return false;
 	}
 	else if($("#content").val()==""){
-		alert("한마디를 입력하세요");
+		alert("내용을 입력하세요");
 		return false;
 	}
 }
@@ -59,9 +59,11 @@ function checkUpdate(){
 	
 </script>
 <link rel="stylesheet" href="css/project.css">
+<link rel="stylesheet" href="css/dew.css">
 <body>
-<h3 id="projectRegisterLogo">프로젝트 수정</h3>
-<div id="registerProjectForm" >
+<div class="main">
+<h3 id="projectRegisterLogo">Project Update</h3>
+<div id="registerProjectForm"  >
 <form action="project_update.do" method="post" class="regform"  onsubmit="return checkUpdate()">
 <hr>
 프로젝트명
@@ -99,9 +101,9 @@ function checkUpdate(){
 모집마감일 <input type="text" id="deadline" name="deadline" style="width: 120px" value="${requestScope.pvo.deadline }"><br>
 진행률<span id="sliderVal"><%=pvo.getProgressing()%>%</span><div style="padding: 10px;"><div id="slider"></div></div>
 <hr>
-한마디<textarea rows="2" cols="28" name="content" id="content">${requestScope.pvo.content }</textarea><hr>
+내용<textarea rows="3" cols="40" name="content" id="content">${requestScope.pvo.content }</textarea><hr>
 <input type="submit" value="수정" id="regProBtn">
 <input type="hidden" name="projectNo" value="${requestScope.pvo.projectNo }">
 </form>
-</div>
+</div></div>
 </body>

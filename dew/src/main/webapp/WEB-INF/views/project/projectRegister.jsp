@@ -48,6 +48,7 @@
 <link rel="stylesheet" href="css/dew.css">
 <body>
 <div class="main">
+
 <h3 id="projectRegisterLogo"><font color=#BEEFFF>Project Register</font></h3>
 <div id="registerProjectForm">
 <form action="project_register.do" method="post" class="regform" onsubmit="return checkRegit()" style="background-color: #F4FFFF;border-color: #dcdcdc">

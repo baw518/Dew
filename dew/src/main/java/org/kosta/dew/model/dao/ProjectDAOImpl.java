@@ -169,5 +169,9 @@ public class ProjectDAOImpl implements ProjectDAO{
 	public ProjectVO findProjectByNo(int projectNo) {
 		return sqlSessionTemplate.selectOne("project.findProjectByNo",projectNo);
 	}
+	@Override
+	public void updateReq(ProjectVO pvo) {
+		sqlSessionTemplate.update("project.updateReq",pvo);
+	}
 
 }

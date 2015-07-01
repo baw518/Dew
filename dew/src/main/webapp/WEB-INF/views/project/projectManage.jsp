@@ -65,11 +65,12 @@
 				if(confirm("삭제하시겠습니까?"))
 					location.href="project_delete.do?projectNo="+$("#ProBtnHid<%=i%>").val()+"&manage=true";
 			});
-			$("#deleteJoiner<%=i%>").click(function(){
+			<%for(int c=0;c<cpl.get(i).getCommentVO().size();c++){%>
+			$("#deleteJoiner<%=i%><%=c%>").click(function(){
 				if(confirm("삭제하시겠습니까?"))
-					location.href="project_deleteJoiner.do?id="+$("#deleteJoinerBtnHid<%=i%>").val()+"&projectNo="+$("#deleteJoinerBtnHid2<%=i%>").val();
-			});
-			<%}
+					location.href="project_deleteJoiner.do?id="+$("#deleteJoinerBtnHid<%=i%><%=c%>").val()+"&projectNo="+$("#deleteJoinerBtnHid2<%=i%><%=c%>").val();
+			}); 
+			<%}}
 			List<ProjectVO> ppl=pmvo.getProcessingProject();
  			for(int i=0;i<ppl.size();i++){%>
 			$("#successBtn<%=i%>").click(function(){
@@ -210,7 +211,7 @@
 																		<tr>
 																			<td colspan='4' style="background-color: #FFEBF0">참가신청자</td>
 																		</tr>
-																		<tr style="background-color: #FFEFD5">
+																		<tr style="background-color: #FFEBF0">
 																			<td width="80px">ID</td>
 																			<td width="120px">분야</td>
 																			<td width='350px'>내용</td>
@@ -221,10 +222,10 @@
 																			<td>${com.projectSub }</td>
 																			<td>${com.content}</td>
 																			<td>${com.commentDate}<input type='hidden'
-																				value='${com.id}' id='deleteJoinerBtnHid${cp.index}'><input
+																				value='${com.id}' id='deleteJoinerBtnHid${start.index }${cp.index}'><input
 																				type='hidden' value='${createP.projectNo}'
-																				id='deleteJoinerBtnHid2${cp.index}'>
-																				<img src="${initParam.root }images/deleteMan.jpg" id='deleteJoiner${cp.index}'></td>
+																				id='deleteJoinerBtnHid2${start.index }${cp.index }'>
+																				<img src="${initParam.root }images/deleteMan.jpg" id='deleteJoiner${start.index }${cp.index}'></td>
 																		</tr>
 																	</table>
 																</c:forEach><br></td>

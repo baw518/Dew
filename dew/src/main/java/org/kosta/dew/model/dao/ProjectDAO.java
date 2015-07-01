@@ -74,4 +74,6 @@ public interface ProjectDAO {
 
 	ProjectVO findProjectByNo(int projectNo);
 
+	void updateReq(ProjectVO pvo);
+
 }

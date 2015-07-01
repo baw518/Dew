@@ -184,6 +184,10 @@ public class ProjectServiceImpl implements ProjectService{
 	public ProjectVO findProjectByNo(int projectNo) {
 		return projectDAO.findProjectByNo(projectNo);
 	}
+	@Override
+	public void updateReq(ProjectVO pvo) {
+		projectDAO.updateReq(pvo);
+	}
 
 
 }
