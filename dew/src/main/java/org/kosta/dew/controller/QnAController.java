@@ -116,10 +116,8 @@ public class QnAController {
 				}
 			}
 		}
-		 String content = "";
-	     content = qvo.getContent().replaceAll("<", "&lt;");
-	     content = content.replaceAll(">", "&gt");
-	    qvo.setContent(content);
+		
+
 	
 		model.addAttribute("qvo", qvo);
 		
@@ -206,6 +204,38 @@ public class QnAController {
 		String path ="QnA_ReleaseSession";
 		
 		if(mvo!=null){
+			//스크립트,태그 방지설정
+			String test_str= vo.getContent();
+			test_str = test_str.replaceAll("javascript", "x-javascript");
+			test_str = test_str.replaceAll("script", "x-script");
+			test_str = test_str.replaceAll("SCRIPT", "x-SCRIPT");
+			test_str = test_str.replaceAll("iframe", "x-iframe");
+			test_str = test_str.replaceAll("document", "x-document");
+			test_str = test_str.replaceAll("vbscript", "x-vbscript");
+			test_str = test_str.replaceAll("applet", "x-applet");
+			test_str = test_str.replaceAll("embed", "x-embed");  // embed 태그를 사용하지 않을 경우만
+			test_str = test_str.replaceAll("object", "x-object");    // object 태그를 사용하지 않을 경우만
+			test_str = test_str.replaceAll("frame", "x-frame");
+			test_str = test_str.replaceAll("grameset", "x-grameset");
+			test_str = test_str.replaceAll("layer", "x-layer");
+			test_str = test_str.replaceAll("bgsound", "x-bgsound");
+			test_str = test_str.replaceAll("alert", "x-alert");
+			test_str = test_str.replaceAll("onblur", "x-onblur");
+			test_str = test_str.replaceAll("onchange", "x-onchange");
+			test_str = test_str.replaceAll("onclick", "x-onclick");
+			test_str = test_str.replaceAll("ondblclick","x-ondblclick");
+			test_str = test_str.replaceAll("enerror", "x-enerror");
+			test_str = test_str.replaceAll("onfocus", "x-onfocus");
+			test_str = test_str.replaceAll("onload", "x-onload");
+			test_str = test_str.replaceAll("onmouse", "x-onmouse");
+			test_str = test_str.replaceAll("onscroll", "x-onscroll");
+			test_str = test_str.replaceAll("onsubmit", "x-onsubmit");
+			test_str = test_str.replaceAll("onunload", "x-onunload");
+			test_str = test_str.replaceAll("\"", "'");
+			vo.setContent(test_str);
+			
+			
+			
 			//포인트 차감
 			qnAService.pointMinus(vo);
 			
@@ -258,6 +288,36 @@ public class QnAController {
 		//세션이 풀렸을경우 글수정 작업중지. 로그인폼으로
 		String path ="QnA_ReleaseSession";	
 		if(mvo!=null){
+			//스크립트,태그 방지설정
+			String test_str= vo.getContent();
+			test_str = test_str.replaceAll("javascript", "x-javascript");
+			test_str = test_str.replaceAll("script", "x-script");
+			test_str = test_str.replaceAll("SCRIPT", "x-SCRIPT");
+			test_str = test_str.replaceAll("iframe", "x-iframe");
+			test_str = test_str.replaceAll("document", "x-document");
+			test_str = test_str.replaceAll("vbscript", "x-vbscript");
+			test_str = test_str.replaceAll("applet", "x-applet");
+			test_str = test_str.replaceAll("embed", "x-embed");  // embed 태그를 사용하지 않을 경우만
+			test_str = test_str.replaceAll("object", "x-object");    // object 태그를 사용하지 않을 경우만
+			test_str = test_str.replaceAll("frame", "x-frame");
+			test_str = test_str.replaceAll("grameset", "x-grameset");
+			test_str = test_str.replaceAll("layer", "x-layer");
+			test_str = test_str.replaceAll("bgsound", "x-bgsound");
+			test_str = test_str.replaceAll("alert", "x-alert");
+			test_str = test_str.replaceAll("onblur", "x-onblur");
+			test_str = test_str.replaceAll("onchange", "x-onchange");
+			test_str = test_str.replaceAll("onclick", "x-onclick");
+			test_str = test_str.replaceAll("ondblclick","x-ondblclick");
+			test_str = test_str.replaceAll("enerror", "x-enerror");
+			test_str = test_str.replaceAll("onfocus", "x-onfocus");
+			test_str = test_str.replaceAll("onload", "x-onload");
+			test_str = test_str.replaceAll("onmouse", "x-onmouse");
+			test_str = test_str.replaceAll("onscroll", "x-onscroll");
+			test_str = test_str.replaceAll("onsubmit", "x-onsubmit");
+			test_str = test_str.replaceAll("onunload", "x-onunload");
+			test_str = test_str.replaceAll("\"", "'");
+			vo.setContent(test_str);
+			
 			//글 수정
 			qnAService.update(vo);
 			path = "redirect:QnA_showContent.do?qnaNo="+vo.getQnaNo();
@@ -326,6 +386,36 @@ public class QnAController {
 		String path ="QnA_ReleaseSession";	
 		
 		if(mvo!=null){
+			//스크립트,태그 방지설정
+			String test_str= vo.getContent();
+			test_str = test_str.replaceAll("javascript", "x-javascript");
+			test_str = test_str.replaceAll("script", "x-script");
+			test_str = test_str.replaceAll("SCRIPT", "x-SCRIPT");
+			test_str = test_str.replaceAll("iframe", "x-iframe");
+			test_str = test_str.replaceAll("document", "x-document");
+			test_str = test_str.replaceAll("vbscript", "x-vbscript");
+			test_str = test_str.replaceAll("applet", "x-applet");
+			test_str = test_str.replaceAll("embed", "x-embed");  // embed 태그를 사용하지 않을 경우만
+			test_str = test_str.replaceAll("object", "x-object");    // object 태그를 사용하지 않을 경우만
+			test_str = test_str.replaceAll("frame", "x-frame");
+			test_str = test_str.replaceAll("grameset", "x-grameset");
+			test_str = test_str.replaceAll("layer", "x-layer");
+			test_str = test_str.replaceAll("bgsound", "x-bgsound");
+			test_str = test_str.replaceAll("alert", "x-alert");
+			test_str = test_str.replaceAll("onblur", "x-onblur");
+			test_str = test_str.replaceAll("onchange", "x-onchange");
+			test_str = test_str.replaceAll("onclick", "x-onclick");
+			test_str = test_str.replaceAll("ondblclick","x-ondblclick");
+			test_str = test_str.replaceAll("enerror", "x-enerror");
+			test_str = test_str.replaceAll("onfocus", "x-onfocus");
+			test_str = test_str.replaceAll("onload", "x-onload");
+			test_str = test_str.replaceAll("onmouse", "x-onmouse");
+			test_str = test_str.replaceAll("onscroll", "x-onscroll");
+			test_str = test_str.replaceAll("onsubmit", "x-onsubmit");
+			test_str = test_str.replaceAll("onunload", "x-onunload");
+			test_str = test_str.replaceAll("\"", "'");
+			vo.setContent(test_str);
+		    
 			//답변글과 같은 ref들중에서, restep이 답변글보다 더 큰 글들의 restep을 1씩 증가시킨다.
 			qnAService.replyRestepPlus(vo);
 			
@@ -347,6 +437,13 @@ public class QnAController {
 	@RequestMapping("ajaxWriteComment.do")
 	@ResponseBody
 	public List<CommentVO> ajaxWriteComment(CommentVO vo){
+		
+		//스크립트 방지설정
+		String content = "";
+	    content = vo.getContent().replaceAll("<", "&lt;");
+	    content = content.replaceAll(">", "&gt");
+	    vo.setContent(content);
+		
 		//커맨트 쓰기
 		qnAService.ajaxWriteComment(vo);
 		
@@ -364,6 +461,13 @@ public class QnAController {
 	@RequestMapping("ajaxDeleteComment.do")
 	@ResponseBody
 	public List<CommentVO> ajaxDeleteComment(CommentVO vo){
+		
+		//스크립트 방지설정
+		String content = "";
+	    content = vo.getContent().replaceAll("<", "&lt;");
+	    content = content.replaceAll(">", "&gt");
+	    vo.setContent(content);
+			    
 		//커맨트 삭제
 		qnAService.ajaxDeleteComment(vo);
 		
@@ -380,6 +484,11 @@ public class QnAController {
 	@RequestMapping("ajaxUpdateComment.do")
 	@ResponseBody
 	public List<CommentVO> ajaxUpdateComment(CommentVO vo){
+		//스크립트 방지설정
+		String content = "";
+	    content = vo.getContent().replaceAll("<", "&lt;");
+	    content = content.replaceAll(">", "&gt");
+	    vo.setContent(content);
 		//커맨트 수정
 		qnAService.ajaxUpdateComment(vo);
 		
@@ -420,8 +529,13 @@ public class QnAController {
 	@RequestMapping("ajaxWriteCommentReply.do")
 	@ResponseBody
 	public List<CommentVO> ajaxWriteCommentReply(CommentVO vo){
+		//스크립트 방지설정
+		String content = "";
+	    content = vo.getContent().replaceAll("<", "&lt;");
+	    content = content.replaceAll(">", "&gt");
+	    vo.setContent(content);
+		
 		//답변커맨트와 같은 ref들중에서, restep이 답변커맨트보다 더 큰 커맨트들의 restep을 1씩 증가시킨다.
-		System.out.println(vo);
 		qnAService.commentReplyStepPlus(vo);
 		
 		//답변글의 restep과 relevel을 증가시켜 insert한다.
@@ -431,7 +545,6 @@ public class QnAController {
 		
 		//해당글의 커맨트리스트 받아오기
 		List<CommentVO> cmvo = qnAService.showCommentList(vo.getBoardNo());
-		System.out.println(cmvo);
 		return cmvo;
 	}
 }
