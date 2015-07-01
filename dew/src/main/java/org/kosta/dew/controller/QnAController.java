@@ -461,13 +461,7 @@ public class QnAController {
 	@RequestMapping("ajaxDeleteComment.do")
 	@ResponseBody
 	public List<CommentVO> ajaxDeleteComment(CommentVO vo){
-		
-		//스크립트 방지설정
-		String content = "";
-	    content = vo.getContent().replaceAll("<", "&lt;");
-	    content = content.replaceAll(">", "&gt");
-	    vo.setContent(content);
-			    
+
 		//커맨트 삭제
 		qnAService.ajaxDeleteComment(vo);
 		
