@@ -16,7 +16,8 @@ public interface MemberDAO {
 
 	public List<UserTypeVO> usertype(UserTypeVO uvo);
 
-	public MemberVO findbyid(MemberVO vo);
+	public List<MemberVO> findbyid(MemberVO vo);
+
 
 	public MemberVO findbypassword(MemberVO vo);
 

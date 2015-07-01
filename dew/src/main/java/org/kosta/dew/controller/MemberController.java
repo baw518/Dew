@@ -148,14 +148,16 @@ public class MemberController {
 	public ModelAndView finbyid(HttpServletRequest request, MemberVO vo,
 			HttpServletResponse response) throws UnsupportedEncodingException {
 		ModelAndView mv = null;
-		vo = memberService.findbyid(vo);
-		if (vo != null) {
-			mv = new ModelAndView("member_findbyid_result", "vo", vo);
+		List<MemberVO> list = memberService.findbyid(vo);
+		System.out.println(list);
+		if (list != null) {
+			mv = new ModelAndView("member_findbyid_result", "list", list);
 		} else {
 			mv = new ModelAndView("member_findbyid_fail");
 		}
 		return mv;
 	}
+
 
 	@RequestMapping("member_findpasswordView.do")
 	public String findbypasswordView() {
@@ -167,9 +169,9 @@ public class MemberController {
 	public ModelAndView findbypassword(HttpServletRequest request, MemberVO vo,
 			HttpServletResponse response) throws UnsupportedEncodingException {
 		ModelAndView mv = null;
-		vo = memberService.findbyid(vo);
-		if (vo != null) {
-			mv = new ModelAndView("member_findbypassword_result", "vo", vo);
+		MemberVO mvo = memberService.findbypassword2(vo);
+		if (mvo != null) {
+			mv = new ModelAndView("member_findbypassword_result", "vo", mvo);
 		} else {
 			mv = new ModelAndView("member_findbypassword_resultfail");
 		}

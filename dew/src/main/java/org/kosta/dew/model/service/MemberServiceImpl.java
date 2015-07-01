@@ -33,7 +33,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 	
 	@Override
-	public MemberVO findbyid(MemberVO vo){
+	public List<MemberVO> findbyid(MemberVO vo){
 		return memberDAO.findbyid(vo);
 	}
 	public MemberVO findbypassword(MemberVO vo){

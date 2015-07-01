@@ -22,7 +22,7 @@ public interface MemberService {
 
 	List<UserTypeVO> usertype(UserTypeVO uvo);
 
-	MemberVO findbyid(MemberVO vo);
+	List<MemberVO> findbyid(MemberVO vo);
 
 	MemberVO findbypassword2(MemberVO vo);
 

@@ -10,10 +10,10 @@
 <body>
 <div class="main">
 <form action="member_findbypassowrd2.do" method="post">
-질문${requestScope.vo.passwordQuestion}?<br>
-질문에대한 답을 입력하세요?<input type="text" name="passwordAnswer" id="passwordAnswer"><br>
+질문 : ${requestScope.vo.passwordQuestion}<br>
+질문에대한 답을 입력하세요. <input type="text" name="passwordAnswer" id="passwordAnswer"><br>
 <input type="hidden" name="id" id="id" value="${requestScope.vo.id}">
-확인<input type="submit" value="확인">
+<input type="submit" value="확인">
 
 </form>
 </div>

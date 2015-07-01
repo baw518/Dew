@@ -40,8 +40,8 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlSessionTemplate.selectList("member.usertype");
 	}
 	@Override
-	public MemberVO findbyid(MemberVO vo){
-		return sqlSessionTemplate.selectOne("member.findbyid",vo);
+	public List<MemberVO> findbyid(MemberVO vo){
+		return sqlSessionTemplate.selectList("member.findbyid",vo);
 	}
 	@Override
 	public MemberVO findbypassword(MemberVO vo){
