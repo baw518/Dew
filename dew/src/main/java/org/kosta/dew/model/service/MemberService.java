@@ -36,5 +36,11 @@ public interface MemberService {
 
 	List<discussionRequestVO> showInsertRequest();
 
+	MemberVO info(String id);
+
+
+
+	void pointup(String id, String point);
+
 	
 }

@@ -273,4 +273,24 @@ public class MemberController {
 		model.addAttribute("list", list);
 		return "member_showInsertRequest";
 	}
+	@RequestMapping("member_pointUpView.do")
+	public String pointView() {
+		
+		return "member_pointView";
+	}
+	@RequestMapping("member_pointUp.do")
+	public String pointUp(HttpServletRequest request) {
+		MemberVO mvo = new MemberVO();
+		//System.out.println(request.getParameter("id"));
+		//System.out.println(request.getParameter("pointInput"));
+		String id = request.getParameter("id");
+		String point = request.getParameter("pointInput");
+	
+		memberService.pointup(id,point);
+		mvo = memberService.info(id);
+		System.out.println(mvo);
+		HttpSession session=request.getSession();
+		session.setAttribute("mvo",mvo);
+		return "redirect:member_profileForm.do";
+	}
 }

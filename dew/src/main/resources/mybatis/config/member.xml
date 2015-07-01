@@ -73,4 +73,10 @@ values(#{id},#{memberName},#{memberPassword},to_date(#{birthDate},'yyyymmdd'),#{
  	 <select id="showInsertRequest" resultType="drvo">
  	 select id,separation,no from discussionRequest  where separation='등록' order by no asc
  	 </select>
+ 	 <update id="pointup" parameterType="HashMap">
+ 	update member set point = point+#{point} where id =  #{id} 
+ </update>
+ <select id="info" resultMap="memberListRM">
+	select id,member_name,member_password,birth_date,member_level,contribution,point,password_question,password_answer from member where id=#{value} 
+ </select>
  </mapper> 		

@@ -14,8 +14,12 @@
 		$(":input[name=deleteView]").click(function(){
 			location.href="member_deleteview.do";
 		});
+		$(":input[name=pointView]").click(function(){
+			location.href="member_pointUpView.do";
+		});
 	});
 </script>
+<link rel="stylesheet" href="${initParam.root}/css/dew.css" type="text/css">
 <div class="main">
 
 <form  action="member_profile.do" method="post">
@@ -72,7 +76,7 @@
 		<td colspan="2" style="border-bottom-color: #ffffff" align="center">
 			<input type="button" name="updateView" value="정보수정">
 			<input type="button" name="deleteView" value="회원탈퇴">
-			<input type="button" name="deleteView" value="회원탈퇴">
+			<input type="button" name="pointView" value="포인트충전">
 		</td>
 	</tr>
 </table>

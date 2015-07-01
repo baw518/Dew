@@ -91,5 +91,20 @@ public class MemberDAOImpl implements MemberDAO {
 	public List<discussionRequestVO> showInsertRequest() {
 		return sqlSessionTemplate.selectList("member.showInsertRequest");
 	}
+	@Override
+	public void pointup(String id, String point) {
+		// TODO Auto-generated method stub
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("id",id);
+		map.put("point", point);
+		System.out.println("DAOIMPL");
+		System.out.println(map);
+		
+		sqlSessionTemplate.update("member.pointup",map);
+	}
+	@Override
+	public MemberVO info(String id) {
+		return sqlSessionTemplate.selectOne("member.info",id);
+	}
 	
 }

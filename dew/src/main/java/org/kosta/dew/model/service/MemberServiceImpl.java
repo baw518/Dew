@@ -10,6 +10,7 @@ import org.kosta.dew.model.vo.MemberVO;
 import org.kosta.dew.model.vo.PagingBean;
 import org.kosta.dew.model.vo.UserTypeVO;
 import org.kosta.dew.model.vo.discussionRequestVO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -79,6 +80,16 @@ public class MemberServiceImpl implements MemberService {
 	public List<discussionRequestVO> showInsertRequest() {
 		return memberDAO.showInsertRequest();
 	}
-	
+	@Override
+	public MemberVO info(String id) {
+		// TODO Auto-generated method stub
+		return memberDAO.info(id);
+	}
+@Override
+	public void pointup(String id,String point) {
+		// TODO Auto-generated method stub
+		memberDAO.pointup(id, point);
+		
+	}
 	
 }
