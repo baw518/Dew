@@ -44,6 +44,12 @@ public interface MemberDAO {
 
 	public List<discussionRequestVO> showInsertRequest();
 
+	public MemberVO info(String id);
+
+	void pointup(String id, String point);
+
+
+
 
 
 	
