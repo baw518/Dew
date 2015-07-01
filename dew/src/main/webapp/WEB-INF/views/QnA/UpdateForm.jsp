@@ -45,7 +45,7 @@ $(document).ready(function(){
 		}, //boolean
 		fOnAppLoad : function(){
 			//예제 코드
-			oEditors.getById["content"].exec("PASTE_HTML", ["내용을 입력해 주세요."]);
+			oEditors.getById["content"].exec("PASTE_HTML", ["${requestScope.qvo.content}"]);
 		},
 		fCreator: "createSEditor2"
 	});
