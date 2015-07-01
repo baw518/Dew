@@ -79,10 +79,6 @@ public class VideoController {
 			list.get(i).put("VIDEO_FILE_NAME",playPath+dbFileName);
 		}
 		System.out.println(list);
-		String content = "";
-	    content = vvo.getContent().replaceAll("<", "&lt;");
-	    content = content.replaceAll(">", "&gt");
-	    vvo.setContent(content);
 		model.addAttribute("list", list);
 		model.addAttribute("vvo", vvo);
 		return "video_showContent";
@@ -113,15 +109,20 @@ public class VideoController {
 		return "redirect:video_listView.do";
 	}
 	@RequestMapping("video_updateView.do")
-	public String updateView(Model model,int no,List path) {
+	public String updateView(Model model,int no,HttpServletRequest request) {
 		VideoVO vo = videoService.showContentNoHit(no);
 		System.out.println( "path : " + path);
+		//System.out.println(new HttpServletRequestWrapper(request).getRealPath("/"));
 		model.addAttribute("vvo", vo);
 		return "video_updateView";
 	}
 	@RequestMapping("video_update.do")
 	public String update(HttpServletRequest request,Model model,VideoVO vo,MultiFileVO mvo) {
 		String no = request.getParameter("videoNo");
+		String content = "";
+	    content = vo.getContent().replaceAll("<", "&lt;");
+	    content = content.replaceAll(">", "&gt");
+	    vo.setContent(content);
 	//	System.out.println(no);
 		//System.out.println(vo);
 		String filePath = ""; // new HttpServletRequestWrapper(request).getRealPath("/");
@@ -185,9 +186,14 @@ public class VideoController {
 		}
 		
 		/* 리스트 가져오는 부분 */
+		/*
 		VideoVO vvo = videoService.showContentNoHit(vo.getVideoNo());
 		model.addAttribute("vvo", vvo);
-		return "video_showContent";
+		return "video_showContent";*/
+		VideoListVO vvo = videoService.getVideoList("1");
+		model.addAttribute("vo", vvo);
+		
+		return "redirect:video_listView.do";
 	}
 	@RequestMapping("video_writeView.do")
 	public String writeView(Model model) {
@@ -197,7 +203,12 @@ public class VideoController {
 	@RequestMapping("video_write.do")
 	public String write(HttpServletRequest request,Model model,VideoVO vo,MultiFileVO mvo) {
 	//	System.out.println("write.do");
+		String content = "";
+	    content = vo.getContent().replaceAll("<", "&lt;");
+	    content = content.replaceAll(">", "&gt");
+	    vo.setContent(content);
 		videoService.write(vo);
+		
 	//	System.out.println(vo);
 	//	System.out.println(mvo);
 		String filePath = ""; // new HttpServletRequestWrapper(request).getRealPath("/");
