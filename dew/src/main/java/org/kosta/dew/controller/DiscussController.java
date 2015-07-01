@@ -98,6 +98,8 @@ public class DiscussController {
 		String title = request.getParameter("title");
 		String subject = request.getParameter("subject");
 		String content = request.getParameter("content");
+		System.out.println(content);
+		
 		discussService.writeDiscussion(new DiscussVO(id, title, content, subject));
 		return "redirect:discussion_listView.do";
 	}
