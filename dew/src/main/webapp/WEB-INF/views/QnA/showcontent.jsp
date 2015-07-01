@@ -12,6 +12,14 @@ $(document).ready(function(){
 		location.href="QnA_listView.do";
 	});
 	$("#change").click(function(){
+		if("${requestScope.qvo.answerStatus}"==1){
+			alert("채택완료된 답변글에대한 질문글은 수정 할 수 없습니다.");
+			return false;
+		}
+		if("${requestScope.qvo.answerStatus}"==2){
+			alert("채택된 답변글은 수정 할 수 없습니다.");
+			return false;
+		}
 		location.href="QnA_UpdateForm.do?qnaNo=${requestScope.qvo.qnaNo}";
 	});
 	$("#delete").click(function(){

@@ -21,6 +21,10 @@ function submitContents(elClickedObj) {
 		alert("포인트를 입력하세요");
 		return false;
 	}
+	if(point<0){
+		alert("0원이상의 포인트를 입력하세요");
+		return false;
+	}
 	if(isNaN(point)){
 		alert("포인트는 숫자만 입력하세요");
 		return false;
@@ -69,6 +73,10 @@ $(document).ready(function(){
 		}
 		if(isNaN(point)){
 			$("#pointView").html("<font color='red'>포인트는 숫자만 가능합니다.</font>");
+			return false;
+		}
+		if(point<0){
+			$("#pointView").html("<font color='red'>포인트는 0원이상 가능합니다</font>");
 			return false;
 		}
 		if(point>sessionPoint){
