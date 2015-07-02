@@ -5,9 +5,24 @@
 
 <meta charset="UTF-8">
 <title>Dew Project</title>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 <script>
 $(document).ready(function(){
+	$("#word").autocomplete({
+		source:function(request,response){
+			//alert(request.term);// 검색어 입력 정보가 출력 
+			$.ajax({
+				url:"keyword.do",
+				dataType:"json",
+				data:"term="+request.term,
+				success:function(jsonData){
+					response(jsonData);
+				}
+			});//ajax
+		}//source
+	});//autocomplete
 	$("#word").bind("keyup",function(e){
 		if(e.keyCode == 13){
 			var word = $("#word").val();
@@ -23,8 +38,6 @@ $(document).ready(function(){
 				}
 			}
 			 
-
-			
 			location.href="search_resultListView.do?word="+word;
 		}
 	});

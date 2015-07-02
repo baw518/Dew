@@ -1,5 +1,6 @@
 package org.kosta.dew.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -20,6 +21,7 @@ import org.kosta.dew.model.vo.VideoVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 /**
  * 헤더에있는 검색창에 검색어를 입력하는경우 검색기능을 수행하는 컨트롤러.
  * @author KOSTA
@@ -42,6 +44,21 @@ public class SearchController {
 	 * @param word 전체단어
 	 * @return
 	 */
+	
+	@RequestMapping("keyword.do")
+	@ResponseBody
+	public ArrayList<String> keyword(String term){
+		ArrayList<String> list=new ArrayList<String>();
+		if(term.equals("/")){
+		list.add("/error ");
+		list.add("/exception ");
+		list.add("/qna ");
+		list.add("/discuss ");
+		list.add("/project ");
+		list.add("/video ");
+		}
+		return list;
+	}
 	@RequestMapping("search_resultListView.do")
 	public String resultListView(String word,Model model){
 		String path = "search/allListView";
@@ -54,9 +71,9 @@ public class SearchController {
 			//스페이스가 있는경우만
 			if(indexOf != -1){
 				//게시판이름 구하기
-				String boardName = word.substring(1, indexOf).toLowerCase();
+				String boardName = word.substring(1, indexOf);
 				//검색할 내용 구하기
-				String wordName = word.substring(indexOf+1,word.length()).toLowerCase();
+				String wordName = word.substring(indexOf+1,word.length());
 				
 				//map에 페이지번호와 검색어 넣기
 				HashMap<String,String> map = new HashMap<String,String>();
@@ -119,7 +136,7 @@ public class SearchController {
 					path = "search_qnaListView";
 				}
 				/* 토론방 */
-				else if(boardName.equals("토론방") || boardName.equals("토론")){
+				else if(boardName.equals("토론방") || boardName.equals("토론") || boardName.equals("discuss")){
 					//리스트에 검색어에 대한 결과넣기
 					List<DiscussVO> list = searchService.searchDiscuss(map);
 					
