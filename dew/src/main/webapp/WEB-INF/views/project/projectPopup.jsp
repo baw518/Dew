@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>팀정보</title>
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -33,7 +33,6 @@
   			location.href="joinChat.do?projectNo="+$('#projectNo').val();
 		});
 	});
-	
 </script>
 </head>
 <body>

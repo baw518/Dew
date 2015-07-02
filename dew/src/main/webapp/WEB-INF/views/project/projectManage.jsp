@@ -58,8 +58,13 @@
  			List<ProjectVO> cpl=pmvo.getCreatingProject();
  			for(int i=0;i<cpl.size();i++){%>
  			$("#startProBtn<%=i%>").click(function(){
-				if(confirm("시작하시겠습니까?"))
+				if(confirm("시작하시겠습니까?")){
+					if($("#commentVOHid<%=i%>").val()=='[]'){
+						alert("최소 두 명이 필요합니다");
+						return;
+					}
 					location.href="project_start.do?projectNo="+$("#ProBtnHid<%=i%>").val();
+				}
 			});
 			$("#deleteBtn<%=i%>").click(function(){
 				if(confirm("삭제하시겠습니까?"))
@@ -103,22 +108,21 @@
 											window
 													.open(
 															"project_popupProGetJoiner.do?projectNo="
-																	+
-<%=ppl.get(i).getProjectNo()%>
-	,
+																	+<%=ppl.get(i).getProjectNo()%>,
 															"notice",
 															"width=350,height=460,top=120,left=950");
 										});
-<%}%>
-	$("#deleteSuccessProject")
+<%}List<ProjectVO> spl=pmvo.getSuccessProject();
+	for(int s=0;s<spl.size();s++){%>
+	$("#deleteSuccessProject<%=s%>")
 								.click(
 										function() {
 											location.href = "project_delete.do?projectNo="
-													+ $('#successProjectNo')
-															.val()
-													+ "&manage=true";
+													+ $('#successProjectNo<%=s%>').val()+ "&manage=true";
 										});
+	 <%}%>
 					});
+ 	
 	$(function() {
 		$("#accordion").accordion({
 			collapsible : true,
@@ -200,6 +204,7 @@
 																<img src="${initParam.root }images/startBtn.jpg" id='startProBtn${start.index}' width="25px">
 																<input type='hidden' value='${createP.projectNo}'
 																id='ProBtnHid${start.index}'> 
+																<input type="hidden" value="${createP.commentVO}" id="commentVOHid${start.index}">
 																<img src="${initParam.root }images/deleteProBtn.jpg" id='deleteBtn${start.index}' width="22px">
 															</td>
 														</tr>
@@ -223,8 +228,7 @@
 																			<td>${com.content}</td>
 																			<td>${com.commentDate}<input type='hidden'
 																				value='${com.id}' id='deleteJoinerBtnHid${start.index }${cp.index}'><input
-																				type='hidden' value='${createP.projectNo}'
-																				id='deleteJoinerBtnHid2${start.index }${cp.index }'>
+																				type='hidden' value='${createP.projectNo}' id='deleteJoinerBtnHid2${start.index }${cp.index }'>
 																				<img src="${initParam.root }images/deleteMan.jpg" id='deleteJoiner${start.index }${cp.index}'></td>
 																		</tr>
 																	</table>
@@ -280,16 +284,16 @@
 										<td>
 											<div id="progressbar${pro.index}"></div>
 										</td>
-										<td>${processP.project_date}<c:choose>
-												<c:when test='${processP.id==sessionScope.mvo.id}'>
+										<td>${processP.project_date}
+												<c:if test='${processP.id==sessionScope.mvo.id}'>
 													<img src="${initParam.root }images/successProBtn.jpg" id='successBtn${pro.index}' >
 													<input type='hidden' value='${processP.projectNo}'
 														id='successBtnHid${pro.index}'>
 													<tr>
 														<td colspan="3"><div id="slider${pro.index }"></div></td>
 													</tr>
-												</c:when>
-											</c:choose></td>
+												</c:if>
+											</td>
 									</tr>
 								</c:forEach>
 							</table>
@@ -305,14 +309,14 @@
 									<td width="200px">완료일</td>
 								</tr>
 								<c:forEach items='${requestScope.pmvo.successProject}'
-									var='successP'>
+									var='successP' varStatus="sp">
 									<tr style="background-color: #F4FFFF">
 										<td><a
 											href='project_View.do?projectNo=${successP.projectNo}'>${successP.projectName}</a>
 										</td>
 										<td>${successP.project_date}<input type="hidden"
-											value="${successP.projectNo}" id="successProjectNo">
-											<img src="${initParam.root }images/deleteProBtn.jpg" id='deleteSuccessProject' width="20px">
+											value="${successP.projectNo}" id="successProjectNo${sp.index }">
+											<img src="${initParam.root }images/deleteProBtn.jpg" id='deleteSuccessProject${sp.index }' width="20px">
 									</tr>
 								</c:forEach>
 							</table>

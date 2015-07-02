@@ -99,7 +99,9 @@ function checkUpdate(){
 <hr>
 배당포인트 <input type="text" name="point"  style="width: 60px" value="${requestScope.pvo.point }" id="point"> <b>p</b><br>
 모집마감일 <input type="text" id="deadline" name="deadline" style="width: 120px" value="${requestScope.pvo.deadline }"><br>
+<c:if test="${requestScope.pvo.achieve=='진행중' }">
 진행률<span id="sliderVal"><%=pvo.getProgressing()%>%</span><div style="padding: 10px;"><div id="slider"></div></div>
+</c:if>
 <hr>
 내용<textarea rows="3" cols="40" name="content" id="content">${requestScope.pvo.content }</textarea><hr>
 <input type="submit" value="수정" id="regProBtn">

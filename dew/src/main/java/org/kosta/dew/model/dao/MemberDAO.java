@@ -48,6 +48,8 @@ public interface MemberDAO {
 
 	void pointup(String id, String point);
 
+	public MemberVO checkMemberIdPassword(MemberVO mvo);
+
 
 
 

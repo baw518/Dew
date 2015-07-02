@@ -10,7 +10,6 @@ import org.kosta.dew.model.vo.MemberVO;
 import org.kosta.dew.model.vo.PagingBean;
 import org.kosta.dew.model.vo.UserTypeVO;
 import org.kosta.dew.model.vo.discussionRequestVO;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -91,5 +90,12 @@ public class MemberServiceImpl implements MemberService {
 		memberDAO.pointup(id, point);
 		
 	}
+@Override
+public MemberVO checkMemberIdPassword(String id, String memberPassword) {
+	MemberVO mvo=new MemberVO();
+	mvo.setId(id);
+	mvo.setMemberPassword(memberPassword);
+	return memberDAO.checkMemberIdPassword(mvo);
+}
 	
 }

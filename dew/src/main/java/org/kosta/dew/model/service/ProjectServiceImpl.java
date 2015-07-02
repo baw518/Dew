@@ -296,4 +296,12 @@ public class ProjectServiceImpl implements ProjectService {
 		return pvo;
 	}
 
+	@Override
+	public void secedeProject(String projectNo, String id) {
+		CommentVO cvo=new CommentVO();
+		cvo.setBoardNo(Integer.parseInt(projectNo));
+		cvo.setId(id);
+		projectDAO.deleteJoinerById(cvo);
+	}
+
 }

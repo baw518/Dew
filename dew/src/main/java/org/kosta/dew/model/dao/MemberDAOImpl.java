@@ -106,5 +106,9 @@ public class MemberDAOImpl implements MemberDAO {
 	public MemberVO info(String id) {
 		return sqlSessionTemplate.selectOne("member.info",id);
 	}
+	@Override
+	public MemberVO checkMemberIdPassword(MemberVO mvo) {
+		return sqlSessionTemplate.selectOne("member.login",mvo);
+	}
 	
 }

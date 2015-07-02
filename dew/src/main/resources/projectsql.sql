@@ -47,3 +47,6 @@ create table chat(
 )
 drop sequence project_chat_seq;
 create sequence project_chat_seq;
+
+	select id,member_name,member_password,birth_date,member_level,contribution,point,password_question,password_answer from member where id='java' and member_password=1
+

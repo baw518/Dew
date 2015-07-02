@@ -80,5 +80,7 @@ public interface ProjectService {
 	ProjectVO projectView(String projectNo, HttpServletRequest request,
 			HttpServletResponse response, Cookie[] cookies);
 
+	void secedeProject(String projectNo, String id);
+
 	
 }

@@ -22,6 +22,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -389,5 +390,13 @@ public class MemberController {
 		HttpSession session=request.getSession();
 		session.setAttribute("mvo",mvo);
 		return "redirect:member_profileForm.do";
+	}
+	@RequestMapping("checkMemberLogin.do")
+	@ResponseBody
+	public boolean checkMemberLogin(String id,String memberPassword){
+		boolean flag=false;
+		if(memberService.checkMemberIdPassword(id,memberPassword)!=null)
+			flag=true;
+		return flag;
 	}
 }

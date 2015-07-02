@@ -42,5 +42,7 @@ public interface MemberService {
 
 	void pointup(String id, String point);
 
+	MemberVO checkMemberIdPassword(String id, String memberPassword);
+
 	
 }

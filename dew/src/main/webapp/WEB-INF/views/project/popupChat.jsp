@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>팀채팅</title>
 <%List<String> list=(List<String>)request.getAttribute("list"); %>
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script type="text/javascript">
