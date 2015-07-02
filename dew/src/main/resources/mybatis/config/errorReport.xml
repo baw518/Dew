@@ -4,104 +4,145 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="errorReport"> 
  
+ <!-- ErrorCode List 가지고 오기  -->
 <select id="getReportErrorCode" resultType="String">
  select distinct(e.error_code) as errorCode   from error e , error_report er where e.error_no = er.error_no and e.exception_message is null order by e.error_code asc  
 </select>
 
+<!-- ExceptionMessage List 가지고 오기 -->
 <select id="getReportExceptionMessage" resultType="String">
 select distinct(e.exception_message) as exceptionMessage   from error e , error_report er where e.error_no = er.error_no and e.error_code is null order by e.exception_message asc
 </select>
 
+<!-- 해당 Exception 제목의 글의 최신글 보기 -->
 <select id="getContentException" parameterType="String" resultType="evo">
 select e.error_no as errorNo ,e.exception_message as exceptionMessage, to_char(error_report_date,'yyyy/mm/dd HH24:MI') as reportdate , er.content as content ,er.discussion_status as discussionstatus, er.id as id from ERROR_REPORT er, ERROR e where e.error_no = er.error_no and e.exception_message =#{value} and er.error_report_date = (select max(er.error_report_date)    from error_report er, error e  where er.error_no =e.error_no and  e.exception_message =#{value})
 </select>
+
+<!-- 해당 Error 제목의 글의 최신글 보기 -->
 <select id="getContentErrorCode" parameterType="String" resultType="evo">
 select e.error_no as errorNo ,e.error_code as errorCode, to_char(error_report_date,'yyyy/mm/dd HH24:MI') as reportdate , er.content as content, er.discussion_status as discussionstatus, er.id as id from ERROR_REPORT er, ERROR e where e.error_no = er.error_no and e.error_code =#{value} and er.error_report_date = (select max(er.error_report_date)    from error_report er, error e  where er.error_no =e.error_no and  e.error_code =#{value})
 </select>
+<!-- ErrorNo를 가지고 상세 보기 -->
 <select id="showErrorReportVO" parameterType="int" resultType="evo">
 select e.error_code as errorCode ,e.error_no as errorNo,  e.exception_message as exceptionMessage,to_char(error_report_date,'yyyy/mm/dd HH24:MI') as reportdate,er.content as content, er.id as id, er.discussion_status as discussionstatus from ERROR_REPORT er, ERROR e where e.error_no = er.error_no and e.error_no = #{value}
 </select>
+
+<!-- 글쓰기 결과 쿼리 -->
 <select id="writeResult" parameterType="String" resultType="evo">
 select er.error_no as errorNo,e.error_code as errorCode ,  e.exception_message as exceptionMessage,to_char(error_report_date,'yyyy/mm/dd HH24:MI') as reportdate, er.id, er.discussion_status as discussionstatus from ERROR_REPORT er, ERROR e where e.error_no = er.error_no and e.error_no = #{value}
 </select>
+<!-- 글쓰기 결과를 실행 하기전에 글쓴 결과 ErrorNo를 받아오기 위한 쿼리 -->
 <select id="currentValue" resultType="int">
 select error_no.currval from dual
 </select>
+<!-- Exception 수정 이력 보기 -->
 <select id="getReferException" parameterType="HashMap" resultType="evo">
 select errorNo,exceptionMessage,reportdate,discussionstatus
 from ( select errorNo,exceptionMessage,reportdate,discussionstatus,ceil(rownum/10) as page
 from ( select e.error_no as errorNo ,e.exception_message as exceptionMessage, to_char(error_report_date,'yyyy/mm/dd HH24:MI') as reportdate  ,er.discussion_status as discussionstatus from ERROR_REPORT er, ERROR e where e.error_no = er.error_no and e.exception_message =#{refer} order by reportDate desc
 )) where page=#{pageNo}
-
-
 </select>
+<!-- Error 수정 이력 보기 -->
 <select id="getReferError" parameterType="HashMap" resultType="evo">
 select errorNo, errorCode,reportdate, discussionstatus
 from
 ( select errorNo, errorCode,reportdate, discussionstatus , ceil(rownum/10) as page
 from (select e.error_no as errorNo ,e.error_code as errorCode, to_char(error_report_date,'yyyy/mm/dd HH24:MI') as reportdate  ,er.discussion_status as discussionstatus from ERROR_REPORT er, ERROR e where e.error_no = er.error_no and e.error_code =#{refer} order by reportDate desc)
 ) where page=#{pageNo}
-
 </select>
+<!-- 해당 제목의 Exception 총 수정이력 수 -->
 <select id="getAllException" parameterType="String" resultType="int">
 select count(*) from ERROR_REPORT er, ERROR e where e.error_no = er.error_no and e.exception_message =#{value}
 </select>
+<!-- 해당 제목의 Error 총 수정 이력 수 -->
 <select id="getAllError" parameterType="String" resultType="int">
 select count(*) from ERROR_REPORT er, ERROR e where e.error_no = er.error_no and e.error_code =#{value}
 </select>
+
+<!--Error 단어로 검색  기본 쿼리-->
 <sql id="findWordError">
 select distinct(e.error_code) as errorCode  from error e , error_report er where e.error_no = er.error_no and e.exception_message is null
 </sql>
+
+<!-- Exception 단어로 검색 기본 쿼리 -->
 <sql id="findWordException">
 select distinct(e.exception_message) as exceptionMessage   from error e , error_report er where e.error_no = er.error_no and e.error_code is null
 </sql>
+
+<!--Exception id와 title이 겹치는 부분이 있는지 확인 -->
 <select id="duplicateTitleException" parameterType="HashMap" resultType="evo">
 select e.error_no as errorNo  from error e, error_report er where e.error_no = er.error_no and er.id =#{id} and e.exception_message = #{title}
 </select>
+
+<!-- Error id 와 title이 겹치는 부분이 있는지 확인 -->
 <select id="duplicateTitleError" parameterType="HashMap" resultType="evo">
 select e.error_no as errorNo  from error e, error_report er where e.error_no = er.error_no and er.id =#{id} and e.error_code = #{title}
 </select>
+
+<!-- 시작단어로 검색 Exception -->
 <select id="startWithException" parameterType="String" resultType="evo">
 <include refid="findWordException"/> 
-<![CDATA[  and e.exception_message like #{value}||'%' ]]>order by e.exception_message asc</select>
+<![CDATA[  and e.exception_message like #{value}||'%' ]]>order by e.exception_message asc
+</select>
+
+<!-- 끝단어로 검색 Exception -->
 <select id="endWithException" parameterType="String" resultType="evo">
 <include refid="findWordException"/>
 <![CDATA[  and e.exception_message like'%' || #{value}  ]]>order by e.exception_message asc
 </select>
+<!-- 중간단어로 검색 Exception -->
 <select id="containsException" parameterType="String" resultType="evo">
 <include refid="findWordException"/>
 <![CDATA[  and e.exception_message like'%'||#{value} ||'%']]>order by e.exception_message asc
 </select>
+<!-- 시작단어로 검색 Error -->
 <select id="startWithError" parameterType="String" resultType="evo">
 <include refid="findWordError"/> 
 <![CDATA[and e.error_code like  #{value}||'%']]>  order by e.error_code asc
 </select>
+
+<!-- 끝단어로 검색 Error -->
 <select id="endWithError" parameterType="String" resultType="evo">
 <include refid="findWordError"/> 
 <![CDATA[and e.error_code like '%'||#{value}]]>  order by e.error_code asc
 </select>
+
+<!-- 중간 단어로 검색 Error -->
 <select id="containsError" parameterType="String" resultType="evo">
 <include refid="findWordError"/>
 <![CDATA[and e.error_code like '%'||#{value}||'%']]>  order by e.error_code asc
 </select>
+
+
+<!-- 편집 -->
 <update id="update" parameterType="evo">
 update error_report set content = #{content}, error_report_date=sysdate where error_no= #{errorNo}
 </update>
 
+<!-- Exception 제목 등록 -->
 <insert id="writeReportExceptionTitle" parameterType="String">
 insert into error(error_no,exception_message) values(error_no.nextval,#{value})
 </insert>
+
+<!-- Exception 제목에 맞는 글 내용 등록 -->
 <insert id="writeReportException" parameterType="evo">
 insert into error_report(error_report_no,error_no,id,error_report_date,content)
 values(error_report_no.nextval,error_no.currval,#{id},sysdate,#{content})
 </insert>
+
+<!--  Error Code 제목 등록 -->
 <insert id="writeReportErrorcodeTitle" parameterType="String">
 insert into error(error_no,error_code) values(error_no.nextval,#{value})
 </insert>
+
+<!-- ErrorCode  제목에 맞는 글 내용 등록 -->
 <insert id="writeReportErrorcode">
 insert into error_report(error_report_no,error_no,id,error_report_date,content)
 values(error_report_no.nextval,error_no.currval,#{id},sysdate,#{content})
 </insert>
+
+<!-- 토론 등록 요청이 됬을때, 업데이트 쿼리  -->
 <update id="updateDiscussionStatus" parameterType="int">
 update (select e.error_no as errorNo , e.exception_message as exceptionMessage, e.error_code as errorCode, er.discussion_status as discussionstatus from error e, error_report er where e.error_no = er.error_no) set discussionstatus=1 where errorNo=#{value}
 </update>
