@@ -18,7 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * 홈 컨트롤러. 메인페이지의 정보를 받아온다.
+ * 메인페이지의 정보를 받아오기위한 홈 컨트롤러.
  * @author KOSTA
  *
  */

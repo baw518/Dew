@@ -21,7 +21,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 /**
- * 서치컨트롤러. 헤더에있는 검색창에 검색어를 입력하는경우 검색기능을 수행한다.
+ * 헤더에있는 검색창에 검색어를 입력하는경우 검색기능을 수행하는 컨트롤러.
  * @author KOSTA
  *
  */

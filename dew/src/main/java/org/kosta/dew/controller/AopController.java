@@ -15,7 +15,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
 /**
- * AOP. 다양한 모듈에서 공통적으로 이용하는 기능을 정의. 지정된 매서드가 존재하는경우 그 매서드에대한 특별한 작업을 거치도록 한다.
+ * AOP 다양한 모듈에서 공통적으로 이용하는 기능을 정의하여
+ * 지정된 매서드가 존재하는경우 그 매서드에대한 특별한 작업을 거치도록 한다.
  * @author KOSTA
  *
  */
