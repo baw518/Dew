@@ -33,7 +33,7 @@ public class DiscussController {
 	}
 	/**
 	 * 토론방 게시글 상세보기
-	 * @param request
+	 * @param request 
 	 * @return
 	 */
 	@RequestMapping("findDiscussContent.do")
@@ -196,6 +196,9 @@ public class DiscussController {
 		
 		return cmlist;
 	}
+	/**
+	 * 
+	 */
 	@RequestMapping("replyView.do")
 	@ResponseBody
 	public CommentVO replyView(HttpServletRequest request){
@@ -265,14 +268,22 @@ public class DiscussController {
 		}
 		return cmvo;
 	}
-	//관리자가 게시글을 강제삭제(쇼컨텐츠에서)
+	/**
+	 * 관리자가 게시글을 강제삭제(쇼컨텐츠에서)
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping("delete.do")
 	public String delete(HttpServletRequest request){
 		String no = request.getParameter("discussionNo");
 		discussService.delete(no);
 		return "redirect:discussion_listView.do";
 	}
-	//삭제요청 페이지에서 게시글 삭제
+	/**
+	 * 삭제요청 페이지에서 게시글 삭제
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping("discussion_requestDelete.do")
 	public String requestDelete(HttpServletRequest request){
 		String no = request.getParameter("no");
@@ -281,7 +292,11 @@ public class DiscussController {
 		discussService.deleteDiscussRequest(no);
 		return "redirect:member_deleteRequest.do";
 	}
-	//삭제요청 페이지에서 게시글 삭제요청을 취소
+	/**
+	 * 삭제요청 페이지에서 게시글 삭제요청을 취소
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping("discussion_requestNoDelete.do")
 	public String requestNoDelete(HttpServletRequest request){
 		String no = request.getParameter("no");
@@ -289,7 +304,11 @@ public class DiscussController {
 		discussService.deleteDiscussRequest(no);
 		return "redirect:member_deleteRequest.do";
 	}
-	//등록요청 페이지에서 게시글 등록
+	/**
+	 * 등록요청 페이지에서 게시글 등록
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping("discussion_requestInsert.do")
 	public String requestInsert(HttpServletRequest request){
 		int no = Integer.parseInt(request.getParameter("no"));
@@ -300,7 +319,11 @@ public class DiscussController {
 		
 		return "redirect:member_insertRequest.do";
 	}
-	//등록요청 페이지에서 게시글 등록요청을 취소
+	/**
+	 * 등록요청 페이지에서 게시글 등록요청을 취소
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping("discussion_requestNoInsert.do")
 	public String requestNoInsert(HttpServletRequest request){
 		int no = Integer.parseInt(request.getParameter("no"));
