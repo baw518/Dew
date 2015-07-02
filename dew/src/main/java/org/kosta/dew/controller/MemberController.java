@@ -29,12 +29,20 @@ import org.springframework.web.servlet.ModelAndView;
 public class MemberController {
 	@Resource
 	private MemberService memberService;
-
+/**
+ * 로그인Form으로 보내주는 컨트롤러이다
+ * @return
+ */
 	@RequestMapping("member_login_form.do")
 	public String loginForm() {
 		return "member_loginForm";
 	}
-
+/**
+ * 로그인 실행창
+ * @param request
+ * @param vo
+ * @return
+ */
 	@RequestMapping("member_login.do")
 	public ModelAndView login(HttpServletRequest request, MemberVO vo) {
 		String url = "";
@@ -54,7 +62,11 @@ public class MemberController {
 		}
 		return new ModelAndView(url);
 	}
-
+/**
+ * 로그아웃 실행 컨트롤러
+ * @param request
+ * @return
+ */
 	@RequestMapping("member_logout.do")
 	public String logout(HttpServletRequest request) {
 		HttpSession session = request.getSession();
@@ -68,6 +80,10 @@ public class MemberController {
 		List<UserTypeVO> list = memberService.usertype(uvo);
 		return new ModelAndView("member_registerView", "list", list);
 	}*/
+	/**
+	 * 회원등록form으로 보내주는 컨트롤러
+	 * @return
+	 */
 	@RequestMapping(value="member_registerView.do",method=RequestMethod.GET)
 	public ModelAndView registerForm() {
 		return new ModelAndView("member_registerView", "memberVO", new MemberVO());
@@ -105,6 +121,13 @@ public class MemberController {
 		}
 		return "member_register_result";
 	}*/
+	/**
+	 * 회원가입을 실행시키는 컨트롤러 
+	 * @param memberVO
+	 * @param result
+	 * @param image
+	 * @return
+	 */
 	@RequestMapping(value="member_register.do",method=RequestMethod.POST)
 	public String register(@Valid MemberVO memberVO, BindingResult result, MultipartFile image) {
 		if(result.hasErrors()){
@@ -138,18 +161,29 @@ public class MemberController {
 		return "member_register_result";
 	}
 	
+	/**
+	 * id찾기 view로 보내주는 컨트롤러
+	 * @return
+	 */
 	@RequestMapping("member_findidView.do")
 	public String findbyidView() {
 
 		return "member_findidView";
 	}
-
+/**
+ * 아이디찾기를 실행시키는 컨트롤러
+ * @param request
+ * @param vo
+ * @param response
+ * @return
+ * @throws UnsupportedEncodingException
+ */
 	@RequestMapping("member_findbyid.do")
 	public ModelAndView finbyid(HttpServletRequest request, MemberVO vo,
 			HttpServletResponse response) throws UnsupportedEncodingException {
 		ModelAndView mv = null;
 		List<MemberVO> list = memberService.findbyid(vo);
-		System.out.println(list);
+		//System.out.println(list);
 		if (list != null) {
 			mv = new ModelAndView("member_findbyid_result", "list", list);
 		} else {
@@ -158,13 +192,23 @@ public class MemberController {
 		return mv;
 	}
 
-
+/**
+ * 패스워드찾기view로 보내주는 컨트롤러
+ * @return
+ */
 	@RequestMapping("member_findpasswordView.do")
 	public String findbypasswordView() {
 
 		return "member_findpasswordView";
 	}
-
+/**
+ * password찾기  질문view으로 이동시키는 실행시키는 컨트롤러
+ * @param request
+ * @param vo
+ * @param response
+ * @return
+ * @throws UnsupportedEncodingException
+ */
 	@RequestMapping("member_findbypassword.do")
 	public ModelAndView findbypassword(HttpServletRequest request, MemberVO vo,
 			HttpServletResponse response) throws UnsupportedEncodingException {
@@ -177,7 +221,14 @@ public class MemberController {
 		}
 		return mv;
 	}
-
+/**
+ * password찾기를 실행시키는 컨트롤러
+ * @param request
+ * @param vo
+ * @param response
+ * @return
+ * @throws UnsupportedEncodingException
+ */
 	@RequestMapping("member_findbypassowrd2.do")
 	public ModelAndView findbypassword2(HttpServletRequest request,
 			MemberVO vo, HttpServletResponse response)
@@ -186,7 +237,12 @@ public class MemberController {
 
 		return new ModelAndView("member_findbypassword_result2", "vo", vo);
 	}
-
+/**
+ * 회원탈퇴를실행시키는 컨트롤러
+ * @param request
+ * @param vo
+ * @return
+ */
 	@RequestMapping("member_deletemember.do")
 	public ModelAndView deletemember(HttpServletRequest request, MemberVO vo) {
 		memberService.deletemember(vo);
@@ -200,20 +256,30 @@ public class MemberController {
 		}
 		return new ModelAndView("redirect:home.do");
 	}
-
+/**
+ * 회원탈퇴view로 보내주는 컨트롤러
+ * @param vo
+ * @param model
+ * @return
+ */
 	@RequestMapping("member_deleteview.do")
 	public String deltememberForm(MemberVO vo, Model model) {
 
 		model.addAttribute("vo", vo);
 		return "member_dletepassword";
 	}
-
+/**
+ * 회원수정 Form으로 보내주는 컨트롤러
+ * @return
+ */
 	@RequestMapping("member_updateview.do")
 	public String updatememberForm() {
 
 		return "member_update";
 	}
-
+/**
+ * 회원수정을 실행시키는 컨트롤러
+ */
 	@Resource(name="uploadPath")
     private String path;
 	@RequestMapping("member_update.do")
@@ -245,39 +311,70 @@ public class MemberController {
 
 		return new ModelAndView("member_update_result");
 	}
-
+/**
+ * mypage form으로 보내주는 컨트롤러
+ * @return
+ */
 	@RequestMapping("member_mypageForm.do")
 	public String mypageForm() {
 
 		return "member_mypageForm";
 	}
-
+/**
+ * profileForm으로 보내주는 컨트롤러
+ * @return
+ */
 	@RequestMapping("member_profileForm.do")
 	public String profileForm() {
 
 		return "member_profileform";
 	}
+	/**
+	 * 관리자가 회원정보를 보여주는 컨트롤러
+	 * @param pageNo
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("member_view.do")
 	public ModelAndView memberView(String pageNo,Model model){
 		return new ModelAndView("member_memberView","mlvo",memberService.allMember(pageNo));
 	}
+	/**
+	 * 회원이 삭제요청을 하면 관리자한테 보내주는 컨트롤러
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("member_deleteRequest.do")
 	public String deleteRequest(Model model){
 		List<discussionRequestVO> list = memberService.showDeleteRequest();
 		model.addAttribute("list", list);
 		return "member_showDeleteRequest";
 	}
+	/**
+	 * 회원이 등록요청을 하면 관리자한테 보내주는 컨트롤러
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("member_insertRequest.do")
 	public String insertRequest(Model model){
 		List<discussionRequestVO> list = memberService.showInsertRequest();
 		model.addAttribute("list", list);
 		return "member_showInsertRequest";
 	}
+	/**
+	 * 포인트 충전view로 보내주는 컨트롤러
+	 * @return
+	 */
 	@RequestMapping("member_pointUpView.do")
 	public String pointView() {
 		
 		return "member_pointView";
 	}
+	/**
+	 * 포인트 충전을 실행시키는 컨트롤러
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping("member_pointUp.do")
 	public String pointUp(HttpServletRequest request) {
 		MemberVO mvo = new MemberVO();
@@ -288,7 +385,7 @@ public class MemberController {
 	
 		memberService.pointup(id,point);
 		mvo = memberService.info(id);
-		System.out.println(mvo);
+		//System.out.println(mvo);
 		HttpSession session=request.getSession();
 		session.setAttribute("mvo",mvo);
 		return "redirect:member_profileForm.do";
