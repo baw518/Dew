@@ -159,7 +159,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		values(#{projectNo},#{projectName},#{id},#{content},#{achieve},sysdate,#{deadline})
  	</insert>
  	<update id="updateReq" parameterType="pvo">
- 		update project_write set title=#{projectName},content=#{content},progressing_end_date=#{deadline}
+ 		update project_write set title=#{projectName},content=#{content},progressing_end_date=#{deadline} where project_no=#{projectNo}
  	</update>
  	<select id="findChatRecord" resultType="cmvo">
  		select chat_content as content,to_char(chat_date,'HH24:MI') as commentDate from chat where project_no=#{value} order by chat_no asc

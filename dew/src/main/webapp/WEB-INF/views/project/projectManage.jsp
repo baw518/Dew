@@ -204,13 +204,13 @@
 															</td>
 														</tr>
 														<tr>
+															<td colspan='4' style="background-color: #FFEBF0">참가신청자</td>
+														</tr>
+														<tr>
 															<td><c:forEach items='${createP.commentVO }'
 																	var='com' varStatus='cp'>
-																	<br>
 																	<table>
-																		<tr>
-																			<td colspan='4' style="background-color: #FFEBF0">참가신청자</td>
-																		</tr>
+																		
 																		<tr style="background-color: #FFEBF0">
 																			<td width="80px">ID</td>
 																			<td width="120px">분야</td>
@@ -218,7 +218,7 @@
 																			<td width='160px'>접수일</td>
 																		</tr>
 																		<tr>
-																			<td>${com.id}</td>
+																			<td><img src="${initParam.root }upload/img/${com.id }.jpg" width="60px" height="40px">${com.id}</td>
 																			<td>${com.projectSub }</td>
 																			<td>${com.content}</td>
 																			<td>${com.commentDate}<input type='hidden'

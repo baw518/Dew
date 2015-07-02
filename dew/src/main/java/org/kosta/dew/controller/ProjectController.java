@@ -1,6 +1,5 @@
 package org.kosta.dew.controller;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,20 +34,19 @@ public class ProjectController {
 		public ModelAndView projectRequestView(){
 			return new ModelAndView("projectView_projectRequest");
 		}
+	   /**
+	    * 프로젝트 의뢰를 수정합니다
+	    * @param pvo
+	    * @param picture
+	    * @param request
+	    * @return
+	    */
 	   @RequestMapping("project_ReqUpdate.do")
 		public ModelAndView projectRequestUpdate(ProjectVO pvo, MultipartFile picture,HttpServletRequest request){
 		   HttpSession session=request.getSession(false);
 			MemberVO mvo=(MemberVO) session.getAttribute("mvo");
 			pvo.setId(mvo.getId());
-			String fileName;
-			pvo.setDeadline(picture.getOriginalFilename());
-			fileName=picture.getOriginalFilename();
-			try{
-				picture.transferTo(new File(path+"img/"+fileName));
-			}catch(Exception e){
-				e.printStackTrace();
-			}
-			projectService.updateReq(pvo);
+			projectService.projectRequestUpdate(pvo,picture,path);
 			return new ModelAndView("redirect:project_View.do?projectNo="+pvo.getProjectNo());
 		}
 	   /**
@@ -63,11 +61,7 @@ public class ProjectController {
 		   MemberVO mvo=(MemberVO) session.getAttribute("mvo");
 		   if(mvo!=null){
 		   String id=mvo.getId();
-		   ProjectManageVO pmvo=new ProjectManageVO();
-		   pmvo.setCreatingProject(projectService.findProjectById(id));
-		   pmvo.setJoinProject(projectService.findJoinProjectById(id));
-		   pmvo.setProcessingProject(projectService.findProcessProjectById(id));
-		   pmvo.setSuccessProject(projectService.findSuccessProjectById(id));
+		   ProjectManageVO pmvo = projectService.projectManageView(id);
 			return new ModelAndView("projectView_projectManage","pmvo",pmvo);
 		   }
 		   return new ModelAndView("redirect:project_listView.do");
@@ -117,20 +111,7 @@ public class ProjectController {
 				HttpSession session=request.getSession(false);
 				MemberVO mvo=(MemberVO) session.getAttribute("mvo");
 				pvo.setId(mvo.getId());
-				String fileName;
-				if(picture.getOriginalFilename()!=""){
-					pvo.setDeadline(picture.getOriginalFilename());
-					fileName=picture.getOriginalFilename();
-					try{
-						picture.transferTo(new File(path+"img/"+fileName));
-					}catch(Exception e){
-						e.printStackTrace();
-					}
-				}else{
-					pvo.setDeadline("noImage");
-				}
-				pvo.setAchieve("의뢰");
-				projectService.writeReqProject(pvo);
+				projectService.registerReqProject(pvo,picture,path);
 				return new ModelAndView("redirect:project_View.do?projectNo="+pvo.getProjectNo());
 		}
 		/**
@@ -143,36 +124,8 @@ public class ProjectController {
 		 */
 	@RequestMapping("project_View.do")
 	public ModelAndView projectView(String projectNo,HttpServletRequest request,HttpServletResponse response){
-		ProjectVO pvo=null;
 		Cookie [] cookies=request.getCookies();
-		if(cookies==null||cookies.length==0){
-			response.addCookie(new Cookie("hitcookie","|"+projectNo+"|"));
-			pvo = projectService.getProjectContent(projectNo);
-		}
-		else{
-			Cookie cookie=null;
-			for(int i=0;i<cookies.length;i++){
-				if(cookies[i].getName().equals("hitcookie")){
-					cookie=cookies[i];
-					break;
-				}
-			}
-						if(cookie==null){
-							response.addCookie(new Cookie("hitcookie","|"+projectNo+"|"));
-							pvo = projectService.getProjectContent(projectNo);
-						}
-						else{
-							String value=cookie.getValue();
-							if(value.indexOf("|"+projectNo+"|")!=-1){
-								pvo = projectService.getProjectContentNohit(projectNo);
-							}
-							else{
-								pvo = projectService.getProjectContent(projectNo);
-								value+="|"+projectNo+"|";
-								response.addCookie(new Cookie("hitcookie",value));
-							}
-						}
-		}
+		ProjectVO pvo=projectService.projectView(projectNo,request,response,cookies);
 		return new ModelAndView("projectView_projectView","pvo",pvo);
 	}
 	/**
@@ -184,8 +137,6 @@ public class ProjectController {
 	@RequestMapping("project_listView.do")
 	public ModelAndView ProjectList(String pageNo){
 		ProjectListVO plvo=projectService.makeProjectListVO(pageNo);
-		for(int i=0;i<plvo.getList().size();i++)
-			plvo.getList().get(i).setCommentVO(projectService.countComment(plvo.getList().get(i).getProjectNo()));
 		return new ModelAndView("projectView_projectList","plvo",plvo);
 	}
 	/**
@@ -224,13 +175,11 @@ public class ProjectController {
 	@RequestMapping("project_delete.do")
 	public ModelAndView deleteProject(int projectNo,boolean manage){
 		String delPath="redirect:project_listView.do";
+		ProjectVO pvo=projectService.findProjectByNo(projectNo);
+		String FilePath=path+"img/"+pvo.getDeadline();
 		if(manage==true)
 			delPath="redirect:project_main.do";
-		ProjectVO pvo=projectService.findProjectByNo(projectNo);
-		File file=new File(path+"img/"+pvo.getDeadline());
-		file.delete();
-		projectService.deleteDepart(projectNo);
-		projectService.deleteProject(projectNo);
+		projectService.deleteProject(projectNo,FilePath);
 		return new ModelAndView(delPath);
 	}
 	/**

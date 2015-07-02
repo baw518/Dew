@@ -2,10 +2,16 @@ package org.kosta.dew.model.service;
 
 import java.util.List;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.kosta.dew.model.vo.CommentVO;
 import org.kosta.dew.model.vo.DepartVO;
 import org.kosta.dew.model.vo.ProjectListVO;
+import org.kosta.dew.model.vo.ProjectManageVO;
 import org.kosta.dew.model.vo.ProjectVO;
+import org.springframework.web.multipart.MultipartFile;
 
 public interface ProjectService {
 
@@ -17,7 +23,7 @@ public interface ProjectService {
 
 	int getTotalPostingCount();
 
-	void deleteProject(int projectNo);
+	void deleteProject(int projectNo,String FilePath);
 
 	void deleteDepart(int projectNo);
 
@@ -35,25 +41,15 @@ public interface ProjectService {
 
 	List<ProjectVO> findProjectById(String id);
 
-	List<ProjectVO> findJoinProjectById(String id);
-
-	List<ProjectVO> findProcessProjectById(String id);
-
-	boolean joinCheck(CommentVO pvo);
+	boolean joinCheck(CommentVO cvo);
 
 	void deleteJoinComment(String commentNo);
 
 	void startProject(String projectNo);
 
-	ProjectVO getProjectContentNohit(String projectNo);
-
-	List<CommentVO> countComment(int projectNo);
-
 	void deleteJoinerById(String id,String projectNo);
 
 	void successProject(String projectNo);
-
-	List<ProjectVO> findSuccessProjectById(String id);
 
 	void updateProgress(ProjectVO pvo);
 
@@ -73,8 +69,16 @@ public interface ProjectService {
 
 	ProjectVO findProjectByNo(int projectNo);
 
-	void updateReq(ProjectVO pvo);
+	void deleteFile(String string);
 
+	void projectRequestUpdate(ProjectVO pvo, MultipartFile picture, String path);
+
+	ProjectManageVO projectManageView(String id);
+
+	void registerReqProject(ProjectVO pvo, MultipartFile picture, String path);
+
+	ProjectVO projectView(String projectNo, HttpServletRequest request,
+			HttpServletResponse response, Cookie[] cookies);
 
 	
 }
