@@ -35,7 +35,7 @@ $(document).ready(function(){
     //use jQuery MultiFile Plugin 
    $('#updateform input[name=file]').MultiFile({
         max: 10, //업로드 최대 파일 갯수 (지정하지 않으면 무한대)
-        accept: 'avi|mkv|mp4|mpeg|wmv|swf', //허용할 확장자(지정하지 않으면 모든 확장자 허용)
+        accept: 'avi|mkv|mp4|mpeg|swf', //허용할 확장자(지정하지 않으면 모든 확장자 허용)
         maxfile: 1024*1024*1024, //각 파일 최대 업로드 크기
         maxsize: 1024*1024*1024*10,  //전체 파일 최대 업로드 크기
         STRING: { //Multi-lingual support : 메시지 수정 가능

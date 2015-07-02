@@ -112,6 +112,8 @@ public class VideoController {
 	public String updateView(Model model,int no,HttpServletRequest request) {
 		VideoVO vo = videoService.showContentNoHit(no);
 		System.out.println( "path : " + path);
+	//	List<HashMap<String, String>> list = videoService.getVideoName(String.valueOf(no));
+		
 		//System.out.println(new HttpServletRequestWrapper(request).getRealPath("/"));
 		model.addAttribute("vvo", vo);
 		return "video_updateView";
