@@ -20,15 +20,26 @@ import org.kosta.dew.model.vo.VideoVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+/**
+ * 서치컨트롤러. 헤더에있는 검색창에 검색어를 입력하는경우 검색기능을 수행한다.
+ * @author KOSTA
+ *
+ */
 @Controller
 public class SearchController {
+	/**
+	 * 서치서비스 인터페이스를 DI
+	 */
 	@Resource
 	private SearchService searchService;
 	
 	/**
-	 * 검색하기
-	 * @param word
+	 * 검색하기. 
+	 * 통합검색, 게시판별 검색인지를 판별하여 검색결과를 보여준다.
+	 * 통합검색을 맨앞에 /가 없으면 해당단어로 통합검색결과를 보여주며, 
+	 * /가 있는경우,  /[게시판이름] [검색단어] 에서 게시판이름이 존재하지 않을경우 검색단어로 통합검색결과를 보여준다.
+	 * /[게시판이름]이 존재하는경우 해당게시판의 검색결과만을 보여준다.
+	 * @param word 전체단어
 	 * @return
 	 */
 	@RequestMapping("search_resultListView.do")
@@ -255,8 +266,8 @@ public class SearchController {
 
 	/**
 	 * exception 페이징적용 검색결과
-	 * @param pageNo
-	 * @param wordName
+	 * @param pageNo 페이지번호
+	 * @param wordName 검색단어
 	 * @param model
 	 * @return
 	 */
@@ -285,9 +296,9 @@ public class SearchController {
 	}
 	
 	/**
-	 * qna 페이징적용 검색결과
-	 * @param pageNo
-	 * @param wordName
+	 * 질의응답 페이징적용 검색결과
+	 * @param pageNo 페이지번호
+	 * @param wordName 검색단어
 	 * @param model
 	 * @return
 	 */
@@ -317,8 +328,8 @@ public class SearchController {
 	
 	/**
 	 * 토론방 페이징적용 검색결과
-	 * @param pageNo
-	 * @param wordName
+	 * @param pageNo 페이지번호
+	 * @param wordName 검색단어
 	 * @param model
 	 * @return
 	 */
@@ -379,8 +390,8 @@ public class SearchController {
 	
 	/**
 	 * 동영상강의 페이징적용 검색결과
-	 * @param pageNo
-	 * @param wordName
+	 * @param pageNo 페이지번호
+	 * @param wordName 검색단어
 	 * @param model
 	 * @return
 	 */

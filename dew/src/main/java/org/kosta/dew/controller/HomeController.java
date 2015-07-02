@@ -17,9 +17,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+/**
+ * 홈 컨트롤러. 메인페이지의 정보를 받아온다.
+ * @author KOSTA
+ *
+ */
 @Controller
 public class HomeController {
-	
+	/**
+	 * 홈서비스 인터페이스를 DI
+	 */
 	@Resource
 	private HomeService homeService;
 	

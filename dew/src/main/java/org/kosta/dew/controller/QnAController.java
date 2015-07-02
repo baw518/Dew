@@ -22,8 +22,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+/**
+ * 질의응답 게시판 컨트롤러.
+ * @author KOSTA
+ *
+ */
 @Controller
 public class QnAController {
+	/**
+	 * 서비스 인터페이스를 DI
+	 */
 	@Resource
 	private QnAService qnAService;
 	
@@ -64,7 +72,7 @@ public class QnAController {
 	
 	/**
 	 * QnA게시판 상세글보기
-	 * @param qnaNo
+	 * @param qnaNo 글번호
 	 * @param request
 	 * @param response
 	 * @param model
@@ -137,7 +145,7 @@ public class QnAController {
 	/**
 	 * 그룹선택시 선택된 그룹들만 보여주기.
 	 * 그룹,페이징 적용 QnA 게시판 
-	 * @param qnAGroupNo
+	 * @param qnAGroupNo 그룹번호
 	 * @param request
 	 * @param model
 	 * @return
@@ -190,8 +198,8 @@ public class QnAController {
 	
 	/**
 	 * 게시판에 질문글 등록
-	 * @param vo
-	 * @param title
+	 * @param vo QnAVO
+	 * @param title 글제목
 	 * @return
 	 */
 	@RequestMapping("QnA_Write.do")
@@ -257,7 +265,7 @@ public class QnAController {
 	
 	/**
 	 * 게시판 질문내용 수정폼 보이기
-	 * @param qnaNo
+	 * @param qnaNo 글번호
 	 * @param model
 	 * @return
 	 */
@@ -276,7 +284,7 @@ public class QnAController {
 	
 	/**
 	 * 게시판 질문내용 수정하기
-	 * @param vo
+	 * @param vo QnAVO
 	 * @return
 	 */
 	@RequestMapping("QnA_Update.do")
@@ -330,7 +338,7 @@ public class QnAController {
 	
 	/**
 	 * QnA게시판 게시글 삭제.
-	 * @param vo
+	 * @param vo QnAVO
 	 * @param model
 	 * @return
 	 */
@@ -353,7 +361,7 @@ public class QnAController {
 	
 	/**
 	 * QnA게시판 답글폼 보여주기
-	 * @param qnaNo
+	 * @param qnaNo 글번호
 	 * @param model
 	 * @return
 	 */
@@ -431,7 +439,7 @@ public class QnAController {
 	
 	/**
 	 * ajax 커맨트등록
-	 * @param vo
+	 * @param vo CommentVO
 	 * @return
 	 */
 	@RequestMapping("ajaxWriteComment.do")
@@ -455,7 +463,7 @@ public class QnAController {
 	
 	/**
 	 * ajax 커맨트 삭제
-	 * @param vo
+	 * @param vo CommentVO
 	 * @return
 	 */
 	@RequestMapping("ajaxDeleteComment.do")
@@ -472,7 +480,7 @@ public class QnAController {
 	
 	/**
 	 * ajax 커맨트 수정
-	 * @param vo
+	 * @param vo CommentVO
 	 * @return
 	 */
 	@RequestMapping("ajaxUpdateComment.do")
@@ -493,9 +501,9 @@ public class QnAController {
 	
 	/**
 	 * 질문자가 답변을 채택하는곳
-	 * @param questionNO
-	 * @param answerNO
-	 * @param qvo
+	 * @param questionNO 질문글번호
+	 * @param answerNO 답변글번호
+	 * @param qvo QnAVO
 	 * @return
 	 */
 	@RequestMapping("QnA_replyChoose.do")
@@ -517,7 +525,7 @@ public class QnAController {
 	
 	/**
 	 * 커맨트에대한 답글커맨트 ajax로 다는곳.
-	 * @param vo
+	 * @param vo CommentVO
 	 * @return
 	 */
 	@RequestMapping("ajaxWriteCommentReply.do")

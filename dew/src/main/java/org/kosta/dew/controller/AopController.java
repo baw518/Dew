@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
 /**
- * aop
+ * AOP. 다양한 모듈에서 공통적으로 이용하는 기능을 정의. 지정된 매서드가 존재하는경우 그 매서드에대한 특별한 작업을 거치도록 한다.
  * @author KOSTA
  *
  */
@@ -25,16 +25,26 @@ import org.springframework.stereotype.Controller;
 @Aspect
 @Controller
 public class AopController {
+	/**
+	 * AOP서비스 인터페이스 DI
+	 */
 	@Resource
 	private AopService aopService;
 	
 	/**
+	 * exception, errercode, 질문게시판, 토론방, 프로젝트에
 	 * 글등록할경우 회원의 기여도가 1씩 증가
-	 * @param point
+	 * @param point 회원의 기여도
 	 */
 	@After("execution(public * org.kosta..*ServiceImpl.write*(..))")
 	public void afterMemberContribution(JoinPoint point){
+		/**
+		 * 매서드의 매개변수를 배열에 저장
+		 */
 		Object param[] = point.getArgs();
+		/**
+		 * 글 쓴사람의 아이디
+		 */
 		String id = null;
 
 		for(int i=0; i<param.length; i++){
