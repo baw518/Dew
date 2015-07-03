@@ -10,7 +10,7 @@
 <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 <script>
 $(document).ready(function(){
-	$("#word").autocomplete({
+	/* $("#word").autocomplete({
 		source:function(request,response){
 			//alert(request.term);// 검색어 입력 정보가 출력 
 			$.ajax({
@@ -22,7 +22,7 @@ $(document).ready(function(){
 				}
 			});//ajax
 		}//source
-	});//autocomplete
+	});//autocomplete */
 	$("#word").bind("keyup",function(e){
 		if(e.keyCode == 13){
 			var word = $("#word").val();
