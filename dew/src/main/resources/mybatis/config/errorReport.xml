@@ -146,6 +146,18 @@ values(error_report_no.nextval,error_no.currval,#{id},sysdate,#{content})
 <update id="updateDiscussionStatus" parameterType="int">
 update (select e.error_no as errorNo , e.exception_message as exceptionMessage, e.error_code as errorCode, er.discussion_status as discussionstatus from error e, error_report er where e.error_no = er.error_no) set discussionstatus=1 where errorNo=#{value}
 </update>
+
+<update id="updateDiscussionStatusException" parameterType="int">
+update (select e.error_no as errorNo , e.exception_message as exceptionMessage, e.error_code as errorCode, er.discussion_status as discussionstatus from error e, error_report er where e.error_no = er.error_no) set discussionstatus=0 where exceptionMessage=#{value}
+</update>
+
+<update id="updateDiscussionStatusErrror" parameterType="int">
+update (select e.error_no as errorNo , e.exception_message as exceptionMessage, e.error_code as errorCode, er.discussion_status as discussionstatus from error e, error_report er where e.error_no = er.error_no) set discussionstatus=0 where errorCode=#{value}
+</update>
+
+<select id="findByTitle" resultType="evo">
+select e.error_code as errorCode ,e.error_no as errorNo,  e.exception_message as exceptionMessage,to_char(error_report_date,'yyyy/mm/dd HH24:MI') as reportdate,er.content as content, er.id as id, er.discussion_status as discussionstatus from ERROR_REPORT er, ERROR e where e.error_no = er.error_no and e.error_code=#{value} or e.exception_message=#{value}
+</select>
  </mapper> 		
  
  

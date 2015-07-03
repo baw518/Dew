@@ -49,5 +49,7 @@ public interface DiscussService {
 
 	public abstract void insert(int no);
 
+	public abstract void doneDiscuss(int discussionNo,String title);
+
 
 }

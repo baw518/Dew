@@ -180,13 +180,23 @@ $(document).ready(function(){
 	
 	//삭제 버튼 누를 시(관리자)
 	$("#deleteContent").click(function(){
-		var no = $("#no").val();
+		var no = ${requestScope.dsvo.discussionNo};
+	
 		var q = confirm(no+"번 게시글을 삭제하시겠습니까?");
 		if(q){			
 		location.href="delete.do?discussionNo="+no;
 		}
 	});
 	
+	//글쓴이가 토론끝내기 버튼 누를 시
+	$("#doneDiscuss").click(function(){
+		var no = $("#no").val();
+		var title = $("#title").val();
+		var q = confirm(no+"번 토론을 종료하시겠습니까?");
+		if(q){	
+		location.href="discussion_doneDiscuss.do?discussionNo="+no+"&title="+title;
+		}
+	});
 });//ready
 </script>
 <div class="main">
@@ -209,7 +219,17 @@ $(document).ready(function(){
  		<th class="hit"> ${requestScope.dsvo.hit} </th>
  	</tr>
  	<tr>
- 		<th class="id" colspan="5" align="left" height="30px"><img src="${initParam.root }upload/img/${dsvo.id}.jpg" width="30px">${requestScope.dsvo.id} </th>
+ 		<th class="id" colspan="4" align="left" height="30px"><img src="${initParam.root }upload/img/${dsvo.id}.jpg" width="30px">${requestScope.dsvo.id} </th>
+ 		<th>  
+ 			<c:choose>
+ 				<c:when test="${requestScope.dsvo.progress==1}">
+ 					<font style="color: red">토론종료</font>
+ 				</c:when>
+ 				<c:otherwise>
+ 					<font style="color: blue">토론중</font>
+ 				</c:otherwise>
+ 			</c:choose>
+ 		</th>
  	</tr>
  	</thead>
  	<tr>
@@ -219,6 +239,7 @@ $(document).ready(function(){
  		
  		</td>
  	</tr>
+ 	<c:if test="${requestScope.dsvo.progress!=1}">
  	<tr>
 		<td colspan="4">
 				<table class="dewCommentTable" align="center" id="commentView">
@@ -243,6 +264,7 @@ $(document).ready(function(){
 					</c:forEach>
 				</table>
 				</td></tr>
+				
 	<c:if test="${sessionScope.mvo.id != null}">
  	<tr>
 	<td colspan="5" align="center">
@@ -251,16 +273,24 @@ $(document).ready(function(){
  	<input type="image" src="http://cafeimgs.naver.net/cafe4/btn_cmt_cfm_v1.gif" alt="확인" id="submit">
  	<input type="hidden" name="id" id="id" value="${sessionScope.mvo.id }">
 	<input type="hidden" name="no" id="no" value="${requestScope.dsvo.discussionNo}">
+	<input type="hidden" name="progress" id="progress" value="${requestScope.dsvo.progress}">
+	<input type="hidden" name="title" id="title" value="${requestScope.dsvo.title}">
 	</td> 
  	</tr> 
+	</c:if>	
 	</c:if>
 	<tr><td colspan="5" align="center" style="border-bottom-color: #ffffff">
-	<c:if test="${sessionScope.mvo.id != null && sessionScope.mvo.memberLevel != 0}">
+	<c:if test="${sessionScope.mvo.id != null && sessionScope.mvo.memberLevel != 0 && requestScope.dsvo.progress!=1}">
  <input type="button" id="deleteManager" name="deleteManager" value="삭제 요청">
+ <c:if test="${sessionScope.mvo.id == requestScope.dsvo.id && requestScope.dsvo.progress!=1}">
+ <input type="button" id="doneDiscuss" name="doneDiscuss" value="토론 끝내기">
+
+ </c:if>
 </c:if>
   <c:if test="${sessionScope.mvo.memberLevel == 0}">
  <input type="button" id="deleteContent" name="deleteContent" value="삭제"> 
  </c:if>
+ 
  </td></tr>
  	</table>
 </div>

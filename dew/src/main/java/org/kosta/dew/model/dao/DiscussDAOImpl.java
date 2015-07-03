@@ -128,5 +128,15 @@ public class DiscussDAOImpl implements DiscussDAO {
 		// TODO Auto-generated method stub
 		sqlSessionTemplate.delete("discuss.insertDiscussRequest",no);
 	}
+	@Override
+	public int findProgress(int discussionNo) {
+		// TODO Auto-generated method stub
+		return sqlSessionTemplate.selectOne("discuss.progress",discussionNo);
+	}
+	@Override
+	public void updateProgress(int discussionNo) {
+		// TODO Auto-generated method stub
+		sqlSessionTemplate.update("discuss.updateProgress",discussionNo);
+	}
 
 }

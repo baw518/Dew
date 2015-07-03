@@ -166,10 +166,32 @@ public class DiscussServiceImpl implements DiscussService {
 		}else if(vo.getErrorCode()!=null){
 			title=vo.getErrorCode();
 		}
-		DiscussVO dsvo = new DiscussVO(vo.getId(), title, vo.getContent(), title);
+		// 등록요청해서 등록된 토론방은 구분자를 2로 둠.
+		// 나중에 토론 종료 시 에러리포트 글을 구분하기 위해서.
+		DiscussVO dsvo = new DiscussVO(vo.getId(), title, vo.getContent(), title,2);
+		
 		//토론방 insert
 		discussDAO.registerDiscussion(dsvo);
+		
 	}
-
-
+	@Override
+	public void doneDiscuss(int discussionNo,String title) {
+		// TODO Auto-generated method stub
+		int progress = discussDAO.findProgress(discussionNo);
+		if(progress==0){
+			discussDAO.updateProgress(discussionNo);
+		}else if(progress==2){
+			discussDAO.updateProgress(discussionNo);
+			//where = title 로 에러리포트 update
+			// title로 evo 받아오기
+	/*		List<ErrorReportVO> vo = errorReportDAO.findByTitle(title);
+	}
+			
+			}*/
+			//errorReportDAO.discussFinish(title);
+			
+					
+		}
+		}
+		
 }

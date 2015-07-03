@@ -59,9 +59,8 @@ public class DiscussController {
 	      content = dsvo.getContent().replaceAll("<", "&lt;");
 	      content = content.replaceAll(">", "&gt");
 	      dsvo.setContent(content);
-		
 		model.addAttribute("dsvo",dsvo);
-		
+
 		List<CommentVO> cmvo = discussService.findDiscussComment(no);
 		for(int i =0; i<cmvo.size();i++){
 			String c = "";
@@ -71,7 +70,6 @@ public class DiscussController {
 		}
 		model.addAttribute("cmvo",cmvo);
 
-		
 		return "discussion_show_discussion";
 
 /*		String no = request.getParameter("no");
@@ -88,7 +86,7 @@ public class DiscussController {
 		return "discussion_registerDiscussionForm";
 	}
 	/**
-	 * 토론방 생성 메소드
+	 * 토론방 등록 메소드
 	 * @param request
 	 * @return
 	 */
@@ -100,7 +98,7 @@ public class DiscussController {
 		String content = request.getParameter("content");
 		
 		
-		discussService.writeDiscussion(new DiscussVO(id, title, content, subject));
+		discussService.writeDiscussion(new DiscussVO(id, title, content, subject,0));
 		return "redirect:discussion_listView.do";
 	}
 	/**
@@ -330,5 +328,18 @@ public class DiscussController {
 		// discussRequest 테이블 내용 삭제
 		discussService.InsertDiscussRequest(no);
 		return "redirect:member_insertRequest.do";
+	}
+	/**
+	 * 글쓴이가
+	 * 토론끝내기를 눌렀을 때
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("discussion_doneDiscuss.do")
+	public String doneDiscuss(HttpServletRequest request){
+		int discussionNo = Integer.parseInt(request.getParameter("discussionNo"));
+		String title = request.getParameter("title");
+		discussService.doneDiscuss(discussionNo,title);
+		return "redirect:findDiscussContent.do?no="+discussionNo;
 	}
 }

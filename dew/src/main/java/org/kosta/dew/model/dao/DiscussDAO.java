@@ -48,5 +48,9 @@ public interface DiscussDAO {
 
 	public abstract void insertDiscussRequest(int no);
 
+	public abstract int findProgress(int discussionNo);
+
+	public abstract void updateProgress(int discussionNo);
+
 
 }

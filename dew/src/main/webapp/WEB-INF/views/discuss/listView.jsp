@@ -28,10 +28,22 @@
 			<c:forEach var="dsvo" items="${requestScope.dslvo.list}">		
 			<tr>
 			    <td>${dsvo.discussionNo }</td>					
-			    <td><a href="findDiscussContent.do?no=${dsvo.discussionNo }" class="hover_font">${dsvo.title }</a></td>					
+			    <td>
+			     <c:choose>
+			      <c:when test="${dsvo.progress==1 }">
+			    <font style="color: blue">[토론종료]</font>
+			    <a href="findDiscussContent.do?no=${dsvo.discussionNo }" class="hover_font">${dsvo.title }</a>
+			    </c:when>
+			    <c:otherwise>			    
+			    <a href="findDiscussContent.do?no=${dsvo.discussionNo }" class="hover_font">${dsvo.title }</a>
+			    </c:otherwise>
+			    </c:choose>
+			    </td>					
 			    <td height="30px"><img src="${initParam.root }upload/img/${dsvo.id}.jpg" width="30px"> ${dsvo.id }</td>	
 			    <!-- 주제 필요없어서 주석 처리 -->				
-			    <td>${dsvo.discussionSubject }</td>		
+			    <td>
+			    ${dsvo.discussionSubject }
+			    </td>		
 			    <td>${dsvo.discussionDate }</td>					
 			    <td>${dsvo.hit }</td>					 
 			</tr>		
