@@ -49,7 +49,7 @@
 		</form>
 		</c:when>
 		<c:when test="${sessionScope.mvo.memberLevel == 0}">
-		<img src="${initParam.root }images/${sessionScope.mvo.id }.jpg">
+		<span style="margin-left: 50px"><img src="${initParam.root }images/${sessionScope.mvo.id }.jpg"></span>
 		<ul class="leftmenu">
 			<li><a href="member_view.do" class="list_font">회원관리</a></li>
 			<li><a href="member_insertRequest.do" class="list_font">토론방 등록 요청</a></li>
