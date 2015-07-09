@@ -10,9 +10,7 @@ create table project_write(
 	point number default 0,
 	project_date date not null,
 	progressing_end_date varchar2(100) not null,
-	req number default 0
 )
-
  drop sequence project_seq;
  create sequence project_seq; 
 

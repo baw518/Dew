@@ -285,26 +285,28 @@ public class MemberController {
     private String path;
 	@RequestMapping("member_update.do")
 	public ModelAndView updateMember(HttpServletRequest request,
-			HttpServletResponse response, MemberVO vo, MultipartFile memberImage) throws InterruptedException {
+			HttpServletResponse response, MemberVO vo, MultipartFile memberImage)
+			throws InterruptedException {
 		HttpSession session = request.getSession(false);
 		FileOutputStream fos = null;
 		if (session != null) {// 세션이 연결되어있을때
-			if(memberImage.getOriginalFilename()!=""){
-			try {
-				byte[] imageData=memberImage.getBytes();
-				fos=new FileOutputStream(path+"img/"+vo.getId()+".jpg");
-				fos.write(imageData);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}finally{
-				if(fos!=null){
-					try {
-						fos.close();
-					} catch (IOException e) {
-						e.printStackTrace();
+			if (memberImage.getOriginalFilename() != "") {
+				try {
+					byte[] imageData = memberImage.getBytes();
+					fos = new FileOutputStream(path + "img/" + vo.getId()
+							+ ".jpg");
+					fos.write(imageData);
+				} catch (IOException e) {
+					e.printStackTrace();
+				} finally {
+					if (fos != null) {
+						try {
+							fos.close();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
 					}
 				}
-			}
 			}
 			memberService.update(vo);
 			session.setAttribute("mvo", vo);

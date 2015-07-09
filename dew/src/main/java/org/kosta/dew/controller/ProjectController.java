@@ -293,9 +293,6 @@ public class ProjectController {
 		@RequestMapping("project_popupProGetJoiner.do")
 		public ModelAndView popupProGetJoiner(int projectNo,HttpServletRequest request){
 			List<CommentVO> cvo=projectService.findJoinListProcess(projectNo);
-			if(cvo.size()==0){
-				return new ModelAndView("project/projectPopup");
-			}
 			cvo.get(0).setBoardNo(projectNo);
 			return new ModelAndView("project/projectPopup","cvo",cvo);
 		}

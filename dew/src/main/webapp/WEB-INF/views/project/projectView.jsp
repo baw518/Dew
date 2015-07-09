@@ -48,8 +48,13 @@
 			location.href="project_listView.do";
 		});
 		$("#deleteProBtn").click(function(){
+			<%if(pvo.getAchieve().equals("진행중")){%>
+			alert("진행중인 프로젝트는 삭제할 수 없습니다");
+			return;
+			<%}else{%>
 			if(confirm("삭제하시겠습니까?"))
 			location.href="project_delete.do?projectNo=${requestScope.pvo.projectNo}";
+			<%}%>
 		});
 		$("#updateProBtn").click(function(){
 			<%if(pvo.getAchieve().equals("의뢰")){%>

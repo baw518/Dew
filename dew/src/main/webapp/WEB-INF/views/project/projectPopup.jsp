@@ -36,8 +36,6 @@
 </script>
 </head>
 <body>
-<c:choose>
-<c:when test="${requestScope.cvo!=null }">
 <table cellpadding="12" width="330px">
 <tr><th colspan="3">팀원현황</th></tr>
 <c:forEach items="${requestScope.cvo }" var="c">
@@ -53,10 +51,5 @@
 <img src="${initParam.root }images/stopMan.jpg" id="stopMans">
 <img src="${initParam.root }images/joinChat.jpg" id="joinChat">
 </div>
-</c:when>
-<c:otherwise>
-혼자하고있습니다.
-</c:otherwise>
-</c:choose>
 </body>
 </html>
