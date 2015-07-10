@@ -6,7 +6,7 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
-import org.kosta.dew.model.service.AopService;
+import org.kosta.dew.model.service.RankingService;
 import org.kosta.dew.model.vo.DiscussVO;
 import org.kosta.dew.model.vo.ErrorReportVO;
 import org.kosta.dew.model.vo.ProjectVO;
@@ -25,12 +25,12 @@ import org.springframework.stereotype.Controller;
 //Aspect 어노테이션을 명시하여 공통기능정의 빈임을 컨테이너에게 알린다.
 @Aspect
 @Controller
-public class AopController {
+public class RankingController {
 	/**
 	 * AOP서비스 인터페이스 DI
 	 */
 	@Resource
-	private AopService aopService;
+	private RankingService aopService;
 	
 	/**
 	 * exception, errercode, 질문게시판, 토론방, 프로젝트에

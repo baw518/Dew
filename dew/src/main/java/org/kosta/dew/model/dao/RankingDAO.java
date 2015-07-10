@@ -1,6 +1,6 @@
 package org.kosta.dew.model.dao;
 
-public interface AopDAO {
+public interface RankingDAO {
 
 	void memberUpContribution(String id);
 

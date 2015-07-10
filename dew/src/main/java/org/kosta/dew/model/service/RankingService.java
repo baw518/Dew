@@ -1,6 +1,6 @@
 package org.kosta.dew.model.service;
 
-public interface AopService {
+public interface RankingService {
 
 	void memberUpContribution(String id);
 

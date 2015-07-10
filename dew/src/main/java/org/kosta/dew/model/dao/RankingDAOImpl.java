@@ -6,7 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class AopDAOImpl implements AopDAO {
+public class RankingDAOImpl implements RankingDAO {
 	@Resource
 	private SqlSessionTemplate sqlSessionTemplate;
 
