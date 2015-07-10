@@ -29,6 +29,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="mybatis/config/comment.xml"></mapper>	
 		<mapper resource="mybatis/config/home.xml"></mapper>
 		<mapper resource="mybatis/config/search.xml"></mapper>
-		<mapper resource="mybatis/config/aop.xml"></mapper>
+		<mapper resource="mybatis/config/ranking.xml"></mapper>
 	</mappers>
 </configuration>
